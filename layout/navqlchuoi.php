@@ -4,7 +4,7 @@
         <div class="dropdown">
             <a href="#">Quản lý <i class="fas fa-caret-down"></i></a>
             <div class="dropdown-content">
-            <a href="/chuoithucannhanh/views/QLNV/index.php">Quản lý Nhân Viên <i class="fas fa-user"></i></a>
+            <a href="index.php?page=QLNV">Quản lý Nhân Viên <i class="fas fa-user"></i></a>
                 <a href="index.php?page=qlnlchuoicuahang">Quản lý nguyên liệu <i class="fas fa-warehouse"></i></a>
                 <a href="index.php?page=quanlydonhang">quản lý đơn hàng<i class="fas fa-box"></i></a>
                 <a href="#">Quản lý .......... <i class="fas fa-file-invoice"></i></a>
@@ -22,9 +22,9 @@
         <div class="dropdown">
             <a href="#">Nhân sự <i class="fas fa-caret-down"></i></a>
             <div class="dropdown-content">
-                <a href="/chuoithucannhanh/views/ChamCong/index.php">Chấm công <i class="fas fa-chart-line"></i></a>
-                <a href="#">Xếp lịch <i class="fas fa-seedling"></i>
-                <a href="#">Tính lương<i class="fas fa-users"></i></a>
+                <a href="index.php?page=ChamCong">Chấm công </a>
+                <a href="#">Xếp lịch</a>
+                <a href="#">Tính lương</a>
             </div>
         </div>
 

@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Quản lý nhân viên</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-    <link rel="stylesheet" href="../../layout/style.css">  
-    <link rel="stylesheet" href="../../css/QLNV/style.css">  
-    <link rel="stylesheet" href="../../css/ChamCong/style.css"> 
+    <link rel="stylesheet" href="layout/style.css">  
+    <link rel="stylesheet" href="css/QLNV/style.css">  
+    <link rel="stylesheet" href="css/ChamCong/style.css"> 
     <style>  
     </style>  
 </head>  
 <body>  
 
-    <?php  
-        require('../../layout/header.php');  
-        require('../../layout/navqlchuoi.php');  
+    <?php   
+        require('layout/navqlchuoi.php');  
     ?> 
     <div class="main">  
         <div class="title">  
