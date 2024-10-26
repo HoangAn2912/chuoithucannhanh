@@ -46,8 +46,9 @@
                         <th>Tên nhân viên</th>  
                         <th>Chức vụ</th>  
                         <th>Ca làm</th>  
-                        <th>Ngày làm</th>  <!-- Column for Date -->
-                        <th>Trạng thái</th>  
+                        <th>Ngày làm</th>
+                        <th>Trạng thái</th> 
+                        <th>Ghi chú</th> 
                     </tr>  
                 </thead>  
                 <tbody id="employee-list">  
@@ -55,23 +56,25 @@
                         <td>Trần Thị B</td>  
                         <td>Nhân viên</td>  
                         <td>Ca 2</td>  
-                        <td><input type="date" name="date_1" value="<?php echo date('Y-m-d'); ?>" readonly></td>  <!-- Current Date -->
+                        <td><input type="date" name="date_1" value="<?php echo date('Y-m-d'); ?>" readonly></td> 
                         <td class="check-box status-present">  
                             <label><input type="radio" name="status_1" value="present"> Có mặt</label>  
                             <label><input type="radio" name="status_1" value="late"> Trễ</label>  
                             <label><input type="radio" name="status_1" value="absent"> Vắng mặt</label>  
                         </td> 
+                        <td><textarea name="note_1" class="notes-input" placeholder="Ghi chú..."></textarea></td>
                     </tr>  
                     <tr>  
                         <td>Nguyễn Văn C</td>  
                         <td>Nhân viên</td>  
                         <td>Ca 1</td>  
-                        <td><input type="date" name="date_2" value="<?php echo date('Y-m-d'); ?>" readonly></td>  <!-- Current Date -->
+                        <td><input type="date" name="date_2" value="<?php echo date('Y-m-d'); ?>" readonly></td>
                         <td class="check-box">  
                             <label><input type="radio" name="status_2" value="present"> Có mặt</label>  
                             <label><input type="radio" name="status_2" value="late"> Trễ</label>  
                             <label><input type="radio" name="status_2" value="absent"> Vắng mặt</label>  
                         </td>  
+                        <td><textarea name="note_2" class="notes-input" placeholder="Ghi chú..."></textarea></td>
                     </tr>  
                 </tbody>  
             </table>  

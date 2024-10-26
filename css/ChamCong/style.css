@@ -36,3 +36,12 @@ input[type="date"] {
     font-size: 20px;
 }
 
+.notes-input {
+    border: none;
+    background-color: #ddd; 
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+}
+
+
