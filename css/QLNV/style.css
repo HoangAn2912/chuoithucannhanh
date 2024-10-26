@@ -77,13 +77,13 @@ h3 {
 }  
 
 .qlnv-search-bar button {  
+    border: 1px solid #963e03;
     background-color: #FF7E29;  
-    color: white;   
-    border: none;  
+    color: white;    
     padding: 12px 15px;  
     cursor: pointer;  
-    border-radius: 4px;  
-    margin-left: 5px; 
+    border-radius: 10px;  
+    margin-left: -1px; 
 }  
 
 .qlnv-search-bar button:hover {  
@@ -99,6 +99,9 @@ h3 {
     margin-right: 10px;  
 }  
 
+#branch{
+    width: 15%;
+}
 /* Bảng danh sách nhân viên */  
 table.employee-list {  
     width: 100%;  
@@ -113,11 +116,11 @@ table.employee-list th, table.employee-list td {
 }  
 
 table.employee-list th {  
-    background-color: #f2f2f2;  
+    background-color: #FF7E29;  
 }  
 
 table.employee-list tr:hover {  
-    background-color: #f9f9f9;  
+    background-color: #eaeaea;  
 }  
 
 /* Thao tác */  
@@ -139,7 +142,7 @@ table.employee-list td a:hover {
  
 .add-employee {  
     padding: 12px 20px;  
-    background-color: #28a745;  
+    background-color: #FF7E29;  
     color: white;  
     border: none;  
     border-radius: 4px;  
@@ -148,7 +151,7 @@ table.employee-list td a:hover {
 }  
 
 .add-employee:hover {  
-    background-color: #218838;  
+    background-color: #FF7E29;  
 }  
 
 /* Form thêm nhân viên */  
@@ -193,7 +196,7 @@ table.employee-list td a:hover {
 
 /* Nút thêm trong form */  
 #employeeForm button {  
-    background-color: #007bff;  
+    background-color: #FF7E29;  
     color: white;  
     border: none;  
     padding: 10px 15px;  
@@ -204,5 +207,44 @@ table.employee-list td a:hover {
 }  
 
 #employeeForm button:hover {  
-    background-color: #0056b3;  
+    background-color: #d76417;  
+}
+
+
+.employee-detail{  
+    display: none;  
+    position: fixed;  
+    top: 50%;
+    left: 50%;  
+    transform: translate(-50%, -50%);  
+    background-color: white;  
+    padding: 30px;  
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
+    z-index: 1000;  
+    border-radius: 8px;
+    width: 50%; 
+}  
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: none;
+    z-index: 100;
+}
+
+.back-button-view button {
+    background-color: #FF7E29;
+    color: white;
+    border: none;
+    padding: 10px 15px; 
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.back-button-view button:hover {
+    background-color: #d46013;
 }

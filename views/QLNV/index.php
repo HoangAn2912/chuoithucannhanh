@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Quản lý nhân viên</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-    <link rel="stylesheet" href="layout/style.css">  
     <link rel="stylesheet" href="css/QLNV/style.css">  
     <style>  
     </style>  
@@ -24,12 +23,12 @@
         <div class="qlnv-search-bar">  
             <form method="POST">  
                 <input type="text" name="search" placeholder="Nhập nhân viên cần tìm" />  
-                <button type="submit"><i class="fas fa-search"></i></button>  
+                <button type="submit"><i class="fas fa-search"></i> Tìm</button> 
             </form>  
         </div>  
 
         <div class="branch-selector">  
-            <label for="branch">Chi nhánh:</label>  
+            <label for="branch">Chọn chi nhánh:</label>  
             <select id="branch" name="branch" onchange="this.form.submit()">  
                 <option value="branch1">Chi nhánh 1</option>  
                 <option value="branch2">Chi nhánh 2</option>  
@@ -59,7 +58,7 @@
                         <td>Quản lý</td>  
                         <td>Ca 1</td>  
                         <td>  
-                            <a href='detail.php?id=1'>Xem chi tiết</a> |  
+                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
                             <a href='edit.php?id=1'>Sửa</a> |  
                             <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
                         </td>  
@@ -70,9 +69,9 @@
                         <td>Nhân viên</td>  
                         <td>Ca 2</td>  
                         <td>  
-                            <a href='detail.php?id=2'>Xem chi tiết</a> |  
+                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
                             <a href='edit.php?id=2'>Sửa</a> |  
-                            <a href='delete.php?id=2' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
+                            <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
                         </td>  
                     </tr>  
                 </tbody>  
@@ -108,7 +107,55 @@
             </select>  
             <button onclick="addEmployee()">Lưu</button>  
         </div>  
-        
-    </div>  
 
-    <script src="../../js/QLNV/jsQLNV.js"></script>
+        <div class="overlay" id="overlayDetail" onclick="toggleDetailForm()" style="display: none;"></div>
+        <div class="employee-detail" id="employeeDetail">  
+            <h3>Chi tiết nhân viên</h3>  
+
+            <div class="form-group">
+                <label for="employeeNameDetail">Tên nhân viên</label>
+                <input type="text" id="employeeNameDetail" value="" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="employeeBirthdayDetail">Ngày sinh</label>
+                <input type="text" id="employeeBirthdayDetail" value="" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="employeeGenderDetail">Giới tính</label>
+                <input type="text" id="employeeGenderDetail" value="" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="employeeAddressDetail">Địa chỉ</label>
+                <textarea id="employeeAddressDetail" rows="3" readonly></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="employeeEmailDetail">Email</label>
+                <input type="email" id="employeeEmailDetail" value="" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="employeePhoneDetail">Số điện thoại</label>
+                <input type="text" id="employeePhoneDetail" value="" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="employeePositionDetail">Chức vụ</label>
+                <input type="text" id="employeePositionDetail" value="" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="branchDetail">Chi nhánh</label>
+                <input type="text" id="branchDetail" value="" readonly>
+            </div>
+
+            <div class="back-button-view">
+                <button onclick="toggleDetailForm()">Quay lại</button>
+            </div>
+        </div>
+    </div>  
+</body>
+<script src="js/QLNV/jsQLNV.js"></script>

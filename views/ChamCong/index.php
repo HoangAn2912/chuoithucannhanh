@@ -3,11 +3,9 @@
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Quản lý nhân viên</title>  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-    <link rel="stylesheet" href="layout/style.css">  
+    <title>Quản lý nhân viên</title>
+    <link rel="stylesheet" href="css/ChamCong/style.css">    
     <link rel="stylesheet" href="css/QLNV/style.css">  
-    <link rel="stylesheet" href="css/ChamCong/style.css"> 
     <style>  
     </style>  
 </head>  
@@ -29,7 +27,7 @@
         </div>  
 
         <div class="branch-selector">  
-            <label for="branch">Chi nhánh:</label>  
+            <label for="branch">Chọn chi nhánh:</label>  
             <select id="branch" name="branch" onchange="this.form.submit()">  
                 <option value="branch1">Chi nhánh 1</option>  
                 <option value="branch2">Chi nhánh 2</option>  
@@ -48,6 +46,7 @@
                         <th>Tên nhân viên</th>  
                         <th>Chức vụ</th>  
                         <th>Ca làm</th>  
+                        <th>Ngày làm</th>  <!-- Column for Date -->
                         <th>Trạng thái</th>  
                     </tr>  
                 </thead>  
@@ -56,6 +55,7 @@
                         <td>Trần Thị B</td>  
                         <td>Nhân viên</td>  
                         <td>Ca 2</td>  
+                        <td><input type="date" name="date_1" value="<?php echo date('Y-m-d'); ?>" readonly></td>  <!-- Current Date -->
                         <td class="check-box status-present">  
                             <label><input type="radio" name="status_1" value="present"> Có mặt</label>  
                             <label><input type="radio" name="status_1" value="late"> Trễ</label>  
@@ -66,6 +66,7 @@
                         <td>Nguyễn Văn C</td>  
                         <td>Nhân viên</td>  
                         <td>Ca 1</td>  
+                        <td><input type="date" name="date_2" value="<?php echo date('Y-m-d'); ?>" readonly></td>  <!-- Current Date -->
                         <td class="check-box">  
                             <label><input type="radio" name="status_2" value="present"> Có mặt</label>  
                             <label><input type="radio" name="status_2" value="late"> Trễ</label>  
@@ -81,6 +82,5 @@
         </div>  
     </div>  
 
-    <script src="../../js/QLNV/jsQLNV.js"></script>  
 </body>  
 </html>
