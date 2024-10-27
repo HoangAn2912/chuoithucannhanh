@@ -1,6 +1,7 @@
-<!-- Sidebar -->
 <?php
-    require("layout/navqlchuoi.php");
+    echo '<link rel="stylesheet" href="css/management.material.css">';
+    require_once("layout/navqlchuoi.php");
+    
 ?>
 <?php
 if(isset($_POST["btn-detail"])){
@@ -34,47 +35,12 @@ if(isset($_POST["btn-detail"])){
 }
 ?>
 <?php
-    if(isset($_POST["capnhat"])){
-        echo 
-        '<div class="container" id="ingredient-details">
-            <div class="header">
-                <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
-            </div>
-            <h3 style="color: #db5a04;">Cập nhật nguyên liệu</h3>
-            <div class="themnguyenlieu">
-                <div class="form-group">
-                    <label for="name">Tên nguyên liệu</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="unit">Đơn vị tính</label>
-                    <select id="unit" name="unit" required>
-                        <option value="">Chọn đơn vị</option>
-                        <option value="kg">Kg</option>
-                        <option value="g">g</option>
-                        <option value="l">l</option>
-                        <option value="ml">ml</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="supplierName">Tên NCC</label>
-                    <input type="text" id="supplierName" name="supplierName" required>
-                </div>
-                <div class="form-group">
-                    <label for="supplierPhone">SĐT NCC</label>
-                    <input type="tel" id="supplierPhone" name="supplierPhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="supplierEmail">Email NCC</label>
-                    <input type="email" id="supplierEmail" name="supplierEmail" required>
-                </div>
-            </div>
-            <button class="btn-them">Sửa</button>
-        </div>';
+    if(isset($_POST["update"])){
+        header("Location:index.php?page=qlnlchuoicuahang/capnhat");
     }
 ?>
 <?php
-    if(isset($_POST["themmoi"])){
+    if(isset($_POST["add"])){
         echo 
         '<div class="container" id="ingredient-details">
             <div class="header">
@@ -109,7 +75,7 @@ if(isset($_POST["btn-detail"])){
                     <input type="email" id="supplierEmail" name="supplierEmail" required>
                 </div>
             </div>
-            <button class="btn-them">Thêm</button>
+            <button class="btn-add">Thêm</button>
         </div>';
     }
 ?>
@@ -125,8 +91,8 @@ if(isset($_POST["btn-detail"])){
             <a href=""><label><input type="checkbox" name="cuahang" value="3"> Cửa hàng 3</label></a>
             <a href=""><label><input type="checkbox" name="cuahang" value="4"> Cửa hàng 4</label></a>
             <a href=""><label><input type="checkbox" name="cuahang" value="5"> Cửa hàng 5</label></a>
-            <button class="themmoi" name="themmoi">Thêm mới</button>
-            <button class="capnhat" name="capnhat">Cập nhật</button>
+            <button class="add" name="add">Thêm mới</button>
+            <button class="update" name="update">Cập nhật</button>
 
     </form>
 </div>
@@ -250,10 +216,10 @@ if(isset($_POST["btn-detail"])){
     </div>
 
 </body>
+
 <script>
-function closeDetails() {
-    document.getElementById("ingredient-details").style.display = "none";
-}
+    function closeDetails() {
+        document.getElementById("ingredient-details").style.display = "none";
+    }
 </script>
 </html>
-

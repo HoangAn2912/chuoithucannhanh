@@ -104,163 +104,25 @@ body {
 }
 
 /* Search bar */
+.search-container {
+    position: relative;
+    display: inline-block;
+}
 .search-bar {
-    margin-right: 20px;
-}
-
-.search-bar input[type="text"] {
-    padding: 5px;
-    font-size: 16px;
-    border-radius: 5px;
-    background-color:rgba(255, 0, 0, 0);
-    border: solid 1px white;
-}
-
-/* qlnlchuoicuahang */
-.btn-detail{
-    background-color: #ec9262;
+    padding: 5px 30px 5px 10px;
+    border-radius: 15px;
+    border: 1px solid #fff;
+    background-color: #ffab5e;
     color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
+    width: 200px;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.search-bar::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
-th, td {
-    border: 1px solid #ffffff;
-    border-bottom:1px solid   #ec9262;
-    padding: 10px;
-    text-align: center;
-}
-th {
-    background-color:  #ec9262;
-    color: white;
-}
-.btn-detail:hover {
-    background-color:  #ec9262;
-}
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-.pagination a {
-    margin: 0 5px;
-    text-decoration: none;
-    color:  #ec9262;
-}
-.themmoi{
-    background-color:  #ec9262;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.capnhat{
-    background-color:  #ec9262;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-/* chitietnguyenlieu */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.search-icon {
     position: absolute;
+    right: 10px;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    border-radius: 10px;
-}
-
-.container .header {
-    display: flex;
-    margin: 0;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.container h2 {
-    margin-bottom: 20px;
-}
-
-.container .details {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.btn-approve {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #db5a04;;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-}
-.close-btn {
-    background-color:rgba(255, 0, 0, 0);
-    color: #db5a04;
-    border: white
-}
-.close-btn:hover {
+    transform: translateY(-50%);
     color: white;
 }
-/* themnguyenlieumoi */
-.container {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 400px;
-}
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input, select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.btn-them {
-    width: 100%;
-    padding: 10px;
-    background-color: #5d4037;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn-them:hover {
-    background-color: #3e2723;
-}  
