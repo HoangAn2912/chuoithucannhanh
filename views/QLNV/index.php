@@ -33,6 +33,8 @@
                 <option value="branch1">Chi nhánh 1</option>  
                 <option value="branch2">Chi nhánh 2</option>  
                 <option value="branch3">Chi nhánh 3</option>  
+                <option value="branch3">Chi nhánh 4</option> 
+                <option value="branch3">Chi nhánh 5</option> 
             </select>  
         </div>  
 
@@ -55,7 +57,7 @@
                     <tr>  
                         <td><i class='fas fa-user'></i></td>  
                         <td>Nguyễn Văn A</td>  
-                        <td>Quản lý</td>  
+                        <td>Nhân Viên</td>  
                         <td>Ca 1</td>  
                         <td>  
                             <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
@@ -68,6 +70,28 @@
                         <td>Trần Thị B</td>  
                         <td>Nhân viên</td>  
                         <td>Ca 2</td>  
+                        <td>  
+                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
+                            <a href='edit.php?id=2'>Sửa</a> |  
+                            <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
+                        </td>  
+                    </tr> 
+                    <tr>  
+                        <td><i class='fas fa-user'></i></td>  
+                        <td>Phạm Thị Ba</td>  
+                        <td>Nhân viên Bếp</td>  
+                        <td>Ca 1</td>  
+                        <td>  
+                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
+                            <a href='edit.php?id=2'>Sửa</a> |  
+                            <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
+                        </td>  
+                    </tr> 
+                    <tr>  
+                        <td><i class='fas fa-user'></i></td>  
+                        <td>Trần Thanh An</td>  
+                        <td>Nhân viên Bếp</td>  
+                        <td>Ca 1</td>  
                         <td>  
                             <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
                             <a href='edit.php?id=2'>Sửa</a> |  
