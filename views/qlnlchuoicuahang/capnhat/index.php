@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <?php
-    echo '<link rel="stylesheet" href="css/management.material.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
     require("layout/navqlchuoi.php");
 ?>
 <?php

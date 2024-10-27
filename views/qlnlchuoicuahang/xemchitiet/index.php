@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/management.material.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
     require_once("layout/navqlchuoi.php");
     
 ?>

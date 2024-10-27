@@ -10,7 +10,8 @@
     <div style="margin-left: 210px; padding: 20px;">
         <h2>Nội dung chính</h2>
         <p>Đây là nơi nội dung của trang sẽ xuất hiện...</p>
-        <p>thu nghiem</p>
+        <p>thu nghiem
+        </p>
     </div>
 
 </body>

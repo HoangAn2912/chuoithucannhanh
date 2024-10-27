@@ -7,7 +7,8 @@ if(isset($_POST["login"])) {
         $_SESSION["dangnhap"] = 'chuoi';
         header("Location:index.php?page=trangchu");
         exit();
-    } else if ($username === "qlch1" && $password === "1234") {
+    
+    }elseif($username === "qlch1" && $password === "1234") {
         $_SESSION["dangnhap"] = 'qlch1';
         header("Location:index.php?page=trangchu");
         exit();
