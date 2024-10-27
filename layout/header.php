@@ -13,5 +13,12 @@
     <div class="header">
         <div class="logo" style="margin-right: 10px"> Quản Lý Chuỗi </div>
         <div class="user-icon" style="margin-right: 20px"> <i class="fas fa-user-circle"></i> </div>
-        <a href="#" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-sign-out-alt"></i>  Đăng xuất</a>
+        <?php
+            if ($_SESSION["dangnhap"]) {
+                echo '<a href="index.php?page=dangxuat" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>';
+            } else {
+                echo '<a href="" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-user-plus"></i> Đăng ký</a>/';
+                echo '<a href="index.php?page=dangnhap" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-sign-in-alt"></i> Đăng nhập</a>';
+            }
+        ?>
     </div>

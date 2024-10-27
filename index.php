@@ -1,4 +1,5 @@
 <?php
+    session_start();
     error_reporting(1);
     require("layout/header.php");
     if(isset($_GET["page"]))
