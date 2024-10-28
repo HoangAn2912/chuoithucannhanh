@@ -3,13 +3,10 @@
         <a href="index.php?page=trangchu">Trang Chủ</a>
         <div class="dropdown">
             <?php
-<<<<<<< HEAD
-                if (isset($_SESSION["dangnhap"])){
-                    echo '<a href="#">Quản lýy <i class="fas fa-caret-down"></i></a>';
-=======
+
                 if (isset($_SESSION["dangnhap"])&& (($_SESSION["dangnhap"] === "qlch1")|| ($_SESSION["dangnhap"] === "chuoi"))){
                     echo '<a href="#">Quản lý <i class="fas fa-caret-down"></i></a>';
->>>>>>> 036fa4d89911145c14c3c42ffbf1624ee55b7845
+
                 }
             ?>
             <div class="dropdown-content">

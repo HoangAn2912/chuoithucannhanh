@@ -15,8 +15,15 @@
     <?php
         if($_SESSION["dangnhap"] == 'nvb'){
             echo "Nhân Viên Bếp";
-        }else{
+        }else if($_SESSION["dangnhap"] == 'nvbh'){
+            echo "Nhân Viên Bán Hàng";
+        }elseif($_SESSION["dangnhap"] == 'chuoi'){
             echo "Quản Lý Chuỗi";
+        }elseif($_SESSION["dangnhap"] == 'qlch1'){
+            echo "Quản Lý Cửa Hàng 1";
+        }
+        else{
+            echo "";
         }
     ?>        
     </div>

@@ -12,18 +12,10 @@ if(isset($_POST["login"])) {
         $_SESSION["dangnhap"] = 'qlch1';
         header("Location:index.php?page=trangchu");
         exit();
-<<<<<<< HEAD
+
     }
-    /*Nhan vien bep */
-    elseif($username === "nvb" && $password === "1234") {
-        $_SESSION["dangnhap"] = 'nvb';
-        header("Location:index.php?page=trangchu");
-        exit();
-    } 
-    
-    else {
-=======
-    }elseif($username === "nvbh" && $password === "1234") {
+    /* Nhan vien */
+    elseif($username === "nvbh" && $password === "1234") {
         $_SESSION["dangnhap"] = 'nvbh';
         header("Location:index.php?page=trangchu");
         exit();
@@ -32,7 +24,7 @@ if(isset($_POST["login"])) {
         header("Location:index.php?page=trangchu");
         exit();
     }else {
->>>>>>> 036fa4d89911145c14c3c42ffbf1624ee55b7845
+
         echo '<script>alert("Đăng nhập không thành công");</script>';
     }
 }
