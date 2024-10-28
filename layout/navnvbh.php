@@ -28,6 +28,7 @@
                   </div>';
             }
         ?>
+<<<<<<< HEAD
         <?php
             if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "nvbh")) {
                 echo '
@@ -39,6 +40,8 @@
                   </div>';
             }
         ?>
+=======
+>>>>>>> 4d5883349d575eccfdbe9394f4f9b2a8fc49a16f
         <div class="search-container">
             <input type="text" placeholder="Tìm kiếm..." class="search-bar">
             <span class="search-icon fas fa-search "></span>

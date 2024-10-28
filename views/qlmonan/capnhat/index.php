@@ -72,7 +72,7 @@
                 <td>1</td>
                 <td>Gà rán giòn</td>
                 <td>Gà rán</td>
-                <td>75,000</td>
+                <td>76,000</td>
                 <td>Còn</td>
                 <td>
                     <div class="dropdown">
