@@ -47,12 +47,12 @@
             if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "nvbh")) {
                 echo '<a href="#">Quản lý đơn hàng</a>';
                 echo '<a href="#">Xem lương</a>';
-                echo '<a href="#">Đăng ký ca làm</a>';
+                echo '<a href="index.php?page=nhanvien/dangkycalam">Đăng ký ca làm</a>';
             }
             if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "nvb")){
                 echo '<a href="#">Quản lý đơn hàng</a>';
                 echo '<a href="#">Xem lương</a>';
-                echo '<a href="#">Đăng ký ca làm</a>';
+                echo '<a href="index.php?page=nhanvien/dangkycalam">Đăng ký ca làm</a>';
             }
         ?>
         <div class="search-container">
