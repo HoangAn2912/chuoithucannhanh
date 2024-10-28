@@ -3,8 +3,13 @@
         <a href="index.php?page=trangchu">Trang Chủ</a>
         <div class="dropdown">
             <?php
+<<<<<<< HEAD
                 if (isset($_SESSION["dangnhap"])){
                     echo '<a href="#">Quản lýy <i class="fas fa-caret-down"></i></a>';
+=======
+                if (isset($_SESSION["dangnhap"])&& (($_SESSION["dangnhap"] === "qlch1")|| ($_SESSION["dangnhap"] === "chuoi"))){
+                    echo '<a href="#">Quản lý <i class="fas fa-caret-down"></i></a>';
+>>>>>>> 036fa4d89911145c14c3c42ffbf1624ee55b7845
                 }
             ?>
             <div class="dropdown-content">
@@ -14,7 +19,6 @@
                     echo '<a href="index.php?page=qlnlcuahang">Quản lý nguyên liệu <i class="fas fa-warehouse"></i></a>';
                 }elseif((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] === "chuoi")){
                     echo '<a href="index.php?page=qlnlchuoicuahang/xemchitiet">Quản lý nguyên liệu <i class="fas fa-warehouse"></i></a>';
-                    echo '<a href="index.php?page=quanlydonhang">quản lý đơn hàng<i class="fas fa-box"></i></a>';
                 }
             ?>
             </div>
@@ -27,7 +31,6 @@
                     <div class="dropdown-content">
                         <a href="#">Thống kê doanh thu <i class="fas fa-chart-line"></i></a>
                         <a href="index.php?page=qlnlchuoicuahang/thongkenguyenlieu">Thống kê nguyên liệu <i class="fas fa-seedling"></i>
-                        <a href="#">Thống kê........<i class="fas fa-users"></i></a>
                     </div>
                 </div>';
             }
@@ -43,6 +46,18 @@
                         <a href="#">Tính lương</a>
                     </div>
                   </div>';
+            }
+        ?>
+        <?php
+            if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "nvbh")) {
+                echo '<a href="#">Quản lý đơn hàng</a>';
+                echo '<a href="#">Xem lương</a>';
+                echo '<a href="#">Đăng ký ca làm</a>';
+            }
+            if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "nvb")){
+                echo '<a href="#">Quản lý đơn hàng</a>';
+                echo '<a href="#">Xem lương</a>';
+                echo '<a href="#">Đăng ký ca làm</a>';
             }
         ?>
         <div class="search-container">
