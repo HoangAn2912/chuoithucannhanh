@@ -2,6 +2,8 @@
 <?php
     if($_SESSION["dangnhap"] == 'nvb'){
         require("layout/navnvb.php");
+    }elseif($_SESSION["dangnhap"] == 'nvbh'){
+        require("layout/navnvbh.php");
     }else{
         require("layout/navqlchuoi.php");
     }

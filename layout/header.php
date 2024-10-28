@@ -15,8 +15,15 @@
     <?php
         if($_SESSION["dangnhap"] == 'nvb'){
             echo "Nhân Viên Bếp";
-        }else{
+        }else if($_SESSION["dangnhap"] == 'nvbh'){
+            echo "Nhân Viên Bán Hàng";
+        }elseif($_SESSION["dangnhap"] == 'chuoi'){
             echo "Quản Lý Chuỗi";
+        }elseif($_SESSION["dangnhap"] == 'qlch1'){
+            echo "Quản Lý Cửa Hàng 1";
+        }
+        else{
+            echo "";
         }
     ?>        
     </div>
@@ -25,7 +32,7 @@
             if ($_SESSION["dangnhap"]) {
                 echo '<a href="index.php?page=dangxuat" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>';
             } else {
-                echo '<a href="" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-user-plus"></i> Đăng ký</a>/';
+                echo '<a href="index.php?page=dangky" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-user-plus"></i> Đăng ký</a>/';
                 echo '<a href="index.php?page=dangnhap" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-sign-in-alt"></i> Đăng nhập</a>';
             }
         ?>
