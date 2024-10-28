@@ -111,6 +111,7 @@ table.employee-list {
 
 table.employee-list th, table.employee-list td {  
     padding: 12px; 
+    padding-bottom: 30px;
     border: 1px solid #ddd;  
     text-align: left;  
 }  
