@@ -13,6 +13,7 @@
             <?php
                 if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] === "qlch1")) {
                     echo '<a href="index.php?page=QLNV">Quản lý Nhân Viên <i class="fas fa-user"></i></a>';
+                    echo '<a href="index.php?page=qlkh">Quản lý Khách Hàng <i class="fas fa-user"></i></a>';
                     echo '<a href="index.php?page=qlnlcuahang">Quản lý nguyên liệu <i class="fas fa-warehouse"></i></a>';
                 }
             ?>

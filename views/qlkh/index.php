@@ -8,8 +8,13 @@
     <link rel="stylesheet" href="css/qlkh/style.css">  
 </head>
 <body>
-<?php
-    require("layout/navnvbh.php");
+    <?php
+    if($_SESSION["dangnhap"] == 'nvbh'){
+        require("layout/navnvbh.php");
+    }elseif($_SESSION["dangnhap"] == 'qlch1'){
+        require("layout/navqlch.php");
+    }
+
 ?>
 <div class="main">
     <h1>Danh sách khách hàng</h1>
