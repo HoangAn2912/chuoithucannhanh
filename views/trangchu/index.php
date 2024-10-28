@@ -4,6 +4,8 @@
         require("layout/navnvb.php");
     }elseif($_SESSION["dangnhap"] == 'nvbh'){
         require("layout/navnvbh.php");
+    }elseif($_SESSION["dangnhap"] == 'qlch1'){
+        require("layout/navqlch.php");
     }else{
         require("layout/navqlchuoi.php");
     }
