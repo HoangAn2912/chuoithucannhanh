@@ -6,7 +6,7 @@
     <title>Quản lý nhân viên</title>
     <link rel="stylesheet" href="css/ChamCong/style.css">    
     <link rel="stylesheet" href="css/QLNV/styles.css">
-    <link rel="stylesheet" href="css/ChamCong/styles.css">
+    <link rel="stylesheet" href="css/ChamCong/style.css">
 
     <style> 
     </style>  
