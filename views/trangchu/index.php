@@ -1,6 +1,14 @@
 <!-- Sidebar -->
 <?php
-    require("layout/navqlchuoi.php");
+    if($_SESSION["dangnhap"] == 'nvb'){
+        require("layout/navnvb.php");
+    }elseif($_SESSION["dangnhap"] == 'nvbh'){
+        require("layout/navnvbh.php");
+    }elseif($_SESSION["dangnhap"] == 'qlch1'){
+        require("layout/navqlch.php");
+    }else{
+        require("layout/navqlchuoi.php");
+    }
 ?>
 <div class="sidebar">
         <a href="#"><i class="fas fa-cogs"></i> Cài đặt</a>

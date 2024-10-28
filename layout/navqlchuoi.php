@@ -3,8 +3,10 @@
         <a href="index.php?page=trangchu">Trang Chủ</a>
         <div class="dropdown">
             <?php
+
                 if (isset($_SESSION["dangnhap"])&& (($_SESSION["dangnhap"] === "qlch1")|| ($_SESSION["dangnhap"] === "chuoi"))){
                     echo '<a href="#">Quản lý <i class="fas fa-caret-down"></i></a>';
+
                 }
             ?>
             <div class="dropdown-content">
@@ -14,6 +16,7 @@
                     echo '<a href="index.php?page=qlnlcuahang">Quản lý nguyên liệu <i class="fas fa-warehouse"></i></a>';
                 }elseif((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] === "chuoi")){
                     echo '<a href="index.php?page=qlnlchuoicuahang/xemchitiet">Quản lý nguyên liệu <i class="fas fa-warehouse"></i></a>';
+                    echo '<a href="index.php?page=qlmonan/xemchitiet">Quản lý món ăn <i class="fas fa-warehouse"></i></a>';
                 }
             ?>
             </div>
