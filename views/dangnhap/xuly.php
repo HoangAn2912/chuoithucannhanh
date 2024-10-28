@@ -12,7 +12,15 @@ if(isset($_POST["login"])) {
         $_SESSION["dangnhap"] = 'qlch1';
         header("Location:index.php?page=trangchu");
         exit();
-    } else {
+    }elseif($username === "nvbh" && $password === "1234") {
+        $_SESSION["dangnhap"] = 'nvbh';
+        header("Location:index.php?page=trangchu");
+        exit();
+    }elseif($username === "nvb" && $password === "1234") {
+        $_SESSION["dangnhap"] = 'nvb';
+        header("Location:index.php?page=trangchu");
+        exit();
+    }else {
         echo '<script>alert("Đăng nhập không thành công");</script>';
     }
 }

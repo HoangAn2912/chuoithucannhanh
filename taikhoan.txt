@@ -1,0 +1,15 @@
+tk quản lý chuỗi:
+    username: chuoi
+    password: 1234
+
+tk quản lý cửa hàng:
+    username: qlch1
+    password: 1234
+
+tk nhân viên bán hàng:
+    username: nvbh
+    password: 1234 
+
+tk nhân viên bếp:
+    username: nvb
+    password: 1234
