@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Quản lý nhân viên</title>
     <link rel="stylesheet" href="css/ChamCong/style.css">    
-    <link rel="stylesheet" href="css/QLNV/style.css">  
+    <link rel="stylesheet" href="css/QLNV/styles.css">
+    <link rel="stylesheet" href="css/ChamCong/styles.css">
+
     <style> 
-    .check-box label {
-    font-size: 16px;
-    margin-right: 15px;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    } 
     </style>  
 </head>  
 <body>  

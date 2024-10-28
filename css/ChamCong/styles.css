@@ -22,7 +22,8 @@
 .check-box label {
     font-size: 16px; /* Increase font size */
     margin-right: 15px; /* Space between labels */
-    padding: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 .check-box input[type="radio"] {

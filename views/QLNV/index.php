@@ -5,17 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Quản lý nhân viên</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-    <link rel="stylesheet" href="css/QLNV/style.css">  
+    <link rel="stylesheet" href="css/QLNV/styles.css">  
     <style>  
-        .form-group input,
-        .form-group textarea {
-            width: 100%;  
-            padding: 10px;  
-            margin-bottom: 15px;
-            border: 1px solid #ccc;  
-            border-radius: 4px;  
-            font-size: 16px;
-        }
+
     </style>  
 </head>  
 <body>  
