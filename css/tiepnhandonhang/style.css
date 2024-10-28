@@ -1,0 +1,89 @@
+
+* {  
+    box-sizing: border-box;  
+    margin: 0;  
+    padding: 0;  
+}  
+
+.main {
+   width: 80%;
+   margin: 0 auto;
+}
+
+body {  
+    font-family: Arial, sans-serif;  
+    background-color: #f4f4f4;  
+}  
+
+
+
+ /* Chọn chi nhánh */  
+.branch-selector {  
+    margin: 20px 0;  
+}  
+
+.branch-selector label {  
+    margin-right: 10px;  
+}  
+
+#branch{
+    width: 15%;
+}
+
+
+/* Bảng danh sách nhân viên */  
+table.dish-list {  
+    width: 100%;  
+    border-collapse: collapse;  
+    margin-top: 20px;  
+}  
+
+table.dish-list th, table.dish-list td {  
+    padding: 12px; 
+    border: 1px solid #ddd;  
+    text-align: left;  
+}  
+
+table.dish-list th {  
+    background-color: #FF7E29;  
+}  
+
+table.dish-list tr:hover {  
+    background-color: #eaeaea;  
+}  
+
+/* Thao tác */  
+table.dish-list td a {  
+    text-decoration: none;  
+    color: #3498db;  
+    margin-right: 10px;  
+}  
+
+table.dish-list td a:hover {  
+    text-decoration: underline;  
+}  
+ /* chức năng xác nhận */
+ .submit-xacnhan {  
+    padding: 6px 10px;  
+    font-size: 15px;  
+    background-color: #FF7E29; 
+    color: white;
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    transition: background-color 0.3s ease; 
+}  
+
+.submit-xacnhan:hover {  
+    background-color: #d4671f;   
+}    
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container div {
+    margin: 0 5px; /* Thêm khoảng cách giữa các nút */
+}

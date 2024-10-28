@@ -4,7 +4,7 @@
         <div class="dropdown">
             <?php
                 if (isset($_SESSION["dangnhap"])){
-                    echo '<a href="#">Quản lý <i class="fas fa-caret-down"></i></a>';
+                    echo '<a href="#">Quản lýy <i class="fas fa-caret-down"></i></a>';
                 }
             ?>
             <div class="dropdown-content">

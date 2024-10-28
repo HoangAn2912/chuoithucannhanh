@@ -11,7 +11,15 @@
 
    <!-- Header -->
     <div class="header">
-        <div class="logo" style="margin-right: 10px"> Quản Lý Chuỗi </div>
+        <div class="logo" style="margin-right: 10px"> 
+    <?php
+        if($_SESSION["dangnhap"] == 'nvb'){
+            echo "Nhân Viên Bếp";
+        }else{
+            echo "Quản Lý Chuỗi";
+        }
+    ?>        
+    </div>
         <div class="user-icon" style="margin-right: 20px"> <i class="fas fa-user-circle"></i> </div>
         <?php
             if ($_SESSION["dangnhap"]) {
