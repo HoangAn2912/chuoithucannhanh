@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
     <link rel="stylesheet" href="css/QLNV/style.css">  
     <style>  
+        .form-group input,
+        .form-group textarea {
+            width: 100%;  
+            padding: 10px;  
+            margin-bottom: 15px;
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+            font-size: 16px;
+        }
     </style>  
 </head>  
 <body>  
@@ -132,6 +141,7 @@
             <button onclick="addEmployee()">Lưu</button>  
         </div>  
 
+        <!-- xem chi tiet nv -->
         <div class="overlay" id="overlayDetail" onclick="toggleDetailForm()" style="display: none;"></div>
         <div class="employee-detail" id="employeeDetail">  
             <h3>Chi tiết nhân viên</h3>  
