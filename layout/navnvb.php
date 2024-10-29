@@ -8,11 +8,11 @@
                 }
             ?>
             <div class="dropdown-content">
-            <?php
-                if((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] === "nvb")){
-                    echo '<a href="index.php?page=tiepnhandonhang">Tiếp nhận đơn hàng <i class="fas fa-warehouse"></i></a>';
-                }
-            ?>
+                <?php
+                    if((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] === "nvb")){
+                        echo '<a href="index.php?page=tiepnhandonhang">Tiếp nhận đơn hàng <i class="fas fa-warehouse"></i></a>';
+                    }
+                ?>
             </div>
         </div>
         <?php

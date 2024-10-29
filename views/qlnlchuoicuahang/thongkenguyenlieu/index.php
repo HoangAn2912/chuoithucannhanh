@@ -1,7 +1,6 @@
 <?php
     echo '<link rel="stylesheet" href="css/QLNL/style.css">';
-    require_once("layout/navqlchuoi.php");
-    
+    echo require("layout/navqlchuoi.php");
 ?>
 <div class="sidebar">
     <form action=""  method="post">
@@ -23,37 +22,39 @@
     </form>
 </div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
-    <h3>Thống kê nguyên liệu</h3>
-        <form action="" method="post">
-            <table>
-                <tr>
-                    <th>MãNL</th>
-                    <th>Tên Nguyên Liệu</th>
-                    <th>Đơn vị tính</th>
-                    <th>Đơn giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ức gà</td>
-                    <td>Kg</td>
-                    <td>100,000</td>
-                    <td>5</td>
-                    <td>200000</td>
-                </tr>
-            </table>
-        </form>
-        <div class="pagination">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">Tiếp theo</a>
+        <div class="table-material">
+            <h3>Thống kê nguyên liệu</h3>
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <th>MãNL</th>
+                        <th>Tên Nguyên Liệu</th>
+                        <th>Đơn vị tính</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Ức gà</td>
+                        <td>Kg</td>
+                        <td>100,000</td>
+                        <td>5</td>
+                        <td>200000</td>
+                    </tr>
+                </table>
+            </form>
+            <div class="pagination">
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">Tiếp theo</a>
+            </div>
         </div>
         <div>
             <h3>Sơ đồ so sánh các cửa hàng</h3>
             <div class="chart">
-
+                
             </div>
         </div>
     </div>

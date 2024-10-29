@@ -1,4 +1,4 @@
-    <!-- Navigation bar -->
+<!-- Navigation bar -->
     <div class="navbar" style="justify-content: center;">
         <a href="index.php?page=trangchu">Trang Chủ</a>
         <div class="dropdown">
@@ -39,7 +39,7 @@
                         <a href="index.php?page=dexuatmonmoi">Đề xuất món mới</a>
                         <a href="index.php?page=nhanvien/dangkycalam">Đăng ký ca làm</a>
                     </div>
-                  </div>';
+                </div>';
             }
         ?>
 
