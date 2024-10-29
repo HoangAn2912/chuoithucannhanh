@@ -28,7 +28,7 @@
             </form>  
         </div>  
 
-        <!-- <div class="branch-selector">  
+        <div class="branch-selector">  
             <label for="branch">Chọn chi nhánh:</label>  
             <select id="branch" name="branch" onchange="this.form.submit()">  
                 <option value="branch1">Chi nhánh 1</option>  
@@ -37,7 +37,7 @@
                 <option value="branch3">Chi nhánh 4</option> 
                 <option value="branch3">Chi nhánh 5</option> 
             </select>  
-        </div>   -->
+        </div>  
 
         <div class="title-dsnv">  
             <h3>Danh sách nhân viên</h3>   
