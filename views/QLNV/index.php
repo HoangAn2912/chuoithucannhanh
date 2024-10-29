@@ -13,7 +13,7 @@
 <body>  
 
     <?php  
-        require('layout/navqlchuoi.php');  
+        require('layout/navqlch.php');  
     ?>  
 
     <div class="main">   
@@ -23,12 +23,12 @@
         
         <div class="qlnv-search-bar">  
             <form method="POST">  
-                <input type="text" name="search" placeholder="Nhập nhân viên cần tìm" />  
+                <input type="text" name="search" placeholder="Nhập nhân viên cần tìm..." />  
                 <button type="submit"><i class="fas fa-search"></i> Tìm</button> 
             </form>  
         </div>  
 
-        <div class="branch-selector">  
+        <!-- <div class="branch-selector">  
             <label for="branch">Chọn chi nhánh:</label>  
             <select id="branch" name="branch" onchange="this.form.submit()">  
                 <option value="branch1">Chi nhánh 1</option>  
@@ -37,7 +37,7 @@
                 <option value="branch3">Chi nhánh 4</option> 
                 <option value="branch3">Chi nhánh 5</option> 
             </select>  
-        </div>  
+        </div>   -->
 
         <div class="title-dsnv">  
             <h3>Danh sách nhân viên</h3>   
@@ -47,56 +47,56 @@
             <table class="employee-list">  
                 <thead>  
                     <tr>  
-                        <th></th>  
+                        <th>Mã nhân viên</th>  
                         <th>Tên nhân viên</th>  
                         <th>Chức vụ</th>  
-                        <th>Ca làm</th>  
+                        <th>Trạng thái</th>  
                         <th>Thao tác</th>  
                     </tr>  
                 </thead>  
                 <tbody id="employee-list">  
                     <tr>  
-                        <td><i class='fas fa-user'></i></td>  
+                        <td>NV_001</td>  
                         <td>Nguyễn Văn A</td>  
                         <td>Nhân Viên</td>  
-                        <td>Ca 1</td>  
-                        <td>  
-                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
-                            <a href='edit.php?id=1'>Sửa</a> |  
-                            <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
+                        <td>Đang làm việc</td>  
+                        <td class="td-btn-qlnv">  
+                            <button class="btn-view-qlnv" href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</button>                          
+                            <button class="btn-edit-qlnv">Sửa</button>   
+                            <button class="btn-delete-qlnv" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>  
                         </td>  
                     </tr>  
                     <tr>  
-                        <td><i class='fas fa-user'></i></td>  
+                        <td>NV_002</td>  
                         <td>Trần Thị B</td>  
                         <td>Nhân viên</td>  
-                        <td>Ca 2</td>  
-                        <td>  
-                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
-                            <a href='edit.php?id=2'>Sửa</a> |  
-                            <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
+                        <td>Đang làm việc</td>  
+                        <td class="td-btn-qlnv">  
+                            <button class="btn-view-qlnv" href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</button>                          
+                            <button class="btn-edit-qlnv">Sửa</button>   
+                            <button class="btn-delete-qlnv" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>  
                         </td>  
                     </tr> 
                     <tr>  
-                        <td><i class='fas fa-user'></i></td>  
+                        <td>NV_003</i></td>  
                         <td>Phạm Thị Ba</td>  
                         <td>Nhân viên Bếp</td>  
-                        <td>Ca 1</td>  
-                        <td>  
-                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
-                            <a href='edit.php?id=2'>Sửa</a> |  
-                            <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
+                        <td>Nghỉ việc</td>  
+                        <td class="td-btn-qlnv">  
+                            <button class="btn-view-qlnv" href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</button>                          
+                            <button class="btn-edit-qlnv">Sửa</button>   
+                            <button class="btn-delete-qlnv" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button> 
                         </td>  
                     </tr> 
                     <tr>  
-                        <td><i class='fas fa-user'></i></td>  
+                        <td>NV_004</i></td>  
                         <td>Trần Thanh An</td>  
                         <td>Nhân viên Bếp</td>  
-                        <td>Ca 1</td>  
-                        <td>  
-                            <a href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</a>                        |  
-                            <a href='edit.php?id=2'>Sửa</a> |  
-                            <a href='delete.php?id=1' onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>  
+                        <td>Đang làm việc</td>  
+                        <td class="td-btn-qlnv">  
+                            <button class="btn-view-qlnv" href="javascript:void(0);" onclick="toggleDetailForm()">Xem chi tiết</button>                          
+                            <button class="btn-edit-qlnv">Sửa</button>   
+                            <button class="btn-delete-qlnv" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button> 
                         </td>  
                     </tr>  
                 </tbody>  
@@ -105,7 +105,7 @@
 
         <!-- thêm mới nhân viên -->
         <div class="add-NV">  
-            <button class="add-employee" onclick="toggleForm()">Thêm mới nhân viên</button>   
+            <button class="btn-add-NV" onclick="toggleForm()">Thêm mới nhân viên</button>   
         </div>  
 
         <div class="overlay" id="overlay" onclick="toggleForm()"></div>  
@@ -129,8 +129,10 @@
                 <option value="branch1">Chi nhánh 1</option>  
                 <option value="branch2">Chi nhánh 2</option>  
                 <option value="branch3">Chi nhánh 3</option>  
+                <option value="branch4">Chi nhánh 4</option>
+                <option value="branch5">Chi nhánh 5</option>
             </select>  
-            <button onclick="addEmployee()">Lưu</button>  
+            <button class="btn-add-NV-save">Lưu</button>  
         </div>  
 
         <!-- xem chi tiet nv -->

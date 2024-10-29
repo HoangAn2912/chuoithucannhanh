@@ -1,6 +1,9 @@
 <?php
-    echo '<script>alert("Vui lòng xác nhận đăng xuất")</script>';
-    session_destroy();
-    header('refresh: 0.5; url= index.php?page=dangnhap');
+// Kiểm tra nếu người dùng đã xác nhận đăng xuất
+if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
+    session_start(); // Khởi động phiên làm việc
+    session_destroy(); // Hủy phiên làm việc
+    header('Location: index.php?page=dangnhap'); // Chuyển hướng đến trang đăng nhập
     exit();
+}
 ?>

@@ -3,35 +3,35 @@
     echo require("layout/navqlchuoi.php");
 ?>
 <?php
-if(isset($_POST["btn-detail"])){
-    echo '<div class="container" id="ingredient-details">
-        
-        <div class="header">
-            <span>Mã nguyên liệu: 2</span>
-            <span>Mã cửa hàng: 1</span>
-            <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
-        </div>
-        
-        <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
-        
-        <div class="details">
-            <div>
-                <p>Tên nguyên liệu: thịt bò</p>
-                <p>Đơn vị tính: kg</p>
-                <p>Đơn giá: 280,000VND</p>
-                <p>Trạng thái: chờ duyệt</p>
+    if(isset($_POST["btn-detail"])){
+        echo '<div class="container" id="ingredient-details">
+            
+            <div class="header">
+                <span>Mã nguyên liệu: 2</span>
+                <span>Mã cửa hàng: 1</span>
+                <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
             </div>
-            <div>
-                <p>Tên NCC: tươi sống</p>
-                <p>SDT nhà cung cấp: 012345678</p>
-                <p>Email NCC: abc@gmail.com</p>
-                <p>Số lượng bổ sung: 20</p>
+            
+            <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
+            
+            <div class="details">
+                <div>
+                    <p>Tên nguyên liệu: thịt bò</p>
+                    <p>Đơn vị tính: kg</p>
+                    <p>Đơn giá: 280,000VND</p>
+                    <p>Trạng thái: chờ duyệt</p>
+                </div>
+                <div>
+                    <p>Tên NCC: tươi sống</p>
+                    <p>SDT nhà cung cấp: 012345678</p>
+                    <p>Email NCC: abc@gmail.com</p>
+                    <p>Số lượng bổ sung: 20</p>
+                </div>
             </div>
-        </div>
-        
-        <button class="btn-approve">Duyệt</button>
-    </div>';
-}
+            
+            <button class="btn-approve">Duyệt</button>
+        </div>';
+    }
 ?>
 <?php
     if(isset($_POST["update"])){
