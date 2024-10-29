@@ -11,7 +11,6 @@
             <?php
                 if((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] === "nvb")){
                     echo '<a href="index.php?page=tiepnhandonhang">Tiếp nhận đơn hàng <i class="fas fa-warehouse"></i></a>';
-                   
                 }
             ?>
             </div>
@@ -24,7 +23,8 @@
                     <div class="dropdown-content">
                         <a href="index.php?page=tiepnhandonhang">Tiếp nhận đơn hàng</a>
                     </div>
-                  </div>';
+                </div>';
+                echo '<a href="index.php?page=nhanvien/dangkycalam">Đăng ký ca làm</a>';
             }
         ?>
         <div class="search-container">

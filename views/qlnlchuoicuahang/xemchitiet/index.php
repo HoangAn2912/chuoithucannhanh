@@ -4,7 +4,7 @@
     
 ?>
 <?php
-if(isset($_POST["btn-detail"])){
+    if(isset($_POST["btn-detail"])){
     echo '<div class="container" id="ingredient-details">
         
         <div class="header">

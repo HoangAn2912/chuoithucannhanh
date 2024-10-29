@@ -35,6 +35,7 @@
                     <a href="#">Chức năng<i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a href="index.php?page=dexuatmonmoi">Đề xuất món mới</a>
+                        <a href="index.php?page=nhanvien/dangkycalam">Đăng ký ca làm</a>
                     </div>
                   </div>';
             }
