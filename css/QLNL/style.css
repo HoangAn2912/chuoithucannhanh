@@ -67,7 +67,7 @@ th {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
+    width: 100%;
     max-width: 500px;
     padding: 20px;
     background-color: #fff;
@@ -81,7 +81,7 @@ th {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 80%;
     margin-bottom: 20px;
 }
 
@@ -132,12 +132,6 @@ th {
     color: #a94503;
 }
 /* themnguyenlieumoi */
-.container {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 400px;
-}
 .form-group {
     margin-bottom: 15px;
 }
