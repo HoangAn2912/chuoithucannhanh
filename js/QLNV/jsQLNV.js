@@ -1,3 +1,4 @@
+//ẩn hiện form thêm nv
 function toggleForm() {  
     const form = document.getElementById('employeeForm');  
     const overlay = document.getElementById('overlay');  
@@ -6,6 +7,7 @@ function toggleForm() {
     overlay.style.display = isVisible ? 'none' : 'block';   
 }
 
+//ẩn hiện form xem nv
 function toggleDetailForm() {  
     const detailForm = document.getElementById('employeeDetail');  
     const overlay = document.getElementById('overlayDetail');  

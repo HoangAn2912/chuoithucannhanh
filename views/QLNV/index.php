@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Quản lý nhân viên</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-    <link rel="stylesheet" href="css/QLNV/style.css">  
+    <link rel="stylesheet" href="css/QLNV/styles.css">  
     <style>  
+
     </style>  
 </head>  
 <body>  
@@ -132,6 +133,7 @@
             <button onclick="addEmployee()">Lưu</button>  
         </div>  
 
+        <!-- xem chi tiet nv -->
         <div class="overlay" id="overlayDetail" onclick="toggleDetailForm()" style="display: none;"></div>
         <div class="employee-detail" id="employeeDetail">  
             <h3>Chi tiết nhân viên</h3>  

@@ -1,7 +1,6 @@
 <?php
     echo '<link rel="stylesheet" href="css/QLNL/style.css">';
-    require_once("layout/navqlchuoi.php");
-    
+    echo require("layout/navqlchuoi.php");
 ?>
 <?php
 if(isset($_POST["btn-detail"])){
@@ -98,115 +97,117 @@ if(isset($_POST["btn-detail"])){
 </div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
         <h4 style="color: #db5a04">Quản lý nguyên liệu</h4>
-        <form action="" method="post">
-            <table>
-            <tr>
-                <th>Mã NL</th>
-                <th>Tên Nguyên Liệu</th>
-                <th>Đơn vị tính</th>
-                <th>Đơn giá (VND)</th>
-                <th>Trạng thái</th>
-                <th>Tùy Chọn</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Ức gà</td>
-                <td>Kg</td>
-                <td>100,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail" name="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Thịt bò</td>
-                <td>Kg</td>
-                <td>280,000</td>
-                <td>Chờ duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Cá phi lê</td>
-                <td>Kg</td>
-                <td>300,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Trứng gà</td>
-                <td>Quả</td>
-                <td>4,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Khoai tây</td>
-                <td>Kg</td>
-                <td>20,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>Hành tây</td>
-                <td>Kg</td>
-                <td>35,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Cà chua</td>
-                <td>Kg</td>
-                <td>30,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Rau xà lách</td>
-                <td>Kg</td>
-                <td>25,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Dưa leo</td>
-                <td>Kg</td>
-                <td>25,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Đùi gà</td>
-                <td>Kg</td>
-                <td>120,000</td>
-                <td>Chờ duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Ớt chuông</td>
-                <td>Kg</td>
-                <td>60,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail" >Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Phô mai lát</td>
-                <td>Kg</td>
-                <td>150,000</td>
-                <td>Đã duyệt</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-                <!-- Add more rows as needed -->
-            </table>
-        </form>
+        <div class="table-material">
+            <form action="" method="post">
+                <table>
+                <tr>
+                    <th>Mã NL</th>
+                    <th>Tên Nguyên Liệu</th>
+                    <th>Đơn vị tính</th>
+                    <th>Đơn giá (VND)</th>
+                    <th>Trạng thái</th>
+                    <th>Tùy Chọn</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Ức gà</td>
+                    <td>Kg</td>
+                    <td>100,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail" name="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Thịt bò</td>
+                    <td>Kg</td>
+                    <td>280,000</td>
+                    <td>Chờ duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Cá phi lê</td>
+                    <td>Kg</td>
+                    <td>300,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Trứng gà</td>
+                    <td>Quả</td>
+                    <td>4,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Khoai tây</td>
+                    <td>Kg</td>
+                    <td>20,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Hành tây</td>
+                    <td>Kg</td>
+                    <td>35,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Cà chua</td>
+                    <td>Kg</td>
+                    <td>30,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Rau xà lách</td>
+                    <td>Kg</td>
+                    <td>25,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Dưa leo</td>
+                    <td>Kg</td>
+                    <td>25,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Đùi gà</td>
+                    <td>Kg</td>
+                    <td>120,000</td>
+                    <td>Chờ duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Ớt chuông</td>
+                    <td>Kg</td>
+                    <td>60,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail" >Xem chi tiết</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Phô mai lát</td>
+                    <td>Kg</td>
+                    <td>150,000</td>
+                    <td>Đã duyệt</td>
+                    <td><button class="btn-detail">Xem chi tiết</button></td>
+                </tr>
+                    <!-- Add more rows as needed -->
+                </table>
+            </form>
+        </div>
         <div class="pagination">
             <a href="#">1</a>
             <a href="#">2</a>
@@ -219,7 +220,7 @@ if(isset($_POST["btn-detail"])){
 
 <script>
     function closeDetails() {
-        document.getElementById("ingredient-details").style.display = "none";
+        document.getElementById("ingredient-details").style.display ="none";
     }
 </script>
 </html>
