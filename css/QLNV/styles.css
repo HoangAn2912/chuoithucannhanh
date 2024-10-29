@@ -61,7 +61,12 @@ h3 {
 /* Thanh tìm kiếm */  
 .qlnv-search-bar {  
     margin-bottom: 20px;  
-}  
+} 
+
+#branch {
+    padding: 3px;
+    border-radius: 5px;
+}
 
 .qlnv-search-bar input[type="text"] {
     padding: 12px;
@@ -111,6 +116,7 @@ table.employee-list {
 
 table.employee-list th, table.employee-list td {  
     padding: 12px; 
+    padding-bottom: 30px;
     border: 1px solid #ddd;  
     text-align: left;  
 }  
@@ -235,6 +241,7 @@ table.employee-list td a:hover {
     z-index: 100;
 }
 
+/* view nv */
 .back-button-view button {
     background-color: #FF7E29;
     color: white;
@@ -248,3 +255,14 @@ table.employee-list td a:hover {
 .back-button-view button:hover {
     background-color: #d46013;
 }
+
+.form-group input,
+.form-group textarea {
+    width: 100%;  
+    padding: 10px;  
+    margin-bottom: 15px;
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+    font-size: 16px;
+}
+

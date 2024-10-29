@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Quản lý nhân viên</title>
     <link rel="stylesheet" href="css/ChamCong/style.css">    
-    <link rel="stylesheet" href="css/QLNV/style.css">  
-    <style>  
+    <link rel="stylesheet" href="css/QLNV/styles.css">
+    <link rel="stylesheet" href="css/ChamCong/style.css">
+
+    <style> 
     </style>  
 </head>  
 <body>  
