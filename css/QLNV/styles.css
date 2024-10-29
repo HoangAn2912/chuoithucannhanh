@@ -115,14 +115,17 @@ table.employee-list {
 }  
 
 table.employee-list th, table.employee-list td {  
-    padding: 12px; 
-    padding-bottom: 30px;
+    padding: 10px; 
+    padding-top: 15px;
+    padding-bottom: 20px;
     border: 1px solid #ddd;  
     text-align: left;  
 }  
 
+
 table.employee-list th {  
     background-color: #FF7E29;  
+    color: white;
 }  
 
 table.employee-list tr:hover {  
@@ -146,18 +149,18 @@ table.employee-list td a:hover {
 }  
 
  
-.add-employee {  
+.btn-add-NV {  
+    border: 1px solid #963e03;
     padding: 12px 20px;  
     background-color: #FF7E29;  
-    color: white;  
-    border: none;  
-    border-radius: 4px;  
+    color: white;    
+    border-radius: 10px;  
     cursor: pointer;  
     margin-top: 20px;  
 }  
 
-.add-employee:hover {  
-    background-color: #FF7E29;  
+.btn-add-NV:hover {  
+    background-color:#d76417 ; 
 }  
 
 /* Form thêm nhân viên */  
@@ -265,4 +268,25 @@ table.employee-list td a:hover {
     border-radius: 4px;  
     font-size: 16px;
 }
+.td-btn-qlnv {
+    display: flex;
+    justify-content: space-evenly;
+}
+.btn-view-qlnv,
+.btn-edit-qlnv,
+.btn-delete-qlnv {
+    margin-left: 20px;
+    background-color: #FF7E29;  
+    color: white;  
+    border: none;  
+    padding: 10px 12px;  
+    cursor: pointer;  
+    border-radius: 10px;  
+    font-size: 16px;
+}
 
+.btn-view-qlnv:hover,
+.btn-edit-qlnv:hover,
+.btn-delete-qlnv:hover {
+    background-color: #d76417;  
+}
