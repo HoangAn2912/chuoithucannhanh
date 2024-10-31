@@ -43,6 +43,15 @@
             }
         ?>
 
+        <?php
+            if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "nvbh")) {
+                echo '
+                <div class="dropdown">
+                    <a href="index.php?page=taodonhang">Tạo đơn hàng</a>
+                </div>';
+            }
+        ?>
+
         <div class="search-container">
             <input type="text" placeholder="Tìm kiếm..." class="search-bar">
             <span class="search-icon fas fa-search "></span>
