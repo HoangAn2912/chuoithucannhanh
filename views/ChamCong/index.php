@@ -21,7 +21,7 @@
             <h2>Chấm Công Nhân Viên</h2>  
         </div>  
 
-        <div class="cc-search-bar">  t 
+        <div class="cc-search-bar">
             <form method="POST">  
                 <input class="cc-input" type="text" name="search" placeholder="Nhập nhân viên cần tìm..." />  
                 <button class="cc-submit" type="submit"><i class="fas fa-search"></i> Tìm</button>  

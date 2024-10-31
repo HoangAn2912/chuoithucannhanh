@@ -31,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Table rows will be dynamically added here -->
+            <button style="margin: 20px 0px;">Thêm khách hàng</button>
         </tbody>
     </table>
 

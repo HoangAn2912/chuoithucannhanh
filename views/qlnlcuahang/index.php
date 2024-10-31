@@ -6,7 +6,7 @@
 <?php
     if(isset($_POST["add"])){
         echo 
-        '<div class="container" id="ingredient-details">
+        '<div class="container" id="ingredient">
             <div class="header">
                 <span><button class="close-btn" onclick="closeAdd()">✖</button></span>
             </div>
@@ -27,7 +27,7 @@
 ?>
 <?php
     if(isset($_POST["btn-detail"])){
-        echo '<div class="container" id="ingredient-details">
+        echo '<div class="container" id="ingredient">
             
             <div class="header">
                 <span>Mã nguyên liệu: 2</span>
