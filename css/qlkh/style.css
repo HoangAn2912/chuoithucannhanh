@@ -38,6 +38,7 @@ th, td {
     text-align: left;
 }
 th {
+    color: #000;
     background-color: #f2f2f2;
 }
 button {

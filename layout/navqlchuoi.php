@@ -1,6 +1,7 @@
     <!-- Navigation bar -->
     <div class="navbar">
         <div class="search-container">
+            <a href="index.php?page=trangchu">Trang Chủ</a>
             <?php
                 if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "chuoi")) {
                     echo '
