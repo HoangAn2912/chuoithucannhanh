@@ -96,7 +96,10 @@ h2 {
     margin-bottom: 15px;  
 }  
 .infor-item{
+    margin-left: 5px;
+    margin-right: 5px;
     margin-bottom: 10px;
+    border-radius: 5px;
     border: 1px solid #ccc; /* Đường viền cho bảng */
     align-items: center;
     padding-left: 10px;
