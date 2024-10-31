@@ -275,7 +275,7 @@ th {
 #logoutModal {
     display: none; /* Ẩn modal khi không sử dụng */
     position: fixed; /* Đặt vị trí cố định */
-    z-index: 1; /* Đảm bảo modal nằm trên các phần tử khác */
+    z-index: 10000; /* Đảm bảo modal nằm trên các phần tử khác */
     left: 0;
     top: 0;
     width: 100%; /* Chiếm toàn bộ chiều rộng */

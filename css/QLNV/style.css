@@ -107,11 +107,31 @@ h3 {
 #branch{
     width: 15%;
 }
+
+.list-dsnv {
+    max-height: 400px; /* Đặt chiều cao tối đa cho menu */  
+    overflow-y: auto;   /* Cho phép cuộn dọc */ 
+    border: 1px solid #ccc; /* Thêm đường viền cho dễ phân biệt */  
+    border-radius: 10px; /* Bo góc */
+
+}
+
+.title-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.title-list thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);  ; 
+}
 /* Bảng danh sách nhân viên */  
 table.employee-list {  
     width: 100%;  
     border-collapse: collapse;  
-    margin-top: 20px;  
+    margin-top: 0;  
 }  
 
 table.employee-list th, table.employee-list td {  
@@ -145,7 +165,7 @@ table.employee-list td a:hover {
 
 .add-NV {  
     clear: both;  
-    margin-top: 20px; 
+    margin-top: 15px; 
 }  
 
  
