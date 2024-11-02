@@ -4,13 +4,16 @@
 ?>
 <div class="sidebar">
     <form action=""  method="post">
-        <h3>Cửa hàng</h3>
+        <h3>Cửa hàng <button type="submit" style ="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h3>
             <div>
-                <a href=""><label><input type="checkbox" name="cuahang1" value="1"> Cửa hàng 1</label></a>
-                <a href=""><label><input type="checkbox" name="cuahang2" value="2"> Cửa hàng 2</label></a>
-                <a href=""><label><input type="checkbox" name="cuahang3" value="3"> Cửa hàng 3</label></a>
-                <a href=""><label><input type="checkbox" name="cuahang4" value="4"> Cửa hàng 4</label></a>
-                <a href=""><label><input type="checkbox" name="cuahang5" value="5"> Cửa hàng 5</label></a>
+                <?php
+                    include_once("controllers/cCuaHang.php");
+                    $cuaHang = new cCuaHang();
+                    $DScuaHang = $cuaHang->getCuaHang();
+                    foreach($DScuaHang as $i){
+                        echo '<input style ="margin-bottom: 30px;" type="checkbox" name="cuahang[]" value="'.$i['mach'].'"> '.$i['tench'].'<br>';
+                    }
+                ?>
             </div>
         <h3>Thời gian</h3>
         <div>
@@ -62,4 +65,3 @@
 </body>
 
 </html>
-

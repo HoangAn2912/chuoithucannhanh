@@ -79,17 +79,20 @@
     }
 ?>
 <div class="sidebar">
-    <form action=""  method="post">
-        <h4>Trạng thái</h4>
-            <a href=""><label><input type="checkbox" name="trangthai"> Đã duyệt</label></a>
-            <a href=""><label><input type="checkbox" name="trangthai"> Chờ duyệt</label></a>
+<form action=""  method="post">
+        <h4>Trạng thái <button type="submit" style ="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h4>
+           <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Đã duyệt"> Đã duyệt <br>
+           <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Chờ duyệt"> Chờ duyệt
             
-        <h4>Cửa hàng</h4>
-            <a href=""><label><input type="checkbox" name="cuahang" value="1"> Cửa hàng 1</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="2"> Cửa hàng 2</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="3"> Cửa hàng 3</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="4"> Cửa hàng 4</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="5"> Cửa hàng 5</label></a>
+        <h4>Cửa hàng </h4>
+                <?php
+                    include_once("controllers/cCuaHang.php");
+                    $cuaHang = new cCuaHang();
+                    $DScuaHang = $cuaHang->getCuaHang();
+                    foreach($DScuaHang as $i){
+                        echo '<input style ="margin-bottom: 30px;" type="checkbox" name="cuahang[]" value="'.$i['mach'].'"> '.$i['tench'].'<br>';
+                    }
+                ?>
             <button class="add" name="add">Thêm mới</button>
             <button class="update" name="update">Cập nhật</button>
 
@@ -101,6 +104,7 @@
             <form action="" method="post">
                 <table>
                 <tr>
+                    <th>Mã CH</th>
                     <th>Mã NL</th>
                     <th>Tên Nguyên Liệu</th>
                     <th>Đơn vị tính</th>
@@ -108,103 +112,33 @@
                     <th>Trạng thái</th>
                     <th>Tùy Chọn</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ức gà</td>
-                    <td>Kg</td>
-                    <td>100,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail" name="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Thịt bò</td>
-                    <td>Kg</td>
-                    <td>280,000</td>
-                    <td>Chờ duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Cá phi lê</td>
-                    <td>Kg</td>
-                    <td>300,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Trứng gà</td>
-                    <td>Quả</td>
-                    <td>4,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Khoai tây</td>
-                    <td>Kg</td>
-                    <td>20,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Hành tây</td>
-                    <td>Kg</td>
-                    <td>35,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Cà chua</td>
-                    <td>Kg</td>
-                    <td>30,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Rau xà lách</td>
-                    <td>Kg</td>
-                    <td>25,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Dưa leo</td>
-                    <td>Kg</td>
-                    <td>25,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Đùi gà</td>
-                    <td>Kg</td>
-                    <td>120,000</td>
-                    <td>Chờ duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Ớt chuông</td>
-                    <td>Kg</td>
-                    <td>60,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail" >Xem chi tiết</button></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Phô mai lát</td>
-                    <td>Kg</td>
-                    <td>150,000</td>
-                    <td>Đã duyệt</td>
-                    <td><button class="btn-detail">Xem chi tiết</button></td>
-                </tr>
-                    <!-- Add more rows as needed -->
+                <?php
+                    include_once("controllers/cKhoNguyenLieu.php");
+                    $khoNguyenLieu = new cKhoNguyenLieu();
+                    if (isset($_POST["filter"])) {
+                        if (isset($_POST["cuahang"]) && isset($_POST["trangthai"])) {
+                            foreach ($_POST["cuahang"] as $i) {
+                                foreach ($_POST["trangthai"] as $t) {
+                                    $DS = $khoNguyenLieu->getNguyenLieuByMaCH_TT($i, $t);
+                                }
+                            }
+                        } elseif (isset($_POST["cuahang"])) {
+                            foreach ($_POST["cuahang"] as $i) {
+                                $DS = $khoNguyenLieu->getNguyenLieuByMaCH($i);
+                            }
+                        } elseif (isset($_POST["trangthai"])) {
+                            foreach ($_POST["trangthai"] as $t) {
+                                $DS = $khoNguyenLieu->getNguyenLieuByTT($t);
+                            }
+                        }else {
+                            $DS = $khoNguyenLieu->getNguyenLieu();
+                        }
+                        $khoNguyenLieu->displayNguyenLieu($DS);
+                    } else {
+                        $DS = $khoNguyenLieu->getNguyenLieu();
+                        $khoNguyenLieu->displayNguyenLieu($DS);
+                    }
+                ?>
                 </table>
             </form>
         </div>
