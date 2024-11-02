@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 26, 2024 lúc 11:07 AM
+-- Thời gian đã tạo: Th10 02, 2024 lúc 04:07 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -501,28 +501,28 @@ CREATE TABLE `monan` (
 --
 
 INSERT INTO `monan` (`mama`, `tenma`, `hinhanh`, `maloaima`, `giaban`, `soluong`, `trangthai`) VALUES
-(1, 'Gà Rán Giòn', NULL, 1, 75000, 100, 0),
-(2, 'Gà Rán Cay', NULL, 1, 80000, 50, 0),
-(3, 'Gà Rán Phô Mai', NULL, 1, 85000, 30, 0),
-(4, 'Gà Rán Nguyên Miếng', NULL, 1, 90000, 20, 0),
-(5, 'Gà Rán Combo', NULL, 5, 150000, 10, 0),
-(6, 'Nước Ngọt Coca', NULL, 2, 15000, 200, 0),
-(7, 'Nước Ngọt Pepsi', NULL, 2, 15000, 200, 0),
-(8, 'Nước Ngọt Sprite', NULL, 2, 15000, 200, 0),
-(9, 'Nước Ngọt Fanta', NULL, 2, 15000, 200, 0),
-(10, 'Nước Ngọt Combo', NULL, 5, 40000, 50, 0),
-(11, 'Mì Ý Bolognese', NULL, 3, 90000, 30, 0),
-(12, 'Mì Ý Carbonara', NULL, 3, 95000, 25, 0),
-(13, 'Mì Ý Hải Sản', NULL, 3, 100000, 20, 0),
-(14, 'Mì Ý Combo', NULL, 5, 180000, 15, 0),
-(15, 'Khoai Tây Chiên Thường', NULL, 4, 30000, 100, 0),
-(16, 'Khoai Tây Chiên Phô Mai', NULL, 4, 40000, 80, 0),
-(17, 'Khoai Tây Chiên Combo', NULL, 5, 70000, 30, 0),
-(18, 'Gà Rán + Nước Ngọt', NULL, 5, 85000, 15, 0),
-(19, 'Gà Rán + Khoai Tây Chiên', NULL, 5, 90000, 10, 0),
-(20, 'Mì Ý + Nước Ngọt', NULL, 5, 105000, 12, 0),
-(21, 'Mì Ý + Khoai Tây Chiên', NULL, 5, 110000, 8, 0),
-(22, 'Gà Rán + Mì Ý', NULL, 5, 145000, 5, 0);
+(1, 'Gà Rán Giòn', 'garan.jpg', 1, 29000, 100, 0),
+(2, 'Gà Rán Cay', 'garancay.jpg', 1, 33000, 50, 0),
+(3, 'Gà Rán Phô Mai', 'garanphomai.jpg', 1, 35000, 30, 0),
+(4, 'Gà Rán Nguyên Con', 'garannguyencon.jpg', 1, 190000, 20, 0),
+(5, 'Gà Rán Combo', 'garancombo.jpg', 5, 299000, 10, 0),
+(6, 'Nước Ngọt Coca', 'nuocngotcoca.jpg', 2, 15000, 200, 0),
+(7, 'Nước Ngọt Pepsi', 'nuocngotpepsi.jpg', 2, 15000, 200, 0),
+(8, 'Nước Ngọt Sprite', 'nuocngotsprite.jpg', 2, 15000, 200, 0),
+(9, 'Nước Ngọt Fanta', 'nuocngotpanta.jpg', 2, 15000, 200, 0),
+(10, 'Nước Ngọt Coca + Gà Rán', 'garanvacoca.jpg', 5, 39000, 50, 0),
+(11, 'Mì Ý Bolognese', 'myyolo.jpg', 3, 39000, 30, 0),
+(12, 'Mì Ý Trung Quốc', 'myytrungquoc.jpg', 3, 39000, 25, 0),
+(13, 'Mì Ý Hải Sản', 'myyhaisan.jpg', 3, 49000, 20, 0),
+(14, 'Mì Ý Việt + Gà Rán Cay', 'myyvietvagarancay.jpg', 5, 63000, 15, 0),
+(15, 'Khoai Tây Chiên', 'khoaitaychien.jpg', 4, 19000, 100, 0),
+(16, 'Khoai Tây Chiên Phô Mai', 'khoaitaychienphomai.jpg', 4, 25000, 80, 0),
+(17, 'Gà Rán + Khoai Tây Chiên ', 'garanvakhoaitaychien.jpg', 5, 49000, 30, 0),
+(18, 'Cánh Gà Rán', 'canhgaran.jpg', 1, 29000, 15, 0),
+(19, 'Combo Gà Rán', 'combogaran.jpg', 5, 79000, 10, 0),
+(20, 'Mì Ý Tương Đen', 'mytuongden.jpg', 3, 39000, 12, 0),
+(21, 'Combo Đặt Biệt', 'combodatbiet.jpg', 5, 299000, 8, 0),
+(22, 'Gà Rán + Mì Ý', 'garanvamyy.jpg', 5, 69000, 5, 0);
 
 -- --------------------------------------------------------
 
