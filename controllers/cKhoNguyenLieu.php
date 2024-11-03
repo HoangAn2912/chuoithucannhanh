@@ -3,29 +3,36 @@ include_once("models/mKhoNguyenLieu.php");
 
 class cKhoNguyenLieu {
     public function getNguyenLieu() {
-
+        $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl";
         $nguyenlieu = new mKhoNguyenLieu();
-        $DanhSachNL = $nguyenlieu->selectNguyenLieu();
+        $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
         return $DanhSachNL;
     }
 
     public function getNguyenLieuByMaCH($mach) {
-
+        $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl  WHERE mach = '$mach'";
         $nguyenlieu = new mKhoNguyenLieu();
-        $DanhSachNL = $nguyenlieu->selectNguyenLieuByMaCH($mach);
+        $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
         return $DanhSachNL;
     }
 
     public function getNguyenLieuByTT($tinhtrang) {
-
+        $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl  WHERE TinhTrang = '$tinhtrang'";
         $nguyenlieu = new mKhoNguyenLieu();
-        $DanhSachNL = $nguyenlieu->selectNguyenLieuByTT($tinhtrang);
+        $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
         return $DanhSachNL;
     }
     public function getNguyenLieuByMaCH_TT($mach , $tinhtrang) {
-
+        $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl  WHERE mach = '$mach' and TinhTrang = '$tinhtrang'";
         $nguyenlieu = new mKhoNguyenLieu();
-        $DanhSachNL = $nguyenlieu->selectNguyenLieuByMaCH_TT($mach, $tinhtrang);
+        $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
+        return $DanhSachNL;
+    }
+
+    public function getNguyenLieuByMaNL($manlch) {
+        $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl  WHERE NLCH_ID = '$manlch'";
+        $nguyenlieu = new mKhoNguyenLieu();
+        $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
         return $DanhSachNL;
     }
 
@@ -41,7 +48,7 @@ class cKhoNguyenLieu {
                 echo '<td>'.$j['donvitinh'].'</td>';
                 echo '<td>'.$j['dongia'].'</td>';
                 echo '<td>'.$j['TinhTrang'].'</td>';
-                echo '<td><button class="btn-detail" name="btn-detail">Xem chi tiết</button></td>';
+                echo '<td><button class="btn-detail" name="btn-detail" value="'.$j['NLCH_ID'].'">Xem chi tiết</button></td>';
                 echo '</tr>';
             }
         }

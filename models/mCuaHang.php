@@ -6,8 +6,7 @@ include_once("models/mketnoi.php");
             $ketnoi = new ketnoi();
             $this->conn = $ketnoi->ketnoi();
         }
-        public function selectCuaHang() {
-            $sql = "SELECT * FROM cuahang";
+        public function selectCuaHang($sql) {
             $cuahang = array();
             $kq = $this->conn->query($sql);
             if ($kq->num_rows > 0) {
