@@ -119,8 +119,8 @@ h2 {
 
 #order-list {  
     border-radius: 10px;
-    height: 350px;
-    max-height: 350px;  
+    height: 320px;
+    max-height: 320px;  
     overflow-y: auto;  
     margin-bottom: 10px;  
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -157,11 +157,20 @@ h2 {
     padding-right: 10px;
 }
 
-#total-price {  
-    padding: 10px;
-    font-weight: bold;  
-    color: #d9534f;  
-}  
+#total-price {
+    margin: 15px 0px;
+    font-size: 20px; /* Tăng kích thước font để nổi bật hơn */
+    padding: 8px; /* Thêm khoảng cách bên trong */
+    font-weight: bold; /* Giữ font chữ đậm */
+    color: #ef4800; /* Màu chữ đỏ */
+    font-family: 'Arial', sans-serif; /* Sử dụng font Arial hoặc sans-serif nếu không có */
+    background-color: #ffe6e6; /* Màu nền nhẹ để tạo độ tương phản */
+    border: 2px solid #ef4800; /* Viền đỏ */
+    border-radius: 10px; /* Bo góc cho viền */
+    text-align: center; /* Căn giữa nội dung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ để tạo chiều sâu */
+    transition: transform 0.2s; /* Hiệu ứng chuyển động mượt mà */
+}
 
 .ip-search-item {  
     width: 30%;  
@@ -206,7 +215,7 @@ h2 {
 }
 
 .btn-order {
-    margin-top: 10px;
+    margin-top: 5px;
     display: flex;
     justify-content: center;
 }
