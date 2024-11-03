@@ -1,3 +1,7 @@
+<?php
+require_once 'controllers/cTaoDonHang.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>  
@@ -28,99 +32,71 @@
                 </form>  
                 
                 <!-- Các món ăn hiện tại -->  
+                <?php foreach ($monAnList as $monAn): ?>
                 <div class="menu-item">  
-                    <div class="item-image">🍗</div>  
-                    <div class="item-name">Gà Rán</div>  
-                    <div class="item-price">25,000đ</div>  
-                    <button onclick="addToOrder('Gà Rán', 25000)">Chọn</button>  
+                    <div class="item-image"><img src="img/<?php echo $monAn['hinhanh']; ?>" alt="<?php echo $monAn['tenma']; ?>"></div>  
+                    <div class="item-name"><?php echo $monAn['tenma']; ?></div>  
+                    <div class="item-price"><?php echo number_format($monAn['giaban'], 0, ',', '.'); ?>đ</div>  
+                    <form method="POST">
+                        <input type="hidden" name="id" value="<?php echo $monAn['mama']; ?>">
+                        <input type="hidden" name="name" value="<?php echo $monAn['tenma']; ?>">
+                        <input type="hidden" name="price" value="<?php echo $monAn['giaban']; ?>">
+                        <button type="submit" name="add_to_cart">Chọn</button>
+                    </form>
                 </div>  
-                <div class="menu-item">  
-                    <div class="item-image">🍗</div>  
-                    <div class="item-name">Gà Chiên</div>  
-                    <div class="item-price">20,000đ</div>  
-                    <button onclick="addToOrder('Gà Chiên', 20000)">Chọn</button>  
-                </div>  
-                <div class="menu-item">  
-                    <div class="item-image">🥔</div>  
-                    <div class="item-name">Khoai Tây</div>  
-                    <div class="item-price">15,000đ</div>  
-                    <button onclick="addToOrder('Khoai Tây', 15000)">Chọn</button>  
-                </div>  
-                <div class="menu-item">  
-                    <div class="item-image">🍦</div>  
-                    <div class="item-name">Kem</div>  
-                    <div class="item-price">10,000đ</div>  
-                    <button onclick="addToOrder('Kem', 10000)">Chọn</button>  
-                </div>  
-                <div class="menu-item">  
-                    <div class="item-image">🥗</div>  
-                    <div class="item-name">Salad</div>  
-                    <div class="item-price">25,000đ</div>  
-                    <button onclick="addToOrder('Salad', 25000)">Chọn</button>  
-                </div>  
-
-                <!-- 3 món ăn mới được thêm vào -->  
-                <div class="menu-item">  
-                    <div class="item-image">🍕</div>  
-                    <div class="item-name">Pizza</div>  
-                    <div class="item-price">40,000đ</div>  
-                    <button onclick="addToOrder('Pizza', 40000)">Chọn</button>  
-                </div>  
-                <div class="menu-item">  
-                    <div class="item-image">🍔</div>  
-                    <div class="item-name">Bánh Mì</div>  
-                    <div class="item-price">30,000đ</div>  
-                    <button onclick="addToOrder('Bánh Mì', 30000)">Chọn</button>  
-                </div>  
-                <div class="menu-item">  
-                    <div class="item-image">🍣</div>  
-                    <div class="item-name">Sushi</div>  
-                    <div class="item-price">50,000đ</div>  
-                    <button onclick="addToOrder('Sushi', 50000)">Chọn</button>  
-                </div>  
+                <?php endforeach; ?>
             </div>  
             
             <div class="order-summary">  
                 <h2>Thông Tin Đơn Hàng</h2>  
                 <div id="order-list">  
                     <div class="infor-item">
-                        <table>  
+                        <table id="order-table">  
                             <tr>  
-                                <th>tên món</th>  
-                                <th>giá</th>  
+                                <th>Tên món</th>  
+                                <th>Giá</th>  
+                                <th>Số lượng</th>
+                                <th>Thao tác</th>
                             </tr>    
+                            <?php foreach ($cart as $id => $item): ?>
+                            <tr class="order-table-tr">
+                                <td><?php echo $item['name']; ?></td>
+                                <td><?php echo number_format($item['price'], 0, ',', '.'); ?>đ</td>
+                                <td class="order-table-td">
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <input type="hidden" name="action" value="decrease">
+                                        <button class="btn-giam" type="submit" name="update_cart"><i class='bx bx-caret-left' ></i></button>
+                                    </form>
+                                    <?php echo $item['quantity']; ?>
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <input type="hidden" name="action" value="increase">
+                                        <button class="btn-tang" type="submit" name="update_cart"><i class='bx bx-caret-right' ></i></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="POST" style="display:inline;">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <input type="hidden" name="action" value="remove">
+                                        <button type="submit" name="update_cart">Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                         </table>
-                        <div class="icon-left"><i class='bx bxs-left-arrow' ></i></div>
-                        <div class="icon-number">1</div>
-                        <div class="icon-left"><i class='bx bxs-right-arrow'></i></div>
-
-                        <button class="xoa-infor-item">xóa</button>
                     </div>
-
-                    <div class="infor-item">
-                        <table>  
-                                <tr>  
-                                    <th>tên món</th>  
-                                    <th>giá</th>  
-                                </tr>    
-                        </table>
-                        <div class="icon-left"><i class='bx bxs-left-arrow' ></i></div>
-                        <div class="icon-number">1</div>
-                        <div class="icon-left"><i class='bx bxs-right-arrow'></i></div>
-
-                        <button class="xoa-infor-item">xóa</button>
-                    </div>
-
                 </div>  
-                <div id="total-price">Tổng Cộng: 0đ</div>  
-                <button onclick="processOrder()">Thanh toán</button>  
+                <div id="total-price">Tổng Cộng: <?php echo number_format($totalPrice, 0, ',', '.'); ?>đ</div>  
+                <div class="btn-order">
+                    <form method="POST">
+                        <button type="submit" name="clear_cart" class="btn-huy">Hủy đơn hàng</button>
+                    </form>
+                    <button class="btn-thanhtoan">Thanh toán</button>
+                </div>
             </div>  
         </div>  
     </div>  
 
-      
-      
 </body>
-<script src="js/taodonhang/scripts.js"></script>
 </html>
-
