@@ -56,7 +56,6 @@ require_once 'controllers/cTaoDonHang.php';
                                 <th>Tên món</th>  
                                 <th>Giá</th>  
                                 <th>Số lượng</th>
-                                <th>Thao tác</th>
                             </tr>    
                             <?php foreach ($cart as $id => $item): ?>
                             <tr class="order-table-tr">

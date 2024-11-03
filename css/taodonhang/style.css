@@ -22,12 +22,23 @@ h1 {
     width: 58%;
     background: #fffaf7;
     margin-right: 10px;
-    max-height: 500px; /* Đặt chiều cao tối đa cho menu */  
-    overflow-y: auto;   /* Cho phép cuộn dọc */  
+    max-height: 500px;  
+    overflow-y: auto;  
     padding-right: 10px;   
-    border: 1px solid #ccc; /* Thêm đường viền cho dễ phân biệt */  
-    border-radius: 5px; /* Bo góc */ 
+    border: 1px solid #ccc;
+    border-radius: 5px; 
 }
+
+.menu form {
+    margin-bottom: 15px;  
+    border-radius: 2px;
+    position: sticky; 
+    top: -20px;
+    background-color: #fffaf7;
+    z-index: 10; 
+    padding: 10px 0; 
+}
+
 
 .order-summary{
     width: 45%;
@@ -159,23 +170,23 @@ h2 {
 
 #total-price {
     margin: 15px 0px;
-    font-size: 20px; /* Tăng kích thước font để nổi bật hơn */
-    padding: 8px; /* Thêm khoảng cách bên trong */
-    font-weight: bold; /* Giữ font chữ đậm */
-    color: #ef4800; /* Màu chữ đỏ */
-    font-family: 'Arial', sans-serif; /* Sử dụng font Arial hoặc sans-serif nếu không có */
-    background-color: #ffe6e6; /* Màu nền nhẹ để tạo độ tương phản */
-    border: 2px solid #ef4800; /* Viền đỏ */
-    border-radius: 10px; /* Bo góc cho viền */
-    text-align: center; /* Căn giữa nội dung */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ để tạo chiều sâu */
-    transition: transform 0.2s; /* Hiệu ứng chuyển động mượt mà */
+    font-size: 20px; 
+    padding: 8px;
+    font-weight: bold; 
+    color: #ef4800; 
+    font-family: 'Arial', sans-serif; 
+    background-color: #ffe6e6; 
+    border: 2px solid #ef4800;
+    border-radius: 10px; 
+    text-align: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
+
+
 
 .ip-search-item {  
     width: 30%;  
     padding: 6px;  
-    margin-bottom: 15px;  
     border: 1px solid #ccc;  
     border-radius: 10px;  
     font-size: 16px;  
@@ -190,9 +201,9 @@ h2 {
 .menu-item {  
     padding: 10px;  
     margin: 5px 0;  
-    background-color: #fff; /* Nền trắng cho mỗi món */  
-    border-radius: 5px; /* Bo góc */  
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */  
+    background-color: #fff;  
+    border-radius: 5px;  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);   
     transition: transform 0.2s; 
 } 
 
