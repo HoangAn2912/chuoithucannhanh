@@ -7,8 +7,7 @@ class mNguyenLieu {
         $ketnoi = new ketnoi();
         $this->conn = $ketnoi->ketnoi();
     }
-    public function selectNguyenLieu() {
-        $sql = "SELECT * FROM nguyenlieu";
+    public function selectNguyenLieu($sql) {
         $nguyenlieu = array();
         $kq = $this->conn->query($sql);
         if ($kq->num_rows > 0) {
