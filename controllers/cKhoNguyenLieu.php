@@ -29,13 +29,18 @@ class cKhoNguyenLieu {
         return $DanhSachNL;
     }
 
-    public function getNguyenLieuByMaNL($manlch) {
+    public function getNguyenLieuByMaNL_CH($manlch) {
         $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl  WHERE NLCH_ID = '$manlch'";
         $nguyenlieu = new mKhoNguyenLieu();
         $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
         return $DanhSachNL;
     }
 
+    public function updateTinhTrangNguyenLieu($manlch, $tinhtrang){
+        $sql = "UPDATE khonguyenlieu SET TinhTrang = '$tinhtrang' WHERE NLCH_ID  = '$manlch'";
+        $nguyenlieu = new mKhoNguyenLieu();
+        return $nguyenlieu->updateNguyenLieu($sql);
+    }
     public function displayNguyenLieu($DS) {
         if (empty($DS)) {
             echo '<tr><td colspan="7">Không có dữ liệu</td></tr>';

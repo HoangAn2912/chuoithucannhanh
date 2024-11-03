@@ -19,5 +19,9 @@ class mKhoNguyenLieu {
             return array();
         }
     }
+
+    public function updateNguyenLieu($sql){
+        $this->conn->query($sql);
+    }
 }
 ?>
