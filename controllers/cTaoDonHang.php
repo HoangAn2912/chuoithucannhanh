@@ -10,8 +10,8 @@ class MonAnController {
     }
 
     public function index() {
-        if (isset($_POST['search'])) {
-            $keyword = $_POST['search'];
+        if (isset($_GETT['search'])) {
+            $keyword = $_GET['search'];
             $monAnList = $this->model->searchMonAn($keyword);
         } else {
             $monAnList = $this->model->getAllMonAn();

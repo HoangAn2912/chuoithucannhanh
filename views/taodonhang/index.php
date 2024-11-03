@@ -1,5 +1,15 @@
 <?php
 require_once 'controllers/cTaoDonHang.php';
+$monAnModel = new MonAnModel($db);
+$monAnList = [];
+$searchQuery = "";
+
+if (isset($_GET['search'])) {
+    $searchQuery = $_GET['search'];
+    $monAnList = $monAnModel->searchMonAn($searchQuery);
+} else {
+    $monAnList = $monAnModel->getAllMonAn();
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +36,11 @@ require_once 'controllers/cTaoDonHang.php';
         <div class="flex-container">  
             <div class="menu">  
                 <h2>Danh Sách Món Ăn</h2>  
-                <form method="POST">  
-                    <input class="ip-search-item" type="text" name="search" placeholder="Tìm kiếm món ăn..." />  
+                <form method="GET" action="index.php">  
+                    <input type="hidden" name="page" value="taodonhang">
+                    <input class="ip-search-item" type="text" name="search" placeholder="Tìm kiếm món ăn..." value="<?php echo htmlspecialchars($searchQuery); ?>" />  
                     <button class="btn-search-item" type="submit"><i class="fas fa-search"></i> Tìm</button> 
-                </form>  
+                </form>   
                 
                 <!-- Các món ăn hiện tại -->  
                 <?php foreach ($monAnList as $monAn): ?>
