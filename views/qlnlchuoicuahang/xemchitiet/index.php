@@ -3,34 +3,49 @@
     echo require("layout/navqlchuoi.php");
 ?>
 <?php
-    if(isset($_POST["btn-detail"])){
-        echo '<div class="container" id="ingredient-details">
-            
-            <div class="header">
-                <span>Mã nguyên liệu: 2</span>
-                <span>Mã cửa hàng: 1</span>
-                <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
-            </div>
-            
-            <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
-            
-            <div class="details">
-                <div>
-                    <p>Tên nguyên liệu: thịt bò</p>
-                    <p>Đơn vị tính: kg</p>
-                    <p>Đơn giá: 280,000VND</p>
-                    <p>Trạng thái: chờ duyệt</p>
-                </div>
-                <div>
-                    <p>Tên NCC: tươi sống</p>
-                    <p>SDT nhà cung cấp: 012345678</p>
-                    <p>Email NCC: abc@gmail.com</p>
-                    <p>Số lượng bổ sung: 20</p>
-                </div>
-            </div>
-            
-            <button class="btn-approve">Duyệt</button>
-        </div>';
+    include_once("controllers/cKhoNguyenLieu.php");
+    include_once("controllers/cCuaHang.php");
+    $nguyenlieu = new cKhoNguyenLieu();
+    $cuaHang = new cCuaHang();
+    if (isset($_POST["btn-detail"])) {
+
+        $list = $nguyenlieu->getNguyenLieuByMaNL_CH($_POST["btn-detail"]);
+        $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
+
+        echo '<form method = "post">
+                <div class="container" id="ingredient-details">
+                        
+                    <div class="header">
+                        <span>Mã nguyên liệu: ' . $list[0]["manl"] . '</span>
+                        <span>Cửa hàng: ' . $ch[0]['tench'] . ' </span>
+                        <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
+                    </div>
+                    
+                    <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
+                    
+                    <div class="details">
+                        <div>
+                            <p>Tên nguyên liệu: ' . $list[0]['tennl'] . '</p>
+                            <p>Đơn vị tính: ' . $list[0]['donvitinh'] . '</p>
+                            <p>Đơn giá: ' . $list[0]['dongia'] . ' VND</p>
+                            <p>Trạng thái: ' . $list[0]['TinhTrang'] . '</p>
+                        </div>
+                        <div>
+                            <p>Tên NCC: ' . $list[0]['ten_ncc'] . '</p>
+                            <p>SDT nhà cung cấp: ' . $list[0]['sodienthoai_ncc'] . '</p>
+                            <p>Email NCC: ' . $list[0]['email_ncc'] . '</p>
+                            <p>Số lượng bổ sung: ' . $list[0]['SoLuongBoSung'] . '</p>
+                        </div>
+                    </div>';
+
+                if ($list[0]['TinhTrang'] == "Chờ duyệt") {
+                echo '<button class="btn-approve" name="btn-approve" value="' . $list[0]['NLCH_ID'] . '">Duyệt</button>';
+                }
+            echo '</div>';
+        echo '</form>';
+    }
+    if  (isset($_POST["btn-approve"])) {
+       $nguyenlieu->updateTinhTrangNguyenLieu($_POST["btn-approve"], 'Đã duyệt');
     }
 ?>
 <?php
@@ -115,20 +130,22 @@
                 <?php
                     include_once("controllers/cKhoNguyenLieu.php");
                     $khoNguyenLieu = new cKhoNguyenLieu();
+                    $DS = array();
                     if (isset($_POST["filter"])) {
                         if (isset($_POST["cuahang"]) && isset($_POST["trangthai"])) {
                             foreach ($_POST["cuahang"] as $i) {
                                 foreach ($_POST["trangthai"] as $t) {
-                                    $DS = $khoNguyenLieu->getNguyenLieuByMaCH_TT($i, $t);
+                                    // array_merge: để thêm dữ liệu từ mỗi vòng lặp mà không ghi đè lên kết quả trước đó
+                                    $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByMaCH_TT($i, $t));
                                 }
                             }
                         } elseif (isset($_POST["cuahang"])) {
                             foreach ($_POST["cuahang"] as $i) {
-                                $DS = $khoNguyenLieu->getNguyenLieuByMaCH($i);
+                                $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByMaCH($i));
                             }
                         } elseif (isset($_POST["trangthai"])) {
                             foreach ($_POST["trangthai"] as $t) {
-                                $DS = $khoNguyenLieu->getNguyenLieuByTT($t);
+                                $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByTT($t));
                             }
                         }else {
                             $DS = $khoNguyenLieu->getNguyenLieu();

@@ -81,7 +81,7 @@ th {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 95%;
     margin-bottom: 20px;
 }
 
@@ -105,6 +105,10 @@ th {
 .container .details > *:nth-child(odd) {
     font-weight: bold;
     color: #555;
+}
+
+.details p{
+    margin-left: 30px;
 }
 
 .btn-approve {
