@@ -9,9 +9,9 @@ require_once 'controllers/cChamCong.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý nhân viên</title>
-    <link rel="stylesheet" href="css/ChamCong/style.css">
-    <link rel="stylesheet" href="css/QLNV/style.css">
-    <link rel="stylesheet" href="css/ChamCong/styles.css">
+    <link rel="stylesheet" href="css/ChamCong/style.css?v=1">
+    <link rel="stylesheet" href="css/QLNV/style.css?v=1">
+    <link rel="stylesheet" href="css/ChamCong/styles.css?v=1">
 </head>
 <body>
     <?php require('layout/navqlch.php'); ?>

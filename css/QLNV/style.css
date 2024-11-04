@@ -54,8 +54,10 @@ h2 {
 }  
 
 h3 {  
-    color: #555;  
+    color: #FF7E29;  
     margin: 15px 0;  
+    font-size: 24px;
+    font-weight: bold;
 }  
 
 /* Thanh tìm kiếm */  
@@ -263,6 +265,9 @@ table.employee-list td a:hover {
     display: none;
     z-index: 100;
 }
+.back-button-view {
+    width: 100%;
+}
 
 /* view nv */
 .back-button-view button {
@@ -279,6 +284,9 @@ table.employee-list td a:hover {
     background-color: #d46013;
 }
 
+.btn-edit-save{
+    float: right;
+}
 .form-group input,
 .form-group textarea {
     width: 100%;  
@@ -287,7 +295,9 @@ table.employee-list td a:hover {
     border: 1px solid #ccc;  
     border-radius: 4px;  
     font-size: 16px;
+    margin-top: 5px;
 }
+
 .td-btn-qlnv {
     display: flex;
     justify-content: space-evenly;
@@ -310,3 +320,12 @@ table.employee-list td a:hover {
 .btn-delete-qlnv:hover {
     background-color: #d76417;  
 }
+
+#editEmployeePosition,
+#editBranch {
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+

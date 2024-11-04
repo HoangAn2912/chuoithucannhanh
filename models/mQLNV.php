@@ -1,4 +1,3 @@
-<!-- models/mQLNV.php -->
 <?php
 class EmployeeModel {
     private $conn;
