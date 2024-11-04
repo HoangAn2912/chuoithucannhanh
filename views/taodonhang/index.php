@@ -110,3 +110,10 @@ if (isset($_GET['search'])) {
 
 </body>
 </html>
+
+
+<?php
+require_once 'controllers/cQLNV.php';
+?>
+
+header("Location:http://localhost/chuoithucannhanh/index.php?page=QLNV");
