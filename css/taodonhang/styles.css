@@ -29,15 +29,19 @@ h1 {
     border-radius: 5px; 
 }
 
-.menu form {
+.form-search{
     margin-bottom: 15px;  
     border-radius: 2px;
     position: sticky; 
     top: -20px;
     background-color: #fffaf7;
     z-index: 10; 
-    padding: 10px 0; 
+    margin-top: 10px; 
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+
 
 
 .order-summary{

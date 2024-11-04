@@ -19,7 +19,7 @@ if (isset($_GET['search'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Tạo đơn hàng</title>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-    <link rel="stylesheet" href="css/taodonhang/style.css">  
+    <link rel="stylesheet" href="css/taodonhang/styles.css">  
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>  
 
@@ -36,7 +36,7 @@ if (isset($_GET['search'])) {
         <div class="flex-container">  
             <div class="menu">  
                 <h2>Danh Sách Món Ăn</h2>  
-                <form method="GET" action="index.php">  
+                <form class="form-search" method="GET" action="index.php">  
                     <input type="hidden" name="page" value="taodonhang">
                     <input class="ip-search-item" type="text" name="search" placeholder="Tìm kiếm món ăn..." value="<?php echo htmlspecialchars($searchQuery); ?>" />  
                     <button class="btn-search-item" type="submit"><i class="fas fa-search"></i> Tìm</button> 
@@ -48,7 +48,7 @@ if (isset($_GET['search'])) {
                     <div class="item-image"><img src="img/<?php echo $monAn['hinhanh']; ?>" alt="<?php echo $monAn['tenma']; ?>"></div>  
                     <div class="item-name"><?php echo $monAn['tenma']; ?></div>  
                     <div class="item-price"><?php echo number_format($monAn['giaban'], 0, ',', '.'); ?>đ</div>  
-                    <form method="POST">
+                    <form class="form-add-cart" method="POST">
                         <input type="hidden" name="id" value="<?php echo $monAn['mama']; ?>">
                         <input type="hidden" name="name" value="<?php echo $monAn['tenma']; ?>">
                         <input type="hidden" name="price" value="<?php echo $monAn['giaban']; ?>">
