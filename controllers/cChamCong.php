@@ -1,6 +1,5 @@
 <?php
 require_once 'models/mChamCong.php';
-
 class cChamCong {
     private $model;
 
