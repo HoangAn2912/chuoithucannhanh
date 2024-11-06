@@ -4,7 +4,6 @@ $database = new ketnoi();
 $db = $database->ketnoi();
 $employeeModel = new EmployeeModel($db);
 
-// Lấy mã cửa hàng từ session
 $mach = $_SESSION['mach'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employeeName'])) {

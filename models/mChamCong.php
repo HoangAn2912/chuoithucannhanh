@@ -8,15 +8,25 @@ class mChamCong {
         $this->conn = $ketnoi->ketnoi();
     }
 
-    public function getEmployees($mach) {
+    public function getEmployees($mach, $search = '') {
         $sql = "SELECT nguoidung.tennd, vaitro.tenvaitro, nhanvienbanhang.mand AS manvbh, nhanvienbep.mand AS manvb
                 FROM nguoidung
                 LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
                 LEFT JOIN nhanvienbanhang ON nguoidung.mand = nhanvienbanhang.mand
                 LEFT JOIN nhanvienbep ON nguoidung.mand = nhanvienbep.mand
                 WHERE nguoidung.mach = ? AND (vaitro.mavaitro = 3 OR vaitro.mavaitro = 4)";
+        
+        if (!empty($search)) {
+            $sql .= " AND nguoidung.tennd LIKE ?";
+        }
+    
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $mach);
+        if (!empty($search)) {
+            $searchTerm = "%$search%";
+            $stmt->bind_param("is", $mach, $searchTerm);
+        } else {
+            $stmt->bind_param("i", $mach);
+        }
         $stmt->execute();
         $result = $stmt->get_result();
         $employees = [];
@@ -25,15 +35,16 @@ class mChamCong {
         }
         return $employees;
     }
+    
 
-    public function getEmployeeById($employeeId) {
+    public function getEmployeeById($employeeId, $mach) {
         $sql = "SELECT nhanvienbanhang.mand AS manvbh, nhanvienbep.mand AS manvb
                 FROM nguoidung
                 LEFT JOIN nhanvienbanhang ON nguoidung.mand = nhanvienbanhang.mand
                 LEFT JOIN nhanvienbep ON nguoidung.mand = nhanvienbep.mand
-                WHERE nguoidung.mand = ?";
+                WHERE nguoidung.mand = ? AND nguoidung.mach = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i", $employeeId);
+        $stmt->bind_param("ii", $employeeId, $mach);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();

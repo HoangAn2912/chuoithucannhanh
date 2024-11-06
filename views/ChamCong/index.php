@@ -1,4 +1,3 @@
-
 <?php
 require_once 'controllers/cChamCong.php';
 ?>
@@ -8,7 +7,7 @@ require_once 'controllers/cChamCong.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý nhân viên</title>
+    <title>Chấm Công Nhân Viên</title>
     <link rel="stylesheet" href="css/ChamCong/style.css?v=1">
     <link rel="stylesheet" href="css/QLNV/style.css?v=2">
     <link rel="stylesheet" href="css/ChamCong/styles.css?v=1">
@@ -20,8 +19,9 @@ require_once 'controllers/cChamCong.php';
             <h2>Chấm Công Nhân Viên</h2>
         </div>
         <div class="cc-search-bar">
-            <form method="POST">
-                <input class="cc-input" type="text" name="search" placeholder="Nhập nhân viên cần tìm..." />
+            <form method="GET" action="index.php">
+                <input type="hidden" name="page" value="ChamCong">
+                <input class="cc-input" type="text" name="search" placeholder="Nhập nhân viên cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
                 <button class="cc-submit" type="submit"><i class="fas fa-search"></i> Tìm</button>
             </form>
         </div>

@@ -7,8 +7,8 @@ class cChamCong {
         $this->model = new mChamCong();
     }
 
-    public function getEmployees($mach) {
-        return $this->model->getEmployees($mach);
+    public function getEmployees($mach, $search = '') {
+        return $this->model->getEmployees($mach, $search);
     }
 
     public function getShifts() {
@@ -24,7 +24,7 @@ class cChamCong {
             $shiftId = $attendance['shift'] ?? 0;
             
             // Lấy thông tin nhân viên
-            $employee = $this->model->getEmployeeById($employeeId);
+            $employee = $this->model->getEmployeeById($employeeId, $_SESSION['mach']);
             
             // Xác định mã nhân viên bán hàng và mã nhân viên bếp
             $manvbh = $employee['manvbh'] ?? 0;
@@ -40,15 +40,19 @@ class cChamCong {
     }
 }
 
-// Simulate logged-in manager's store ID
-$loggedInManagerStoreId = 1; // This should be dynamically set based on the logged-in manager
+// Lấy mã cửa hàng từ session
+$loggedInManagerStoreId = $_SESSION['mach'];
 
 // Main script
 $cChamCong = new cChamCong();
-$employees = $cChamCong->getEmployees($loggedInManagerStoreId);
+$searchQuery = '';
+if (isset($_GET['search'])) {
+    $searchQuery = $_GET['search'];
+}
+$employees = $cChamCong->getEmployees($loggedInManagerStoreId, $searchQuery);
 $shifts = $cChamCong->getShifts();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['search'])) {
     $attendanceData = [];
     foreach ($_POST as $key => $value) {
         if (strpos($key, 'status_') === 0) {
@@ -65,3 +69,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cChamCong->saveAttendance($attendanceData);
 }
 ?>
+
