@@ -211,8 +211,8 @@
         </div>
     </div>
     <div>
-        <h3>Sơ đồ so sánh các cửa hàng</h3>
         <div class="chart">
+        <h3>Sơ đồ so sánh các cửa hàng</h3>
             <select id="ingredientSelector"></select>
             
             <select id="monthSelector" style ="margin-top: 20px;">

@@ -73,6 +73,11 @@ class cKhoNguyenLieu {
         return $nguyenlieu->updateNguyenLieu($sql);
     }
 
+    // public function updateQuantity ($congthuc){
+    //     foreach($congthuc as $index => $value)
+
+    // }
+
     public function getDistinctIngredients() {
         $sql = "SELECT DISTINCT n.manl, n.tennl FROM nguyenlieu n JOIN khonguyenlieu k ON n.manl = k.manl ORDER BY n.tennl";
         $nguyenlieu = new mKhoNguyenLieu();
@@ -102,6 +107,7 @@ class cKhoNguyenLieu {
         $nguyenlieu = new mKhoNguyenLieu();
         return $nguyenlieu->selectNguyenLieu($sql);
     }
+
     public function displayNguyenLieu($DS) {
         if (empty($DS)) {
             echo '<tr><td colspan="7">Không có dữ liệu</td></tr>';
