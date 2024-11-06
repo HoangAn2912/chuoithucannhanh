@@ -68,46 +68,35 @@
                 <th>Trạng thái</th>
                 <th>Tùy Chọn</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Gà rán giòn</td>
-                <td>Gà rán</td>
-                <td>76,000</td>
-                <td>Còn</td>
-                <td>
-                    <div class="dropdown">
-                        <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                        <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                            <ul type=none>
-                                <li><button class="delete" name="delete" onclick="return confirm('Ban co chac muon xoa sp nay khong?')" type="submit">xóa</button></li>
-                                <li><button class="edit" name="edit">sửa</button></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Gà rán cay</td>
-                <td>Gà rán</td>
-                <td>80,000</td>
-                <td>Hết</td>
-                <td>
-                    <div class="dropdown">
-                        <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                        <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                            <ul type=none>
-                                <li><button class="delete" name="delete" onclick="return confirm('Ban co chac muon xoa sp nay khong?')" type="submit">xóa</button></li>
-                                <li><button class="edit" name="edit">sửa</button></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                </td>
-            </tr>
-            
-                <!-- Add more rows as needed -->
+          
+                <?php
+                    include_once("controllers/cMonAn.php");
+                    $monan = new cMonAn ();
+                    $DSMonan=$monan->getMonAn();
+                    echo '<tr>';
+                    if($DSMonan){
+                        foreach($DSMonan as $i){
+                            echo '<td>'.$i['mama'].'</td>';
+                            echo '<td>'.$i['tenma'].'</td>';
+                            echo '<td>'.$i['maloaima'].'</td>';
+                            echo '<td>'.$i['giaban'].'</td>';
+                                
+                            echo '<td>';
+                            echo '<div class="dropdown">';
+                                echo '<a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>';
+                                echo '<div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">';
+                                    echo '<ul type=none>';
+                                        echo '<li><button class="delete" name="delete" onclick="return confirm(\'Ban co chac muon xoa sp nay khong?\')" type="submit">xóa</button></li>';
+                                        echo '<li><button class="edit" name="edit">sửa</button></li>';
+                                    echo '</ul>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</td>';
+                            echo '</tr>';
+                    }
+                }
+
+                ?>
             </table>
         </form>
         <div class="pagination">
