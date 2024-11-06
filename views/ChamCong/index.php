@@ -25,7 +25,7 @@ require_once 'controllers/cChamCong.php';
                 <button class="cc-submit" type="submit"><i class="fas fa-search"></i> Tìm</button>
             </form>
         </div>
-        <form method="POST">
+        <form method="POST" onsubmit="return confirmSaveAttendance()">
             <div class="title-dsnv">
                 <h3>Danh sách nhân viên</h3>
             </div>
@@ -55,8 +55,8 @@ require_once 'controllers/cChamCong.php';
                                 </select>
                             </td>
                             <td class="check-box status-present">
-                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="có mặt" required> Có mặt</label>
-                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="vắng" required> Vắng mặt</label>
+                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="có mặt" > Có mặt</label>
+                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="vắng" > Vắng mặt</label>
                             </td>
                             <td><textarea name="note_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" class="notes-input" placeholder="Ghi chú..."></textarea></td>
                         </tr>
@@ -69,5 +69,10 @@ require_once 'controllers/cChamCong.php';
             </div>
         </form> 
     </div>
+    <script>
+        function confirmSaveAttendance() {
+            return confirm('Bạn có chắc chắn muốn lưu thông tin chấm công không?');
+        }
+    </script>
 </body>
 </html>

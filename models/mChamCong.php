@@ -19,7 +19,7 @@ class mChamCong {
         if (!empty($search)) {
             $sql .= " AND nguoidung.tennd LIKE ?";
         }
-    
+
         $stmt = $this->conn->prepare($sql);
         if (!empty($search)) {
             $searchTerm = "%$search%";
@@ -35,7 +35,6 @@ class mChamCong {
         }
         return $employees;
     }
-    
 
     public function getEmployeeById($employeeId, $mach) {
         $sql = "SELECT nhanvienbanhang.mand AS manvbh, nhanvienbep.mand AS manvb

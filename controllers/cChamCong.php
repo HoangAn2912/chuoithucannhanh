@@ -1,10 +1,12 @@
 <?php
 require_once 'models/mChamCong.php';
+
 class cChamCong {
     private $model;
 
     public function __construct() {
         $this->model = new mChamCong();
+        date_default_timezone_set('Asia/Ho_Chi_Minh'); // Thiết lập múi giờ Việt Nam
     }
 
     public function getEmployees($mach, $search = '') {
@@ -17,24 +19,26 @@ class cChamCong {
 
     public function saveAttendance($data) {
         foreach ($data as $employeeId => $attendance) {
-            $status = $attendance['status'] ?? 'absent';
-            $note = $attendance['note'] ?? '';
-            $date = date('Y-m-d');
-            $time = date('H:i:s');
-            $shiftId = $attendance['shift'] ?? 0;
-            
-            // Lấy thông tin nhân viên
-            $employee = $this->model->getEmployeeById($employeeId, $_SESSION['mach']);
-            
-            // Xác định mã nhân viên bán hàng và mã nhân viên bếp
-            $manvbh = $employee['manvbh'] ?? 0;
-            $manvb = $employee['manvb'] ?? 0;
-            
-            // Kiểm tra loại nhân viên và đặt giá trị tương ứng
-            if ($manvbh != 0) {
-                $this->model->saveAttendance(['manvb' => 0, 'manvbh' => $manvbh], $status, $note, $date, $time, $shiftId);
-            } else {
-                $this->model->saveAttendance(['manvb' => $manvb, 'manvbh' => 0], $status, $note, $date, $time, $shiftId);
+            if (isset($attendance['status'])) { // Chỉ lưu nếu ô radio được chọn
+                $status = $attendance['status'];
+                $note = $attendance['note'] ?? '';
+                $date = date('Y-m-d');
+                $time = date('H:i:s'); // Lấy thời gian hiện tại theo múi giờ Việt Nam
+                $shiftId = $attendance['shift'] ?? 0;
+                
+                // Lấy thông tin nhân viên
+                $employee = $this->model->getEmployeeById($employeeId, $_SESSION['mach']);
+                
+                // Xác định mã nhân viên bán hàng và mã nhân viên bếp
+                $manvbh = $employee['manvbh'] ?? 0;
+                $manvb = $employee['manvb'] ?? 0;
+                
+                // Kiểm tra loại nhân viên và đặt giá trị tương ứng
+                if ($manvbh != 0) {
+                    $this->model->saveAttendance(['manvb' => 0, 'manvbh' => $manvbh], $status, $note, $date, $time, $shiftId);
+                } else {
+                    $this->model->saveAttendance(['manvb' => $manvb, 'manvbh' => 0], $status, $note, $date, $time, $shiftId);
+                }
             }
         }
     }
@@ -69,4 +73,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['search'])) {
     $cChamCong->saveAttendance($attendanceData);
 }
 ?>
-
