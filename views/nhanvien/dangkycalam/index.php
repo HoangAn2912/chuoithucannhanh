@@ -1,9 +1,10 @@
 <?php
     session_start();
-    require("layout/navqlchuoi.php");
+    require("layout/navnvbh.php");
     echo '<link rel="stylesheet" href="css/Dk_CaLam/style.css">';
 ?>
 <?php
+    include_once("controllers/cCaLam.php");
     if (!isset($_SESSION['selected_shifts'])) {
         $_SESSION['selected_shifts'] = array();
     }
@@ -12,7 +13,7 @@
         $date = $_POST["date"];
         $shift = $_POST["shift"];
         if (!empty($date) && !empty($shift)) {
-            $_SESSION['selected_shifts'][] = array('date' => $date, 'shift' => $shift);
+            $_SESSION['selected_shifts'][] = array('date' => $date, 'shift' => $shift, 'role'=>$_SESSION['dangnhap']);
         }
     }
 
@@ -22,15 +23,15 @@
             unset($_SESSION['selected_shifts'][$index]);
         }
     }
+
+    if (isset($_POST["btn-register"])){
+        foreach ($_SESSION['selected_shifts'] as $index => $shift) {
+            $calam= new  cCaLam();
+            $calam->addCaLam($shift['shift'], $shift['date'],$shift['role']);
+        }
+        echo "<script>alert('Đăng ký ca làm thành công');</script>";
+    }
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký ca làm</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -57,7 +58,7 @@
                     for ($i = 0; $i < 7; $i++) {
                         $date = clone $nextMonday;
                         $date->modify("+$i days");
-                        $formattedDate = $date->format('d/m/Y');
+                        $formattedDate = $date->format('Y-m-d');
                         echo "<option value=\"$formattedDate\">$formattedDate</option>";
                     }
                     ?>

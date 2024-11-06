@@ -1,30 +1,16 @@
 <?php
+include_once ('controllers/cNguoiDung.php');
+$nguoidung = new cNguoiDung();
 if(isset($_POST["login"])) {
-    $username = $_POST["username"];
+    $email = $_POST["email"];
     $password = $_POST["password"];
-    
-    if ($username === "chuoi" && $password === "1234") {
-        $_SESSION["dangnhap"] = 'chuoi';
+    $taikhoan = $nguoidung->getNguoiDungByAccount ($email, $password);
+    if($taikhoan){
+        $_SESSION["dangnhap"] = $taikhoan[0]['mand'];
+        echo '<script>alert("Đăng nhập thành công");</script>';
         header("Location:index.php?page=trangchu");
-        exit();
-    
-    }elseif($username === "qlch1" && $password === "1234") {
-        $_SESSION["dangnhap"] = 'qlch1';
-        header("Location:index.php?page=trangchu");
-        exit();
-
     }
-    /* Nhan vien */
-    elseif($username === "nvbh" && $password === "1234") {
-        $_SESSION["dangnhap"] = 'nvbh';
-        header("Location:index.php?page=trangchu");
-        exit();
-    }elseif($username === "nvb" && $password === "1234") {
-        $_SESSION["dangnhap"] = 'nvb';
-        header("Location:index.php?page=trangchu");
-        exit();
-    }else {
-
+    {
         echo '<script>alert("Đăng nhập không thành công");</script>';
     }
 }

@@ -3,7 +3,7 @@
         <div class="search-container">
             <a href="index.php?page=trangchu">Trang Chủ</a>
             <?php
-                if ((isset($_SESSION["dangnhap"])) && ($_SESSION["dangnhap"] == "chuoi")) {
+                if (isset($_SESSION["dangnhap"])) {
                     echo '
                     <div class="dropdown">
                         <a href="#">Quản lý <i class="fas fa-caret-down"></i></a>

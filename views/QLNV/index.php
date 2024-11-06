@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employeeName'])) {
         'mach' => $_POST['branch']
     ];
     if ($employeeModel->addEmployee($data)) {
-        header("Location: http://localhost/chuoithucannhanh/index.php?page=QLNV&status=success");
+        header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=success");
     } else {
-        header("Location: http://localhost/chuoithucannhanh/index.php?page=QLNV&status=error");
+        header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=error");
     }
     exit();
 }
@@ -40,7 +40,7 @@ $roles = $employeeModel->getRoles();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý nhân viên</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/QLNV/style.css?v=2">
+    <link rel="stylesheet" href="css/QLNV/style.css?v=1">
 </head>
 <body>
     <?php require('layout/navqlch.php'); ?>
@@ -50,7 +50,7 @@ $roles = $employeeModel->getRoles();
         </div>
         <div class="qlnv-search-bar">
             <form method="GET" action="index.php">
-                <input type="hidden" name="page" value="QLNV">
+                <input type="hidden" name="page" value="qlnv">
                 <input type="text" name="search" placeholder="Nhập tên nhân viên cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
                 <button type="submit"><i class="fas fa-search"></i> Tìm</button>
             </form>
@@ -77,9 +77,9 @@ $roles = $employeeModel->getRoles();
                             echo "<td>{$employee['tennd']}</td>";
                             echo "<td>{$employee['tenvaitro']}</td>";
                             echo "<td class='td-btn-qlnv'>
-                                    <button class='btn-view-qlnv' onclick='viewEmployeeDetail({$employee['mand']})'>Xem chi tiết</button>
-                                    <button class='btn-edit-qlnv' onclick='editEmployee({$employee['mand']})'>Sửa</button>
-                                    <button class='btn-delete-qlnv' onclick='deleteEmployee({$employee['mand']})'>Xóa</button>
+                                    <a href='views/QLNV/xemchitiet.php?mand={$employee['mand']}'>Xem chi tiết</a>
+                                    <a href='views/QLNV/update.php?mand={$employee['mand']}'>Sửa</a>
+                                    <a href='controllers/cQLNV.php?action=delete&mand={$employee['mand']}' onclick='return confirm(\"Bạn có chắc chắn muốn xóa nhân viên không?\")'>Xóa</a>
                                   </td>";
                             echo "</tr>";
                         }
@@ -94,7 +94,7 @@ $roles = $employeeModel->getRoles();
             <button class="btn-add-NV" onclick="toggleForm()">Thêm mới nhân viên</button>
         </div>
         <div class="overlay" id="overlay" onclick="toggleForm()"></div>
-        <div class="add-employee-form" id="employeeForm">
+        <div class="add-employee-form" id="employeeForm" style="display: none;">
             <h3>Thêm mới nhân viên</h3>
             <form method="POST" action="" onsubmit="return confirmAddEmployee()">
                 <input type="text" name="employeeName" placeholder="Tên nhân viên" required />
@@ -130,97 +130,6 @@ $roles = $employeeModel->getRoles();
                 <button type="submit" class="btn-add-NV-save">Lưu</button>
             </form>
         </div>
-        <!-- xem chi tiet nv -->
-        <div class="overlay" id="overlayDetail" onclick="toggleDetailForm()" style="display: none;"></div>
-        <div class="employee-detail" id="employeeDetail">  
-            <h3>Chi tiết nhân viên</h3>  
-
-            <div class="form-group">
-                <label for="employeeNameDetail">Tên nhân viên</label>
-                <input type="text" id="employeeNameDetail" value="" readonly>
-            </div>
-
-            <div class="form-group">
-                <label for="employeeBirthdayDetail">Ngày sinh</label>
-                <input type="text" id="employeeBirthdayDetail" value="" readonly>
-            </div>
-
-            <div class="form-group">
-            <label for="employeeGenderDetail">Giới tính</label>
-                <input type="text" id="employeeGenderDetail" value="" readonly>
-            </div>
-
-            <div class="form-group">
-                <label for="employeeAddressDetail">Địa chỉ</label>
-                <textarea id="employeeAddressDetail" rows="3" readonly></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="employeeEmailDetail">Email</label>
-                <input type="email" id="employeeEmailDetail" value="" readonly>
-            </div>
-
-            <div class="form-group">
-                <label for="employeePhoneDetail">Số điện thoại</label>
-                <input type="text" id="employeePhoneDetail" value="" readonly>
-            </div>
-
-            <div class="form-group">
-                <label for="employeePositionDetail">Chức vụ</label>
-                <input type="text" id="employeePositionDetail" value="" readonly>
-            </div>
-
-            <div class="form-group">
-                <label for="branchDetail">Chi nhánh</label>
-                <input type="text" id="branchDetail" value="" readonly>
-            </div>
-
-            <div class="back-button-view">
-                <button onclick="toggleDetailForm()">Quay lại</button>
-            </div>
-        </div>
-
-        <!-- Edit Employee Form -->
-        <div class="overlay" id="overlayEdit" onclick="toggleEditForm()" style="display: none;"></div>
-        <div class="employee-edit employee-detail" id="employeeEdit" >
-            <h3>Chỉnh sửa nhân viên</h3>
-            <form method="POST" action="" onsubmit="return confirmEditEmployee()">
-                <input type="hidden" name="mand" id="editEmployeeId">
-                <div class="form-group">
-                    <label for="editEmployeeName">Tên nhân viên</label>
-                    <input type="text" name="employeeName" id="editEmployeeName" required>
-                </div>
-                <div class="form-group">
-                    <label for="editEmployeeAddress">Địa chỉ</label>
-                    <textarea name="employeeAddress" id="editEmployeeAddress" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="editEmployeeEmail">Email</label>
-                    <input type="email" name="employeeEmail" id="editEmployeeEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="editEmployeePhone">Số điện thoại</label>
-                    <input type="text" name="employeePhone" id="editEmployeePhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="editEmployeePosition">Chức vụ</label>
-                    <select name="employeePosition" id="editEmployeePosition" required>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="editBranch">Chi nhánh</label>
-                    <select name="branch" id="editBranch" required>
-                    </select>
-                </div>
-                <div class="back-button-view">
-                    <button type="submit" class="btn-edit-save">Lưu</button>
-                </div>
-            </form>
-            <div class="back-button-view">
-                <button onclick="toggleEditForm()">Quay lại</button>
-            </div>
-        </div>
-
     </div>
     <?php
     if (isset($_GET['status']) && $_GET['status'] == 'success') {
@@ -229,7 +138,6 @@ $roles = $employeeModel->getRoles();
         echo "<script>alert('Có lỗi xảy ra.');</script>";
     }
     ?>
- <script src="js/QLNV/js.js"></script>
+    <script src="js/QLNV/jss.js"></script>
 </body>
 </html>
-

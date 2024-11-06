@@ -1,27 +1,23 @@
 <?php
 include_once("models/mketnoi.php");
 
-class mNguyenLieu {
+class mMonAn {
     private $conn;
     public function __construct() {
         $ketnoi = new ketnoi();
         $this->conn = $ketnoi->ketnoi();
     }
-    public function selectNguyenLieu($sql) {
-        $nguyenlieu = array();
+    public function selectMonAn($sql) {
+        $monan = array();
         $kq = $this->conn->query($sql);
         if ($kq->num_rows > 0) {
             while ($r = $kq->fetch_assoc()) {
-                $nguyenlieu[] = $r;
+                $monan[] = $r;
             }
-            return $nguyenlieu;
+            return $monan;
         } else {
             return array();
         }
-    }
-
-    public function insertNguyenLieu($sql){
-        return  $this->conn->query($sql);
     }
 }
 ?>

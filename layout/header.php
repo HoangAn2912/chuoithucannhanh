@@ -25,16 +25,11 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
     <div class="header">
         <div class="logo" style="margin-right: 10px"> 
             <?php
+                include_once ('controllers/cNguoiDung.php');
+                $nguoidung = new cNguoiDung();
                 if (isset($_SESSION["dangnhap"])) {
-                    if ($_SESSION["dangnhap"] == 'nvb') {
-                        echo "Nhân Viên Bếp";
-                    } elseif ($_SESSION["dangnhap"] == 'nvbh') {
-                        echo "Nhân Viên Bán Hàng";
-                    } elseif ($_SESSION["dangnhap"] == 'chuoi') {
-                        echo "Quản Lý Chuỗi";
-                    } elseif ($_SESSION["dangnhap"] == 'qlch1') {
-                        echo "Quản Lý Cửa Hàng 1";
-                    }
+                    $taikhoan = $nguoidung->getNguoiDungByID($_SESSION["dangnhap"]);
+                    echo $taikhoan[0]['tennd'];
                 }
             ?>        
         </div>

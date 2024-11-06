@@ -1,0 +1,146 @@
+body {  
+    font-family: Arial, sans-serif;  
+    background-color: #f7f9fc;  
+    margin: 0;  
+    padding: 0;
+    -webkit-user-select: none;  
+    -moz-user-select: none;     
+    -ms-user-select: none;    
+    user-select: none;   
+}
+
+.main {  
+    display: flex;  
+    justify-content: center;  
+    padding: 40px 0;  
+}
+
+.form-view-nhanvien {   
+    width: 60%;  
+    background: #fff;  
+    padding: 20px;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  
+    border-radius: 12px;  
+    background-color: #fffbf7;  
+    border: 3px solid #FF7E29;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+.employee-image img {  
+    width: 120px;  
+    height: 120px;  
+    border-radius: 50%;  
+    border: 2px solid #FF7E29;  
+}
+
+.employee-image-update img {  
+    width: 120px;  
+    height: 120px;  
+    border-radius: 50%;  
+    border: 2px solid #FF7E29;  
+}
+
+.employee-detail { 
+    display: flex;  
+    flex-direction: row;  
+    gap: 20px;
+    width: 100%;  
+    justify-content: center; 
+    margin-top: 20px;
+}
+
+.form-child {  
+    display: flex;  
+    flex-direction: column;  
+    gap: 20px;
+    width: 100%;  
+}
+
+.title h2 {  
+    font-size: 24px;  
+    color: #FF7E29;  
+    margin-bottom: 20px;  
+}
+
+.employee-image{
+    margin-left: 25px;
+}
+
+.employee-image-update{
+    margin-left: -120px;
+}
+
+.form-group {  
+    margin-left: 50px;
+    display: flex;  
+    flex-direction: column;  
+    margin-bottom: 10px; 
+}
+
+.form-group label {  
+    font-weight: bold;  
+    font-size: 14px;  
+    margin-bottom: 20px;  
+    color: #333;
+}
+
+.form-group input,  
+.form-group textarea {  
+    padding: 8px 15px;  
+    border: 1px solid #ddd;  
+    border-radius: 6px;  
+    font-size: 14px;  
+    width: 100%;  
+    transition: border-color 0.3s ease;  
+}
+
+.form-group input:focus,  
+.form-group textarea:focus {  
+    border-color: #FF7E29;  
+    outline: none;  
+}
+
+.form-row {  
+    display: flex;  
+    gap: 20px; 
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.back-button-view {  
+    display: flex;  
+    justify-content: flex-end;  
+    gap: 10px;  
+    margin-top: 20px;  
+}
+
+.back-button-view button {  
+    padding: 8px 16px;  
+    background-color: #FF7E29; 
+    color: #fff;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 14px;  
+    transition: background-color 0.3s ease;  
+}
+
+.back-button-view button:hover {  
+    background-color: #da6111; 
+}
+
+.bxs-user {
+    color: #FF7E29;
+    font-size: 70px;
+    padding: 25px;
+    border: 3px solid #FF7E29;
+    border-radius: 71px;
+}
+
+#editEmployeePosition, #editBranch {
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
