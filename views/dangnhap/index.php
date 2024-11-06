@@ -33,8 +33,8 @@
                     <td colspan="2"><span>ĐĂNG NHẬP</span></td>
                 </tr>
                 <tr>
-                    <td>Username</td>
-                    <td><input type="text" name="username" required></td>
+                    <td>Email</td>
+                    <td><input type="text" name="email" required></td>
                 </tr>
                 <tr>
                     <td>Password</td>

@@ -26,34 +26,46 @@
     }
 ?>
 <?php
-    if(isset($_POST["btn-detail"])){
-        echo '<div class="container" id="ingredient">
-            
-            <div class="header">
-                <span>Mã nguyên liệu: 2</span>
-                <span>Mã cửa hàng: 1</span>
-                <span><button class="close-btn" onclick="closeAdd()">✖</button></span>
-            </div>
-            
-            <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
-            
-            <div class="details">
-                <div>
-                    <p>Tên nguyên liệu: thịt bò</p>
-                    <p>Đơn vị tính: kg</p>
-                    <p>Đơn giá: 280,000VND</p>
-                    <p>Trạng thái: chờ duyệt</p>
-                </div>
-                <div>
-                    <p>Tên NCC: tươi sống</p>
-                    <p>SDT nhà cung cấp: 012345678</p>
-                    <p>Email NCC: abc@gmail.com</p>
-                    <p>Số lượng bổ sung: 20</p>
-                </div>
-            </div>
-            
-            <button class="btn-approve">Duyệt</button>
-        </div>';
+    include_once("controllers/cKhoNguyenLieu.php");
+    include_once("controllers/cCuaHang.php");
+    $nguyenlieu = new cKhoNguyenLieu();
+    $cuaHang = new cCuaHang();
+    if (isset($_POST["btn-detail"])) {
+
+        $list = $nguyenlieu->getNguyenLieuByMaNL_CH($_POST["btn-detail"]);
+        echo '<form method = "post">
+                <div class="container" id="ingredient">
+                        
+                    <div class="header">
+                        <span>Mã nguyên liệu: ' . $list[0]["manl"] . '</span>
+                        <span><button class="close-btn" onclick="closeAdd()">✖</button></span>
+                    </div>
+                    
+                    <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
+                    
+                    <div class="details">
+                        <div>
+                            <p>Tên nguyên liệu: ' . $list[0]['tennl'] . '</p>
+                            <p>Đơn vị tính: ' . $list[0]['donvitinh'] . '</p>
+                            <p>Đơn giá: ' . $list[0]['dongia'] . ' VND</p>
+                            <p>Trạng thái: ' . $list[0]['TinhTrang'] . '</p>
+                        </div>
+                        <div>
+                            <p>Tên NCC: ' . $list[0]['ten_ncc'] . '</p>
+                            <p>SDT nhà cung cấp: ' . $list[0]['sodienthoai_ncc'] . '</p>
+                            <p>Email NCC: ' . $list[0]['email_ncc'] . '</p>
+                            <p>Số lượng bổ sung: ' . $list[0]['SoLuongBoSung'] . '</p>
+                        </div>
+                    </div>';
+
+                if ($list[0]['TinhTrang'] == "Hết hàng") {
+                echo '<button class="btn-approve" name="btn-approve" value="' . $list[0]['NLCH_ID'] . '">Đề xuất</button>';
+                }
+            echo '</div>';
+        echo '</form>';
+    }
+    if  (isset($_POST["btn-approve"])) {
+       $nguyenlieu->updateTinhTrangNguyenLieu($_POST["btn-approve"], 'Chờ duyệt');
     }
 ?>
 <div class="sidebar">
@@ -72,235 +84,42 @@
                     <th>Trạng thái</th>
                     <th>Tùy Chọn</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ức gà</td>
-                    <td>Kg</td>
-                    <td>100,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Thịt bò</td>
-                    <td>Kg</td>
-                    <td>280,000</td>
-                    <td>Chờ duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Cá phi lê</td>
-                    <td>Kg</td>
-                    <td>300,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Trứng gà</td>
-                    <td>Quả</td>
-                    <td>4,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Khoai tây</td>
-                    <td>Kg</td>
-                    <td>20,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li> 
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Hành tây</td>
-                    <td>Kg</td>
-                    <td>35,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Cà chua</td>
-                    <td>Kg</td>
-                    <td>30,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Rau xà lách</td>
-                    <td>Kg</td>
-                    <td>25,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Dưa leo</td>
-                    <td>Kg</td>
-                    <td>25,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Đùi gà</td>
-                    <td>Kg</td>
-                    <td>120,000</td>
-                    <td>Chờ duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Ớt chuông</td>
-                    <td>Kg</td>
-                    <td>60,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Phô mai lát</td>
-                    <td>Kg</td>
-                    <td>150,000</td>
-                    <td>Đã duyệt</td>
-                    <td>
-                        <div class="dropdown">
-                            <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
-                            <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
-                                <ul type=none>
-                                    <li><button class="edit" name="add">Nhập nguyên liệu</button></li>
-                                    <li><button class="edit" name="btn-detail">Xem chi tiêt</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </td>
-                </tr>
-                    <!-- Add more rows as needed -->
+                <?php
+                    include_once ('controllers/cNguoiDung.php');
+                    include_once ('controllers/cKhoNguyenLieu.php');
+                    $nguyenlieu = new cKhoNguyenLieu();
+                    $nguoidung = new cNguoiDung();
+                    if(isset($_SESSION['dangnhap'])){
+                        $taikhoan = $nguoidung->getNguoiDungByID($_SESSION["dangnhap"]);
+                        $mach = $taikhoan[0]['mach'];
+                        $dsnl = $nguyenlieu-> getNguyenLieuByMaCH($mach);
+                        foreach($dsnl as $i){
+                            echo 
+                            '
+                            <tr>
+                                <td>'.$i["manl"].'</td>
+                                <td>'.$i["tennl"].'</td>
+                                <td>'.$i["donvitinh"].'</td>
+                                <td>'.$i["dongia"].'</td>
+                                <td>'.$i["TinhTrang"].'</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>
+                                        <div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">
+                                            <ul type=none>
+                                                <li><button class="edit" name="add" value="'.$i['NLCH_ID'].'">Nhập nguyên liệu</button></li>
+                                                <li><button class="edit" name="btn-detail" value="'.$i['NLCH_ID'].'">Xem chi tiêt</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            ';
+                        }
+                       
+                    }
+                ?> 
                 </table>
             </form>
             <div class="pagination">

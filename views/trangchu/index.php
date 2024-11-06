@@ -1,13 +1,19 @@
 <!-- Sidebar -->
 <?php
-    if($_SESSION["dangnhap"] == 'nvb'){
-        require("layout/navnvb.php");
-    }elseif($_SESSION["dangnhap"] == 'nvbh'){
-        require("layout/navnvbh.php");
-    }elseif($_SESSION["dangnhap"] == 'qlch1'){
-        require("layout/navqlch.php");
-    }else{
-        require("layout/navqlchuoi.php");
+    include_once ('controllers/cNguoiDung.php');
+    $nguoidung = new cNguoiDung();
+    if(isset($_SESSION['dangnhap'])){
+        $taikhoan = $nguoidung->getNguoiDungByID($_SESSION["dangnhap"]);
+        $role = $taikhoan[0]['mavaitro'];
+        if($role == 4){
+            require("layout/navnvb.php");
+        }elseif($role == 3){
+            require("layout/navnvbh.php");
+        }elseif($role == 2){
+            require("layout/navqlch.php");
+        }elseif($role == 1){
+            require("layout/navqlchuoi.php");
+        }
     }
 ?>
 <div class="sidebar">
