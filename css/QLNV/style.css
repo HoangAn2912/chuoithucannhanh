@@ -12,7 +12,12 @@
 
 body {  
     font-family: Arial, sans-serif;  
-    background-color: #f4f4f4;  
+    background-color: #f4f4f4;
+    /* không cho chọn văn bản */
+    -webkit-user-select: none;  
+    -moz-user-select: none;     
+    -ms-user-select: none;    
+    user-select: none; 
 }  
 
 /* Sidebar */  
@@ -111,7 +116,7 @@ h3 {
 }
 
 .list-dsnv {
-    max-height: 400px; /* Đặt chiều cao tối đa cho menu */  
+    max-height: 350px; /* Đặt chiều cao tối đa cho menu */  
     overflow-y: auto;   /* Cho phép cuộn dọc */ 
     border: 1px solid #ccc; /* Thêm đường viền cho dễ phân biệt */  
     border-radius: 10px; /* Bo góc */
@@ -125,7 +130,7 @@ h3 {
 
 .title-list thead {
     position: sticky;
-    top: 0;
+    top: -2px;
     z-index: 1;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);  ; 
 }

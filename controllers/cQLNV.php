@@ -1,22 +1,5 @@
 <?php
-class ketnoi {
-    private $host = "localhost";
-    private $user = "root";
-    private $pass = "";
-    private $db = "cuahangthucan_db";
-    private $conn;
-
-    public function ketnoi() {
-        $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->db);
-        if ($this->conn->connect_error) {
-            echo "Kết nối không thành công: " . $this->conn->connect_error;
-            exit();
-        } else {
-            return $this->conn;
-        }
-    }
-}
-
+include_once("models/mQLNV.php");
 class EmployeeModel {
     private $conn;
 
@@ -174,7 +157,7 @@ class EmployeeModel {
     }
 }
 
-$employeeModel = new EmployeeModel((new ketnoi())->ketnoi());
+$employeeModel = new mEmployeeModel((new ketnoi())->ketnoi());
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'view' && isset($_GET['mand'])) {

@@ -1,5 +1,6 @@
 <?php
-class EmployeeModel {
+include_once("models/mketnoi.php");
+class mEmployeeModel {
     private $conn;
 
     public function __construct($db) {

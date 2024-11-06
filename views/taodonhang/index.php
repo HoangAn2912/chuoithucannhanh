@@ -116,4 +116,3 @@ if (isset($_GET['search'])) {
 require_once 'controllers/cQLNV.php';
 ?>
 
-header("Location:http://localhost/chuoithucannhanh/index.php?page=QLNV");
