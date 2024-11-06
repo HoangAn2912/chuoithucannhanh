@@ -4,6 +4,9 @@ $database = new ketnoi();
 $db = $database->ketnoi();
 $employeeModel = new EmployeeModel($db);
 
+// Lấy mã cửa hàng từ session
+$mach = $_SESSION['mach'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employeeName'])) {
     $data = [
         'tennd' => $_POST['employeeName'],
@@ -25,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employeeName'])) {
 $searchQuery = '';
 if (isset($_GET['search'])) {
     $searchQuery = $_GET['search'];
-    $employees = $employeeModel->searchEmployeesByName($searchQuery);
+    $employees = $employeeModel->searchEmployeesByName($searchQuery, $mach);
 } else {
-    $employees = $employeeModel->getKitchenAndSalesEmployees();
+    $employees = $employeeModel->getKitchenAndSalesEmployees($mach);
 }
 
 $branches = $employeeModel->getBranches();

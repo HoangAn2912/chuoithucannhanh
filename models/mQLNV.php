@@ -8,29 +8,13 @@ class EmployeeModel {
         $this->conn = $db;
     }
 
-    public function getKitchenAndSalesEmployees() {
+    public function getKitchenAndSalesEmployees($mach) {
         $sql = "SELECT nguoidung.mand, nguoidung.tennd, nguoidung.sodienthoai, nguoidung.email, nguoidung.diachi, vaitro.tenvaitro 
                 FROM nguoidung 
                 JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
-                WHERE vaitro.tenvaitro IN ('Nhân viên bếp', 'Nhân viên bán hàng')";
-        $result = $this->conn->query($sql);
-        $employees = [];
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $employees[] = $row;
-            }
-        }
-        return $employees;
-    }
-
-    public function searchEmployeesByName($name) {
-        $sql = "SELECT nguoidung.mand, nguoidung.tennd, nguoidung.sodienthoai, nguoidung.email, nguoidung.diachi, vaitro.tenvaitro 
-                FROM nguoidung 
-                JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
-                WHERE vaitro.tenvaitro IN ('Nhân viên bếp', 'Nhân viên bán hàng') AND nguoidung.tennd LIKE ?";
+                WHERE vaitro.tenvaitro IN ('Nhân viên bếp', 'Nhân viên bán hàng') AND nguoidung.mach = ?";
         $stmt = $this->conn->prepare($sql);
-        $searchTerm = "%$name%";
-        $stmt->bind_param("s", $searchTerm);
+        $stmt->bind_param("i", $mach);
         $stmt->execute();
         $result = $stmt->get_result();
         $employees = [];
@@ -41,6 +25,27 @@ class EmployeeModel {
         }
         return $employees;
     }
+    
+
+    public function searchEmployeesByName($name, $mach) {
+        $sql = "SELECT nguoidung.mand, nguoidung.tennd, nguoidung.sodienthoai, nguoidung.email, nguoidung.diachi, vaitro.tenvaitro 
+                FROM nguoidung 
+                JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
+                WHERE vaitro.tenvaitro IN ('Nhân viên bếp', 'Nhân viên bán hàng') AND nguoidung.tennd LIKE ? AND nguoidung.mach = ?";
+        $stmt = $this->conn->prepare($sql);
+        $searchTerm = "%$name%";
+        $stmt->bind_param("si", $searchTerm, $mach);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $employees = [];
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $employees[] = $row;
+            }
+        }
+        return $employees;
+    }
+    
 
     public function getBranches() {
         $sql = "SELECT mach, tench FROM cuahang";
