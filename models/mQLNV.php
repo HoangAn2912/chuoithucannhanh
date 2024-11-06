@@ -1,12 +1,7 @@
 <?php
-<<<<<<< Updated upstream
 
 require_once __DIR__ . '/../models/mketnoi.php';
 class EmployeeModel {
-=======
-include_once('models/mketnoi.php');
-class mEmployeeModel {
->>>>>>> Stashed changes
     private $conn;
 
     public function __construct($db) {
