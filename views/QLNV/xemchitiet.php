@@ -46,14 +46,14 @@ if (isset($_GET['mand'])) {
                         </div>  
                     </div>  
                     <div class="form-row">  
-                        <div class="form-group">  
-                            <label for="employeeGenderDetail">Giới tính</label>  
-                            <input type="text" id="employeeGenderDetail" value="<?php echo $employeeDetail['gioitinh']; ?>" readonly>  
-                        </div>  
-                        <div class="form-group">  
-                            <label for="employeeAddressDetail">Địa chỉ</label>  
-                            <textarea id="employeeAddressDetail" rows="3" readonly><?php echo $employeeDetail['diachi']; ?></textarea>  
-                        </div>  
+                    <div class="form-group">  
+                        <label for="employeeGenderDetail">Giới tính</label>  
+                        <input type="text" id="employeeGenderDetail" value="<?php echo $employeeDetail['gioitinh'] == 0 ? 'Nữ' : 'Nam'; ?>" readonly>  
+                    </div>  
+                    <div class="form-group">  
+                        <label for="employeeAddressDetail">Địa chỉ</label>  
+                        <textarea id="employeeAddressDetail" rows="3" readonly><?php echo $employeeDetail['diachi']; ?></textarea>  
+                    </div>  
                     </div>  
                     <div class="form-row">  
                         <div class="form-group">  
@@ -73,6 +73,12 @@ if (isset($_GET['mand'])) {
                         <div class="form-group">  
                             <label for="branchDetail">Chi nhánh</label>  
                             <input type="text" id="branchDetail" value="<?php echo $employeeDetail['tench']; ?>" readonly>  
+                        </div>  
+                    </div>  
+                    <div class="form-row">  
+                        <div class="form-group">  
+                            <label for="employeeStatusDetail">Trạng thái làm việc</label>  
+                            <input type="text" id="employeeStatusDetail" value="<?php echo $employeeDetail['tenttlv']; ?>" readonly>  
                         </div>  
                     </div>  
                     <div class="back-button-view">  

@@ -59,6 +59,19 @@ if (isset($_GET['mand'])) {
                             <input type="text" name="tennd" id="editEmployeeName" value="<?php echo htmlspecialchars($editEmployee['tennd']); ?>" required>
                         </div>
                         <div class="form-group">
+                            <label for="editEmployeeBirthday">Ngày sinh</label>
+                            <input type="date" name="ngaysinh" id="editEmployeeBirthday" value="<?php echo htmlspecialchars($editEmployee['ngaysinh']); ?>" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editEmployeeGender">Giới tính</label>
+                            <select name="gioitinh" id="editEmployeeGender" required>
+                                <option value="0" <?php echo $editEmployee['gioitinh'] == 0 ? 'selected' : ''; ?>>Nữ</option>
+                                <option value="1" <?php echo $editEmployee['gioitinh'] == 1 ? 'selected' : ''; ?>>Nam</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="editEmployeeAddress">Địa chỉ</label>
                             <textarea name="diachi" id="editEmployeeAddress" rows="3" required><?php echo htmlspecialchars($editEmployee['diachi']); ?></textarea>
                         </div>
