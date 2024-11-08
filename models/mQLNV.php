@@ -108,10 +108,11 @@ class EmployeeModel {
 
     public function getEmployeeById($mand) {
         $sql = "SELECT nguoidung.mand, nguoidung.tennd, nguoidung.ngaysinh, nguoidung.gioitinh, nguoidung.diachi, nguoidung.email, nguoidung.sodienthoai, 
-                       vaitro.mavaitro, vaitro.tenvaitro, cuahang.mach, cuahang.tench 
+                       nguoidung.mavaitro, COALESCE(vaitro.tenvaitro, 'Không có') AS tenvaitro, cuahang.mach, cuahang.tench, trangthailamviec.tenttlv 
                 FROM nguoidung 
-                JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro 
+                LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro 
                 JOIN cuahang ON nguoidung.mach = cuahang.mach 
+                LEFT JOIN trangthailamviec ON nguoidung.mattlv = trangthailamviec.mattlv 
                 WHERE nguoidung.mand = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $mand);
@@ -120,8 +121,6 @@ class EmployeeModel {
         return $result->fetch_assoc();
     }
     
-    
-
     public function deleteEmployee($mand) {
         $sql = "UPDATE nguoidung SET email = '', matkhau = '', mattlv = 2, mavaitro = NULL WHERE mand = ?";
         $stmt = $this->conn->prepare($sql);
