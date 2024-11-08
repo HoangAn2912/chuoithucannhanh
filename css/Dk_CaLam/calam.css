@@ -1,0 +1,90 @@
+th, td {
+    border: 1px solid #f4efea;
+    padding: 12px;
+    text-align: center;
+}
+
+.btn-confirm,.btn-register{
+    border: none;
+    background-color: #e1881a;
+    color: white;
+    display: block;
+    width: 100px;
+    margin: 20px auto 0;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+}
+.btn-confirm :hover {
+    background-color: #e79f47;
+}
+.btn-reset {
+    border: none;
+    background-color: #e1881a;
+    color: white;
+    display: block;
+    width: 90px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.btn-reset :hover {
+    background-color: #ed0909;
+}
+
+/* bang dang ky */
+
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+.timetable th, .timetable td {
+    border: 1px solid #f4efea;
+    padding: 8px;
+    text-align: center;
+}
+.timetable th {
+    background-color: rgb(234, 143, 15);
+    color: white;
+}
+.shift-cell:hover {
+    background-color: #f0f0f0;
+}
+.shift-cell.selected {
+    background-color: orange; /* Màu cam khi được chọn */
+    color: white;
+}
+.shift-cell.full {
+    background-color: red;
+    color: white;
+    cursor: not-allowed;
+}
+.shift-cell.registered {
+    background-color: #4CAF50;
+    color: white;
+    cursor: not-allowed;
+}
+.shift{
+    width: 95%;
+    height: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.register-list{
+    width: 95%;
+    height: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
