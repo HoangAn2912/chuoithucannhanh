@@ -23,11 +23,10 @@
             <thead>  
             <tr>  
                 <th style="text-align: center;">Mã đơn hàng</th>  
-                <th style="text-align: center;">Tên món ăn</th>  
-  
-                <th style="text-align: center;">Số lượng</th>
+                <th style="text-align: center;">Ngày đặt</th> 
+                <th style="text-align: center;">Chi tiết</th> 
                
-
+<button></button>
             </tr>  
         </thead>  
         <tbody id="dish-list">  
@@ -37,14 +36,18 @@
             $kq = $p -> getAllDonHang();
         
             if($kq){
+                $stt = 1;  // Biến để đánh số thứ tự
             while($r = mysqli_fetch_assoc($kq)){
                 echo"<tr>";  
-                echo "<td><a href='?page=chitiettiepnhandonhang&madonhang=" . $r['madh'] . "'>" . $r['madh'] . "</a></td>";  
-                
-                echo "<td>".$r['ngaydat']."</td>" ;
-                echo "<td>".$r['tongtien']."</td>"; 
+                echo "<td style='text-align: center;'> ".$stt." </td>";  
+                echo "<td style='text-align: center;'>".$r['ngaydat']."</td>" ;
+                echo "<td style='text-align: center;'>
+                <a href='?page=chitiettiepnhandonhang&madonhang=".$r['madh']."'>
+                    <button class='btnChiTietDonHang'>Xem chi tiết</button>
+                </a>
+              </td>"; 
               
-              
+              $stt++;  // Tăng số thứ tự lên 1
             }
             
         }else{

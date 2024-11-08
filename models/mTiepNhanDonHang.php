@@ -8,8 +8,11 @@
             if($con -> connect_errno){
 				return false;
 			}else{
-                $sql = "SELECT *
-                FROM donhang";
+                $sql = "SELECT s.*, t.soluong, t.giamgia, t.dongia 
+                FROM donhang s 
+                LEFT JOIN chitietdonhang t ON s.madh = t.madh
+                ORDER BY s.ngaydat DESC;  -- Lấy các đơn hàng theo thứ tự mới nhất
+                ";
 				$kq = mysqli_query($con, $sql);
 				return $kq;
 			}

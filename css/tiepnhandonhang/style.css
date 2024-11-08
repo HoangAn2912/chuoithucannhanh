@@ -85,3 +85,19 @@ table.dish-list td a:hover {
 .button-container div {
     margin: 0 5px; /* Thêm khoảng cách giữa các nút */
 }
+
+.btnChiTietDonHang {
+    background-color: #FB9200 !important;
+    color: #fff !important;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.btnChiTietDonHang:hover {
+    background-color: #e07f00;
+}
