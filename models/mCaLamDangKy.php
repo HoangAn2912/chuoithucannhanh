@@ -1,7 +1,7 @@
 <?php
 include_once("models/mketnoi.php");
 
-class mCaLam {
+class mCaLamDangKy {
     private $conn;
     public function __construct() {
         $ketnoi = new ketnoi();
@@ -18,6 +18,10 @@ class mCaLam {
         } else {
             return array();
         }
+    }
+    
+    public function insertCaLamDangKy($sql){
+        return  $this->conn->query($sql);
     }
 }
 ?>
