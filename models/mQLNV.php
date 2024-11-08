@@ -13,7 +13,8 @@ class EmployeeModel {
                 FROM nguoidung 
                 LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
                 LEFT JOIN trangthailamviec ON nguoidung.mattlv = trangthailamviec.mattlv
-                WHERE nguoidung.mach = ? AND nguoidung.mavaitro IN (3, 4,0)";
+                WHERE nguoidung.mach = ? AND nguoidung.mavaitro IN (3, 4, 0)
+                ORDER BY FIELD(nguoidung.mavaitro, 3, 4, 0), nguoidung.mand ASC";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $mach);
         $stmt->execute();
@@ -27,8 +28,7 @@ class EmployeeModel {
         return $employees;
     }
     
-     
-
+    
     public function searchEmployeesByName($name, $mach) {
         $sql = "SELECT nguoidung.mand, nguoidung.tennd, nguoidung.sodienthoai, nguoidung.email, nguoidung.diachi, 
                        COALESCE(vaitro.tenvaitro, 'Không có') AS tenvaitro, trangthailamviec.tenttlv 

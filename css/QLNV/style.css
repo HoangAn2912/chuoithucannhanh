@@ -221,6 +221,7 @@ table.employee-list td a:hover {
 #employeeForm input[type="text"],  
 #employeeForm input[type="date"], 
 #employeeForm input[type="email"], 
+#employeeForm input[type="password"], 
 #employeeForm select {  
     width: 100%;  
     padding: 10px;  

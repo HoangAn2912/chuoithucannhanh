@@ -1,9 +1,8 @@
-
 <?php
 require_once 'models/mketnoi.php';
 
 class MonAnModel {
-    private $conn;
+    public $conn;
 
     public function __construct($db) {
         $this->conn = $db;

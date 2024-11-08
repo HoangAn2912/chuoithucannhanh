@@ -10,6 +10,12 @@ if (isset($_GET['search'])) {
 } else {
     $monAnList = $monAnModel->getAllMonAn();
 }
+// kt hien thi ttb tanh cong
+$checkoutSuccess = false;
+if (isset($_SESSION['checkout_success'])) {
+    $checkoutSuccess = true;
+    unset($_SESSION['checkout_success']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -99,20 +105,34 @@ if (isset($_GET['search'])) {
                 </div>  
                 <div id="total-price">Tổng Cộng: <?php echo number_format($totalPrice, 0, ',', '.'); ?>đ</div>  
                 <div class="btn-order">
+                    <form method="POST" id="checkout-form">
+                        <input type="hidden" name="checkout" value="1">
+                        <button type="button" class="btn-thanhtoan" onclick="confirmCheckout()">Thanh toán</button>
+                    </form>
                     <form method="POST">
                         <button type="submit" name="clear_cart" class="btn-huy">Hủy đơn hàng</button>
                     </form>
-                    <button class="btn-thanhtoan">Thanh toán</button>
                 </div>
             </div>  
         </div>  
     </div>  
 
+    <script>
+        function confirmCheckout() {
+            if (<?php echo empty($cart) ? 'true' : 'false'; ?>) {
+                alert("Bạn chưa có sản phẩm nào để thanh toán");
+            } else {
+                if (confirm("Bạn có chắc chắn muốn thanh toán không?")) {
+                    document.getElementById('checkout-form').submit();
+                }
+            }
+        }
+
+        // Hien thi tb neu tt thanh cong
+        <?php if ($checkoutSuccess): ?>
+            alert("Thanh toán thành công!");
+        <?php endif; ?>
+    </script>
+
 </body>
 </html>
-
-
-<?php
-require_once 'controllers/cQLNV.php';
-?>
-
