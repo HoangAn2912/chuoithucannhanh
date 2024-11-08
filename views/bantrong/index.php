@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
 
     <link rel="stylesheet" href="css/bantrong/style.css">  
-    <link rel="stylesheet" href="js/bantrong/bantrong.js">  
+
 
   </head>
 <body>
@@ -20,40 +20,66 @@
     <div class="container">
         <h1>Xem Số Bàn Trống</h1>
         
-        <div class="branch-selection">
-            <label for="branch">Chọn chi nhánh:</label>
-            <select id="branch" onchange="checkAvailableTables()">
-                <option value="1">Chi nhánh 1</option>
-                <option value="2">Chi nhánh 2</option>
-                <option value="3">Chi nhánh 3</option>
-                <option value="3">Chi nhánh 4</option>
-                <option value="3">Chi nhánh 5</option>
-                <!-- Add more branches as needed -->
-            </select>
-        </div>
         <div class="time-selection">
             <label for="time-slot">Chọn khung giờ:</label>
-            <select id="time-slot" onchange="checkAvailableTables()">
-                <option value="08:00">08:00 - 09:00</option>
-                <option value="09:00">09:00 - 10:00</option>
-                <option value="10:00">10:00 - 11:00</option>
-                <option value="11:00">11:00 - 12:00</option>
-                <option value="12:00">12:00 - 13:00</option>
-                <option value="13:00">13:00 - 14:00</option>
-                <option value="14:00">14:00 - 15:00</option>
-                <option value="15:00">15:00 - 16:00</option>
-                <option value="16:00">16:00 - 17:00</option>
-                <option value="17:00">17:00 - 18:00</option>
-                <option value="18:00">18:00 - 19:00</option>
-                <option value="19:00">19:00 - 20:00</option>
-            </select>
-            <button onclick="checkAvailableTables()">Xem</button>
+            <input type="date" name="date" id="id">
+<?php
+            include_once("controllers/cXemBanTrong.php");
+            $p = new controlBan();
+            $kq = $p -> getAllThoiGianGio();
+        
+            if($kq){
+            echo '<select name="cbothoigian" id="cbothoigian">';  
+            while($r = mysqli_fetch_assoc($kq)){
+                echo"<tr>";  
+                echo '<td>';
+                echo "<option value=".$r['magio']." selected>" .$r['giobatdau'] ." - " . $r['gioketthuc'] ."</option>";
+               echo '</td> ';
+            } 
+             echo "</select>";
+
+                echo '<td> <div class="button-container">
+                        <div><input class="submit-xacnhan" name="submitXem" type="submit" value="Xem"></div>
+                        
+                    </div> </td>';
+                echo "</tr>";  
+        }else{
+            echo "<script>alert('Không có dữ liệu!')</script>";
+        }
+?>
         </div>
         <div class="container mt-4">
     <h2>Danh sách bàn</h2>
-    <div class="row" id="tables">
-        <!-- Các phần tử table-item sẽ được thêm vào đây bằng JavaScript -->
+     <!-- Danh sách bàn -->
+     <div id="tables" class="row">
+            <div class="col-md-3 mb-3">
+                <div class="table-item trong" id="table-1">
+                    Bàn 1: Trống
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="table-item dat" id="table-2">
+                    Bàn 2: Đã đặt
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="table-item trong" id="table-3">
+                    Bàn 3: Trống
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="table-item trong" id="table-4">
+                    Bàn 4: Trống
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="table-item dat" id="table-5">
+                    Bàn 5: Đã đặt
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
     </div>
      <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

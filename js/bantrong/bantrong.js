@@ -1,44 +1,13 @@
-const tables = [
-    { id: 1, status: 'trống' },
-    { id: 2, status: 'đã đặt' },
-    { id: 3, status: 'trống' },
-    { id: 4, status: 'đã đặt' },
-    { id: 5, status: 'trống' },
-    { id: 6, status: 'đã đặt' },
-    { id: 7, status: 'trống' },
-    { id: 8, status: 'đã đặt' },
-    { id: 9, status: 'trống' },
-    { id: 10, status: 'đã đặt' },
-    { id: 11, status: 'trống' },
-    { id: 12, status: 'đã đặt' }
-    // Thêm các bàn khác nếu cần
-];
+ // Giả lập việc cập nhật trạng thái bàn
+ document.querySelectorAll('.table-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const table = item;
+        const currentStatus = table.classList.contains('trong') ? 'trống' : 'đã đặt';
+        const newStatus = currentStatus === 'trống' ? 'đã đặt' : 'trống';
 
-function createTableItem(table) {
-    const colDiv = document.createElement('div');
-    colDiv.className = 'col-md-3 mb-3';  // Lớp `col-md-3` giúp chia 4 cột mỗi hàng
-
-    const tableItem = document.createElement('div');
-    tableItem.className = 'table-item ' + (table.status === 'trống' ? 'trong' : 'dat');
-    tableItem.textContent = `Bàn ${table.id}: ${table.status}`;
-
-    tableItem.addEventListener('click', () => {
-        table.status = table.status === 'trống' ? 'đã đặt' : 'trống';
-        checkAvailableTables();  // Gọi lại hàm để cập nhật trạng thái
+        // Cập nhật trạng thái bàn
+        table.classList.toggle('trong');
+        table.classList.toggle('dat');
+        table.textContent = `${table.textContent.split(":")[0]}: ${newStatus}`;
     });
-
-    colDiv.appendChild(tableItem);
-    return colDiv;
-}
-
-function checkAvailableTables() {
-    const tableList = document.getElementById('tables');
-    tableList.innerHTML = '';  // Xóa nội dung cũ
-
-    tables.forEach(table => {
-        const tableItem = createTableItem(table);
-        tableList.appendChild(tableItem);  // Thêm từng item vào danh sách
-    });
-}
-
-checkAvailableTables();  // Gọi hàm khi trang tải lần đầu
+});

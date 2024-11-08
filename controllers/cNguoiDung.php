@@ -3,6 +3,7 @@ include_once("models/mNguoiDung.php");
 
 class cNguoiDung {
     public function getNguoiDungByAccount($email, $password) {
+        $password = md5($password);
         $sql = "SELECT * FROM nguoidung WHERE email = '$email' and matkhau='$password'";
         $nguoidung = new mNguoiDung();
         $ND = $nguoidung->selectNguoiDung($sql);

@@ -15,7 +15,7 @@
 
 <div class="main">  
         <div style="text-align: center;  margin-top: 20px; ">  
-            <h2>Tiếp nhận đơn hàng</h2>  
+            <h2>Chitiet Tiếp nhận đơn hàng</h2>  
         </div>   
 
         <div class="list-dish">  
@@ -26,24 +26,22 @@
                 <th style="text-align: center;">Tên món ăn</th>  
   
                 <th style="text-align: center;">Số lượng</th>
-               
-
+                
             </tr>  
         </thead>  
         <tbody id="dish-list">  
             <?php
             include_once("controllers/cTiepNhanDonHang.php");
             $p = new controlDonHang();
-            $kq = $p -> getAllDonHang();
+            $kq = $p -> getAllDonHang($_GET['madonhang']);
         
             if($kq){
             while($r = mysqli_fetch_assoc($kq)){
                 echo"<tr>";  
-                echo "<td><a href='?page=chitiettiepnhandonhang&madonhang=" . $r['madh'] . "'>" . $r['madh'] . "</a></td>";  
+                echo "<td><a href='?page=chitiettiepnhandonhang?madonhang=" . $r['madh'] . "'>" . $r['madh'] . "</a></td>";  
                 
                 echo "<td>".$r['ngaydat']."</td>" ;
                 echo "<td>".$r['tongtien']."</td>"; 
-              
               
             }
             
