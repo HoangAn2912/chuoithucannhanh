@@ -9,11 +9,9 @@ class mChamCong {
     }
 
     public function getEmployees($mach, $search = '') {
-        $sql = "SELECT nguoidung.tennd, vaitro.tenvaitro, nhanvienbanhang.mand AS manvbh, nhanvienbep.mand AS manvb
+        $sql = "SELECT nguoidung.mand, nguoidung.tennd, vaitro.tenvaitro
                 FROM nguoidung
                 LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
-                LEFT JOIN nhanvienbanhang ON nguoidung.mand = nhanvienbanhang.mand
-                LEFT JOIN nhanvienbep ON nguoidung.mand = nhanvienbep.mand
                 WHERE nguoidung.mach = ? AND (vaitro.mavaitro = 3 OR vaitro.mavaitro = 4)";
         
         if (!empty($search)) {
@@ -37,10 +35,8 @@ class mChamCong {
     }
 
     public function getEmployeeById($employeeId, $mach) {
-        $sql = "SELECT nhanvienbanhang.mand AS manvbh, nhanvienbep.mand AS manvb
+        $sql = "SELECT nguoidung.mand
                 FROM nguoidung
-                LEFT JOIN nhanvienbanhang ON nguoidung.mand = nhanvienbanhang.mand
-                LEFT JOIN nhanvienbep ON nguoidung.mand = nhanvienbep.mand
                 WHERE nguoidung.mand = ? AND nguoidung.mach = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ii", $employeeId, $mach);
@@ -59,15 +55,13 @@ class mChamCong {
         return $shifts;
     }
 
-    public function saveAttendance($employeeId, $status, $note, $date, $time, $shiftId) {
-        $manvbh = $employeeId['manvbh'] ?? 0;
-        $manvb = $employeeId['manvb'] ?? 0;
-        $sql = "INSERT INTO chamcong (manvb, manvbh, macalam, ngaychamcong, thoigianvao, trangthai, ghichu) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public function saveAttendance($mand, $status, $note, $date, $time, $shiftId) {
+        $sql = "INSERT INTO chamcong (mand, macalam, ngaychamcong, thoigianvao, trangthai, ghichu) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         if ($stmt === false) {
             die('Prepare failed: ' . htmlspecialchars($this->conn->error));
         }
-        $stmt->bind_param("iiissss", $manvb, $manvbh, $shiftId, $date, $time, $status, $note);
+        $stmt->bind_param("iissss", $mand, $shiftId, $date, $time, $status, $note);
         if (!$stmt->execute()) {
             die('Execute failed: ' . htmlspecialchars($stmt->error));
         }

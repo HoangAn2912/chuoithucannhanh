@@ -26,19 +26,9 @@ class cChamCong {
                 $time = date('H:i:s'); // Lấy thời gian hiện tại theo múi giờ Việt Nam
                 $shiftId = $attendance['shift'] ?? 0;
                 
-                // Lấy thông tin nhân viên
                 $employee = $this->model->getEmployeeById($employeeId, $_SESSION['mach']);
-                
-                // Xác định mã nhân viên bán hàng và mã nhân viên bếp
-                $manvbh = $employee['manvbh'] ?? 0;
-                $manvb = $employee['manvb'] ?? 0;
-                
-                // Kiểm tra loại nhân viên và đặt giá trị tương ứng
-                if ($manvbh != 0) {
-                    $this->model->saveAttendance(['manvb' => 0, 'manvbh' => $manvbh], $status, $note, $date, $time, $shiftId);
-                } else {
-                    $this->model->saveAttendance(['manvb' => $manvb, 'manvbh' => 0], $status, $note, $date, $time, $shiftId);
-                }
+                $mand = $employee['mand']; // Lấy mã người dùng từ thông tin nhân viên
+                $this->model->saveAttendance($mand, $status, $note, $date, $time, $shiftId);
             }
         }
     }

@@ -13,10 +13,7 @@ if (isset($_GET['action'])) {
 
     if ($_GET['action'] == 'delete' && isset($_GET['mand'])) {
         $mand = $_GET['mand'];
-        $sql = "DELETE FROM nguoidung WHERE mand = ?";
-        $stmt = $employeeModel->conn->prepare($sql);
-        $stmt->bind_param("i", $mand);
-        if ($stmt->execute()) {
+        if ($employeeModel->deleteEmployee($mand)) {
             header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=success");
         } else {
             header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=error");
@@ -24,6 +21,7 @@ if (isset($_GET['action'])) {
         exit();
     }
 
+    
     if ($_GET['action'] == 'getRoles') {
         $roles = $employeeModel->getRoles();
         echo json_encode($roles);
@@ -46,10 +44,12 @@ if (isset($_GET['action'])) {
     if ($_GET['action'] == 'add' && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = [
             'tennd' => $_POST['tennd'],
+            'ngaysinh' => $_POST['ngaysinh'],
+            'gioitinh' => $_POST['gioitinh'],
             'sodienthoai' => $_POST['sodienthoai'],
             'email' => $_POST['email'],
             'diachi' => $_POST['diachi'],
-            'matkhau' => password_hash($_POST['matkhau'], PASSWORD_DEFAULT),
+            'matkhau' => md5($_POST['matkhau']),
             'mavaitro' => $_POST['mavaitro'],
             'mach' => $_POST['mach']
         ];
@@ -65,9 +65,12 @@ if (isset($_GET['action'])) {
         $data = [
             'mand' => $_POST['mand'],
             'tennd' => $_POST['tennd'],
+            'ngaysinh' => $_POST['ngaysinh'],
+            'gioitinh' => $_POST['gioitinh'],
             'sodienthoai' => $_POST['sodienthoai'],
             'email' => $_POST['email'],
             'diachi' => $_POST['diachi'],
+            'matkhau' => md5($_POST['matkhau']),
             'mavaitro' => $_POST['mavaitro'],
             'mach' => $_POST['mach']
         ];
