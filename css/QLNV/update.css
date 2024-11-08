@@ -15,6 +15,10 @@ body {
     padding: 40px 0;  
 }
 
+.employee-edit form{
+    width: 60%;
+}
+
 .form-view-nhanvien {   
     width: 60%;  
     background: #fff;  
@@ -54,7 +58,7 @@ body {
 .form-child {  
     display: flex;  
     flex-direction: column;  
-    gap: 5px;
+    gap: 20px;
     width: 100%;  
 }
 
@@ -104,9 +108,10 @@ body {
 
 .form-row {  
     display: flex;  
-    gap: 20px; 
+    gap: 25px; 
     flex-wrap: wrap;
     width: 100%;
+    justify-content: space-between;
 }
 
 .back-button-view {  
