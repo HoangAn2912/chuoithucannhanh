@@ -48,17 +48,17 @@ require_once 'controllers/cChamCong.php';
                             <td><?php echo $employee['tenvaitro']; ?></td>
                             <td><input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" readonly></td>
                             <td>
-                                <select name="shift_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>">
+                                <select name="shift_<?php echo $employee['mand']; ?>">
                                     <?php foreach ($shifts as $shift): ?>
                                         <option value="<?php echo $shift['macalam']; ?>"><?php echo $shift['tenca']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
                             <td class="check-box status-present">
-                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="có mặt" > Có mặt</label>
-                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="vắng" > Vắng mặt</label>
+                                <label><input type="radio" name="status_<?php echo $employee['mand']; ?>" value="có mặt" > Có mặt</label>
+                                <label><input type="radio" name="status_<?php echo $employee['mand']; ?>" value="vắng" > Vắng mặt</label>
                             </td>
-                            <td><textarea name="note_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" class="notes-input" placeholder="Ghi chú..."></textarea></td>
+                            <td><textarea name="note_<?php echo $employee['mand']; ?>" class="notes-input" placeholder="Ghi chú..."></textarea></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
