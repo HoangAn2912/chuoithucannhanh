@@ -8,10 +8,11 @@ require_once 'controllers/cChamCong.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chấm Công Nhân Viên</title>
-    <link rel="stylesheet" href="css/ChamCong/style.css?v=1">
     <link rel="stylesheet" href="css/QLNV/style.css?v=2">
-    <link rel="stylesheet" href="css/ChamCong/styles.css?v=1">
+    <link rel="stylesheet" href="css/ChamCong/styles.css?v=2">
 </head>
+<style>
+</style>
 <body>
     <?php require('layout/navqlch.php'); ?>
     <div class="main">
@@ -28,6 +29,7 @@ require_once 'controllers/cChamCong.php';
         <form method="POST" onsubmit="return confirmSaveAttendance()">
             <div class="title-dsnv">
                 <h3>Danh sách nhân viên</h3>
+                <a href="views/ChamCong/chitietchamcong.php">Xem thông tin chấm công</a>
             </div>
             <div class="list-dsnv">
                 <table class="employee-list title-list">

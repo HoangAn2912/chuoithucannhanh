@@ -1,5 +1,5 @@
 <?php
-require_once 'models/mChamCong.php';
+require_once __DIR__ . '/../models/mChamCong.php';
 
 class cChamCong {
     private $model;
@@ -32,12 +32,14 @@ class cChamCong {
             }
         }
     }
+
+    public function xemChamCong($shiftId, $date) {
+        return $this->model->xemChamCong($shiftId, $date);
+    }
+
 }
 
-// Lấy mã cửa hàng từ session
 $loggedInManagerStoreId = $_SESSION['mach'];
-
-// Main script
 $cChamCong = new cChamCong();
 $searchQuery = '';
 if (isset($_GET['search'])) {
