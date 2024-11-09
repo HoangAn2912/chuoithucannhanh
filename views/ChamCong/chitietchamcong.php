@@ -1,14 +1,18 @@
 <?php
-error_reporting(error_level: 0);
+error_reporting(0);
 require_once '../../controllers/cChamCong.php';
 $cChamCong = new cChamCong();
 $shifts = $cChamCong->getShifts();
 $attendanceDetails = [];
 
+session_start();
+$loggedInManagerStoreId = $_SESSION['mach'];
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET['date'])) {
     $shiftId = $_GET['shift'];
     $date = $_GET['date'];
-    $attendanceDetails = $cChamCong->xemChamCong($shiftId, $date);
+    $attendanceDetails = $cChamCong->xemChamCong($loggedInManagerStoreId, $shiftId, $date);
 }
 ?>
 
@@ -18,10 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET[
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Tiết Chấm Công</title>
-    <link rel="stylesheet" href="../../css/ChamCong/chitiet.css?v=1">
+    <link rel="stylesheet" href="../../css/ChamCong/chitiet.css?v=4">
 </head>
-<style>
-</style>
 <body>
     <div class="main">
         <div class="title">
@@ -39,8 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET[
                 </div>
                 <div class="chon-ngay">
                     <label for="date">Chọn ngày chấm công:</label>
-                    <input type="date" name="date" id="date" required>
+                    <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" required>
                 </div>
+
                 <button type="submit">Lọc</button>
             </form>
         </div>
@@ -68,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET[
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5">Không có dữ liệu chấm công.</td>
+                            <td colspan="5">Không tìm thấy dữ liệu chấm công!</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

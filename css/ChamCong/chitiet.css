@@ -151,7 +151,7 @@ h3 {
 }
 
 .back-button-view button {
-    float: right;
+    float: left;
     background-color: #FF7E29;
     color: white;
     border: none;
@@ -167,4 +167,9 @@ h3 {
     top: -2px;
     z-index: 1;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.select-calam label,
+.chon-ngay label {
+    font-weight: bold;
 }

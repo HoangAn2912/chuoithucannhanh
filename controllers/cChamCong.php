@@ -33,9 +33,12 @@ class cChamCong {
         }
     }
 
-    public function xemChamCong($shiftId, $date) {
-        return $this->model->xemChamCong($shiftId, $date);
-    }
+// controllers/cChamCong.php
+public function xemChamCong($mach, $shiftId, $date) {
+    return $this->model->laydulieuchamcong($mach, $shiftId, $date);
+}
+
+    
 
 }
 

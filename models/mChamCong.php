@@ -67,23 +67,24 @@ class mChamCong {
             die('Execute failed: ' . htmlspecialchars($stmt->error));
         }
     }
-    public function xemChamCong($shiftId, $date) {
-        $sql = "SELECT nguoidung.tennd, vaitro.tenvaitro, calam.tenca, chamcong.trangthai, chamcong.ghichu
-                FROM chamcong
-                JOIN nguoidung ON chamcong.mand = nguoidung.mand
-                JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
-                JOIN calam ON chamcong.macalam = calam.macalam
-                WHERE chamcong.macalam = ? AND chamcong.ngaychamcong = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("is", $shiftId, $date);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $attendanceDetails = [];
-        while ($row = $result->fetch_assoc()) {
-            $attendanceDetails[] = $row;
-        }
-        return $attendanceDetails;
+public function laydulieuchamcong($mach, $shiftId, $date) {
+    $sql = "SELECT nguoidung.tennd, vaitro.tenvaitro, calam.tenca, chamcong.trangthai, chamcong.ghichu
+            FROM chamcong
+            JOIN nguoidung ON chamcong.mand = nguoidung.mand
+            JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
+            JOIN calam ON chamcong.macalam = calam.macalam
+            WHERE chamcong.macalam = ? AND chamcong.ngaychamcong = ? AND nguoidung.mach = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("isi", $shiftId, $date, $mach);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $attendanceDetails = [];
+    while ($row = $result->fetch_assoc()) {
+        $attendanceDetails[] = $row;
     }
+    return $attendanceDetails;
+}
+
 
 }
 ?>
