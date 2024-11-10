@@ -1,5 +1,5 @@
 <?php
-require_once 'models/mChamCong.php';
+require_once __DIR__ . '/../models/mChamCong.php';
 
 class cChamCong {
     private $model;
@@ -26,28 +26,23 @@ class cChamCong {
                 $time = date('H:i:s'); // Lấy thời gian hiện tại theo múi giờ Việt Nam
                 $shiftId = $attendance['shift'] ?? 0;
                 
-                // Lấy thông tin nhân viên
                 $employee = $this->model->getEmployeeById($employeeId, $_SESSION['mach']);
-                
-                // Xác định mã nhân viên bán hàng và mã nhân viên bếp
-                $manvbh = $employee['manvbh'] ?? 0;
-                $manvb = $employee['manvb'] ?? 0;
-                
-                // Kiểm tra loại nhân viên và đặt giá trị tương ứng
-                if ($manvbh != 0) {
-                    $this->model->saveAttendance(['manvb' => 0, 'manvbh' => $manvbh], $status, $note, $date, $time, $shiftId);
-                } else {
-                    $this->model->saveAttendance(['manvb' => $manvb, 'manvbh' => 0], $status, $note, $date, $time, $shiftId);
-                }
+                $mand = $employee['mand']; // Lấy mã người dùng từ thông tin nhân viên
+                $this->model->saveAttendance($mand, $status, $note, $date, $time, $shiftId);
             }
         }
     }
+
+// controllers/cChamCong.php
+public function xemChamCong($mach, $shiftId, $date) {
+    return $this->model->laydulieuchamcong($mach, $shiftId, $date);
 }
 
-// Lấy mã cửa hàng từ session
-$loggedInManagerStoreId = $_SESSION['mach'];
+    
 
-// Main script
+}
+
+$loggedInManagerStoreId = $_SESSION['mach'];
 $cChamCong = new cChamCong();
 $searchQuery = '';
 if (isset($_GET['search'])) {

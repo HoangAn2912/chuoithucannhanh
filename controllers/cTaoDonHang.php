@@ -10,7 +10,7 @@ class MonAnController {
     }
 
     public function index() {
-        if (isset($_GETT['search'])) {
+        if (isset($_GET['search'])) {
             $keyword = $_GET['search'];
             $monAnList = $this->model->searchMonAn($keyword);
         } else {
@@ -34,7 +34,6 @@ class MonAnController {
             ];
         }
     }
-
     public function updateCart($id, $action) {
         if (isset($_SESSION['cart'][$id])) {
             if ($action == 'increase') {
@@ -67,6 +66,32 @@ class MonAnController {
         }
         return $total;
     }
+
+    public function checkout() {
+        $mand = $_SESSION['dangnhap'];
+        $mach = $_SESSION['mach'];
+        $mattdh = 4; //mã trạn thái là 4 vì nahan viên nó đặt và thanh toán tại chỗ luôn
+
+        // Tạo đơn hàng mới
+        $query = "INSERT INTO donhang (mattdh, makh, mach) VALUES (?, ?, ?)";
+        $stmt = $this->model->conn->prepare($query);
+        $stmt->bind_param("iii", $mattdh, $mand, $mach);
+        $stmt->execute();
+        $madh = $stmt->insert_id;
+
+        // Lưu chi tiết đơn hàng
+        foreach ($_SESSION['cart'] as $id => $item) {
+            $query = "INSERT INTO chitietdonhang (giamgia, soluong, dongia, madh, mama, mattdh) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->model->conn->prepare($query);
+            $giamgia = 0;
+            $soluong = $item['quantity'];
+            $dongia = $item['price'];
+            $stmt->bind_param("iiiiii", $giamgia, $soluong, $dongia, $madh, $id, $mattdh);
+            $stmt->execute();
+        }
+        $this->clearCart();
+        $_SESSION['checkout_success'] = true;
+    }
 }
 
 $database = new ketnoi();
@@ -81,11 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $controller->updateCart($_POST['id'], $_POST['action']);
     } elseif (isset($_POST['clear_cart'])) {
         $controller->clearCart();
+    } elseif (isset($_POST['checkout'])) {
+        $controller->checkout();
+        header("Location: index.php?page=taodonhang");
+        exit();
     }
 }
 
 $monAnList = $controller->index();
 $cart = $controller->getCart();
 $totalPrice = $controller->getTotalPrice();
-
 ?>

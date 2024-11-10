@@ -25,7 +25,7 @@ if (isset($_GET['mand'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa nhân viên</title>
-    <link rel="stylesheet" href="../../css/QLNV/views.css">
+    <link rel="stylesheet" href="../../css/QLNV/update.css?v=4">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script>
         function confirmEditEmployee() {
@@ -59,6 +59,19 @@ if (isset($_GET['mand'])) {
                             <input type="text" name="tennd" id="editEmployeeName" value="<?php echo htmlspecialchars($editEmployee['tennd']); ?>" required>
                         </div>
                         <div class="form-group">
+                            <label for="editEmployeeBirthday">Ngày sinh</label>
+                            <input type="date" name="ngaysinh" id="editEmployeeBirthday" value="<?php echo htmlspecialchars($editEmployee['ngaysinh']); ?>" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editEmployeeGender">Giới tính</label>
+                            <select name="gioitinh" id="editEmployeeGender" required>
+                                <option value="0" <?php echo $editEmployee['gioitinh'] == 0 ? 'selected' : ''; ?>>Nữ</option>
+                                <option value="1" <?php echo $editEmployee['gioitinh'] == 1 ? 'selected' : ''; ?>>Nam</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="editEmployeeAddress">Địa chỉ</label>
                             <textarea name="diachi" id="editEmployeeAddress" rows="3" required><?php echo htmlspecialchars($editEmployee['diachi']); ?></textarea>
                         </div>
@@ -81,7 +94,7 @@ if (isset($_GET['mand'])) {
                                 foreach ($roles as $role) {
                                     $selected = ($role['mavaitro'] == $editEmployee['mavaitro']) ? 'selected' : '';
                                     echo "<option value='{$role['mavaitro']}' {$selected}>{$role['tenvaitro']}</option>";
-                                }
+                                }                                
                                 ?>
                             </select>
                         </div>
@@ -98,8 +111,8 @@ if (isset($_GET['mand'])) {
                         </div>
                     </div>
                     <div class="back-button-view">
-                        <button type="submit">Lưu</button>
                         <button type="button" onclick="return confirmBack()">Quay lại</button>
+                        <button type="submit">Lưu</button>
                     </div>
                 </form>
             </div>

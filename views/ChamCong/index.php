@@ -8,10 +8,11 @@ require_once 'controllers/cChamCong.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chấm Công Nhân Viên</title>
-    <link rel="stylesheet" href="css/ChamCong/style.css?v=1">
     <link rel="stylesheet" href="css/QLNV/style.css?v=2">
-    <link rel="stylesheet" href="css/ChamCong/styles.css?v=1">
+    <link rel="stylesheet" href="css/ChamCong/styles.css?v=2">
 </head>
+<style>
+</style>
 <body>
     <?php require('layout/navqlch.php'); ?>
     <div class="main">
@@ -28,6 +29,7 @@ require_once 'controllers/cChamCong.php';
         <form method="POST" onsubmit="return confirmSaveAttendance()">
             <div class="title-dsnv">
                 <h3>Danh sách nhân viên</h3>
+                <a href="views/ChamCong/chitietchamcong.php">Xem thông tin chấm công</a>
             </div>
             <div class="list-dsnv">
                 <table class="employee-list title-list">
@@ -48,17 +50,17 @@ require_once 'controllers/cChamCong.php';
                             <td><?php echo $employee['tenvaitro']; ?></td>
                             <td><input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" readonly></td>
                             <td>
-                                <select name="shift_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>">
+                                <select name="shift_<?php echo $employee['mand']; ?>">
                                     <?php foreach ($shifts as $shift): ?>
                                         <option value="<?php echo $shift['macalam']; ?>"><?php echo $shift['tenca']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
                             <td class="check-box status-present">
-                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="có mặt" > Có mặt</label>
-                                <label><input type="radio" name="status_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" value="vắng" > Vắng mặt</label>
+                                <label><input type="radio" name="status_<?php echo $employee['mand']; ?>" value="có mặt" > Có mặt</label>
+                                <label><input type="radio" name="status_<?php echo $employee['mand']; ?>" value="vắng" > Vắng mặt</label>
                             </td>
-                            <td><textarea name="note_<?php echo $employee['manvbh'] ?? $employee['manvb']; ?>" class="notes-input" placeholder="Ghi chú..."></textarea></td>
+                            <td><textarea name="note_<?php echo $employee['mand']; ?>" class="notes-input" placeholder="Ghi chú..."></textarea></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

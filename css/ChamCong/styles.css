@@ -91,4 +91,16 @@ input[type="date"] {
     resize: none;
 }
 
+.title-dsnv {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-dsnv a {
+    color: #FF7E29;
+    font-size: 16px;
+}
+
 

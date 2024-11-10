@@ -9,10 +9,12 @@ $mach = $_SESSION['mach'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employeeName'])) {
     $data = [
         'tennd' => $_POST['employeeName'],
+        'ngaysinh' => $_POST['employeeBirthday'],
+        'gioitinh' => $_POST['employeeGender'],
         'sodienthoai' => $_POST['employeePhone'],
         'email' => $_POST['employeeEmail'],
         'diachi' => $_POST['employeeAddress'],
-        'matkhau' => password_hash('defaultpassword', PASSWORD_DEFAULT),
+        'matkhau' => password_hash($_POST['matkhau'], PASSWORD_DEFAULT),
         'mavaitro' => $_POST['employeePosition'],
         'mach' => $_POST['branch']
     ];
@@ -42,7 +44,7 @@ $roles = $employeeModel->getRoles();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý nhân viên</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/QLNV/style.css?v=1">
+    <link rel="stylesheet" href="css/QLNV/style.css?v=4">
 </head>
 <body>
     <?php require('layout/navqlch.php'); ?>
@@ -67,6 +69,7 @@ $roles = $employeeModel->getRoles();
                         <th>Mã nhân viên</th>
                         <th>Tên nhân viên</th>
                         <th>Chức vụ</th>
+                        <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -78,6 +81,7 @@ $roles = $employeeModel->getRoles();
                             echo "<td>{$employee['mand']}</td>";
                             echo "<td>{$employee['tennd']}</td>";
                             echo "<td>{$employee['tenvaitro']}</td>";
+                            echo "<td>{$employee['tenttlv']}</td>";
                             echo "<td class='td-btn-qlnv'>
                                     <a href='views/QLNV/xemchitiet.php?mand={$employee['mand']}'>Xem chi tiết</a>
                                     <a href='views/QLNV/update.php?mand={$employee['mand']}'>Sửa</a>
@@ -86,7 +90,7 @@ $roles = $employeeModel->getRoles();
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='4'>Không có dữ liệu</td></tr>";
+                        echo "<tr><td colspan='4'>Không tìm thấy nhân viên</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -103,12 +107,13 @@ $roles = $employeeModel->getRoles();
                 <input type="date" name="employeeBirthday" placeholder="Ngày sinh" required />
                 <select name="employeeGender" required>
                     <option value="">Giới tính</option>
-                    <option value="male">Nam</option>
-                    <option value="female">Nữ</option>
+                    <option value="1">Nam</option>
+                    <option value="0">Nữ</option>
                 </select>
                 <input type="text" name="employeeAddress" placeholder="Địa chỉ" required />
                 <input type="email" name="employeeEmail" placeholder="Email" required />
                 <input type="text" name="employeePhone" placeholder="Số điện thoại" required />
+                <input type="password" name="matkhau" placeholder="Mật khẩu" required />
                 <select name="employeePosition" required>
                     <option value="">Chức vụ</option>
                     <?php

@@ -16,8 +16,8 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Management Interface</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/DAY/day.css">
-    <link rel="stylesheet" href="layout/style.css">
+    <link rel="stylesheet" href="css/DAY/day.css?v=2">
+    <link rel="stylesheet" href="layout/style.css?v=2">
 </head>
 <body>
 
