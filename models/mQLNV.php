@@ -97,7 +97,7 @@ class EmployeeModel {
         // Update employee details
         $sql = "UPDATE nguoidung SET tennd = ?, ngaysinh = ?, gioitinh = ?, sodienthoai = ?, email = ?, diachi = ?, mavaitro = ?, mach = ? WHERE mand = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssissssii", $data['tennd'], $data['ngaysinh'], $data['gioitinh'], $data['sodienthoai'], $data['email'], $data['diachi'], $data['mavaitro'], $data['mach'], $data['mand']);
+        $stmt->bind_param("ssisssiii", $data['tennd'], $data['ngaysinh'], $data['gioitinh'], $data['sodienthoai'], $data['email'], $data['diachi'], $data['mavaitro'], $data['mach'], $data['mand']);
         $stmt->execute();
     
         return true;
