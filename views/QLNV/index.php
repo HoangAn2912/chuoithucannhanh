@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employeeName'])) {
         'sodienthoai' => $_POST['employeePhone'],
         'email' => $_POST['employeeEmail'],
         'diachi' => $_POST['employeeAddress'],
-        'matkhau' => password_hash($_POST['matkhau'], PASSWORD_DEFAULT),
+        'matkhau' => md5($_POST['matkhau']),
         'mavaitro' => $_POST['employeePosition'],
         'mach' => $_POST['branch']
     ];

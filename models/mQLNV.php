@@ -81,10 +81,8 @@ class EmployeeModel {
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ssissssii", $data['tennd'], $data['ngaysinh'], $data['gioitinh'], $data['sodienthoai'], $data['email'], $data['diachi'], $data['matkhau'], $data['mavaitro'], $data['mach']);
         return $stmt->execute();
-    }
+    }    
     
-    
-
     public function updateEmployee($data) {
         // Get current role and branch
         $currentDetailsSql = "SELECT mavaitro, mach FROM nguoidung WHERE mand = ?";
@@ -97,9 +95,9 @@ class EmployeeModel {
         $currentBranch = $currentDetails['mach'];
     
         // Update employee details
-        $sql = "UPDATE nguoidung SET tennd = ?, ngaysinh = ?, gioitinh = ?, sodienthoai = ?, email = ?, diachi = ?, matkhau = ?, mavaitro = ?, mach = ? WHERE mand = ?";
+        $sql = "UPDATE nguoidung SET tennd = ?, ngaysinh = ?, gioitinh = ?, sodienthoai = ?, email = ?, diachi = ?, mavaitro = ?, mach = ? WHERE mand = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssissssiii", $data['tennd'], $data['ngaysinh'], $data['gioitinh'], $data['sodienthoai'], $data['email'], $data['diachi'], $data['matkhau'], $data['mavaitro'], $data['mach'], $data['mand']);
+        $stmt->bind_param("ssissssii", $data['tennd'], $data['ngaysinh'], $data['gioitinh'], $data['sodienthoai'], $data['email'], $data['diachi'], $data['mavaitro'], $data['mach'], $data['mand']);
         $stmt->execute();
     
         return true;

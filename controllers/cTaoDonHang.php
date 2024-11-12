@@ -70,17 +70,18 @@ class MonAnController {
     public function checkout() {
         $mand = $_SESSION['dangnhap'];
         $mach = $_SESSION['mach'];
-        $mattdh = 4; //mã trạn thái là 4 vì nahan viên nó đặt và thanh toán tại chỗ luôn
-
+        $mattdh = 4; // mã trạng thái là 4 vì nhân viên đặt và thanh toán tại chỗ luôn
+    
         // Tạo đơn hàng mới
         $query = "INSERT INTO donhang (mattdh, makh, mach) VALUES (?, ?, ?)";
         $stmt = $this->model->conn->prepare($query);
         $stmt->bind_param("iii", $mattdh, $mand, $mach);
         $stmt->execute();
         $madh = $stmt->insert_id;
-
-        // Lưu chi tiết đơn hàng
+    
+        // Lưu chi tiết đơn hàng và cập nhật số lượng món ăn
         foreach ($_SESSION['cart'] as $id => $item) {
+            // Lưu chi tiết đơn hàng
             $query = "INSERT INTO chitietdonhang (giamgia, soluong, dongia, madh, mama, mattdh) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->model->conn->prepare($query);
             $giamgia = 0;
@@ -88,10 +89,17 @@ class MonAnController {
             $dongia = $item['price'];
             $stmt->bind_param("iiiiii", $giamgia, $soluong, $dongia, $madh, $id, $mattdh);
             $stmt->execute();
+    
+            // Cập nhật số lượng món ăn
+            $query = "UPDATE monan SET soluong = soluong - ? WHERE mama = ?";
+            $stmt = $this->model->conn->prepare($query);
+            $stmt->bind_param("ii", $soluong, $id);
+            $stmt->execute();
         }
         $this->clearCart();
         $_SESSION['checkout_success'] = true;
     }
+    
 }
 
 $database = new ketnoi();
