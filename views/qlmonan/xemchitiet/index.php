@@ -1,36 +1,43 @@
 <?php
     echo '<link rel="stylesheet" href="css/QLNL/style.css">';
-    require_once("layout/navqlchuoi.php");
-    
+    echo require("layout/navqlchuoi.php");
 ?>
 <?php
-if(isset($_POST["btn-detail"])){
-    echo '<div class="container" id="ingredient-details">
-        
-        <div class="header">
-            <span>Mã món: 1</span>
-            <span>Mã cửa hàng: 1</span>
-            <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
-        </div>
-        
-        <h3 style="color: #db5a04;">Chi tiết món ăn</h3>
-        
-        <div class="details">
-            <div>
-                <p>Tên món: Gà rán cay</p>
-                <p>Loại món: Gà rán</p>
-                <p>Tên nguyên liệu: Gà, bột.</p>
-                <p>Đơn giá: 80,000VND</p>
-                <p>Trạng thái: Hết</p>
-            </div>
-            <div>
-                <p>Giảm giá: 0VND</p>
-                <p>Mô tả: ...</p>
-                <p>Công thức: ...</p>
-            </div>
-        </div>
-    </div>';
-}
+    include_once("controllers/cMonAn.php");
+    include_once("controllers/cCuaHang.php");
+    $monan = new cMonAn();
+    $cuaHang = new cCuaHang();
+    if (isset($_POST["btn-detail"])) {
+
+        $list = $monan-> getMonAnByMaMonAn($_POST["btn-detail"]);
+        // $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
+        echo '<form method = "post">
+                <div class="container" id="ingredient-details">
+                        
+                    <div class="header">
+                        <span>Mã món ăn: ' . $list[0]["mama"] . '</span>
+                        <span>Cửa hàng: ' . $ch[0]['tench'] . ' </span>
+                        <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
+                    </div>
+                    <h3 style="color: #db5a04;">Chi tiết món ăn</h3>
+                    
+                    <div class="details">
+                        <div>
+                            <p>Tên món ăn: ' . $list[0]['tenma'] . '</p>
+                            <p>Loại món ăn: ' . $list[0]['maloaima'] . '</p>
+                            <p>Đơn giá: ' . $list[0]['giaban'] . ' VND</p>
+                            <p>Trạng thái: ' . $list[0]['trangthai'] . '</p>
+                            <p>Tên nguyên liệu: ' . $list[0]['tennl'] . '</p>
+                            <p>Số lượng: ' . $list[0]['soluong'] . '</p>
+                        </div>
+                        
+                    </div>';
+
+               
+            echo '</div>';
+        echo '</form>';
+    }
+    
 ?>
 <?php
     if(isset($_POST["update"])){
@@ -38,52 +45,68 @@ if(isset($_POST["btn-detail"])){
     }
 ?>
 <?php
+    include_once("controllers/cMonAn.php");
+    $monan = new cMonAn();
     if(isset($_POST["add"])){
         echo 
-        '<div class="container" id="ingredient-details">
-            <div class="header">
-                <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
+        '<form method="post">
+            <div class="container" id="ingredient-details">
+                <div class="header">
+                    <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
+                </div>
+                <h3 style="color: #db5a04;">Thêm món ăn</h3>
+                <div class="themnguyenlieu">
+                    <div class="form-group">
+                        <label for="name">Tên món ăn</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loai">Loại món ăn</label>
+                        <input type="text" id="loai" name="loai" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gia">Đơn giá</label>
+                        <input type="text" id="gia" name="gia" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nguyenlieu">Nguyên Liệu</label>
+                        <input type="tel" id="nguyenlieu" name="nguyenlieu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="congthuc">Công thức</label>
+                        <input type="text" id="congthuc" name="congthuc" required>
+                    </div>
+                </div>
+                <button class="btn-add" type="submit" name="btn-add">Thêm</button>
             </div>
-            <h3 style="color: #db5a04;">Thêm món ăn</h3>
-            <div class="themnguyenlieu">
-                <div class="form-group">
-                    <label for="name">Tên món ăn</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="unit">Loại món</label>
-                    <input type="text" id="supplierName" name="supplierName" required>
-                </div>
-                <div class="form-group">
-                    <label for="supplierName">Đơn giá</label>
-                    <input type="text" id="supplierName" name="supplierName" required>
-                </div>
-                <div class="form-group">
-                    <label for="supplierPhone">Nguyên liệu</label>
-                    <input type="tel" id="supplierPhone" name="supplierPhone" required>
-                </div>
-                <div class="form-group">
-                    <label for="supplierEmail">Công thức</label>
-                    <input type="email" id="supplierEmail" name="supplierEmail" required>
-                </div>
-            </div>
-            <button class="btn-add">Thêm</button>
-        </div>';
+        </form>';
+    }
+    if(isset($_POST["btn-add"])){
+        $name = $_POST['name'];
+        $loai = $_POST['loai'];
+        $gia=  $_POST['gia'];
+        $nguyenlieu =  $_POST['nguyenlieu'];
+        $congthuc = $_POST['congthuc'];
+
+        $monan->addMonAn($name, $loai, $gia, $nguyenlieu, $congthuc);
     }
 ?>
 <div class="sidebar">
-    <form action=""  method="post">
-        <h4>Trạng thái</h4>
-            <a href=""><label><input type="checkbox" name="trangthai"> Còn</label></a>
-            <a href=""><label><input type="checkbox" name="trangthai"> Hết</label></a>
-            <a href=""><label><input type="checkbox" name="trangthai"> Ẩn</label></a>
+<form action=""  method="post">
+        <h4>Trạng thái <button type="submit" style ="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h4>
+           <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Đã duyệt"> Còn <br>
+           <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Chờ duyệt"> Hết <br>
+           <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Chờ duyệt"> Ẩn
             
-        <h4>Cửa hàng</h4>
-            <a href=""><label><input type="checkbox" name="cuahang" value="1"> Cửa hàng 1</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="2"> Cửa hàng 2</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="3"> Cửa hàng 3</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="4"> Cửa hàng 4</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="5"> Cửa hàng 5</label></a>
+        <h4>Cửa hàng </h4>
+                <?php
+                    include_once("controllers/cCuaHang.php");
+                    $cuaHang = new cCuaHang();
+                    $DScuaHang = $cuaHang->getCuaHang();
+                    foreach($DScuaHang as $i){
+                        echo '<input style ="margin-bottom: 30px;" type="checkbox" name="cuahang[]" value="'.$i['mach'].'"> '.$i['tench'].'<br>';
+                    }
+                ?>
             <button class="add" name="add">Thêm mới</button>
             <button class="update" name="update">Cập nhật</button>
 
@@ -101,30 +124,35 @@ if(isset($_POST["btn-detail"])){
                 <th>Trạng thái</th>
                 <th>Tùy Chọn</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Gà rán giòn</td>
-                <td>Gà rán</td>
-                <td>75,000</td>
-                <td>Còn</td>
-                <td><button class="btn-detail" name="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Gà rán cay</td>
-                <td>Gà rán</td>
-                <td>80,000</td>
-                <td>Hết</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Khoai tây chiên</td>
-                <td>Khoai tây chiên</td>
-                <td>30,000</td>
-                <td>Ẩn</td>
-                <td><button class="btn-detail">Xem chi tiết</button></td>
-            </tr>
+            <?php
+                    include_once("controllers/cMonAn.php");
+                    $MonAn = new cMonAn();
+                    $DS = array();
+                    if (isset($_POST["filter"])) {
+                        if (isset($_POST["cuahang"]) && isset($_POST["trangthai"])) {
+                            foreach ($_POST["cuahang"] as $i) {
+                                foreach ($_POST["trangthai"] as $t) {
+                                    // array_merge: để thêm dữ liệu từ mỗi vòng lặp mà không ghi đè lên kết quả trước đó
+                                    $DS = array_merge($DS, $MonAn->getMonAnByMaCH_TT($i, $t));
+                                }
+                            }
+                        } elseif (isset($_POST["cuahang"])) {
+                            foreach ($_POST["cuahang"] as $i) {
+                                $DS = array_merge($DS, $MonAn->getMonAnByMaCH($i));
+                            }
+                        } elseif (isset($_POST["trangthai"])) {
+                            foreach ($_POST["trangthai"] as $t) {
+                                $DS = array_merge($DS, $MonAn->getMonAnByTT($t));
+                            }
+                        }else {
+                            $DS = $MonAn->getMonAn();
+                        }
+                        $MonAn->displayMonAn($DS);
+                    } else {
+                        $DS = $MonAn->getMonAn();
+                        $MonAn->displayMonAn($DS);
+                    }
+                ?>
             
                 <!-- Add more rows as needed -->
             </table>

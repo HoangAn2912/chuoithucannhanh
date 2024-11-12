@@ -105,12 +105,12 @@ if (isset($_SESSION['checkout_success'])) {
                 </div>  
                 <div id="total-price">Tổng Cộng: <?php echo number_format($totalPrice, 0, ',', '.'); ?>đ</div>  
                 <div class="btn-order">
+                    <form method="POST">
+                        <button type="submit" name="clear_cart" class="btn-huy">Hủy đơn hàng</button>
+                    </form>
                     <form method="POST" id="checkout-form">
                         <input type="hidden" name="checkout" value="1">
                         <button type="button" class="btn-thanhtoan" onclick="confirmCheckout()">Thanh toán</button>
-                    </form>
-                    <form method="POST">
-                        <button type="submit" name="clear_cart" class="btn-huy">Hủy đơn hàng</button>
                     </form>
                 </div>
             </div>  
