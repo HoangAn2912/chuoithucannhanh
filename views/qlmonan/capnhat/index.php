@@ -17,21 +17,21 @@
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="unit">Loại món</label>
-                    <input type="text" id="supplierName" name="supplierName" required>
+                    <label for="loai">Loại món</label>
+                    <input type="text" id="loai" name="loai" required>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="supplierName">Đơn giá</label>
-                    <input type="text" id="supplierName" name="supplierName" required>
+                    <label for="gia">Đơn giá</label>
+                    <input type="text" id="gia" name="gia" required>
                 </div>
                 <div class="form-group">
-                    <label for="supplierPhone">Công thức</label>
-                    <input type="tel" id="supplierPhone" name="supplierPhone" required>
+                    <label for="congthuc">Công thức</label>
+                    <input type="tel" id="congthuc" name="congthuc" required>
                 </div>
                 <div class="form-group">
-                    <label for="supplierEmail">Nguyên liệu</label>
-                    <input type="email" id="supplierEmail" name="supplierEmail" required>
+                    <label for="nguyenlieu">Nguyên liệu</label>
+                    <input type="text" id="nguyenlieu" name="nguyenlieu" required>
                 </div>
             </div>
             <button class="btn-update">Sửa</button>
@@ -80,6 +80,7 @@
                             echo '<td>'.$i['tenma'].'</td>';
                             echo '<td>'.$i['maloaima'].'</td>';
                             echo '<td>'.$i['giaban'].'</td>';
+                            echo '<td>'.$i['trangthai'].'</td>';
                                 
                             echo '<td>';
                             echo '<div class="dropdown">';
