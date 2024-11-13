@@ -84,7 +84,5 @@ public function laydulieuchamcong($mach, $shiftId, $date) {
     }
     return $attendanceDetails;
 }
-
-
 }
 ?>

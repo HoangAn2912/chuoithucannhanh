@@ -60,6 +60,7 @@ if (isset($_GET['action'])) {
         }
         exit();
     }
+    
 
     if ($_GET['action'] == 'update' && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = [
@@ -70,7 +71,6 @@ if (isset($_GET['action'])) {
             'sodienthoai' => $_POST['sodienthoai'],
             'email' => $_POST['email'],
             'diachi' => $_POST['diachi'],
-            'matkhau' => md5($_POST['matkhau']),
             'mavaitro' => $_POST['mavaitro'],
             'mach' => $_POST['mach']
         ];
