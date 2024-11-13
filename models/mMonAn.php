@@ -19,5 +19,8 @@ class mMonAn {
             return array();
         }
     }
+    public function insertMonAn($sql){
+        return  $this->conn->query($sql);
+    }
 }
 ?>
