@@ -58,7 +58,7 @@
                                         $ca_max += 2;
                                     }
                                     $calamdk = new cCaLamDangKy();
-                                    $ds_calamdk = $calamdk->getCaLamDangKyByCuaHang($_SESSION["mach"]);
+                                    $ds_calamdk = $calamdk->getCaLamDangKyByCuaHang($_SESSION["mach"], $tt[0]['mavaitro']);
                                     $ds_calamdkbyid = $calamdk -> getCaLamDangKyByMand($_SESSION['dangnhap']);
                                     foreach ($ds_calamdk as $k) {
                                         if ($k['ngaydanky'] == $ngaydk && $k['macalam'] == $ca['macalam']) {
