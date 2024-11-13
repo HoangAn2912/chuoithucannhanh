@@ -1,6 +1,8 @@
 <?php
     echo '<link rel="stylesheet" href="css/QLNL/style.css">';
     echo require("layout/navqlchuoi.php");
+    include_once("controllers/cKhoNguyenLieu.php");
+    include_once("controllers/cNguyenLieu.php");
 ?>
 <?php
     include_once("controllers/cMonAn.php");
@@ -69,13 +71,15 @@
                         <input type="text" id="gia" name="gia" required>
                     </div>
                     <div class="form-group">
-                        <label for="nguyenlieu">Nguyên Liệu</label>
-                        <input type="tel" id="nguyenlieu" name="nguyenlieu" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="congthuc">Công thức</label>
-                        <input type="text" id="congthuc" name="congthuc" required>
-                    </div>
+                        <label for="congthuc">Công thức</label>';
+                        $nguyenlieu = new cNguyenLieu();
+                        $list_nguyenlieu = $nguyenlieu->getNguyenLieu();
+                        foreach ($list_nguyenlieu as $i) {
+                            echo '<label for="">' . $i["tennl"] . '</label>';
+                            echo '<input type="hidden" name="nguyenlieu_id[]" value="' . $i["manl"] . '">';
+                            echo '<input type="number" placeholder="Định lượng" name="dinhluong[]"> <br>';
+                        }
+                    echo '</div>
                 </div>
                 <button class="btn-add" type="submit" name="btn-add">Thêm</button>
             </div>
@@ -85,10 +89,14 @@
         $name = $_POST['name'];
         $loai = $_POST['loai'];
         $gia=  $_POST['gia'];
-        $nguyenlieu =  $_POST['nguyenlieu'];
-        $congthuc = $_POST['congthuc'];
+        $congthuc = '';
+        foreach ($_POST['dinhluong'] as $key => $dinhluong) {
+            if(!empty($dinhluong)){
+                $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
+            }
+        }
 
-        $monan->addMonAn($name, $loai, $gia, $nguyenlieu, $congthuc);
+        $monan->addMonAn($name, $loai, $gia, $congthuc);
     }
 ?>
 <div class="sidebar">

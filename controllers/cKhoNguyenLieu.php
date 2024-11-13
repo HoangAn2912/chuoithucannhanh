@@ -125,5 +125,11 @@ class cKhoNguyenLieu {
             }
         }
     }
+    public function getcongthuc(){
+        $sql = "SELECT * FROM monan where mama = 1";
+        $nguyenlieu = new mKhoNguyenLieu();
+        $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
+        return $DanhSachNL;
+    }
 }
 ?>

@@ -8,8 +8,8 @@ class cCaLamDangKy{
         $calam = new mCaLamDangKy();
         $calam->insertCaLamDangKy($sql);
     }
-    public function getCaLamDangKyByCuaHang($mach) {
-        $sql = "SELECT * FROM dangkycalam as d join nguoidung as n on d.mand = n.mand join cuahang as c on c.mach = n.mach WHERE c.mach = $mach";
+    public function getCaLamDangKyByCuaHang($mach, $mavaitro) {
+        $sql = "SELECT * FROM dangkycalam as d join nguoidung as n on d.mand = n.mand join cuahang as c on c.mach = n.mach WHERE c.mach = $mach and n.mavaitro = $mavaitro";
         $calam = new mCaLamDangKy();
         $danhsachcalam=$calam->selectCaLam($sql);
         return $danhsachcalam;

@@ -32,7 +32,13 @@ class cMonAn {
         $DanhSachMA = $monan->selectMonAn($sql);
         return $DanhSachMA;
     }
-
+    
+    public function AddMonAn($name, $loai, $gia, $congthuc) {
+        $sql = "INSERT INTO monan(tenma, maloaima, giaban, congthuc) VALUES ('$name','$loai','$gia','$congthuc')";
+        $monan = new mMonAn();
+        return  $monan->insertMonAn($sql);
+        
+    }
     
 
     
