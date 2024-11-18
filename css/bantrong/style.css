@@ -73,16 +73,16 @@ h1 {
 }
 .table-list {
     display: inline-flex;
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    flex-wrap: wrap; 
     margin-top: 20px;
-    flex: 0 0 calc(25% - 30px); /* Each item takes up 25% of the container width minus the gap */
+    flex: 0 0 calc(25% - 30px); 
 }
 
 .table-item {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
     text-align: center;
     font-size: 16px;
     cursor: pointer; 
@@ -99,5 +99,26 @@ h1 {
 }
 
 
+.table-item.trong {
+    background-color: #d8ff4d;  /* Màu xanh cho bàn trống */
+    color: rgb(19, 9, 9);
+    padding: 20px 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.table-item.dat {
+    background-color: #fcb24c;  /* Màu hồng cho bàn đã đặt */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.table-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
 

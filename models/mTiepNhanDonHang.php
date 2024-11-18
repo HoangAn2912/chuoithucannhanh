@@ -8,22 +8,35 @@
             if($con -> connect_errno){
 				return false;
 			}else{
-                $sql = "SELECT s.*, t.soluong, t.giamgia, t.dongia 
-                FROM donhang s 
+                $sql = "SELECT s.madh, s.ngaydat, m.tenma, t.soluong, t.dongia, t.giamgia,
+                    (t.soluong * t.dongia - t.giamgia) AS tongtien,
+                    tt.tenttdh AS tinhtrang
+                FROM donhang s
                 LEFT JOIN chitietdonhang t ON s.madh = t.madh
-                ORDER BY s.ngaydat DESC;  -- Lấy các đơn hàng theo thứ tự mới nhất
-                ";
+                LEFT JOIN monan m ON t.mama = m.mama  
+                LEFT JOIN tinhtrangdonhang tt ON s.mattdh = tt.mattdh  -- Điều chỉnh tại đây, dùng 's.mattdh'
+                ORDER BY s.ngaydat DESC 
+                LIMIT 0, 25;
+
+        ";
+
 				$kq = mysqli_query($con, $sql);
 				return $kq;
 			}
         }
 
-        public function mUpdateTinhTrang($madh,$mattdh){
+        public function selectTinhTrangOptions() {
             $p = new ketnoi();
-			$con = $p -> ketnoi();
-            $sql = "Update donhang set mattdh = $mattdh where madh = $madh";	
-            $kq = mysqli_query($con, $sql);
-            return $kq;
+            $con = $p->ketnoi();
+            if ($con->connect_errno) {
+                return false;
+            } else {
+                $sql = "SELECT mattdh, tenttdh FROM tinhtrangdonhang WHERE mattdh IN (1, 2, 3)";
+                $kq = mysqli_query($con, $sql);
+                return $kq;
+            }
         }
+        
+
     }
 ?>
