@@ -90,6 +90,7 @@ if (isset($_GET['mand'])) {
                         <div class="form-group">
                             <label for="editEmployeePosition">Chức vụ</label>
                             <select name="mavaitro" id="editEmployeePosition" required>
+                                <option value="">Chức vụ</option>
                                 <?php
                                 foreach ($roles as $role) {
                                     $selected = ($role['mavaitro'] == $editEmployee['mavaitro']) ? 'selected' : '';
