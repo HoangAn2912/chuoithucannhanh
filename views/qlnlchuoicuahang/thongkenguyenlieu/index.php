@@ -3,113 +3,149 @@
     echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
     echo require("layout/navqlchuoi.php");
 ?>
+
 <?php
-    // Include your database connection and necessary controllers
     include_once("controllers/cKhoNguyenLieu.php");
     $khoNguyenLieu = new cKhoNguyenLieu();
+    $DS = array();
+    $total = 0;
 
-    // Fetch data for 5 stores and 12 months
-    $stores = ['CH001', 'CH002', 'CH003', 'CH004', 'CH005']; // Replace with actual store IDs
-    $months = range(1, 12);
-    $ingredients = $khoNguyenLieu->getDistinctIngredients();
+    if (isset($_POST["filter"])) {
+        $dateFrom = $_POST["dateFrom"] ?? null;
+        $dateTo = $_POST["dateTo"] ?? null;
+        $store = isset($_POST["cuahang"]) ? $_POST["cuahang"] : [];
+        $ingredient = $_POST["ingredient"] ?? null;
 
-    // Prepare data for the chart
-    $chartData = [];
-    $chartData = [];
-    foreach ($ingredients as $ingredient) {
-        $datasetData = [];
-        foreach ($stores as $store) {
-            $weeklyData = [];
-            for ($week = 1; $week <= 4; $week++) { // Giả định 4 tuần trong tháng
-                $quantity = $khoNguyenLieu->getIngredientQuantityByStoreAndWeek($store, $ingredient['manl'], $selectedMonth);
-                $weeklyData[] = $quantity[$week]['quantity'] ?? 0;
+        if ($store && $ingredient && $dateFrom && $dateTo){
+            foreach ($store as $i) {
+                $nguyenlieu = $khoNguyenLieu->getNguyenLieuByDate_MaCH_MaNL($dateFrom, $dateTo, $i,$ingredient);
+                $DS = array_merge($DS, $nguyenlieu);
             }
-            $datasetData[] = [
-                'label' => "Cửa hàng " . $store . " - " . $ingredient['tennl'],
-                'data' => $weeklyData,
-                'borderColor' => sprintf('#%06X', mt_rand(0, 0xFFFFFF)),
-                'fill' => false
-            ];
+        } elseif ($ingredient && $dateFrom && $dateTo) {
+            $DS = $khoNguyenLieu->getNguyenLieuByDateandMaNL($ingredient, $dateFrom, $dateTo);
+        } elseif ($store && $dateFrom && $dateTo) {
+            foreach ($store as $i) {
+                $nguyenlieu = $khoNguyenLieu->getNguyenLieuByDate_MaCH($dateFrom, $dateTo, $i);
+                $DS = array_merge($DS, $nguyenlieu);
+            }
+        } elseif ($store && $ingredient) {
+            foreach ($store as $i) {
+                $nguyenlieu = $khoNguyenLieu->getNguyenLieuByMaCHandMaNL($i, $ingredient);
+                $DS = array_merge($DS, $nguyenlieu);
+            }
+        } elseif ($dateFrom && $dateTo) {
+            $DS = $khoNguyenLieu->getNguyenLieuByDate($dateFrom, $dateTo);
+        } elseif ($ingredient) {
+            $DS = $khoNguyenLieu->getNguyenLieuByMaNL($ingredient);
+        } elseif ($store) {
+            foreach ($store as $i) {
+                $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByMaCH($i));
+            }
+        } else {
+            $DS = $khoNguyenLieu->getNguyenLieu();
         }
-        $chartData[$ingredient['tennl']] = $datasetData;
+    } else {
+        $DS = $khoNguyenLieu->getNguyenLieu();
     }
+
+
+
+    if (empty($DS)) {
+        $total_price = 0;
+        $total_quantity = 0;
+    } else {
+        foreach ($DS as $j) {
+            $total_price += $j['soluongnhapkho'] * $j['dongia'];
+            $total_quantity += $j['soluongnhapkho'];
+        }
+    }
+?>
+<?php
+    $chartData = [];
+    foreach ($DS as $item) {
+        $store = $item['mach'];
+        $ingredient = $item['tennl'];
+        $quantity = $item['soluongnhapkho'];
+        
+        if (!isset($chartData[$store])) {
+            $chartData[$store] = [];
+        }
+        if (!isset($chartData[$store][$ingredient])) {
+            $chartData[$store][$ingredient] = 0;
+        }
+        $chartData[$store][$ingredient] = $quantity; 
+    }
+
     $chartDataJson = json_encode($chartData);
 ?>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-    var chartData = <?php echo $chartDataJson; ?>;
-    var ingredients = Object.keys(chartData);
-    var currentIngredient = ingredients[0];
-    var currentMonth = document.getElementById('monthSelector').value;
+    document.addEventListener('DOMContentLoaded', function() {
+        var chartData = <?php echo $chartDataJson; ?>;
+        var stores = Object.keys(chartData);
+        var ingredients = [];
+        var datasets = [];
 
-    var ctx = document.getElementById('ingredientChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'],
-            datasets: chartData[currentIngredient]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Thống kê nguyên liệu theo Tuần và cửa hàng'
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false
+        stores.forEach(function(store) {
+            Object.keys(chartData[store]).forEach(function(ingredient) {
+                if (!ingredients.includes(ingredient)) {
+                    ingredients.push(ingredient);
                 }
+            });
+        });
+
+        ingredients.forEach(function(ingredient, index) {
+            var data = stores.map(function(store) {
+                return chartData[store][ingredient] || 0;
+            });
+
+            datasets.push({
+                label: ingredient,
+                data: data,
+                backgroundColor: 'hsl(' + (index * 360 / ingredients.length) + ', 70%, 60%)',
+            });
+        });
+
+        var ctx = document.getElementById('ingredientChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: stores,
+                datasets: datasets
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Số lượng'
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Số lượng'
+                        }
                     }
                 },
-                x: {
+                plugins: {
                     title: {
                         display: true,
-                        text: 'Tuần'
+                        text: 'Thống kê nguyên liệu theo cửa hàng'
+                    },
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
                     }
                 }
             }
-        }
-    });
-
-    var selector = document.getElementById('ingredientSelector');
-    ingredients.forEach(function(ingredient) {
-        var option = document.createElement('option');
-        option.value = ingredient;
-        option.text = ingredient;
-        selector.appendChild(option);
-    });
-
-    // Add event listener to update chart when selection changes
-    selector.addEventListener('change', function() {
-        currentIngredient = this.value;
-        chart.data.datasets = chartData[currentIngredient];
-        chart.update();
-    });
-
-    document.getElementById('monthSelector').addEventListener('change', function() {
-            currentMonth = this.value;
-            updateChart();
-    });
-
-    document.getElementById('ingredientSelector').addEventListener('change', function() {
-            currentIngredient = this.value;
-            updateChart();
-    });
-    function updateChart() {
-            chart.data.datasets = chartData[currentIngredient];
-            chart.update();
-    }
+        });
     });
 </script>
+
 <div class="sidebar">
     <form action="" method="post">
         <h3>Cửa hàng 
@@ -127,6 +163,20 @@
                 }
             ?>
         </div>
+        <h3>Nguyên liệu</h3>
+        <div>
+            <select name="ingredient" class="ingredient">
+                <option value="">- chọn nguyên liệu -</option>
+                <?php
+                    include_once("controllers/cNguyenLieu.php");
+                    $NguyenLieu = new cNguyenLieu();
+                    $list_nguyenlieu = $NguyenLieu->getNguyenLieu();
+                    foreach ($list_nguyenlieu as $i) {
+                        echo '<option value="'.$i['manl'].'">'.$i['tennl'].'</option>';
+                    }
+                ?>
+            </select>
+        </div>
         <h3>Thời gian</h3>
         <div>
             <label>Từ:</label>
@@ -138,93 +188,67 @@
 </div>
 
 <div style="margin-left: 210px; padding: 20px;" class="content">
-    <div class="table-material">
-        <h3>Thống kê nguyên liệu</h3>
-        <form action="" method="post">
-            <table>
-                <tr>
-                    <th>MaCH</th>
-                    <th>MaNL</th>
-                    <th>Tên Nguyên Liệu</th>
-                    <th>Đơn vị tính</th>
-                    <th>Đơn giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                </tr>
-                <?php
-                include_once("controllers/cKhoNguyenLieu.php");
-                $khoNguyenLieu = new cKhoNguyenLieu();
-                $DS = array();
-
-                if (isset($_POST["filter"])) {
-                    $dateFrom = $_POST["dateFrom"] ?? null;
-                    $dateTo = $_POST["dateTo"] ?? null;
-                    $store = isset($_POST["cuahang"]) ? $_POST["cuahang"] : [];
-
-                    if ($store && $dateFrom && $dateTo) {
-
-                        foreach ($store as $i) {
-                            $nguyenlieu = $khoNguyenLieu->getNguyenLieuByDate_MaCH($dateFrom, $dateTo, $i);
-                            $DS = array_merge($DS, $nguyenlieu);
-                        }
-
-                    } elseif ($store) {
-
-                        foreach ($store as $i) {
-                            $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByMaCH($i));
-                        }
-
-                    } elseif ($dateFrom && $dateTo) {
-    
-                        $DS = $khoNguyenLieu->getNguyenLieuByDate($dateFrom, $dateTo);
-                    } else {
-        
-                        $DS = $khoNguyenLieu->getNguyenLieu();
-                    }
-                } else {
-                    $DS = $khoNguyenLieu->getNguyenLieu(); 
-                }
-
-                if (empty($DS)) {
-                    echo "<tr><td colspan='7'>Không có dữ liệu phù hợp với bộ lọc.</td></tr>";
-                } else {
-                    foreach ($DS as $i) {
-                        echo '<tr>';
-                            echo '<td>'.$i['mach'].'</td>';
-                            echo '<td>'.$i['manl'].'</td>';
-                            echo '<td>'.$i['tennl'].'</td>';
-                            echo '<td>'.$i['donvitinh'].'</td>';
-                            echo '<td>'.$i['dongia'].'</td>';
-                            echo '<td>'.$i['SoLuongNhapKho'].'</td>';
-                            echo '<td>'.$i['SoLuongNhapKho'] * $i['dongia'].'</td>';
-                        echo '</tr>';
-                    }
-                }
-                ?>
-            </table>
-        </form>
-        <div class="pagination">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">Tiếp theo</a>
+    <div class="cards">
+        <div class="card">
+            <h3>Tổng tiền</h3>
+            <div class="value"><?php echo number_format($total_price, 0, ',', '.'); ?></div>
+            <p>+20.1% from last month</p>
+        </div>
+        <div class="card">
+            <h3>Tổng số nguyên liệu</h3>
+            <div class="value"><?php echo number_format($total_quantity, 0, ',', '.'); ?></div>
+            <p>+19% from last month</p>
         </div>
     </div>
-    <div>
-        <div class="chart">
+
+    <div class="chart">
         <h3>Sơ đồ so sánh các cửa hàng</h3>
-            <select id="ingredientSelector"></select>
+        <canvas id="ingredientChart">
             
-            <select id="monthSelector" style ="margin-top: 20px;">
-                <?php for ($m = 1; $m <= 12; $m++) {
-                    echo "<option value='$m'>Tháng $m</option>";
-                } ?>
-            </select>
-            <canvas id="ingredientChart"></canvas>
+        </canvas>
+    </div>
+
+    <div class="table-material">
+        <h3>Thống kê nguyên liệu</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>MaCH</th>
+                        <th>MaNL</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên Nguyên Liệu</th>
+                        <th>Đơn vị tính</th>
+                        <th>Đơn giá</th>
+                        <th>Ngày nhập</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        if (empty($DS)) {
+                            echo "<tr><td colspan='9'>Không có dữ liệu phù hợp với bộ lọc.</td></tr>";
+                        } else {
+                            foreach ($DS as $i) {
+                                echo '<tr>';
+                                echo '<td>'.$i['mach'].'</td>';
+                                echo '<td>'.$i['manl'].'</td>';
+                                echo '<td><img src="image/'.$i['hinh'].'" width="50" height="50"></td>';
+                                echo '<td>'.$i['tennl'].'</td>';
+                                echo '<td>'.$i['donvitinh'].'</td>';
+                                echo '<td>'.number_format($i['dongia'], 0, ',', '.').'</td>';
+                                echo '<td>'.$i['ngaynhapkho'].'</td>';
+                                echo '<td>'.$i['soluongnhapkho'].'</td>';
+                                echo '<td>'.number_format($i['soluongnhapkho'] * $i['dongia'], 0, ',', '.').'</td>';
+                                echo '</tr>';
+                            }
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-
 </body>
-
 </html>
