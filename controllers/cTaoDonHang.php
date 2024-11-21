@@ -131,12 +131,12 @@ class MonAnController {
         // Lưu chi tiết đơn hàng và cập nhật số lượng món ăn
         foreach ($_SESSION['cart'] as $id => $item) {
             // Lưu chi tiết đơn hàng
-            $query = "INSERT INTO chitietdonhang (giamgia, soluong, dongia, madh, mama, mattdh) VALUES (?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO chitietdonhang (giamgia, soluong, dongia, madh, mama) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->model->conn->prepare($query);
             $giamgia = 0;
             $soluong = $item['quantity'];
             $dongia = $item['price'];
-            $stmt->bind_param("iiiiii", $giamgia, $soluong, $dongia, $madh, $id, $mattdh);
+            $stmt->bind_param("iiiii", $giamgia, $soluong, $dongia, $madh, $id);
             $stmt->execute();
 
             // Cập nhật số lượng món ăn
