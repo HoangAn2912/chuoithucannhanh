@@ -1,3 +1,7 @@
+<?php
+include_once("views/dexuatmonmoi/handle.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +14,7 @@
     
 <main>
         <h1>Đề Xuất Món Mới</h1>
-        <form>
+        <form method="post">
             <div>
                 <label for="dish-name">Tên Món Ăn</label>
                 <input type="text" id="dish-name" name="dish-name" required>
@@ -31,7 +35,7 @@
                 <label for="description">Mô Tả</label>
                 <textarea id="description" name="description" required></textarea>
             </div>
-            <button type="submit">Gửi Đề Xuất</button>
+            <button id="rec" type="submit" name="rec" value="Gửi Đề Xuất">Gửi Đề Xuất</button>
         </form>
     </main>
 </body>

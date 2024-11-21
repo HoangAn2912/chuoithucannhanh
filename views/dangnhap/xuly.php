@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once ('controllers/cNguoiDung.php');
 $nguoidung = new cNguoiDung();
 if(isset($_POST["login"])) {

@@ -12,7 +12,7 @@
     if (isset($_POST["btn-detail"])) {
 
         $list = $monan-> getMonAnByMaMonAn($_POST["btn-detail"]);
-        // $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
+        $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
         echo '<form method = "post">
                 <div class="container" id="ingredient-details">
                         
