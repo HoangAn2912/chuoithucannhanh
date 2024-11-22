@@ -9,7 +9,7 @@
             if(mysqli_num_rows($kq) > 0){
 				return $kq;
 			}else{
-				echo "<script>alert('Khong co du lieu!')</script>";
+				echo "<script>alert('Không có dữ liệu!')</script>";
 			}
         }
 
@@ -24,7 +24,7 @@
 				return $kq;
 			}
         }
-		
+
         public function cUpdateTinhTrang($madh, $mattdh){
 			var_dump($madh, $mattdh);
 			$p = new controlDonHang();

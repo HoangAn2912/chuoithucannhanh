@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="main">
-        <div class="container mt-5">
+        <div class="container">
             <h1>Danh sách khách hàng</h1>
 
             <!-- Hiển thị thông báo thêm khách hàng thành công -->
@@ -28,7 +28,7 @@
             <?php endif; ?>
 
             <!-- Thêm khách hàng -->
-            <button class="btn btn-warning mb-3" data-toggle="modal" data-target="#addCustomerModal">Thêm khách hàng</button>
+            <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addCustomerModal">Thêm khách hàng</button>
 
             <!-- Table khách hàng -->
             <table class="table table-bordered">

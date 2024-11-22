@@ -1,35 +1,40 @@
 <?php
-    include_once("mketnoi.php");
-    class modelLichLamViec {
-        public function selectLichLamViec($mand) {
-            if (!$mand) {
-                echo "Mã nhân viên không hợp lệ!";
-                return false;
-            }
+include_once("mketnoi.php");
 
-            $p = new ketnoi();
-            $con = $p->ketnoi();
+class modelLichLamViec {
+    private $conn;
 
-            if ($con->connect_errno) {
-                echo "Lỗi kết nối: " . $con->connect_error;
-                return false;
-            }
-
-            // Lấy ngày bắt đầu tuần hiện tại (Thứ 2)
-            $startOfWeek = date('Y-m-d', strtotime('monday this week'));
-            // Lấy ngày kết thúc tuần hiện tại (Chủ Nhật)
-            $endOfWeek = date('Y-m-d', strtotime('sunday this week'));
-
-            // Câu lệnh SQL lấy lịch làm việc của nhân viên trong tuần này
-            $sql = "SELECT * FROM lichlamviec WHERE mand = $mand AND ngaylamviec BETWEEN '$startOfWeek' AND '$endOfWeek' ORDER BY ngaylamviec ASC";
-            $kq = mysqli_query($con, $sql);
-
-            if (!$kq) {
-                echo "Lỗi truy vấn SQL: " . mysqli_error($con);
-                return false;
-            }
-
-            return $kq;
-        }
+    public function __construct() {
+        $ketnoi = new ketnoi();
+        $this->conn = $ketnoi->ketnoi();
     }
+    
+    public function getLichLamViec($mand, $weekOffset = 0) {
+        $startOfWeek = new DateTime();
+        $startOfWeek->modify('monday this week');
+        $startOfWeek->modify("$weekOffset week");
+        $startDate = $startOfWeek->format('Y-m-d');
+        $endOfWeek = new DateTime($startDate);
+        $endOfWeek->modify('+6 days');
+        $endDate = $endOfWeek->format('Y-m-d');
+    
+        $sql = "
+            SELECT lichlamviec.ngaylamviec, calam.tenca, lichlamviec.cocalam
+            FROM lichlamviec 
+            JOIN calam ON lichlamviec.macalam = calam.macalam
+            WHERE lichlamviec.mand = '$mand'
+            AND lichlamviec.ngaylamviec BETWEEN '$startDate' AND '$endDate'
+        ";
+        
+        $result = $this->conn->query($sql);
+        $lichLamViec = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $lichLamViec[] = $row;
+            }
+        }
+        return $lichLamViec;
+    }
+    
+}
 ?>

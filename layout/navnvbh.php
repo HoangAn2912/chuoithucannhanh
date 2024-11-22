@@ -16,8 +16,8 @@
                     <div class="dropdown">
                         <a href="#">Xem <i class="fas fa-caret-down"></i></a>
                         <div class="dropdown-content">
-                            <a href="index.php?page=bantrong">Xem bàn trống</a>
                             <a href="index.php?page=xemlichlamviec">Xem lịch làm việc</a>
+                            <a href="index.php?page=bantrong">Xem bàn trống</a>
                             <a href="index.php?page=nhanvien/xemluong">Xem lương</a>
                         </div>
                     </div>';
@@ -26,8 +26,8 @@
                     <div class="dropdown">
                         <a href="#">Chức năng <i class="fas fa-caret-down"></i></a>
                         <div class="dropdown-content">
-                            <a href="index.php?page=dexuatmonmoi">Đề xuất món mới</a>
                             <a href="index.php?page=nhanvien/dangkycalam">Đăng ký ca làm</a>
+                            <a href="index.php?page=dexuatmonmoi">Đề xuất món mới</a>
                             <a href="index.php?page=taodonhang">Tạo đơn hàng</a>
                         </div>
                     </div>';
@@ -39,3 +39,14 @@
             <span class="search-icon fas fa-search "></span>
         </div>
     </div>
+
+<!-- + Quản lý đơn hàng (đặt hàng, thanh toán, hủy đơn hàng) a
++ Quản lý khách hàng (xem, cập nhật thông tin khách hàng) 
++ Xem số bàn trống
++ Đăng ký ca làm việc 
++ Xem lịch làm việc 
++ Đề xuất món mới
++ Thanh toán
++ Đặt món
++ Xem lương 
++ Đăng nhập, đăng xuất  -->
