@@ -1,51 +1,20 @@
 <?php
     echo '<link rel="stylesheet" href="css/QLNL/style.css">';
     echo require("layout/navqlchuoi.php");
+    include_once("views/qlnlchuoicuahang/themnl.php");
+    include_once("views/qlnlchuoicuahang/xemchitiet/vxemchitiet.php");
 ?>
 <?php
     include_once("controllers/cKhoNguyenLieu.php");
-    include_once("controllers/cCuaHang.php");
-    $nguyenlieu = new cKhoNguyenLieu();
-    $cuaHang = new cCuaHang();
-    if (isset($_POST["btn-detail"])) {
-
-        $list = $nguyenlieu->getNguyenLieuByMaNL_CH($_POST["btn-detail"]);
-        $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
-
-        echo '<form method = "post">
-                <div class="container" id="ingredient-details">
-                        
-                    <div class="header">
-                        <span>Mã nguyên liệu: ' . $list[0]["manl"] . '</span>
-                        <span>Cửa hàng: ' . $ch[0]['tench'] . ' </span>
-                        <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
-                    </div>
-                    
-                    <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
-                    
-                    <div class="details">
-                        <div>
-                            <p>Tên nguyên liệu: ' . $list[0]['tennl'] . '</p>
-                            <p>Đơn vị tính: ' . $list[0]['donvitinh'] . '</p>
-                            <p>Đơn giá: ' . $list[0]['dongia'] . ' VND</p>
-                            <p>Trạng thái: ' . $list[0]['TinhTrang'] . '</p>
-                        </div>
-                        <div>
-                            <p>Tên NCC: ' . $list[0]['ten_ncc'] . '</p>
-                            <p>SDT nhà cung cấp: ' . $list[0]['sodienthoai_ncc'] . '</p>
-                            <p>Email NCC: ' . $list[0]['email_ncc'] . '</p>
-                            <p>Số lượng bổ sung: ' . $list[0]['SoLuongBoSung'] . '</p>
-                        </div>
-                    </div>';
-
-                if ($list[0]['TinhTrang'] == "Chờ duyệt") {
-                echo '<button class="btn-approve" name="btn-approve" value="' . $list[0]['NLCH_ID'] . '">Duyệt</button>';
-                }
-            echo '</div>';
-        echo '</form>';
-    }
-    if  (isset($_POST["btn-approve"])) {
-       $nguyenlieu->updateTinhTrangNguyenLieu($_POST["btn-approve"], 'Đã duyệt');
+    $ingredient = new cKhoNguyenLieu();
+    $list_ingredient = $ingredient->getDistanctNguyenLieu();
+    foreach($list_ingredient as $i){
+        if($i['SoLuongHienCo']==0){
+            $ingredient->updateTinhTrangNguyenLieu($i['NLCH_ID'],"Hết hàng");
+        }
+        else{
+            $ingredient->updateTinhTrangNguyenLieu($i['NLCH_ID'], "Còn hàng");
+        }
     }
 ?>
 <?php
@@ -53,59 +22,9 @@
         header("Location:index.php?page=qlnlchuoicuahang/capnhat");
     }
 ?>
-<?php
-    include_once("controllers/cNguyenLieu.php");
-    $nguyenlieu = new cNguyenLieu();
-    if(isset($_POST["add"])){
-        echo 
-        '<form method="post">
-            <div class="container" id="ingredient-details">
-                <div class="header">
-                    <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
-                </div>
-                <h3 style="color: #db5a04;">Thêm nguyên liệu</h3>
-                <div class="themnguyenlieu">
-                    <div class="form-group">
-                        <label for="name">Tên nguyên liệu</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="unit">Đơn vị tính</label>
-                        <select id="unit" name="unit" required>
-                            <option value="">Chọn đơn vị</option>
-                            <option value="kg">Kg</option>
-                            <option value="g">g</option>
-                            <option value="l">l</option>
-                            <option value="ml">ml</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="supplierName">Tên NCC</label>
-                        <input type="text" id="supplierName" name="supplierName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="supplierPhone">SĐT NCC</label>
-                        <input type="tel" id="supplierPhone" name="supplierPhone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="supplierEmail">Email NCC</label>
-                        <input type="email" id="supplierEmail" name="supplierEmail" required>
-                    </div>
-                </div>
-                <button class="btn-add" type="submit" name="btn-add">Thêm</button>
-            </div>
-        </form>';
-    }
-    if(isset($_POST["btn-add"])){
-        $name = $_POST['name'];
-        $unit = $_POST['unit'];
-        $supplierName =  $_POST['supplierName'];
-        $supplierPhone =  $_POST['supplierPhone'];
-        $supplierEmail = $_POST['supplierEmail'];
-
-        $nguyenlieu->addNguyenLieu($name, $donvitinh, $supplierName, $supplierEmail, $supplierPhone);
-    }
-?>
+<div id="notification" class="notification">
+    <span></span>
+</div>
 <div class="sidebar">
 <form action=""  method="post">
         <h4>Trạng thái <button type="submit" style ="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h4>
@@ -127,64 +46,76 @@
     </form>
 </div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
-        <h4 style="color: #db5a04">Quản lý nguyên liệu</h4>
-        <div class="table-material">
+        <h3 style="color: #db5a04">Quản lý nguyên liệu</h3>
+        <div class="table-material" style ="max-height: 400px; overflow-y: auto;">
             <form action="" method="post">
-                <table>
-                <tr>
-                    <th>Mã CH</th>
-                    <th>Mã NL</th>
-                    <th>Tên Nguyên Liệu</th>
-                    <th>Đơn vị tính</th>
-                    <th>Đơn giá (VND)</th>
-                    <th>Trạng thái</th>
-                    <th>Tùy Chọn</th>
-                </tr>
-                <?php
-                    include_once("controllers/cKhoNguyenLieu.php");
-                    $khoNguyenLieu = new cKhoNguyenLieu();
-                    $DS = array();
-                    if (isset($_POST["filter"])) {
-                        if (isset($_POST["cuahang"]) && isset($_POST["trangthai"])) {
-                            foreach ($_POST["cuahang"] as $i) {
-                                foreach ($_POST["trangthai"] as $t) {
-                                    // array_merge: để thêm dữ liệu từ mỗi vòng lặp mà không ghi đè lên kết quả trước đó
-                                    $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByMaCH_TT($i, $t));
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <th>Mã CH</th>
+                            <th>Mã NL</th>
+                            <th>Hình ảnh</th>
+                            <th>Tên Nguyên Liệu</th>
+                            <th>Đơn vị tính</th>
+                            <th>Đơn giá (VND)</th>
+                            <th>Trạng thái</th>
+                            <th>Tùy Chọn</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                                include_once("controllers/cKhoNguyenLieu.php");
+                                $khoNguyenLieu = new cKhoNguyenLieu();
+                                $DS = array();
+                                if (isset($_POST["filter"])) {
+                                    if (isset($_POST["cuahang"]) && isset($_POST["trangthai"])) {
+                                        foreach ($_POST["cuahang"] as $i) {
+                                            foreach ($_POST["trangthai"] as $t) {
+                                                // array_merge: để thêm dữ liệu từ mỗi vòng lặp mà không ghi đè lên kết quả trước đó
+                                                $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByMaCH_TT($i, $t));
+                                            }
+                                        }
+                                    } elseif (isset($_POST["cuahang"])) {
+                                        foreach ($_POST["cuahang"] as $i) {
+                                            $DS = array_merge($DS, $khoNguyenLieu->getDistanctNguyenLieuByMaCH($i));
+                                        }
+                                    } elseif (isset($_POST["trangthai"])) {
+                                        foreach ($_POST["trangthai"] as $t) {
+                                            $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByTT($t));
+                                        }
+                                    }else {
+                                        $DS = $khoNguyenLieu->getDistanctNguyenLieu();
+                                    }
+                                    $khoNguyenLieu->displayNguyenLieu($DS);
+                                } else {
+                                    $DS = $khoNguyenLieu->getDistanctNguyenLieu();
+                                    $khoNguyenLieu->displayNguyenLieu($DS);
                                 }
-                            }
-                        } elseif (isset($_POST["cuahang"])) {
-                            foreach ($_POST["cuahang"] as $i) {
-                                $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByMaCH($i));
-                            }
-                        } elseif (isset($_POST["trangthai"])) {
-                            foreach ($_POST["trangthai"] as $t) {
-                                $DS = array_merge($DS, $khoNguyenLieu->getNguyenLieuByTT($t));
-                            }
-                        }else {
-                            $DS = $khoNguyenLieu->getNguyenLieu();
-                        }
-                        $khoNguyenLieu->displayNguyenLieu($DS);
-                    } else {
-                        $DS = $khoNguyenLieu->getNguyenLieu();
-                        $khoNguyenLieu->displayNguyenLieu($DS);
-                    }
-                ?>
-                </table>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </form>
-        </div>
-        <div class="pagination">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">Tiếp theo</a>
         </div>
     </div>
 
 </body>
 
 <script>
-    function closeDetails() {
-        document.getElementById("ingredient-details").style.display ="none";
+    function closeIngredient() {
+        document.getElementById("ingredient").style.display ="none";
+    }
+    function showNotification(message) {
+        var notification = document.getElementById("notification");
+        notification.style.display = "block";
+        notification.querySelector("span").innerText = message; // Hiển thị thông báo động
+
+        // Đóng thông báo khi click ra ngoài
+        document.addEventListener("click", function handleOutsideClick(event) {
+            if (!notification.contains(event.target)) {
+                notification.style.display = "none";
+                document.removeEventListener("click", handleOutsideClick);
+            }
+        });
     }
 </script>
 </html>
