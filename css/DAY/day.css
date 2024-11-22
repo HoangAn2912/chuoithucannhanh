@@ -129,6 +129,29 @@ body {
 
 
 /* Bảng đơn hàng */
+
+
+/* set hiển thị cho nó */
+.table tr {
+    border-bottom: 2px solid #ddd; /* Đường viền dưới mỗi dòng */
+}
+
+.table tr:nth-child(even) {
+    background-color: #f8f9fa; /* Dòng chẵn có màu nền khác */
+}
+
+.table tr:nth-child(odd) {
+    background-color: #ffffff; /* Dòng lẻ có nền trắng */
+}
+/* --- tắt css --- */
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: transparent !important;
+}
+
+
+
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -146,6 +169,9 @@ th {
     background-color: #ec9262;
     color: white;
 }
+
+
+
 
 /* Nút chi tiết đơn hàng */
 .btn-detail {
