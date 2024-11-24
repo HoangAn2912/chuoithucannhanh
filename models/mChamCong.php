@@ -56,16 +56,6 @@ class mChamCong {
         return $shifts;
     }
 
-    public function getShifts() {
-        $sql = "SELECT macalam, tenca FROM calam";
-        $result = $this->conn->query($sql);
-        $shifts = [];
-        while ($row = $result->fetch_assoc()) {
-            $shifts[] = $row;
-        }
-        return $shifts;
-    }
-
     public function saveAttendance($mand, $status, $note, $date, $time, $shiftId) {
         $sql = "INSERT INTO chamcong (mand, macalam, ngaychamcong, thoigianvao, trangthai, ghichu) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
