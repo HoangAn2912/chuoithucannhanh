@@ -21,7 +21,15 @@ class mNguyenLieu {
     }
 
     public function insertNguyenLieu($sql){
-        return  $this->conn->query($sql);
+        return $this->conn->query($sql);
+    }
+
+    public function deleteNguyenLieu($sql){
+        return $this->conn->query($sql);
+    }
+
+    public function updateNguyenLieu($sql){
+        return $this->conn->query($sql);
     }
 }
 ?>

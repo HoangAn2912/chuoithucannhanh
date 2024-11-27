@@ -61,12 +61,12 @@
                                     $ds_calamdk = $calamdk->getCaLamDangKyByCuaHang($_SESSION["mach"], $tt[0]['mavaitro']);
                                     $ds_calamdkbyid = $calamdk -> getCaLamDangKyByMand($_SESSION['dangnhap']);
                                     foreach ($ds_calamdk as $k) {
-                                        if ($k['ngaydanky'] == $ngaydk && $k['macalam'] == $ca['macalam']) {
+                                        if ($k['ngaylamviec'] == $ngaydk && $k['macalam'] == $ca['macalam']) {
                                             $dem++;
                                         }
                                     }
                                     foreach ($ds_calamdkbyid as $j) {
-                                        if ($j['ngaydanky'] == $ngaydk && $j['macalam'] == $ca['macalam']) {
+                                        if ($j['ngaylamviec'] == $ngaydk && $j['macalam'] == $ca['macalam']) {
                                             $isRegistered = true;
                                             break;
                                         }

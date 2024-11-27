@@ -8,6 +8,7 @@ class cKhoNguyenLieu {
         $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
         return $DanhSachNL;
     }
+
     public function getNguyenLieu() {
         $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl join lichsunhapkho as l on k.NLCH_ID =l.StoreIngredientID";
         $nguyenlieu = new mKhoNguyenLieu();
@@ -106,6 +107,7 @@ class cKhoNguyenLieu {
         $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
         return $DanhSachNL;
     }
+
     public function getNguyenLieuByMaCH_TT($mach , $tinhtrang) {
         $sql = "SELECT * FROM khonguyenlieu as k join nguyenlieu as n on k.manl=n.manl  WHERE mach = '$mach' and TinhTrang = '$tinhtrang'";
         $nguyenlieu = new mKhoNguyenLieu();
@@ -126,10 +128,6 @@ class cKhoNguyenLieu {
         return $nguyenlieu->updateNguyenLieu($sql);
     }
 
-    // public function updateQuantity ($congthuc){
-    //     foreach($congthuc as $index => $value)
-
-    // }
     public function displayNguyenLieu($DS) {
         if (empty($DS)) {
             echo '<tr><td colspan="8">Không có dữ liệu</td></tr>';
@@ -148,12 +146,6 @@ class cKhoNguyenLieu {
             }
         }
     }
-    public function getcongthuc(){
-        $sql = "SELECT * FROM monan where mama = 1";
-        $nguyenlieu = new mKhoNguyenLieu();
-        $DanhSachNL = $nguyenlieu->selectNguyenLieu($sql);
-        return $DanhSachNL;
-    }
 
     public function updatequantity($soluongnhap, $id){
         $sql = "UPDATE khonguyenlieu SET SoLuongHienCo = SoLuongHienCo + $soluongnhap, NgayNhap = CURRENT_TIMESTAMP WHERE NLCH_ID ='$id'";
@@ -171,6 +163,11 @@ class cKhoNguyenLieu {
                   </script>';
             return false;
         }
+    }
+
+    public function deleteNguyenLieuByID($id){
+        $sql = "DELETE FROM khonguyenlieu WHERE NLCH_ID = '$id'";
+        
     }
 }
 ?>
