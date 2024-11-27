@@ -32,7 +32,7 @@
     if (isset($_POST["btn-register"])) {
         $calam = new cCaLamDangKy();
         foreach ($_SESSION['calamdk'] as $shift) {
-            $calam->addCaLamDangky($shift['ca'], $shift['ngaylam'], $shift['role'], 1);
+            $calam->addCaLamDangky($shift['ca'], $shift['ngaylam'], $shift['role']);
         }
         $_SESSION['calamdk'] = array();
         echo "<script>alert('Đăng ký ca làm thành công');</script>";
