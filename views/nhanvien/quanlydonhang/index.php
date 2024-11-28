@@ -10,7 +10,7 @@ if (!isset($_SESSION["dangnhap"])) {
 include_once("models/Order.php");
 
 // Lấy mã cửa hàng từ session
-$storeId = $_SESSION["mach"]; // Giả sử mã cửa hàng được lưu trong session
+$storeId = $_SESSION["mach"]; 
 
 $orderModel = new Order();
 $orders = $orderModel->getAllOrdersByStore($storeId); // Lấy đơn hàng theo mã cửa hàng
@@ -32,6 +32,7 @@ require("layout/navnvbh.php");
                 <tr>
                     <th>Mã đơn hàng</th>
                     <th>Tên khách hàng</th>
+                    <th>MaKH</th>
                     <th>Địa chỉ</th>
                     <th>Số điện thoại</th>
                     <th>Trạng thái</th>
@@ -43,9 +44,11 @@ require("layout/navnvbh.php");
                     <?php foreach ($orders as $order): ?>
                         <tr>
                             <td><?php echo $order['madh']; ?></td>
-                            <td><?php echo $order['tennd']; ?></td>
-                            <td><?php echo $order['diachi']; ?></td>
-                            <td><?php echo $order['sodienthoai']; ?></td>
+                            
+                            <td><?php echo $order['tennguoinhan']; ?></td>
+                            <td><?php echo $order['makh']; ?></td>
+                            <td><?php echo $order['diachinguoinhan']; ?></td>
+                            <td><?php echo $order['sdtnguoinhan']; ?></td>
                             <td>
                                 <select class="custom-select" onchange="updateOrderStatus(<?php echo $order['madh']; ?>, this.value)">
                                     <?php foreach ($statusList as $status): ?>
