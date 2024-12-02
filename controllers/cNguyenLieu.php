@@ -19,19 +19,10 @@ class cNguyenLieu {
         $sql = "INSERT INTO nguyenlieu(tennl, donvitinh, ten_ncc, email_ncc, sodienthoai_ncc, hinh) 
                 VALUES ('$tennl','$donvitinh','$ten_ncc','$email_ncc','$sodienthoai_ncc', '$hinhanh')";
         $nguyenlieu = new mNguyenLieu();
-        $mess='';
         $test = "SELECT * FROM nguyenlieu WHERE tennl = '$tennl'";
         if ($nguyenlieu->selectNguyenLieu($test)) {
             echo "<script>alert('Tên nguyên liệu đã tồn tại');</script>";
-        } else if (!preg_match("/^[\p{L}\s]+$/u", $tennl)) {
-            echo "<script>alert('Tên nguyên liệu chỉ được chứa chữ cái');</script>";
-        } 
-        else if (!preg_match("/^[\p{L}\s]+$/u", $ten_ncc)) {
-            echo "<script>alert('Tên nhà cung cấp chỉ được chứa chữ cái');</script>";
-        } 
-        else if (!preg_match("/^0[0-9]{9,11}$/", $sodienthoai_ncc)) {
-            echo "<script>alert('Số điện thoại không hợp lệ');</script>";
-        }else {
+        } else {
             if ($nguyenlieu->insertNguyenLieu($sql)) {
                 echo "<script>alert('Thêm thành công');</script>";
                 header('Location: index.php?page=qlnlchuoicuahang/capnhat');
@@ -42,6 +33,16 @@ class cNguyenLieu {
         }
     }
 
-    
+    public function updateNguyenLieu($donvitinh, $ten_ncc, $email_ncc, $sodienthoai_ncc, $dongia, $id){
+        $sql = "UPDATE nguyenlieu SET donvitinh = '$donvitinh', ten_ncc = '$ten_ncc', email_ncc = '$email_ncc', sodienthoai_ncc = '$sodienthoai_ncc', dongia = '$dongia ' WHERE manl =$id";
+        $nguyenlieu = new mNguyenLieu();
+        if ($nguyenlieu->updateNguyenLieu($sql)) {
+            echo "<script>alert('Cập nhật thành công');</script>";
+            header('Location: index.php?page=qlnlchuoicuahang/capnhat');
+            exit;
+        } else{
+            echo "<script>alert('Cập nhật thất bại');</script>";
+        }
+    } 
 }
 ?>
