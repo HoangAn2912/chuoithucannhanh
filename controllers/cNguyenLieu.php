@@ -9,6 +9,12 @@ class cNguyenLieu {
         return $DanhSachNL;
     }
 
+    public function getNguyenLieuByID($id){
+        $sql = "SELECT * FROM nguyenlieu WHERE manl = '$id'";
+        $nguyenlieu = new mNguyenLieu();
+        $nl = $nguyenlieu->selectNguyenLieu($sql);
+        return $nl;
+    }
     public function addNguyenLieu($tennl, $donvitinh, $ten_ncc, $email_ncc, $sodienthoai_ncc, $hinhanh) {
         $sql = "INSERT INTO nguyenlieu(tennl, donvitinh, ten_ncc, email_ncc, sodienthoai_ncc, hinh) 
                 VALUES ('$tennl','$donvitinh','$ten_ncc','$email_ncc','$sodienthoai_ncc', '$hinhanh')";

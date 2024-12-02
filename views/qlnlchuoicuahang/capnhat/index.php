@@ -1,6 +1,8 @@
 <!-- Sidebar -->
 <?php
     echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js"></script>';
+    echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     require_once('layout/navqlchuoi.php');
     include_once('views/qlnlchuoicuahang/themnl.php');
     include_once("views/qlnlchuoicuahang/capnhat/edit.php");
@@ -43,7 +45,7 @@
                                         echo '<span>Tùy chọn <i class="fas fa-caret-down"></i></span>';
                                         echo '<div class="dropdown-menu" style ="width: 50px;">';
                                             echo '<button class="delete" name="delete" onclick="return confirm(\'Ban co chac muon xoa sp nay khong?\')" type="submit">xóa</button></li><br>';
-                                            echo '<button class="edit" name="edit">sửa</button></li>';
+                                            echo '<button class="edit" name="edit" value ="'.$i['manl'].'">sửa</button></li>';
                                         echo '</div>';
                                     echo '</div>';
                                     echo '</td>';
@@ -58,10 +60,5 @@
         </div>
     </div>
 </body>
-<script>
-    function closeIngredient() {
-        document.getElementById("ingredient").style.display = "none";
-    }
-</script>
 </html>
 

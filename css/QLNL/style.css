@@ -77,6 +77,35 @@ th::after {
     border-radius: 5px;
 }
 
+.validation-message {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 1000;
+    margin-top: -60px;
+    font-size: 14px;
+}
+
+.validation-message::before {
+    content: "⚠️";
+    margin-right: 8px;
+    color: #f90;
+}
+
+.validation-message::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: white transparent transparent;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+}
 /* chitietnguyenlieu */
 .container {
     display: flex;
