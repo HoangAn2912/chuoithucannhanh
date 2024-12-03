@@ -105,6 +105,5 @@ function updateTinhTrang(madh, mattdh) {
 }
 
 </script>
-
 </body>
 </html>

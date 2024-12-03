@@ -45,6 +45,12 @@ public function xemChamCong($mach, $shiftId, $date) {
     return $this->model->laydulieuchamcong($mach, $shiftId, $date);
 }
 
+
+public function xemluong($mand, $hourlyRate = 25000, $month, $year) {
+    // Gọi phương thức tinhluong trong model, truyền thêm tham số tháng và năm
+    return $this->model->tinhluong($mand, $hourlyRate, $month, $year);
+}
+
     
 }
 
@@ -71,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['search'])) {
             $attendanceData[$employeeId]['shift'] = $value;
         }
     }
+    $cChamCong->saveAttendance($attendanceData);
+    
     $cChamCong->luuChamCong($attendanceData);
 }
 ?>

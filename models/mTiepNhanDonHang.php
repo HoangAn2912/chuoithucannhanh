@@ -15,7 +15,8 @@
                 LEFT JOIN chitietdonhang t ON s.madh = t.madh
                 LEFT JOIN monan m ON t.mama = m.mama  
                 LEFT JOIN tinhtrangdonhang tt ON s.mattdh = tt.mattdh  -- Điều chỉnh tại đây, dùng 's.mattdh'
-                ORDER BY s.ngaydat DESC 
+                WHERE s.mattdh IN (2,3) AND s.mach =$mach
+                ORDER BY s.ngaydat DESC     
                 LIMIT 0, 25;
 
         ";
