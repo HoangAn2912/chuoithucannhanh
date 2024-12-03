@@ -336,7 +336,19 @@ label {
 }
 
 /* Modal đăng xuất */
-#confirmUpdate {
+#confirmUpdate{
+    display: none; /* Ẩn modal khi không sử dụng */
+    position: fixed; /* Đặt vị trí cố định */
+    z-index: 10000; /* Đảm bảo modal nằm trên các phần tử khác */
+    left: 0;
+    top: 0;
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    height: 100%; /* Chiếm toàn bộ chiều cao */
+    overflow: auto; /* Cho phép cuộn khi cần thiết */
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền mờ */
+    padding-top: 60px; /* Khoảng cách từ đỉnh */
+}
+#confirmDelete{
     display: none; /* Ẩn modal khi không sử dụng */
     position: fixed; /* Đặt vị trí cố định */
     z-index: 10000; /* Đảm bảo modal nằm trên các phần tử khác */
@@ -358,8 +370,22 @@ label {
     width: 80%; /* Chiều rộng tối đa */
     max-width: 400px; /* Chiều rộng tối đa */
 }
-
+#confirmDelete .modal-content {
+    background-color: #ffffff; /* Màu nền trắng cho nội dung modal */
+    margin: 15% auto; /* Căn giữa modal */
+    padding: 20px; /* Khoảng cách nội dung */
+    border-radius: 8px; /* Bo tròn góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng cho modal */
+    width: 80%; /* Chiều rộng tối đa */
+    max-width: 400px; /* Chiều rộng tối đa */
+}
 #confirmUpdate .close {
+    color: #888; /* Màu cho biểu tượng đóng */
+    float: right; /* Đưa biểu tượng đóng sang phải */
+    font-size: 24px; /* Kích thước chữ */
+    font-weight: bold; /* Đậm */
+}
+#confirmDelete .close {
     color: #888; /* Màu cho biểu tượng đóng */
     float: right; /* Đưa biểu tượng đóng sang phải */
     font-size: 24px; /* Kích thước chữ */
@@ -372,8 +398,19 @@ label {
     text-decoration: none; /* Không gạch chân */
     cursor: pointer; /* Đổi con trỏ thành pointer */
 }
-
+#confirmDelete .close:hover,
+#confirmUpdate .close:focus {
+    color: #ff0000; /* Đổi màu khi di chuột qua */
+    text-decoration: none; /* Không gạch chân */
+    cursor: pointer; /* Đổi con trỏ thành pointer */
+}
 #confirmUpdate h4 {
+    margin: 0 0 10px 0; /* Khoảng cách dưới tiêu đề */
+    font-size: 20px; /* Kích thước tiêu đề */
+    color: #333; /* Màu chữ tiêu đề */
+    font-weight: 600; /* Đậm */
+}
+#confirmDelete h4 {
     margin: 0 0 10px 0; /* Khoảng cách dưới tiêu đề */
     font-size: 20px; /* Kích thước tiêu đề */
     color: #333; /* Màu chữ tiêu đề */
@@ -385,8 +422,22 @@ label {
     font-size: 16px; /* Kích thước chữ */
     margin-bottom: 20px; /* Khoảng cách dưới đoạn văn */
 }
-
+#confirmDelete p {
+    color: #555; /* Màu chữ cho nội dung */
+    font-size: 16px; /* Kích thước chữ */
+    margin-bottom: 20px; /* Khoảng cách dưới đoạn văn */
+}
 #confirmUpdate button {
+    background-color: #4CAF50; /* Màu nền xanh */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Không có viền */
+    border-radius: 4px; /* Bo tròn góc */
+    padding: 10px 15px; /* Khoảng cách trong nút */
+    cursor: pointer; /* Đổi con trỏ thành pointer */
+    font-size: 16px; /* Kích thước chữ */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+#confirmDelete button {
     background-color: #4CAF50; /* Màu nền xanh */
     color: white; /* Màu chữ trắng */
     border: none; /* Không có viền */
@@ -400,7 +451,13 @@ label {
 #confirmUpdate button:hover {
     background-color: #45a049; /* Đổi màu khi di chuột qua */
 }
+#confirmDelete button:hover {
+    background-color: #45a049; /* Đổi màu khi di chuột qua */
+}
 
 #confirmUpdate button:not(:last-child) {
+    margin-right: 10px; /* Khoảng cách giữa các nút */
+}
+#confirmDelete button:not(:last-child) {
     margin-right: 10px; /* Khoảng cách giữa các nút */
 }

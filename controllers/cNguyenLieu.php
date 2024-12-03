@@ -9,6 +9,13 @@ class cNguyenLieu {
         return $DanhSachNL;
     }
 
+    public function getNguyenLieuByIDMax(){
+        $sql = "SELECT * FROM nguyenlieu ORDER BY manl DESC LIMIT 1;";
+        $nguyenlieu = new mNguyenLieu();
+        $nl = $nguyenlieu->selectNguyenLieu($sql);
+        return $nl;
+    }
+
     public function getNguyenLieuByID($id){
         $sql = "SELECT * FROM nguyenlieu WHERE manl = '$id'";
         $nguyenlieu = new mNguyenLieu();
@@ -25,8 +32,6 @@ class cNguyenLieu {
         } else {
             if ($nguyenlieu->insertNguyenLieu($sql)) {
                 echo "<script>alert('Thêm thành công');</script>";
-                header('Location: index.php?page=qlnlchuoicuahang/capnhat');
-                exit;
             } else {
                 echo "<script>alert('Thêm thất bại');</script>";
             }
@@ -44,5 +49,16 @@ class cNguyenLieu {
             echo "<script>alert('Cập nhật thất bại');</script>";
         }
     } 
+
+    public function updateTinhTrangNguyenLieu($manl, $tinhtrang){
+        $sql = "UPDATE nguyenlieu SET trangthai = '$tinhtrang' WHERE manl  = '$manl'";
+        $nguyenlieu = new mNguyenLieu();
+        if($nguyenlieu->updateNguyenLieu($sql)){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 }
 ?>
