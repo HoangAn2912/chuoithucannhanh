@@ -41,7 +41,6 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
                 echo '<a href="#" id="logoutButton" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-sign-out-alt"></i> Đăng xuất</a>';
             } else {
                 // Hiển thị nút Đăng ký / Đăng nhập nếu chưa đăng nhập
-                echo '<a href="index.php?page=dangky" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-user-plus"></i> Đăng ký</a>/';
                 echo '<a href="index.php?page=dangnhap" style="color: white; text-decoration: none; margin-right: 5px"> <i class="fas fa-sign-in-alt"></i> Đăng nhập</a>';
             }
         ?>

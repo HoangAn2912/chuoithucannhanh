@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<link rel="stylesheet" href="css/QLMA/chitiet.css">';
     echo require("layout/navqlchuoi.php");
     include_once("controllers/cKhoNguyenLieu.php");
     include_once("controllers/cNguyenLieu.php");
@@ -13,6 +13,8 @@
 
         $list = $monan-> getMonAnByMaMonAn($_POST["btn-detail"]);
         $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
+        
+        echo $ch["mach"];
         echo '<form method = "post">
                 <div class="container" id="ingredient-details">
                         
@@ -70,11 +72,12 @@
                         <label for="gia">Đơn giá</label>
                         <input type="text" id="gia" name="gia" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group scrollable-container">
                         <label for="congthuc">Công thức</label>';
                         $nguyenlieu = new cNguyenLieu();
                         $list_nguyenlieu = $nguyenlieu->getNguyenLieu();
                         foreach ($list_nguyenlieu as $i) {
+                            echo'<hr>';
                             echo '<label for="">' . $i["tennl"] . '</label>';
                             echo '<input type="hidden" name="nguyenlieu_id[]" value="' . $i["manl"] . '">';
                             echo '<input type="number" placeholder="Định lượng" name="dinhluong[]"> <br>';
@@ -122,16 +125,19 @@
 </div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
         <h4 style="color: #db5a04">Quản lý món ăn</h4>
+        <div class="table-material" style ="max-height: 400px; overflow-y: auto;">
         <form action="" method="post">
+        <div class="table-wrapper">
             <table>
-            <tr>
+            <thead>
                 <th>Mã MA</th>
-                <th>Tên Món Ăn</th>
+                <th>Hình ảnh</th>
+                <th>Tên món ăn</th>
                 <th>Loại món</th>
-                <th>Đơn giá (VND)</th>
+                <th>Đơn giá (VND)</th>  
                 <th>Trạng thái</th>
-                <th>Tùy Chọn</th>
-            </tr>
+                <th>Tùy chọn</th>
+            </thead>
             <?php
                     include_once("controllers/cMonAn.php");
                     $MonAn = new cMonAn();
@@ -164,7 +170,9 @@
             
                 <!-- Add more rows as needed -->
             </table>
+            </div>
         </form>
+        </div>
         <div class="pagination">
             <a href="#">1</a>
             <a href="#">2</a>

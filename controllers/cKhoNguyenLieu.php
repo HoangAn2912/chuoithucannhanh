@@ -133,22 +133,24 @@ class cKhoNguyenLieu {
             echo '<tr><td colspan="8">Không có dữ liệu</td></tr>';
         } else {
             foreach ($DS as $j) {
-                echo '<tr>';
-                echo '<td>'.$j['mach'].'</td>';
-                echo '<td>'.$j['manl'].'</td>';
-                echo '<td><img src="image/'.$j['hinh'].'" width="50" height="50"></td>';
-                echo '<td>'.$j['tennl'].'</td>';
-                echo '<td>'.$j['donvitinh'].'</td>';
-                echo '<td>'.number_format($j['dongia'], 0, ',', '.') . '</td>';
-                echo '<td>'.$j['TinhTrang'].'</td>';
-                echo '<td><button class="btn-detail" name="btn-detail" value="'.$j['NLCH_ID'].'">Xem chi tiết</button></td>';
-                echo '</tr>';
+                if ($j['trangthai'] !== 'Đã xóa') {
+                    echo '<tr>';
+                    echo '<td>'.$j['mach'].'</td>';
+                    echo '<td>'.$j['manl'].'</td>';
+                    echo '<td><img src="image/'.$j['hinh'].'" width="50" height="50"></td>';
+                    echo '<td>'.$j['tennl'].'</td>';
+                    echo '<td>'.$j['donvitinh'].'</td>';
+                    echo '<td>'.number_format($j['dongia'], 0, ',', '.') . '</td>';
+                    echo '<td>'.$j['TinhTrang'].'</td>';
+                    echo '<td><button class="btn-detail" name="btn-detail" value="'.$j['NLCH_ID'].'">Xem chi tiết</button></td>';
+                    echo '</tr>';
+                }
             }
         }
     }
 
     public function updatequantity($soluongnhap, $id){
-        $sql = "UPDATE khonguyenlieu SET SoLuongHienCo = SoLuongHienCo + $soluongnhap, NgayNhap = CURRENT_TIMESTAMP WHERE NLCH_ID ='$id'";
+        $sql = "UPDATE khonguyenlieu SET SoLuongHienCo = SoLuongHienCo + $soluongnhap, NgayNhap = CURRENT_TIMESTAMP, SoLuongBoSung= 0 WHERE NLCH_ID ='$id'";
         $nguyenlieu = new mKhoNguyenLieu();
         if($nguyenlieu->updateNguyenLieu($sql)){
             echo '<script>
@@ -165,9 +167,28 @@ class cKhoNguyenLieu {
         }
     }
 
-    public function deleteNguyenLieuByID($id){
-        $sql = "DELETE FROM khonguyenlieu WHERE NLCH_ID = '$id'";
-        
+    public function addNguyenLieu($manl,$mach){
+        $sql = "INSERT INTO khonguyenlieu (mach, manl) VALUES ('$mach', '$manl')";
+        $nguyenlieu = new mKhoNguyenLieu();
+        return $nguyenlieu->insertNguyenLieu($sql);
+    }
+    public function updatequantityadd($soluongbosung, $id){
+        $sql = "UPDATE khonguyenlieu SET SoLuongBoSung = $soluongbosung WHERE NLCH_ID ='$id'";
+        $nguyenlieu = new mKhoNguyenLieu();
+        if($nguyenlieu->updateNguyenLieu($sql)){
+            $this->updateTinhTrangNguyenLieu( $id, 'Chờ duyệt');
+            echo '<script>
+                    alert("Đề xuất thành công");
+                    window.location.href = "index.php?page=qlnlcuahang";
+                  </script>';
+            return true;
+        } else {
+            echo '<script>
+                    alert("Đề xuất thất bại thất bại");
+                    window.location.href = "index.php?page=qlnlcuahang";
+                  </script>';
+            return false;
+        }
     }
 }
 ?>

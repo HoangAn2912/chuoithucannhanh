@@ -24,10 +24,20 @@
     $history = new cLichSuNhapKho();
     $nguyenlieu = new cKhoNguyenLieu();   
     if(isset($_POST['btn-add'])){
-       if( $history ->updatehistory ($_POST['quantity'],  $_POST['btn-add']) &&
-        $nguyenlieu->updatequantity($_POST['quantity'], $_POST['btn-add']) ){
+        $nl = $nguyenlieu->getNguyenLieuByMaNL_CH($_POST['btn-add']);
+        if($_POST['quantity'] == $nl[0]['SoLuongBoSung']){
+            if( $history ->updatehistory ($_POST['quantity'],  $_POST['btn-add']) &&
+                $nguyenlieu->updatequantity($_POST['quantity'], $_POST['btn-add']) && ($nguyenlieu->updateTinhTrangNguyenLieu($_POST['btn-add'], 'Còn hàng'))){
 
+                    echo 'window.location.href = "index.php?page=qlnlcuahang';
+            }
+        }else{
+            echo '<script>
+                    alert("Vui lòng nhập đúng số lượng đã đề xuất là: ' . $nl[0]['SoLuongBoSung'] . '");
+                    window.location.href = "index.php?page=qlnlcuahang";
+                  </script>';
         }
+        
     }
 ?>
 <?php
@@ -70,6 +80,21 @@
         echo '</form>';
     }
     if  (isset($_POST["btn-approve"])) {
-       $nguyenlieu->updateTinhTrangNguyenLieu($_POST["btn-approve"], 'Chờ duyệt');
+        echo '<form method = "post">
+                <div class="container" id="ingredient">
+                    <div class="header">
+                        <span><button class="close-btn">✖</button></span>
+                    </div>
+                    
+                    <h3 style="color: #db5a04; margin: auto;">Nhập số lượng đề xuất</h3>
+                    <div class="form-group"  style ="margin-top: 20px;">
+                        <input type="number" id="quantityadd" name="quantityadd" required>
+                    </div>';
+                    echo '<button class="btn-confirm" name="btn-confirm" value="' . $_POST["btn-approve"]. '">Xác nhận</button>';
+            echo '</div>';
+        echo '</form>';
+    }
+    if(isset($_POST["btn-confirm"])){
+        $nguyenlieu->updatequantityadd($_POST["quantityadd"],$_POST["btn-confirm"]);
     }
 ?>

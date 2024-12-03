@@ -14,7 +14,7 @@
                     <div class="header">
                         <span>Mã nguyên liệu: ' . $list[0]["manl"] . '</span>
                         <span>Cửa hàng: ' . $ch[0]['tench'] . ' </span>
-                        <span><button class="close-btn" onclick="closeIngredient()">✖</button></span>
+                        <span><button class="close-btn">✖</button></span>
                     </div>
                     
                     <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
