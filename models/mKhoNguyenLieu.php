@@ -23,5 +23,9 @@ class mKhoNguyenLieu {
     public function updateNguyenLieu($sql){
        return $this->conn->query($sql);
     }
+
+    public function insertNguyenLieu($sql){
+        return $this->conn->query($sql);
+     }
 }
 ?>

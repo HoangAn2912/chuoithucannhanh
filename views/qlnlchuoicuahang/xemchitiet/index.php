@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
     echo require("layout/navqlchuoi.php");

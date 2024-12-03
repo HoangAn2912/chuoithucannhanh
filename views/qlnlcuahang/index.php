@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
     require_once('layout/navqlch.php');
@@ -47,33 +47,35 @@
                             $DS = $nguyenlieu->getDistanctNguyenLieuByMaCH($mach);
                         }
                         foreach($DS as $r) {
-                                echo 
-                                '
-                                <tr>
-                                    <td>'.$r["manl"].'</td>
-                                    <td><img src="image/'.$r['hinh'].'" width="50" height="50"></td>
-                                    <td>'.$r["tennl"].'</td>
-                                    <td>'.$r["SoLuongHienCo"].'</td>
-                                    <td>'.$r["donvitinh"].'</td>
-                                    <td>'.$r["dongia"].'</td>
-                                    <td>'.$r["TinhTrang"].'</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <span>Tùy chọn <i class="fas fa-caret-down"></i></span>
-                                            <div class="dropdown-menu">';
-                                                if ($r['TinhTrang'] == "Đã duyệt") {
-                                                    echo '<button class="edit" name="add" value="' . $r['NLCH_ID'] . '">Nhập nguyên liệu</button>';
-                                                }
-                                                else if ($r['TinhTrang'] == "Hết hàng" || $r['SoLuongHienCo'] <= "10") {
-                                                    echo '<button class="edit" name="btn-approve" value="' . $r['NLCH_ID'] . '">Đề xuất</button>';
-                                                } 
-                                                echo'
-                                                <button class="edit" name="btn-detail" value="'.$r['NLCH_ID'].'">Xem chi tiết</button>
-                                            </div>
-                                        </div> 
-                                    </td>
-                                </tr>
-                                ';
+                                if ($r['trangthai'] !== 'Đã xóa') {
+                                    echo 
+                                    '
+                                    <tr>
+                                        <td>'.$r["manl"].'</td>
+                                        <td><img src="image/'.$r['hinh'].'" width="50" height="50"></td>
+                                        <td>'.$r["tennl"].'</td>
+                                        <td>'.$r["SoLuongHienCo"].'</td>
+                                        <td>'.$r["donvitinh"].'</td>
+                                        <td>'.$r["dongia"].'</td>
+                                        <td>'.$r["TinhTrang"].'</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <span>Tùy chọn <i class="fas fa-caret-down"></i></span>
+                                                <div class="dropdown-menu">';
+                                                    if ($r['TinhTrang'] == "Đã duyệt") {
+                                                        echo '<button class="edit" name="add" value="' . $r['NLCH_ID'] . '">Nhập nguyên liệu</button>';
+                                                    }
+                                                    else if ($r['TinhTrang'] == "Hết hàng" || $r['SoLuongHienCo'] <= "10") {
+                                                        echo '<button class="edit" name="btn-approve" value="' . $r['NLCH_ID'] . '">Đề xuất</button>';
+                                                    } 
+                                                    echo'
+                                                    <button class="edit" name="btn-detail" value="'.$r['NLCH_ID'].'">Xem chi tiết</button>
+                                                </div>
+                                            </div> 
+                                        </td>
+                                    </tr>
+                                    ';
+                                }
                             }   
                         }
                 ?> 

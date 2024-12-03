@@ -1,6 +1,10 @@
 <?php
     include_once("controllers/cNguyenLieu.php");
+    include_once("controllers/cKhoNguyenLieu.php");
+    include_once("controllers/cCuaHang.php");
     $nguyenlieu = new cNguyenLieu();
+    $khonguyenlieu = new cKhoNguyenLieu();
+    $cuahang = new cCuahang();
     if(isset($_POST["add"])){
         echo 
         '<form method="post" id="ingredientForm" class="updateMaterial" enctype="multipart/form-data">
@@ -46,12 +50,17 @@
         $supplierPhone =  $_POST['supplierPhone'];
         $supplierEmail = $_POST['supplierEmail'];
         $hinhanh= $_FILES['hinh']['name'];
+        $dsch = $cuahang->getCuaHang();
         if(move_uploaded_file($_FILES['hinh']['tmp_name'],'image/'.$hinhanh)){
-            return $nguyenlieu->addNguyenLieu($name, $unit, $supplierName, $supplierEmail, $supplierPhone, $hinhanh);
-        }else{
-            echo 'up ảnh không thành công';
+            $nguyenlieu->addNguyenLieu($name, $unit, $supplierName, $supplierEmail, $supplierPhone, $hinhanh);
+            $nl_new = $nguyenlieu->getNguyenLieuByIDMax();
+            if ($nl_new) {
+                foreach($dsch as $i){
+                    $khonguyenlieu->addNguyenLieu($nl_new[0]["manl"], $i["mach"]);
+                }
+            }
+        } else {
+            echo '<script>alert("Cập nhật ảnh không thành công!");</script>';
         }
-        
-
     }
 ?>

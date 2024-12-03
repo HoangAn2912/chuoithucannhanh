@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
     echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
     echo require("layout/navqlchuoi.php");
 ?>

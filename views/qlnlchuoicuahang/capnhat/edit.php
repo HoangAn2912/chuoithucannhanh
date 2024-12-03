@@ -41,18 +41,17 @@
 
 ?>
 <div id="confirmUpdate" class="modal" style="display: none;">
-        <form action="" method="post">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h4>Xác nhận sửa nguyên liệu</h4>
-                <p>Bạn có chắc muốn sửa nguyên liệu không?</p>
-                <button onclick="confirm()" value="<?php echo $_POST["edit"]?>" name="confirm">Có</button>
-                <button onclick="closeModal()">Không</button>
-            </div>
-        </form>
-    </div>
+    <form action="" method="post">
+        <div class="modal-content">
+            <h4>Xác nhận sửa nguyên liệu</h4>
+            <p>Bạn có chắc muốn sửa nguyên liệu không?</p>
+            <button onclick="confirm()" value="<?php echo $_POST["edit"]?>" name="confirm">Có</button>
+            <button onclick="closeModal()">Không</button>
+        </div>
+    </form>
+</div>
 
-    <script>
+<script>
         const btnupdate = document.getElementById('btn-update');
         const confirmModel = document.getElementById('confirmUpdate');
 
@@ -75,25 +74,25 @@
         }
 </script>
 <?php
-    if (isset($_POST['confirm'])) {
-        include_once("controllers/cNguyenLieu.php");
-        include_once("controllers/cLichSuCapNhat.php");
+    // if (isset($_POST['confirm'])) {
+    //     include_once("controllers/cNguyenLieu.php");
+    //     include_once("controllers/cLichSuCapNhat.php");
         
-        $history_update = new clichsucapnhat();
-        $nguyenlieu = new cNguyenLieu();
+    //     $history_update = new clichsucapnhat();
+    //     $nguyenlieu = new cNguyenLieu();
         
-        // Làm sạch dữ liệu đầu vào để ngăn chặn SQL injection
-        $unit = htmlspecialchars($_POST["unit"]);
-        $supplierName = htmlspecialchars($_POST["supplierName"]);
-        $supplierEmail = htmlspecialchars($_POST["supplierEmail"]);
-        $supplierPhone = htmlspecialchars($_POST["supplierPhone"]);
-        $price = htmlspecialchars($_POST["price"]);
-        $ingredientId = htmlspecialchars($_POST["ingredientId"]);
+    //     // Làm sạch dữ liệu đầu vào để ngăn chặn SQL injection
+    //     $unit = htmlspecialchars($_POST["unit"]);
+    //     $supplierName = htmlspecialchars($_POST["supplierName"]);
+    //     $supplierEmail = htmlspecialchars($_POST["supplierEmail"]);
+    //     $supplierPhone = htmlspecialchars($_POST["supplierPhone"]);
+    //     $price = htmlspecialchars($_POST["price"]);
+    //     $ingredientId = htmlspecialchars($_POST["ingredientId"]);
         
-        if ($nguyenlieu->updateNguyenLieu($unit, $supplierName, $supplierEmail, $supplierPhone, $price, $ingredientId)
-            && $history_update->updateLichSuCapNhat($ingredientId, $supplierName, $supplierPhone, $supplierEmail, $price, $unit)) {
+    //     if ($nguyenlieu->updateNguyenLieu($unit, $supplierName, $supplierEmail, $supplierPhone, $price, $ingredientId)
+    //         && $history_update->updateLichSuCapNhat($ingredientId, $supplierName, $supplierPhone, $supplierEmail, $price, $unit)) {
             
-            echo 'window.location.href = "index.php?page=qlnlcuahang";</script>';
-        }
-    }
+    //         echo 'window.location.href = "index.php?page=qlnlcuahang";</script>';
+    //     }
+    // }
 ?>

@@ -51,8 +51,8 @@ require_once 'controllers/cChamCong.php';
                             <td><input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" readonly></td>
                             <td>
                                 <select name="shift_<?php echo $employee['mand']; ?>">
-                                    <?php foreach ($shifts as $shift): ?>
-                                        <option value="<?php echo $shift['macalam']; ?>"><?php echo $shift['tenca']; ?></option>
+                                    <?php foreach ($CaLam as $Ca): ?>
+                                        <option value="<?php echo $Ca['macalam']; ?>"><?php echo $Ca['tenca']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
@@ -75,6 +75,10 @@ require_once 'controllers/cChamCong.php';
         function confirmSaveAttendance() {
             return confirm('Bạn có chắc chắn muốn lưu thông tin chấm công không?');
         }
+        <?php if (isset($_SESSION['error_message'])): ?>
+                alert("<?php echo $_SESSION['error_message']; ?>");
+                <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
     </script>
 </body>
 </html>
