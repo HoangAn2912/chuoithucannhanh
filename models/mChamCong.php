@@ -36,9 +36,7 @@ class mChamCong {
     }
 
     public function getNhanVienByCuaHang($employeeId, $mach) {
-        $sql = "SELECT nguoidung.mand
-                FROM nguoidung
-                WHERE nguoidung.mand = ? AND nguoidung.mach = ?";
+        $sql = "SELECT nguoidung.mand, tennd FROM nguoidung WHERE nguoidung.mand = ? AND nguoidung.mach = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ii", $employeeId, $mach);
         $stmt->execute();
@@ -94,5 +92,6 @@ public function kiemTraChamCongChua($mand, $shiftId, $date) {
     $row = $result->fetch_assoc();
     return $row['count'] > 0;
 }
+
 }
 ?>

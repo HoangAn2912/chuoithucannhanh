@@ -28,10 +28,11 @@ class cChamCong {
                 
                 $employee = $this->model->getNhanVienByCuaHang($employeeId, $_SESSION['mach']);
                 $mand = $employee['mand']; // Lấy mã người dùng từ thông tin nhân viên
+                $tennd = $employee['tennd']; // Lấy tên nhân viên
     
                 // Kiểm tra xem nhân viên đã được chấm công cho ca làm và ngày này chưa
                 if ($this->model->kiemTraChamCongChua($mand, $shiftId, $date)) {
-                    $_SESSION['error_message'] = "Nhân viên này đã được chấm công cho ca làm này.";
+                    $_SESSION['error_message'] = "LỖI! Nhân viên $tennd đã được chấm công trước đó!";
                     continue;
                 }
     
@@ -45,7 +46,6 @@ public function xemChamCong($mach, $shiftId, $date) {
 }
 
     
-
 }
 
 $loggedInManagerStoreId = $_SESSION['mach'];
