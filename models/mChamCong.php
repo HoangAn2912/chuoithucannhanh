@@ -83,6 +83,16 @@ public function laydulieuchamcong($mach, $shiftId, $date) {
     return $attendanceDetails;
 }
 
+public function kiemTraChamCongChua($mand, $shiftId, $date) {
+    $sql = "SELECT COUNT(*) as count FROM chamcong WHERE mand = ? AND macalam = ? AND ngaychamcong = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("iis", $mand, $shiftId, $date);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['count'] > 0;
+}
+
 
 // hàm tính lương
 public function tinhluong($mand, $hourlyRate = 25000, $month = null, $year = null) {

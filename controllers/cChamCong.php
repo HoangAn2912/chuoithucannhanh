@@ -77,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['search'])) {
             $attendanceData[$employeeId]['shift'] = $value;
         }
     }
-    $cChamCong->saveAttendance($attendanceData);
     
     $cChamCong->luuChamCong($attendanceData);
 }
