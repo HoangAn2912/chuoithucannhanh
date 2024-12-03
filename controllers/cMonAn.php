@@ -17,6 +17,7 @@ class cMonAn {
                 echo '<tr>';
              
                 echo '<td>'.$j['mama'].'</td>';
+                echo '<td><img src="img/'.$j['hinhanh'].'" width="50" height="50"></td>';    
                 echo '<td>'.$j['tenma'].'</td>';
                 echo '<td>'.$j['maloaima'].'</td>';
                 echo '<td>'.$j['giaban'].'</td>';
