@@ -48,12 +48,12 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
     </div>
 
     <!-- Modal xác nhận -->
-    <div id="logoutModal" class="modal" style="display: none;">
+    <div id="logoutModal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h4>Xác nhận đăng xuất</h4>
             <p>Bạn có chắc chắn muốn đăng xuất không?</p>
-            <button onclick="confirmLogout()">Có</button>
+            <button class="button" onclick="confirmLogout()">Có</button>
             <button onclick="closeModal()">Không</button>
         </div>
     </div>
