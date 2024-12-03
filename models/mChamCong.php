@@ -9,7 +9,7 @@ class mChamCong {
         $this->conn = $ketnoi->ketnoi();
     }
 
-    public function getEmployees($mach, $search = '') {
+    public function getNhanVien($mach, $search = '') {
         $sql = "SELECT nguoidung.mand, nguoidung.tennd, vaitro.tenvaitro
                 FROM nguoidung
                 LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
@@ -35,7 +35,7 @@ class mChamCong {
         return $employees;
     }
 
-    public function getEmployeeById($employeeId, $mach) {
+    public function getNhanVienByCuaHang($employeeId, $mach) {
         $sql = "SELECT nguoidung.mand
                 FROM nguoidung
                 WHERE nguoidung.mand = ? AND nguoidung.mach = ?";
@@ -46,17 +46,17 @@ class mChamCong {
         return $result->fetch_assoc();
     }
 
-    public function getShifts() {
+    public function getCaLam() {
         $sql = "SELECT macalam, tenca FROM calam";
         $result = $this->conn->query($sql);
-        $shifts = [];
+        $CaLam = [];
         while ($row = $result->fetch_assoc()) {
-            $shifts[] = $row;
+            $CaLam[] = $row;
         }
-        return $shifts;
+        return $CaLam;
     }
 
-    public function saveAttendance($mand, $status, $note, $date, $time, $shiftId) {
+    public function luuChamCong($mand, $status, $note, $date, $time, $shiftId) {
         $sql = "INSERT INTO chamcong (mand, macalam, ngaychamcong, thoigianvao, trangthai, ghichu) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         if ($stmt === false) {
@@ -83,6 +83,16 @@ public function laydulieuchamcong($mach, $shiftId, $date) {
         $attendanceDetails[] = $row;
     }
     return $attendanceDetails;
+}
+
+public function kiemTraChamCongChua($mand, $shiftId, $date) {
+    $sql = "SELECT COUNT(*) as count FROM chamcong WHERE mand = ? AND macalam = ? AND ngaychamcong = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("iis", $mand, $shiftId, $date);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['count'] > 0;
 }
 }
 ?>
