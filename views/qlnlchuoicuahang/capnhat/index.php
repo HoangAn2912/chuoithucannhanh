@@ -1,19 +1,18 @@
 <!-- Sidebar -->
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
     require_once('layout/navqlchuoi.php');
     include_once('views/qlnlchuoicuahang/themnl.php');
     include_once("views/qlnlchuoicuahang/capnhat/edit.php");
 ?>
-<div class="sidebar">
-    <form action=""  method="post">
-        <button class="add" name="add">Thêm mới</button>
-        <button class="update" name="update">Cập nhật</button>
-
-    </form>
-</div>
+    <div class="sidebar">
+        <form action=""  method="post">
+            <button class="add" name="add">Thêm mới</button>
+            <button class="update" name="update">Cập nhật</button>
+        </form>
+    </div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
         <h4 style="color: #db5a04">DANH SÁCH NGUYÊN LIỆU</h4>
         <div class="table-material">
@@ -76,11 +75,6 @@
 </div>
 
 <script>
-    // Fix jQuery loading issue first
-    if (typeof jQuery == 'undefined') {
-        document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"><\/script>');
-    }
-
     function showDeleteModal(manl) {
         document.getElementById('manlToDelete').value = manl;
         document.getElementById('confirmDelete').style.display = 'block';

@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
     echo require("layout/navqlchuoi.php");
@@ -11,10 +11,10 @@
     $ingredient = new cKhoNguyenLieu();
     $list_ingredient = $ingredient->getDistanctNguyenLieu();
     foreach($list_ingredient as $i){
-        if($i['SoLuongHienCo']==0){
+        if($i['SoLuongHienCo'] == 0 && $i['SoLuongBoSung'] == 0){
             $ingredient->updateTinhTrangNguyenLieu($i['NLCH_ID'],"Hết hàng");
         }
-        else{
+        else if($i["SoLuongHienCo"]>0){
             $ingredient->updateTinhTrangNguyenLieu($i['NLCH_ID'], "Còn hàng");
         }
     }

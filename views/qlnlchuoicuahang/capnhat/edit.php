@@ -11,28 +11,30 @@
             </div>
             <h3>Sửa nguyên liệu</h3>
             <form id="ingredientForm" method="post" class="updateMaterial">
-                <div class="form-group">
-                    <label>Đơn giá</label>
-                    <input type="number" id="price" name="price" value="'.htmlspecialchars($nl[0]['dongia']).'" required>
-                    <p id="errorprice"></p>
-                </div>
-                <div class="form-group">
-                    <label>Đơn vị tính</label>
-                    <input type="text" id="unit" name="unit" value="'.htmlspecialchars($nl[0]['donvitinh']).'" required>
-                </div>
-                <div class="form-group" style="position: relative;">
-                    <label>Tên NCC</label>
-                    <input type="text" id="supplierName" name="supplierName" value="'.htmlspecialchars($nl[0]['ten_ncc']).'" required>
-                </div>
-                <div class="form-group">
-                    <label >SĐT NCC</label>
-                    <input type="tel" id="supplierPhone" name="supplierPhone" value="'.htmlspecialchars($nl[0]['sodienthoai_ncc']).'" required>
-                    <p id="errorsupplierphone"></p>
-                </div>
-                <div class="form-group">
-                    <label>Email NCC</label>
-                    <input type="email" id="supplierEmail" name="supplierEmail" value="'.htmlspecialchars($nl[0]['email_ncc']).'" required>
-                    <p id="erroremail"></p>
+                <div class="suanguyenlieu">
+                    <div class="form-group">
+                        <label>Đơn giá</label>
+                        <input type="number" id="price" name="price" value="'.htmlspecialchars($nl[0]['dongia']).'" required>
+                        <p id="errorprice"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Đơn vị tính</label>
+                        <input type="text" id="unit" name="unit" value="'.htmlspecialchars($nl[0]['donvitinh']).'" required>
+                    </div>
+                    <div class="form-group" style="position: relative;">
+                        <label>Tên NCC</label>
+                        <input type="text" id="supplierName" name="supplierName" value="'.htmlspecialchars($nl[0]['ten_ncc']).'" required>
+                    </div>
+                    <div class="form-group">
+                        <label >SĐT NCC</label>
+                        <input type="tel" id="supplierPhone" name="supplierPhone" value="'.htmlspecialchars($nl[0]['sodienthoai_ncc']).'" required>
+                        <p id="errorsupplierphone"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Email NCC</label>
+                        <input type="email" id="supplierEmail" name="supplierEmail" value="'.htmlspecialchars($nl[0]['email_ncc']).'" required>
+                        <p id="erroremail"></p>
+                    </div>
                 </div>
                 <button type="submit" id="btn-update" class="btn-update" value="'.htmlspecialchars($_POST["edit"]).'">Sửa</button>
             </form>

@@ -25,6 +25,7 @@
                     <div class="form-group">
                         <label>Đơn vị tính</label>
                         <input type="text" id="unit" name="unit" required>
+                        <input type="text" id="price" name="price" required placeholder="Đơn giá">
                     </div>
                     <div class="form-group">
                         <label>Tên NCC</label>
