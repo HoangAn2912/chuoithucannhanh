@@ -1,6 +1,8 @@
     <?php
     session_start(); // Khởi động phiên làm việc
-
+    if(!isset($_SESSION['dangnhap'])){
+        header("Refresh: 0; url=index.php?page=dangnhap");
+    }
     // Kiểm tra nếu người dùng đã đăng nhập
     if (!isset($_SESSION["dangnhap"])) {
         header("Location: index.php?page=dangnhap"); // Nếu chưa đăng nhập thì chuyển hướng

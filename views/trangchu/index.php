@@ -1,5 +1,8 @@
 <!-- Sidebar -->
 <?php
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
     include_once ('controllers/cNguoiDung.php');
     $nguoidung = new cNguoiDung();
     if(isset($_SESSION['dangnhap'])){

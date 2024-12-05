@@ -1,4 +1,7 @@
 <?php
+    if(!isset($_SESSION['dangnhap'])){
+        header("Refresh: 0; url=index.php?page=dangnhap");
+    }
     $nguoidung = new cNguoiDung();
     $nhanvien=$nguoidung->getNguoiDungById($_SESSION['dangnhap']);
     if($nhanvien[0]['mavaitro']==3){

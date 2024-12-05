@@ -1,6 +1,9 @@
 <!-- Sidebar -->
 <?php
-    echo '<link rel="stylesheet" href="css/QLMA/chitiet.css">';
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
+    echo '<link rel="stylesheet" href="css/QLMA/qlma.css">';
     require("layout/navqlchuoi.php");
     include_once("controllers/cKhoNguyenLieu.php");
     include_once("controllers/cNguyenLieu.php");
@@ -14,7 +17,7 @@
         '<form method="post">
             <div class="container" id="ingredient-details">
                 <div class="header">
-                    <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
+                    <span><button class="close-btn" onclick="closeIngredientDetails()">✖</button></span>
                 </div>
                 <h3 style="color: #db5a04;">Thêm món ăn</h3>
                 <div class="themnguyenlieu">
@@ -30,7 +33,7 @@
                         <label for="gia">Đơn giá</label>
                         <input type="text" id="gia" name="gia" required>
                     </div>
-                    <div class="form-group scrollable-container">
+                    <div class="form-group scrollable-container" style="height: 200px;overflow-y: scroll;padding: 10px;">
                         <label for="congthuc">Công thức</label>';
                         $nguyenlieu = new cNguyenLieu();
                         $list_nguyenlieu = $nguyenlieu->getNguyenLieu();
@@ -82,10 +85,17 @@
                     <label for="gia">Đơn giá</label>
                     <input type="text" id="gia" name="gia" required>
                 </div>
-                <div class="form-group">
-                    <label for="congthuc">Công thức</label>
-                    <input type="tel" id="congthuc" name="congthuc" required>
-                </div>
+                <div class="form-group scrollable-container">
+                        <label for="congthuc">Công thức</label>';
+                        $nguyenlieu = new cNguyenLieu();
+                        $list_nguyenlieu = $nguyenlieu->getNguyenLieu();
+                        foreach ($list_nguyenlieu as $i) {
+                            echo'<hr>';
+                            echo '<label for="">' . $i["tennl"] . '</label>';
+                            echo '<input type="hidden" name="nguyenlieu_id[]" value="' . $i["manl"] . '">';
+                            echo '<input type="number" placeholder="Định lượng" name="dinhluong[]"> <br>';
+                        }
+                    echo '</div>
                 <div class="form-group">
                     <label for="nguyenlieu">Nguyên liệu</label>
                     <input type="text" id="nguyenlieu" name="nguyenlieu" required>
@@ -93,6 +103,11 @@
             </div>
             <button class="btn-update">Sửa</button>
         </div>';
+    }
+    foreach ($_POST['dinhluong'] as $key => $dinhluong) {
+        if(!empty($dinhluong)){
+            $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
+        }
     }
 ?>
 
@@ -145,7 +160,7 @@
                             echo '<td>';
                             echo '<div class="dropdown">';
                                 echo '<a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>';
-                                echo '<div class="dropdown-content" style="background-color: white; min-width: 30px; border-radius: 10px; border: 1px solid black;  ">';
+                                echo '<div class="dropdown-content" style="background-color: white; min-width: 50px; border-radius: 10px; border: 1px solid;">';
                                     echo '<ul type=none>';
                                         echo '<li><button class="delete" name="delete" onclick="return confirm(\'Ban co chac muon xoa sp nay khong?\')" type="submit">xóa</button></li>';
                                         echo '<li><button class="edit" name="edit">sửa</button></li>';
@@ -167,6 +182,14 @@
 <script>
     function closeUpdates() {
         document.getElementById("ingredient").style.display = "none";
+    }
+</script>
+<script>
+    function closeIngredientDetails() {
+        const details = document.getElementById("ingredient-details");
+        if (details) {
+            details.style.display = "none";
+        } 
     }
 </script>
 </html>

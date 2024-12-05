@@ -3,6 +3,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
 $mach = $_SESSION["mach"];
 $weekOffset = isset($_GET['weekOffset']) ? $_GET['weekOffset'] : 1;
 

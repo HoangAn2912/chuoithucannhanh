@@ -1,7 +1,9 @@
 <?php
 error_reporting(0);
 require_once '../../models/mQLNV.php';
-
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
 $database = new ketnoi();
 $db = $database->ketnoi();
 $employeeModel = new EmployeeModel($db);

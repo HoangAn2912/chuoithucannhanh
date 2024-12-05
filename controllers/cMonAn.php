@@ -40,12 +40,42 @@ class cMonAn {
         return  $monan->insertMonAn($sql);
         
     }
+    // public function getMonAnByTT($trangthai) {
+    //     $sql = "SELECT * FROM monan as k join monan as n on k.mama=n.mama  WHERE TrangThai = '$trangthai'";
+    //     $monan = new mMonAn();
+    //     $DanhSachMA = $monan->selectMonAn($sql);
+    //     return $DanhSachMA;
+    // }
+
     public function getMonAnByTT($trangthai) {
-        $sql = "SELECT * FROM monan as k join monan as n on k.mama=n.mama  WHERE TrangThai = '$trangthai'";
+        $sql = "SELECT * FROM monan  WHERE trangthai = '$trangthai'";
         $monan = new mMonAn();
         $DanhSachMA = $monan->selectMonAn($sql);
         return $DanhSachMA;
     }
+
+    public function getMonAnByMaCH($i) {
+        $sql = "SELECT m.*, k.soluong
+                FROM monan m
+                JOIN khomonan k ON m.mama = k.mama
+                WHERE k.mach = $i;
+                ";
+        $monan = new mMonAn();
+        $DanhSachMA = $monan->selectMonAn($sql);
+        return $DanhSachMA;
+    }
+
+    public function getMonAnByMaCH_TT($i, $trangthai) {
+        $sql = "SELECT m.*, k.soluong
+                FROM monan m
+                JOIN khomonan k ON m.mama = k.mama
+                WHERE k.mach = $i and m.trangthai='$trangthai';
+                ";
+        $monan = new mMonAn();
+        $DanhSachMA = $monan->selectMonAn($sql);
+        return $DanhSachMA;
+    }
+    
 
     
 

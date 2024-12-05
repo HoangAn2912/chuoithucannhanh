@@ -19,6 +19,9 @@
     }
 ?>
 <?php
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
     include_once('controllers/cKhoNguyenLieu.php');
     include_once ('controllers/cLichSuNhapKho.php');
     $history = new cLichSuNhapKho();

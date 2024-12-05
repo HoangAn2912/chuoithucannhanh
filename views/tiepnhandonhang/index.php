@@ -11,6 +11,9 @@
 
 <?php
     require("layout/navnvb.php");
+    if(!isset($_SESSION['dangnhap'])){
+        header("Refresh: 0; url=index.php?page=dangnhap");
+    }
 ?>
 
 <div class="main">  
