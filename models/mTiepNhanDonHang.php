@@ -8,7 +8,7 @@
             if($con -> connect_errno){
 				return false;
 			}else{
-                $sql = "SELECT s.madh, s.ngaydat, m.tenma, t.soluong, t.dongia, t.giamgia,
+                $sql = "SELECT s.madh, s.ngaydat, m.tenma, t.soluong, t.dongia, t.giamgia, m.hinhanh,
                     (t.soluong * t.dongia - t.giamgia) AS tongtien,
                     tt.tenttdh AS tinhtrang
                 FROM donhang s
@@ -20,6 +20,7 @@
                 LIMIT 0, 25;
 
         ";
+
 
 				$kq = mysqli_query($con, $sql);
 				return $kq;
