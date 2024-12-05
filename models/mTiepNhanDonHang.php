@@ -2,13 +2,13 @@
     include_once("mketnoi.php");
     class modelDonHang {
        
-        public function selectAllDonHang (){
+        public function selectAllDonHang ($mach){
             $p = new ketnoi();
 			$con = $p -> ketnoi();
             if($con -> connect_errno){
 				return false;
 			}else{
-                $sql = "SELECT s.madh, s.ngaydat, m.tenma, t.soluong, t.dongia, t.giamgia,
+                $sql = "SELECT s.madh, s.ngaydat, m.tenma, t.soluong, t.dongia, t.giamgia, m.hinhanh,
                     (t.soluong * t.dongia - t.giamgia) AS tongtien,
                     tt.tenttdh AS tinhtrang
                 FROM donhang s
@@ -21,6 +21,7 @@
 
         ";
 
+
 				$kq = mysqli_query($con, $sql);
 				return $kq;
 			}
@@ -32,7 +33,7 @@
             if ($con->connect_errno) {
                 return false;
             } else {
-                $sql = "SELECT mattdh, tenttdh FROM tinhtrangdonhang WHERE mattdh IN (1, 2, 3)";
+                $sql = "SELECT mattdh, tenttdh FROM tinhtrangdonhang WHERE mattdh IN (2, 3, 4)";
                 $kq = mysqli_query($con, $sql);
                 return $kq;
             }

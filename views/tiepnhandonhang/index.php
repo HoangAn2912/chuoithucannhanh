@@ -1,3 +1,10 @@
+<?php 
+if (!isset($_SESSION)) {
+    session_start();
+}
+$mach = $_SESSION["mach"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +34,7 @@
                 <tr>  
                     <th style="text-align: center;">STT</th>  
                     <th style="text-align: center;">Tên món ăn</th>  
+                    <th style="text-align: center;">Hình ảnh</th>  
                     <th style="text-align: center;">Số lượng</th>
                     <th style="text-align: center;">Đơn giá</th>
                     <th style="text-align: center;">Giảm giá</th>
@@ -39,7 +47,7 @@
                 <?php
                 include_once("controllers/cTiepNhanDonHang.php");
                 $p = new controlDonHang();
-                $kq = $p->getAllDonHang();
+                $kq = $p->getAllDonHang($mach);
                 
                 $tinhTrangOptions = $p->getTinhTrangOptions();
 
@@ -50,6 +58,7 @@
                         echo "<tr>";
                         echo "<td style='text-align: center;'>".$stt."</td>";
                         echo "<td style='text-align: center;'>".$r['tenma']."</td>";
+                        echo "<td style='text-align: center;'><img src='img/" . $r['hinhanh'] . "' width='50' height='50'></td>";
                         echo "<td style='text-align: center;'>".$r['soluong']."</td>";
                         echo "<td style='text-align: center;'>".number_format($r['dongia'], 0, ',', '.')." VNĐ</td>";
                         echo "<td style='text-align: center;'>".number_format($r['giamgia'], 0, ',', '.')." VNĐ</td>";
@@ -70,7 +79,7 @@
                         $stt++;
                     }
                 } else {
-                    echo "<script>alert('Không có dữ liệu!')</script>";
+                    echo "Không có dữ liệu!";
                 }
                 ?>
 
@@ -99,7 +108,7 @@ function updateTinhTrang(madh, mattdh) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             alert("Tình trạng đã được cập nhật!");
-            // Thực hiện thao tác gì đó sau khi cập nhật thành công, ví dụ: reload lại phần tử hiển thị
+            location.reload();        
         }
     };
     
