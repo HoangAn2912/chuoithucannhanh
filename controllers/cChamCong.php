@@ -45,12 +45,12 @@ public function xemChamCong($mach, $shiftId, $date) {
     return $this->model->laydulieuchamcong($mach, $shiftId, $date);
 }
 
-
+//xemluongcuaday
 public function xemluong($mand, $hourlyRate = 25000, $month, $year) {
     // Gọi phương thức tinhluong trong model, truyền thêm tham số tháng và năm
     return $this->model->tinhluong($mand, $hourlyRate, $month, $year);
 }
-
+//endxemluongcuaday
     
 }
 

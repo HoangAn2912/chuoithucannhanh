@@ -3,7 +3,6 @@ class ketnoi {
     private $host = "localhost";
     private $user = "root";
     private $pass = "";
-    private $db = "cuahangthucan_db";
     private $conn;
 
     public function ketnoi() {
