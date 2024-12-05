@@ -3,6 +3,7 @@
     echo require("layout/navqlchuoi.php");
     include_once("controllers/cKhoNguyenLieu.php");
     include_once("controllers/cNguyenLieu.php");
+    include_once("controllers/cMonAn.php");
 ?>
 <?php
     include_once("controllers/cMonAn.php");
@@ -14,28 +15,49 @@
         $list = $monan-> getMonAnByMaMonAn($_POST["btn-detail"]);
         $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
         
+        
         echo $ch["mach"];
-        echo '<form method = "post">
-                <div class="container" id="ingredient-details">
-                        
-                    <div class="header">
-                        <span>Mã món ăn: ' . $list[0]["mama"] . '</span>
-                        <span>Cửa hàng: ' . $ch[0]['tench'] . ' </span>
-                        <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
+        echo '<form method = "post" id="detail">
+            <div class="detail" >
+                <div class="headerdetail">
+                    <img src="img/'.$list[0]["hinhanh"].'" alt="Hình ảnh món ăn">
+                    <h1>Thông tin chi tiết nguyên liệu</h1>
+                    <span><button class="close-btn" style="padding-left: 100px;">✖</button></span>
+                </div>
+                <div class="info">
+                    <div class="info-item">
+                        <div class="info-label">Mã món ăn:</div>
+                        <div class="info-value">'.$list[0]["mama"].'</div>
                     </div>
-                    <h3 style="color: #db5a04;">Chi tiết món ăn</h3>
+                    <div class="info-item">
+                        <div class="info-label">Cửa hàng:</div>
+                        <div class="info-value">'.$ch[0]['tench'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Tên món ăn:</div>
+                        <div class="info-value">'.$list[0]['tenma'].'></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Loại món ăn</div>
+                        <div class="info-value">'.$list[0]['maloaima'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Giá bán:</div>
+                        <div class="info-value">'.$list[0]['giaban'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Trạng thái:</div>
+                        <div class="info-value">'.$list[0]['trangthai'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Công thức</div>
+                        <div class="info-value">'.$list[0]['dinhluong'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Số lượng</div>
+                        <div class="info-value">'.$list[0]['soluong'].'</div>
                     
-                    <div class="details">
-                        <div>
-                            <p>Tên món ăn: ' . $list[0]['tenma'] . '</p>
-                            <p>Loại món ăn: ' . $list[0]['maloaima'] . '</p>
-                            <p>Đơn giá: ' . $list[0]['giaban'] . ' VND</p>
-                            <p>Trạng thái: ' . $list[0]['trangthai'] . '</p>
-                            <p>Tên nguyên liệu: ' . $list[0]['tennl'] . '</p>
-                            <p>Số lượng: ' . $list[0]['soluong'] . '</p>
-                        </div>
-                        
-                    </div>';
+                </div>';
 
                
             echo '</div>';
@@ -53,7 +75,7 @@
     $monan = new cMonAn();
     if(isset($_POST["add"])){
         echo 
-        '<form method="post">
+        '<form method="post"  enctype="multipart/form-data">
             <div class="container" id="ingredient-details">
                 <div class="header">
                     <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
@@ -63,6 +85,10 @@
                     <div class="form-group">
                         <label for="name">Tên món ăn</label>
                         <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hình ảnh</label>
+                        <input type="file" id="hinh" name="hinh" required>
                     </div>
                     <div class="form-group">
                         <label for="loai">Loại món ăn</label>
@@ -92,14 +118,22 @@
         $name = $_POST['name'];
         $loai = $_POST['loai'];
         $gia=  $_POST['gia'];
+        $hinhanh= $_FILES['hinh']['name'];
         $congthuc = '';
+        
         foreach ($_POST['dinhluong'] as $key => $dinhluong) {
             if(!empty($dinhluong)){
                 $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
             }
         }
 
-        $monan->addMonAn($name, $loai, $gia, $congthuc);
+        if(move_uploaded_file($_FILES['hinh']['tmp_name'],'img/'.$hinhanh)){
+            $monan->addMonAn($name, $loai, $gia, $congthuc, $hinhanh);
+        }else{
+            echo '<script>alert("Cập nhật ảnh không thành công!");</script>';
+        }
+
+       
     }
 ?>
 <div class="sidebar">
@@ -107,7 +141,6 @@
         <h4>Trạng thái <button type="submit" style ="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h4>
            <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Đã duyệt"> Còn <br>
            <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Chờ duyệt"> Hết <br>
-           <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Chờ duyệt"> Ẩn
             
         <h4>Cửa hàng </h4>
                 <?php
@@ -172,12 +205,6 @@
             </table>
             </div>
         </form>
-        </div>
-        <div class="pagination">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">Tiếp theo</a>
         </div>
     </div>
 

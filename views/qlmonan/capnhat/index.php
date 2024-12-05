@@ -4,6 +4,7 @@
     require("layout/navqlchuoi.php");
     include_once("controllers/cKhoNguyenLieu.php");
     include_once("controllers/cNguyenLieu.php");
+    include_once("controllers/cMonAn.php");
 ?>
 <?php
     include_once("controllers/cMonAn.php");
@@ -100,8 +101,6 @@
         <h4>Trạng thái</h4>
             <a href=""><label><input type="checkbox" name="trangthai"> Còn</label></a>
             <a href=""><label><input type="checkbox" name="trangthai"> Hết</label></a>
-            <a href=""><label><input type="checkbox" name="trangthai"> Ẩn</label></a>
-            
         <h4>Cửa hàng</h4>
             <a href=""><label><input type="checkbox" name="cuahang" value="1"> Cửa hàng 1</label></a>
             <a href=""><label><input type="checkbox" name="cuahang" value="2"> Cửa hàng 2</label></a>
@@ -162,12 +161,6 @@
             </table>
             </div>
         </form>
-        </div>
-        <div class="pagination">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">Tiếp theo</a>
         </div>
     </div>
 </body>
