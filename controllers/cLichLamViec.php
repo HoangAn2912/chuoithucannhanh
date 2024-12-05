@@ -8,5 +8,11 @@ class controlLichLamViec {
         return $lichLamViec;
     }
 
+    public function getNguoidung($mand) {
+        $p = new modelLichLamViec();
+        return $p->selectNguoiDung($mand); // Trả về trực tiếp giá trị mã vai trò
+    }
+    
+
 }
 ?>

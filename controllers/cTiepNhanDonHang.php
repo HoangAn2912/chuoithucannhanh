@@ -3,9 +3,9 @@
 	include_once("../models/mketnoi.php");
     class controlDonHang {
       
-        public function getAllDonHang (){
+        public function getAllDonHang ($mach){
             $p = new modelDonHang();
-			$kq = $p -> selectAllDonHang();
+			$kq = $p -> selectAllDonHang($mach);
             if(mysqli_num_rows($kq) > 0){
 				return $kq;
 			}else{

@@ -35,6 +35,25 @@ class modelLichLamViec {
         }
         return $lichLamViec;
     }
+
+    public function selectNguoiDung($mand) {
+        $p = new ketnoi();
+        $con = $p->ketnoi();
+        if ($con->connect_errno) {
+            return false;
+        } else {
+            $sql = "SELECT mavaitro FROM nguoidung WHERE mand = $mand";
+            $kq = mysqli_query($con, $sql);
+            
+            if ($kq && mysqli_num_rows($kq) > 0) {
+                $row = mysqli_fetch_assoc($kq); // Lấy một hàng kết quả
+                return $row['mavaitro']; // Trả về trực tiếp mã vai trò
+            } else {
+                return null; // Trường hợp không tìm thấy kết quả
+            }
+        }
+    }
+    
     
 }
 ?>

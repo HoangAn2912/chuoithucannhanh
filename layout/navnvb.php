@@ -4,6 +4,7 @@
             <?php
                 if (isset($_SESSION["dangnhap"])){
                     echo '<a href="index.php?page=tiepnhandonhang">Tiếp nhận đơn hàng</a>';
+                    echo '<a href="index.php?page=bangiaodonhang">Bàn giao đơn hàng</a>';
                         echo '
                         <div class="dropdown">
                             <a href="#">Xem<i class="fas fa-caret-down"></i></a>
