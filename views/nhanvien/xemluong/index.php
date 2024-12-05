@@ -29,6 +29,7 @@ $luongNhanVien = $cChamCong->xemluong($mand, $hourlyRate, $month, $year);
 
 <div class="container">
     <h2>Thông tin lương nhân viên</h2>
+    
 
     <!-- Biểu mẫu chọn tháng và năm -->
     <form method="GET" action="index.php">
@@ -88,141 +89,141 @@ $luongNhanVien = $cChamCong->xemluong($mand, $hourlyRate, $month, $year);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
+<style>
  /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
 
-.container {
-    margin: 50px auto;
-    width: 80%;
-    max-width: 800px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-}
+    .container {
+        margin: 50px auto;
+        width: 80%;
+        max-width: 800px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+    }
 
-.container h2 {
-    font-size: 24px;
-    color: #4CAF50;
-    margin-bottom: 20px;
-}
+    .container h2 {
+        font-size: 24px;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
 
-.salary-info {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 20px;
-    text-align: left;
-}
+    .salary-info {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        text-align: left;
+    }
 
-.salary-info h3 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 10px;
-    text-align: center;
-}
+    .salary-info h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+    }
 
-.salary-info p {
-    font-size: 16px;
-    margin: 8px 0;
-    line-height: 1.6;
-}
+    .salary-info p {
+        font-size: 16px;
+        margin: 8px 0;
+        line-height: 1.6;
+    }
 
-.salary-info ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0;
-}
+    .salary-info ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0;
+    }
 
-.salary-info ul li {
-    font-size: 14px;
-    margin: 5px 0;
-    padding: 8px;
-    background-color: #e8f5e9;
-    border-radius: 6px;
-}
+    .salary-info ul li {
+        font-size: 14px;
+        margin: 5px 0;
+        padding: 8px;
+        background-color: #e8f5e9;
+        border-radius: 6px;
+    }
 
-.salary-info ul li strong {
-    color: #4CAF50;
-}
+    .salary-info ul li strong {
+        color: #4CAF50;
+    }
 
-p {
-    font-size: 16px;
-    color: #666;
-    margin: 10px 0;
-}
+    p {
+        font-size: 16px;
+        color: #666;
+        margin: 10px 0;
+    }
 
-.centered {
-    text-align: center;
-    margin: 20px 0;
-}
+    .centered {
+        text-align: center;
+        margin: 20px 0;
+    }
 
-/* Style for dropdowns and buttons */
-form {
-    text-align: left;
-    margin-top: 20px;
-}
+    /* Style for dropdowns and buttons */
+    form {
+        text-align: left;
+        margin-top: 20px;
+    }
 
-form label {
-    font-size: 16px;
-    color: #333;
-    margin-right: 10px;
-}
+    form label {
+        font-size: 16px;
+        color: #333;
+        margin-right: 10px;
+    }
 
-form select {
-    padding: 10px;
-    font-size: 16px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    width: 150px;
-    transition: border 0.3s ease;
-}
+    form select {
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        width: 150px;
+        transition: border 0.3s ease;
+    }
 
-form select:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
+    form select:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
 
-/* Style for filter button */
-form button[type="submit"] {
-    padding: 12px 25px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
-}
+    /* Style for filter button */
+    form button[type="submit"] {
+        padding: 12px 25px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-left: 10px;
+    }
 
-form button[type="submit"]:hover {
-    background-color: #45a049;
-}
+    form button[type="submit"]:hover {
+        background-color: #45a049;
+    }
 
-form button[type="submit"]:active {
-    background-color: #388e3c;
-}
+    form button[type="submit"]:active {
+        background-color: #388e3c;
+    }
 
-/* Add some spacing to the form elements */
-form > * {
-    margin-bottom: 15px;
-}
+    /* Add some spacing to the form elements */
+    form > * {
+        margin-bottom: 15px;
+    }
 
 
 
-    </style>
+</style>
 </head>
 <body>
     
