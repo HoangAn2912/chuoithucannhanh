@@ -15,12 +15,10 @@
     $orderModel = new Order();
 
     
-
    
         // Lấy tất cả đơn hàng của cửa hàng
         $orders = $orderModel->getAllOrdersByStore($storeId);
     
-
 
     $statusList = $orderModel->getAllOrderStatuses();
 
@@ -86,49 +84,6 @@
     </div>
 
 
-    <!-- Modal để hiển thị chi tiết đơn hàng -->
-<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="orderDetailsModalLabel">Chi tiết đơn hàng</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Mã đơn hàng:</strong> <span id="orderId"></span></p>
-                <p><strong>Tên người nhận:</strong> <span id="orderRecipient"></span></p>
-                <p><strong>Số điện thoại người nhận:</strong> <span id="orderPhone"></span></p>
-                <p><strong>Địa chỉ người nhận:</strong> <span id="orderAddress"></span></p>
-                <p><strong>Chi nhánh cửa hàng:</strong> <span id="storeBranch"></span></p>
-                <p><strong>Ngày đặt hàng:</strong> <span id="orderDate"></span></p>
-
-                <h3>Danh sách món ăn</h3>
-                <table class="table" id="orderFoodList">
-                    <thead>
-                        <tr>
-                            <th>Tên món ăn</th>
-                            <th>Số lượng</th>
-                            <th>Giá</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Thông tin món ăn sẽ được thêm vào đây qua AJAX -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Script thêm các Modal -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-
 
     <script>
     // function showOrderDetails(madh) {
@@ -183,9 +138,6 @@
         // Gửi dữ liệu qua POST
         xhr.send("madh=" + encodeURIComponent(madh) + "&mattdh=" + encodeURIComponent(mattdh));
     }
-
-
-
 
     
     </script>
