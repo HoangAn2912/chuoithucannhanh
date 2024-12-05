@@ -1,5 +1,7 @@
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
+    echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+    echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
     echo require("layout/navqlchuoi.php");
     include_once("views/qlnlchuoicuahang/themnl.php");
     include_once("views/qlnlchuoicuahang/xemchitiet/vxemchitiet.php");
@@ -9,10 +11,10 @@
     $ingredient = new cKhoNguyenLieu();
     $list_ingredient = $ingredient->getDistanctNguyenLieu();
     foreach($list_ingredient as $i){
-        if($i['SoLuongHienCo']==0){
+        if($i['SoLuongHienCo'] == 0 && $i['SoLuongBoSung'] == 0){
             $ingredient->updateTinhTrangNguyenLieu($i['NLCH_ID'],"Hết hàng");
         }
-        else{
+        else if($i["SoLuongHienCo"]>0){
             $ingredient->updateTinhTrangNguyenLieu($i['NLCH_ID'], "Còn hàng");
         }
     }
@@ -100,22 +102,4 @@
 
 </body>
 
-<script>
-    function closeIngredient() {
-        document.getElementById("ingredient").style.display ="none";
-    }
-    function showNotification(message) {
-        var notification = document.getElementById("notification");
-        notification.style.display = "block";
-        notification.querySelector("span").innerText = message; // Hiển thị thông báo động
-
-        // Đóng thông báo khi click ra ngoài
-        document.addEventListener("click", function handleOutsideClick(event) {
-            if (!notification.contains(event.target)) {
-                notification.style.display = "none";
-                document.removeEventListener("click", handleOutsideClick);
-            }
-        });
-    }
-</script>
 </html>

@@ -8,40 +8,67 @@
         $list = $nguyenlieu->getNguyenLieuByMaNL_CH($_POST["btn-detail"]);
         $ch = $cuaHang->getCuaHangByMaCH($list[0]['mach']);
 
-        echo '<form method = "post">
-                <div class="container" id="ingredient">
-                        
-                    <div class="header">
-                        <span>Mã nguyên liệu: ' . $list[0]["manl"] . '</span>
-                        <span>Cửa hàng: ' . $ch[0]['tench'] . ' </span>
-                        <span><button class="close-btn" onclick="closeIngredient()">✖</button></span>
+        echo '<form method = "post" id="detail">
+            <div class="detail" >
+                <div class="headerdetail">
+                    <img src="image/'.$list[0]["hinh"].'" alt="Hình ảnh nguyên liệu">
+                    <h1>Thông tin chi tiết nguyên liệu</h1>
+                    <span><button class="close-btn" style="padding-left: 100px;">✖</button></span>
+                </div>
+                <div class="info">
+                    <div class="info-item">
+                        <div class="info-label">Mã nguyên liệu:</div>
+                        <div class="info-value">'.$list[0]["manl"].'</div>
                     </div>
-                    
-                    <h3 style="color: #db5a04;">Chi tiết nguyên liệu</h3>
-                    
-                    <div class="details">
-                        <div>
-                            <p>Tên nguyên liệu: ' . $list[0]['tennl'] . '</p>
-                            <p>Đơn vị tính: ' . $list[0]['donvitinh'] . '</p>
-                            <p>Đơn giá: ' . $list[0]['dongia'] . ' VND</p>
-                            <p>Trạng thái: ' . $list[0]['TinhTrang'] . '</p>
-                        </div>
-                        <div>
-                            <p>Tên NCC: ' . $list[0]['ten_ncc'] . '</p>
-                            <p>SDT nhà cung cấp: ' . $list[0]['sodienthoai_ncc'] . '</p>
-                            <p>Email NCC: ' . $list[0]['email_ncc'] . '</p>
-                            <p>Số lượng bổ sung: ' . $list[0]['SoLuongBoSung'] . '</p>
-                            <p>Số lượng hiện có: ' . $list[0]['SoLuongHienCo'] . '</p>
-                        </div>
-                    </div>';
-
+                    <div class="info-item">
+                        <div class="info-label">Cửa hàng:</div>
+                        <div class="info-value">'.$ch[0]['tench'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Tên nguyên liệu:</div>
+                        <div class="info-value">'.$list[0]['tennl'].'></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Đơn vị tính:</div>
+                        <div class="info-value">'.$list[0]['donvitinh'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Đơn giá:</div>
+                        <div class="info-value">'.$list[0]['dongia'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Trạng thái:</div>
+                        <div class="info-value">'.$list[0]['TinhTrang'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Tên NCC:</div>
+                        <div class="info-value">'.$list[0]['ten_ncc'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">SĐT nhà cung cấp:</div>
+                        <div class="info-value">'.$list[0]['sodienthoai_ncc'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email NCC:</div>
+                        <div class="info-value">'.$list[0]['email_ncc'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Số lượng bổ sung:</div>
+                        <div class="info-value">'.$list[0]['SoLuongBoSung'].'</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Số lượng hiện có:</div>
+                        <div class="info-value">'.$list[0]['SoLuongHienCo'].'</div>
+                    </div>
+                </div>';
                 if ($list[0]['TinhTrang'] == "Chờ duyệt") {
-                echo '<button class="btn-approve" name="btn-approve" value="' . $list[0]['NLCH_ID'] . '">Duyệt</button>';
+                    echo '<button class="btn-approve" name="btn-approve" value="' . $list[0]['NLCH_ID'] . '">Duyệt</button>';
                 }
             echo '</div>';
-        echo '</form>';
+        echo '</form>'; 
     }
+
     if  (isset($_POST["btn-approve"])) {
-       $nguyenlieu->updateTinhTrangNguyenLieu($_POST["btn-approve"], 'Đã duyệt');
+        $nguyenlieu->updateTinhTrangNguyenLieu($_POST["btn-approve"], 'Đã duyệt');
     }
 ?>

@@ -9,15 +9,15 @@ class cChamCong {
         date_default_timezone_set('Asia/Ho_Chi_Minh'); // Thiết lập múi giờ Việt Nam
     }
 
-    public function getEmployees($mach, $search = '') {
-        return $this->model->getEmployees($mach, $search);
+    public function getNhanVien($mach, $search = '') {
+        return $this->model->getNhanVien($mach, $search);
     }
 
-    public function getShifts() {
-        return $this->model->getShifts();
+    public function getCaLam() {
+        return $this->model->getCaLam();
     }
 
-    public function saveAttendance($data) {
+    public function luuChamCong($data) {
         foreach ($data as $employeeId => $attendance) {
             if (isset($attendance['status'])) { // Chỉ lưu nếu ô radio được chọn
                 $status = $attendance['status'];
@@ -26,9 +26,17 @@ class cChamCong {
                 $time = date('H:i:s'); // Lấy thời gian hiện tại theo múi giờ Việt Nam
                 $shiftId = $attendance['shift'] ?? 0;
                 
-                $employee = $this->model->getEmployeeById($employeeId, $_SESSION['mach']);
+                $employee = $this->model->getNhanVienByCuaHang($employeeId, $_SESSION['mach']);
                 $mand = $employee['mand']; // Lấy mã người dùng từ thông tin nhân viên
-                $this->model->saveAttendance($mand, $status, $note, $date, $time, $shiftId);
+                $tennd = $employee['tennd']; // Lấy tên nhân viên
+    
+                // Kiểm tra xem nhân viên đã được chấm công cho ca làm và ngày này chưa
+                if ($this->model->kiemTraChamCongChua($mand, $shiftId, $date)) {
+                    $_SESSION['error_message'] = "LỖI! Nhân viên $tennd đã được chấm công trước đó!";
+                    continue;
+                }
+    
+                $this->model->luuChamCong($mand, $status, $note, $date, $time, $shiftId);
             }
         }
     }
@@ -37,8 +45,13 @@ public function xemChamCong($mach, $shiftId, $date) {
     return $this->model->laydulieuchamcong($mach, $shiftId, $date);
 }
 
+//xemluongcuaday
+public function xemluong($mand, $hourlyRate = 25000, $month, $year) {
+    // Gọi phương thức tinhluong trong model, truyền thêm tham số tháng và năm
+    return $this->model->tinhluong($mand, $hourlyRate, $month, $year);
+}
+//endxemluongcuaday
     
-
 }
 
 $loggedInManagerStoreId = $_SESSION['mach'];
@@ -47,8 +60,8 @@ $searchQuery = '';
 if (isset($_GET['search'])) {
     $searchQuery = $_GET['search'];
 }
-$employees = $cChamCong->getEmployees($loggedInManagerStoreId, $searchQuery);
-$shifts = $cChamCong->getShifts();
+$employees = $cChamCong->getNhanVien($loggedInManagerStoreId, $searchQuery);
+$CaLam = $cChamCong->getCaLam();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['search'])) {
     $attendanceData = [];
@@ -64,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['search'])) {
             $attendanceData[$employeeId]['shift'] = $value;
         }
     }
-    $cChamCong->saveAttendance($attendanceData);
+    
+    $cChamCong->luuChamCong($attendanceData);
 }
 ?>

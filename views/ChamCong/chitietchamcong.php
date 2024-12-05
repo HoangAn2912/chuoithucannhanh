@@ -2,7 +2,7 @@
 error_reporting(0);
 require_once '../../controllers/cChamCong.php';
 $cChamCong = new cChamCong();
-$shifts = $cChamCong->getShifts();
+$CaLam = $cChamCong->getCaLam();
 $attendanceDetails = [];
 
 session_start();
@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET[
                 <div class="select-calam">
                     <label for="shift">Chọn ca làm:</label>
                     <select name="shift" id="shift">
-                        <?php foreach ($shifts as $shift): ?>
-                            <option value="<?php echo $shift['macalam']; ?>"><?php echo $shift['tenca']; ?></option>
+                        <?php foreach ($CaLam as $Ca): ?>
+                            <option value="<?php echo $Ca['macalam']; ?>"><?php echo $Ca['tenca']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

@@ -247,4 +247,15 @@ h2 {
     float: right;
     margin-left: 20px;
 }
+.note-item {
+    padding: 2px;
+    border-radius: 5px;
+    border: 1px solid #ff7417; /* Đảm bảo viền có màu cam */
+}
+
+.note-item:focus {
+    border-color: #ef4800;
+    outline: none;
+    box-shadow: 0 0 1px #d54000;
+}
 

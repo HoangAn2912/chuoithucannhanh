@@ -19,7 +19,7 @@ class MonAnController {
         return $monAnList;
     }
 
-    public function addToCart($id, $name, $price) {
+    public function addToCart($id, $name, $price, $note) {
         // Kiểm tra số lượng sản phẩm trong kho
         $query = "SELECT soluong FROM monan WHERE mama = ?";
         $stmt = $this->model->conn->prepare($query);
@@ -40,6 +40,7 @@ class MonAnController {
         if (isset($_SESSION['cart'][$id])) {
             if ($_SESSION['cart'][$id]['quantity'] < $row['soluong']) {
                 $_SESSION['cart'][$id]['quantity'] += 1;
+                $_SESSION['cart'][$id]['note'] = $note; // Cập nhật ghi chú
             } else {
                 $_SESSION['error_message'] = "Số lượng sản phẩm trong giỏ hàng vượt quá số lượng có trong kho.";
                 return false;
@@ -48,7 +49,8 @@ class MonAnController {
             $_SESSION['cart'][$id] = [
                 'name' => $name,
                 'price' => $price,
-                'quantity' => 1
+                'quantity' => 1,
+                'note' => $note // Thêm ghi chú
             ];
         }
     
@@ -131,12 +133,13 @@ class MonAnController {
         // Lưu chi tiết đơn hàng và cập nhật số lượng món ăn
         foreach ($_SESSION['cart'] as $id => $item) {
             // Lưu chi tiết đơn hàng
-            $query = "INSERT INTO chitietdonhang (giamgia, soluong, dongia, madh, mama) VALUES (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO chitietdonhang (giamgia, soluong, dongia, madh, mama, ghichu) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->model->conn->prepare($query);
             $giamgia = 0;
             $soluong = $item['quantity'];
             $dongia = $item['price'];
-            $stmt->bind_param("iiiii", $giamgia, $soluong, $dongia, $madh, $id);
+            $ghichu = $item['note']; // Lấy ghi chú từ session
+            $stmt->bind_param("iiiiis", $giamgia, $soluong, $dongia, $madh, $id, $ghichu);
             $stmt->execute();
 
             // Cập nhật số lượng món ăn
@@ -158,7 +161,7 @@ $controller = new MonAnController($db);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['add_to_cart'])) {
-        $result = $controller->addToCart($_POST['id'], $_POST['name'], $_POST['price']);
+        $result = $controller->addToCart($_POST['id'], $_POST['name'], $_POST['price'], $_POST['note']);
         if (!$result && isset($_SESSION['error_message'])) {
             echo '<script>alert("' . $_SESSION['error_message'] . '");</script>';
             unset($_SESSION['error_message']);

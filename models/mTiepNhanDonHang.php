@@ -8,16 +8,18 @@
             if($con -> connect_errno){
 				return false;
 			}else{
-                $sql = "SELECT s.madh, s.ngaydat, m.tenma, m.hinhanh, t.soluong, t.dongia, t.giamgia,
-            (t.soluong * t.dongia - t.giamgia) AS tongtien,
-            tt.tenttdh AS tinhtrang
-        FROM donhang s
-        LEFT JOIN chitietdonhang t ON s.madh = t.madh
-        LEFT JOIN monan m ON t.mama = m.mama  
-        LEFT JOIN tinhtrangdonhang tt ON s.mattdh = tt.mattdh  
-        WHERE s.mattdh IN (2, 3) AND s.mach = $mach -- Chỉ lấy trạng thái 1 và 2
-        ORDER BY s.ngaydat DESC 
-        LIMIT 0, 25";
+                $sql = "SELECT s.madh, s.ngaydat, m.tenma, t.soluong, t.dongia, t.giamgia,
+                    (t.soluong * t.dongia - t.giamgia) AS tongtien,
+                    tt.tenttdh AS tinhtrang
+                FROM donhang s
+                LEFT JOIN chitietdonhang t ON s.madh = t.madh
+                LEFT JOIN monan m ON t.mama = m.mama  
+                LEFT JOIN tinhtrangdonhang tt ON s.mattdh = tt.mattdh  -- Điều chỉnh tại đây, dùng 's.mattdh'
+                WHERE s.mattdh IN (2,3) AND s.mach =$mach
+                ORDER BY s.ngaydat DESC     
+                LIMIT 0, 25;
+
+        ";
 
 				$kq = mysqli_query($con, $sql);
 				return $kq;

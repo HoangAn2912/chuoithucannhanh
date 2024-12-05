@@ -293,3 +293,10 @@ label {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
+.scrollable-container {
+    height: 200px; 
+    overflow-y: scroll; 
+    border: 1px solid #ccc; 
+    padding: 10px; /* Khoảng cách bên trong */
+    background-color: #fff; 
+}

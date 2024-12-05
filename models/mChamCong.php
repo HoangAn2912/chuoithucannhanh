@@ -9,7 +9,7 @@ class mChamCong {
         $this->conn = $ketnoi->ketnoi();
     }
 
-    public function getEmployees($mach, $search = '') {
+    public function getNhanVien($mach, $search = '') {
         $sql = "SELECT nguoidung.mand, nguoidung.tennd, vaitro.tenvaitro
                 FROM nguoidung
                 LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
@@ -35,10 +35,8 @@ class mChamCong {
         return $employees;
     }
 
-    public function getEmployeeById($employeeId, $mach) {
-        $sql = "SELECT nguoidung.mand
-                FROM nguoidung
-                WHERE nguoidung.mand = ? AND nguoidung.mach = ?";
+    public function getNhanVienByCuaHang($employeeId, $mach) {
+        $sql = "SELECT nguoidung.mand, tennd FROM nguoidung WHERE nguoidung.mand = ? AND nguoidung.mach = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ii", $employeeId, $mach);
         $stmt->execute();
@@ -46,17 +44,17 @@ class mChamCong {
         return $result->fetch_assoc();
     }
 
-    public function getShifts() {
+    public function getCaLam() {
         $sql = "SELECT macalam, tenca FROM calam";
         $result = $this->conn->query($sql);
-        $shifts = [];
+        $CaLam = [];
         while ($row = $result->fetch_assoc()) {
-            $shifts[] = $row;
+            $CaLam[] = $row;
         }
-        return $shifts;
+        return $CaLam;
     }
 
-    public function saveAttendance($mand, $status, $note, $date, $time, $shiftId) {
+    public function luuChamCong($mand, $status, $note, $date, $time, $shiftId) {
         $sql = "INSERT INTO chamcong (mand, macalam, ngaychamcong, thoigianvao, trangthai, ghichu) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         if ($stmt === false) {
@@ -84,5 +82,81 @@ public function laydulieuchamcong($mach, $shiftId, $date) {
     }
     return $attendanceDetails;
 }
+
+public function kiemTraChamCongChua($mand, $shiftId, $date) {
+    $sql = "SELECT COUNT(*) as count FROM chamcong WHERE mand = ? AND macalam = ? AND ngaychamcong = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("iis", $mand, $shiftId, $date);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['count'] > 0;
+}
+
+
+// hàm tính lương
+public function tinhluong($mand, $hourlyRate = 25000, $month = null, $year = null) {
+    // Truy vấn số ca làm việc của nhân viên, lọc theo tháng và năm nếu có
+    $sql = "SELECT *, cc.macalam, COUNT(*) as soCa
+            FROM chamcong cc 
+            WHERE cc.trangthai LIKE '%Có mặt%' AND cc.mand = ?";
+
+    // Thêm điều kiện lọc theo tháng và năm nếu được cung cấp
+    if ($month !== null) {
+        $sql .= " AND MONTH(cc.ngaychamcong) = ?";
+    }
+    if ($year !== null) {
+        $sql .= " AND YEAR(cc.ngaychamcong) = ?";
+    }
+
+    $sql .= " GROUP BY cc.macalam";
+
+    // Chuẩn bị câu truy vấn
+    $stmt = $this->conn->prepare($sql);
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($this->conn->error));
+    }
+
+    // Ràng buộc tham số cho câu truy vấn
+    if ($month !== null && $year !== null) {
+        $stmt->bind_param("iii", $mand, $month, $year);
+    } elseif ($month !== null) {
+        $stmt->bind_param("ii", $mand, $month);
+    } elseif ($year !== null) {
+        $stmt->bind_param("ii", $mand, $year);
+    } else {
+        $stmt->bind_param("i", $mand);
+    }
+
+    // Thực thi câu truy vấn
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Khởi tạo biến để lưu kết quả
+    $tongCa = 0; // Tổng số ca làm việc
+    $chiTietCa = []; // Lưu chi tiết số ca theo mã ca
+
+    // Duyệt qua kết quả và tính tổng số ca làm việc
+    while ($row = $result->fetch_assoc()) {
+        $chiTietCa[$row['macalam']] = $row['soCa'];
+        $tongCa += $row['soCa'];
+    }
+
+    // Tính tổng số giờ làm (1 ca = 4 giờ)
+    $totalHours = $tongCa * 4;
+
+    // Tính lương (số giờ làm * lương mỗi giờ)
+    $totalSalary = $totalHours * $hourlyRate;
+
+    // Trả về kết quả chi tiết
+    return [
+        'tongCa' => $tongCa,
+        'chiTietCa' => $chiTietCa,
+        'totalHours' => $totalHours,
+        'hourlyRate' => $hourlyRate,
+        'totalSalary' => $totalSalary,
+    ];
+}
+
 }
 ?>

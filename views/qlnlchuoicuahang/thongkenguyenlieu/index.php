@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
     echo require("layout/navqlchuoi.php");
 ?>
@@ -192,12 +192,12 @@
         <div class="card">
             <h3>Tổng tiền</h3>
             <div class="value"><?php echo number_format($total_price, 0, ',', '.'); ?></div>
-            <p>+20.1% from last month</p>
+            <!-- <p>+20.1% from last month</p> -->
         </div>
         <div class="card">
             <h3>Tổng số nguyên liệu</h3>
             <div class="value"><?php echo number_format($total_quantity, 0, ',', '.'); ?></div>
-            <p>+19% from last month</p>
+            <!-- <p>+19% from last month</p> -->
         </div>
     </div>
 

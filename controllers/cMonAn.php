@@ -17,6 +17,7 @@ class cMonAn {
                 echo '<tr>';
              
                 echo '<td>'.$j['mama'].'</td>';
+                echo '<td><img src="img/'.$j['hinhanh'].'" width="50" height="50"></td>';    
                 echo '<td>'.$j['tenma'].'</td>';
                 echo '<td>'.$j['maloaima'].'</td>';
                 echo '<td>'.$j['giaban'].'</td>';
@@ -33,12 +34,19 @@ class cMonAn {
         return $DanhSachMA;
     }
     
-    public function AddMonAn($name, $loai, $gia, $congthuc) {
-        $sql = "INSERT INTO monan(tenma, maloaima, giaban, congthuc) VALUES ('$name','$loai','$gia','$congthuc')";
+    public function AddMonAn($name, $loai, $gia, $dinhluong, $hinhanh) {
+        $sql = "INSERT INTO monan(tenma, maloaima, giaban, dinhluong, hinhanh) VALUES ('$name','$loai','$gia','$dinhluong','$hinhanh')";
         $monan = new mMonAn();
         return  $monan->insertMonAn($sql);
         
     }
+    public function getMonAnByTT($trangthai) {
+        $sql = "SELECT * FROM monan as k join monan as n on k.mama=n.mama  WHERE TrangThai = '$trangthai'";
+        $monan = new mMonAn();
+        $DanhSachMA = $monan->selectMonAn($sql);
+        return $DanhSachMA;
+    }
+
     
 
     

@@ -1,7 +1,64 @@
 <!-- Sidebar -->
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/style.css">';
+    echo '<link rel="stylesheet" href="css/QLMA/chitiet.css">';
     require("layout/navqlchuoi.php");
+    include_once("controllers/cKhoNguyenLieu.php");
+    include_once("controllers/cNguyenLieu.php");
+    include_once("controllers/cMonAn.php");
+?>
+<?php
+    include_once("controllers/cMonAn.php");
+    $monan = new cMonAn();
+    if(isset($_POST["add"])){
+        echo 
+        '<form method="post">
+            <div class="container" id="ingredient-details">
+                <div class="header">
+                    <span><button class="close-btn" onclick="closeDetails()">✖</button></span>
+                </div>
+                <h3 style="color: #db5a04;">Thêm món ăn</h3>
+                <div class="themnguyenlieu">
+                    <div class="form-group">
+                        <label for="name">Tên món ăn</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loai">Loại món ăn</label>
+                        <input type="text" id="loai" name="loai" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gia">Đơn giá</label>
+                        <input type="text" id="gia" name="gia" required>
+                    </div>
+                    <div class="form-group scrollable-container">
+                        <label for="congthuc">Công thức</label>';
+                        $nguyenlieu = new cNguyenLieu();
+                        $list_nguyenlieu = $nguyenlieu->getNguyenLieu();
+                        foreach ($list_nguyenlieu as $i) {
+                            echo'<hr>';
+                            echo '<label for="">' . $i["tennl"] . '</label>';
+                            echo '<input type="hidden" name="nguyenlieu_id[]" value="' . $i["manl"] . '">';
+                            echo '<input type="number" placeholder="Định lượng" name="dinhluong[]"> <br>';
+                        }
+                    echo '</div>
+                </div>
+                <button class="btn-add" type="submit" name="btn-add">Thêm</button>
+            </div>
+        </form>';
+    }
+    if(isset($_POST["btn-add"])){
+        $name = $_POST['name'];
+        $loai = $_POST['loai'];
+        $gia=  $_POST['gia'];
+        $congthuc = '';
+        foreach ($_POST['dinhluong'] as $key => $dinhluong) {
+            if(!empty($dinhluong)){
+                $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
+            }
+        }
+
+        $monan->addMonAn($name, $loai, $gia, $congthuc);
+    }
 ?>
 <?php
     if(isset($_POST["edit"])){
@@ -44,8 +101,6 @@
         <h4>Trạng thái</h4>
             <a href=""><label><input type="checkbox" name="trangthai"> Còn</label></a>
             <a href=""><label><input type="checkbox" name="trangthai"> Hết</label></a>
-            <a href=""><label><input type="checkbox" name="trangthai"> Ẩn</label></a>
-            
         <h4>Cửa hàng</h4>
             <a href=""><label><input type="checkbox" name="cuahang" value="1"> Cửa hàng 1</label></a>
             <a href=""><label><input type="checkbox" name="cuahang" value="2"> Cửa hàng 2</label></a>
@@ -59,16 +114,19 @@
 </div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
         <h4 style="color: #db5a04">DANH SÁCH MÓN ĂN</h4>
+        <div class="table-material" style ="max-height: 400px; overflow-y: auto;">
         <form action="" method="post">
+        <div class="table-wrapper">
             <table>
-            <tr>
+            <thead>
                 <th>Mã MA</th>
+                <th>Hình ảnh</th>
                 <th>Tên Món Ăn</th>
                 <th>Loại món</th>
                 <th>Đơn giá (VND)</th>
                 <th>Trạng thái</th>
                 <th>Tùy Chọn</th>
-            </tr>
+            </thead>
           
                 <?php
                     include_once("controllers/cMonAn.php");
@@ -78,6 +136,7 @@
                     if($DSMonan){
                         foreach($DSMonan as $i){
                             echo '<td>'.$i['mama'].'</td>';
+                            echo '<td><img src="img/'.$i['hinhanh'].'" width="50" height="50"></td>';    
                             echo '<td>'.$i['tenma'].'</td>';
                             echo '<td>'.$i['maloaima'].'</td>';
                             echo '<td>'.$i['giaban'].'</td>';
@@ -100,12 +159,8 @@
 
                 ?>
             </table>
+            </div>
         </form>
-        <div class="pagination">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">Tiếp theo</a>
         </div>
     </div>
 </body>

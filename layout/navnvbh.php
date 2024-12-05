@@ -8,7 +8,7 @@
                         <a href="#">Quản lý <i class="fas fa-caret-down"></i></a>
                         <div class="dropdown-content" style="color: white;">
                             <a href="index.php?page=qlkh">Quản lý khách hàng <i class="fas fa-warehouse"></i></a>
-                            <a href="index.php?page=nhanvien/quanlydonhang">Quản lý đơn hàng <i class="fas fa-warehouse"></i></a>
+                            <a href="index.php?page=nhanvien/quanlydonhang">Quản lý đơn hàng <i class="fas fa-list"></i></a>
                         </div>
                     </div>';
                     
