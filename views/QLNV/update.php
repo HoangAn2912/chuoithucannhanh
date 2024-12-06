@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
 require_once '../../models/mketnoi.php';
 require_once '../../models/mQLNV.php';
 

@@ -1,7 +1,9 @@
 <center>
 <?php
 include_once("controllers/cChamCong.php");
-
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
 // Kiểm tra xem người dùng đã đăng nhập hay chưa
 if (isset($_SESSION["dangnhap"])) {
     $mand = $_SESSION["dangnhap"]; // Mã nhân viên hiện tại từ session

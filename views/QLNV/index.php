@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
 require_once 'controllers/cQLNV.php';
 $database = new ketnoi();
 $db = $database->ketnoi();

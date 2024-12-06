@@ -1,5 +1,8 @@
 <?php
     require("layout/navnvbh.php");
+    if(!isset($_SESSION['dangnhap'])){
+        header("Refresh: 0; url=index.php?page=dangnhap");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -11,21 +14,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/qlkh/style.css">
+    <!-- <link rel="stylesheet" href="css/DAY/day.css"> -->
+<style>
+    .navbar a {
+    color: white !important;
+    text-decoration: none !important;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+</style>
+
+
 </head>
 <body>
     <div class="main">
         <div class="container">
             <h1>Danh sách khách hàng</h1>
 
-            <!-- Hiển thị thông báo thêm khách hàng thành công -->
-            <?php if (isset($message)): ?>
-                <div class="alert <?php echo $alertType; ?> alert-dismissible fade show" role="alert">
-                    <?php echo $message; ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <?php endif; ?>
 
             <!-- Thêm khách hàng -->
             <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addCustomerModal">Thêm khách hàng</button>
@@ -199,7 +204,7 @@ function openEditModal(customerId) {
 
 </script>
 
-<div class="modal fade" id="editCustomerModal" tabindex="-1" role="dialog" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCustomerModal" tabindex="-1" role="dialog" aria-labelledby="editCustomerModalLabel" aria-hidden="true" name="form1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -270,9 +275,10 @@ if (isset($_POST['btnInsertKhachHang'])) {
     $result = $controller->cInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
 
     if ($result) {
-        echo "<script>alert('Thêm khách hàng thành công!');</>";
-        header("Location: index.php?page=qlkh");
-        exit();
+        echo "<script>alert('Thêm khách hàng thành công!');</script>";
+header("Refresh: 0.5; url=index.php?page=qlkh"); 
+exit();
+
     } else {
         echo "<script>alert('Thêm khách hàng thất bại!');</script>";
     }
@@ -296,7 +302,7 @@ if (isset($_POST['btnEditKhachHang'])) {
 
     if ($result) {
         echo "<script>alert('Sửa khách hàng thành công!');</script>";
-        header("Location: index.php?page=qlkh");
+        header("Location: index.php?page=qlkh"); 
         exit();
     } else {
         echo "<script>alert('Sửa khách hàng thất bại!');</script>";
@@ -311,15 +317,13 @@ if (isset($_POST['btnDeleteKhachHang'])) {
     $result = $controller->cDeleteKhachHang($makh);
 
     if ($result) {
-        echo "<script>alert('Xóa khách hàng thành công!');</script>";
-        header("Location: index.php?page=qlkh");
+        echo "<script>alert('Thêm khách hàng thành công!');</script>";
+        header("Refresh: 2; url=index.php?page=qlkh"); 
         exit();
     } else {
         echo "<script>alert('Xóa khách hàng thất bại!');</script>";
     }
 }
-
-	
 	
 ?>
 
@@ -330,4 +334,3 @@ if (isset($_POST['btnDeleteKhachHang'])) {
 
 </body>
 </html>
-

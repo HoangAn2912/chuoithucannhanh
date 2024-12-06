@@ -2,6 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
 $mand = $_SESSION["dangnhap"];
 $weekOffset = isset($_GET['weekOffset']) ? $_GET['weekOffset'] : 0;
 
@@ -26,9 +29,6 @@ $firstDayOfWeekStart = $firstDayOfWeek->format('Y-m-d');
 $isCurrentWeek = ($firstDayOfWeekStart == $currentWeekStart);
 ?>
 
-<?php
-    require("layout/navnvbh.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,9 +37,14 @@ $isCurrentWeek = ($firstDayOfWeekStart == $currentWeekStart);
     <title>Lịch làm việc của nhân viên</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/xemlichlamviec/style.css">
+    <link rel="stylesheet" href="css/DAY/day.css?v=5">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
     <style>
-        /* CSS tô màu hàng ngang */
+        .navbar {
+            display: flex;
+            justify-content: center; /* Căn giữa các mục */
+            align-items: center; /* Căn giữa theo chiều dọc */
+        }
         #th {
             background-color: #FFD580; /* Màu cam nhẹ */
             color: black; /* Chữ màu đen để dễ đọc */
@@ -62,21 +67,33 @@ $isCurrentWeek = ($firstDayOfWeekStart == $currentWeekStart);
             background-color: #f8d7da; /* Nền đỏ nhạt */
         }
 
-        /* Thay đổi màu nền của các nút "Trước" và "Tiếp" */
-    #prevWeek, #nextWeek {
-        background-color: #FB9200; /* Màu cam bạn muốn */
-        border-color: #FB9200; /* Đảm bảo viền cũng có màu cam */
-        color: white; /* Màu chữ trắng để dễ đọc */
-    }
+            .btn-outline-warning {
+            color: #FB9200; /* Màu chữ vàng */
+            border-color: #FB9200; /* Màu viền vàng */
+        }
 
-    /* Thêm hiệu ứng khi hover */
-    #prevWeek:hover, #nextWeek:hover {
-        background-color: #e88000; /* Màu cam đậm khi hover */
-        border-color: #e88000; /* Viền đổi màu khi hover */
-    }
+        .btn-outline-warning:hover {
+            color: #212529;
+            background-color: #f7a63d; 
+            border-color: #ffc107; 
+        }
     </style>
 </head>
+
 <body>
+<?php
+include_once("controllers/cLichLamViec.php");
+$p = new controlLichLamViec();
+$mavaitro = $p->getNguoidung($mand);
+
+if ($mavaitro == 3) {
+    require("layout/navnvbh.php");
+} elseif ($mavaitro == 4) {
+    require("layout/navnvb.php");
+} else {
+    echo "Vai trò không xác định.";
+}
+?>
 <div class="container">
 <div style="margin: auto 0; padding: 20px;">
     <h2 style="color: black; text-align: center;">LỊCH LÀM VIỆC CỦA NHÂN VIÊN</h2>
@@ -88,17 +105,20 @@ $isCurrentWeek = ($firstDayOfWeekStart == $currentWeekStart);
  ?>       
 <form method="GET" action="index.php?page=xemlichlamviec">
     <div class="text-center">
-        <!-- Nút "Trước" luôn hiển thị và gửi giá trị weekOffset giảm đi 1 -->
-        <input type="hidden" name="page" value="xemlichlamviec"> <!-- Giữ tham số page -->
-        <button type="submit" id="prevWeek" class="btn " name="weekOffset" value="<?php echo $weekOffset - 1; ?>">Trước</button>
-        
-        <!-- Nút "Tiếp" chỉ hiển thị nếu không phải là tuần hiện tại -->
-        <button type="submit" id="nextWeek" class="btn " name="weekOffset" value="<?php echo $weekOffset + 1; ?>" <?php echo $isCurrentWeek ? 'style="display:none;"' : ''; ?>>Tiếp</button>
+    <div class="text-center">
+    <!-- Nút "Tuần trước" -->
+    <input type="hidden" name="page" value="xemlichlamviec"> <!-- Giữ tham số page -->
+    <button type="submit" id="prevWeek" class="btn btn-outline-warning" name="weekOffset" value="<?php echo $weekOffset - 1; ?>">Tuần trước</button>
+
+    <!-- Nút "Tuần hiện tại" -->
+    <button type="submit" id="currentWeek" class="btn btn-outline-warning" name="weekOffset" value="0">Tuần hiện tại</button>
+
+    <!-- Nút "Tuần sau" -->
+    <button type="submit" id="nextWeek" class="btn btn-outline-warning" name="weekOffset" value="<?php echo $weekOffset + 1; ?>">Tuần sau</button>
+</div>
+
     </div>
 </form>
-
-
-
 
         <?php
         $daysOfWeek = ['Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy', 'Chủ Nhật'];
