@@ -48,9 +48,12 @@
 			return $p -> mUpdateTinhTrang($madh,$mattdh);
 		}
 
-
-
-        
-        
+        // hàm này dùng để phục vụ cho chi tiết đơn hàng
+        public function selectdanhsachdonhang($mach){
+            return $this->orderModel->danhsachdonhang($mach);
+        }
+        public function getchitietdonhang($madh,$mach){
+            return $this->orderModel->xemchitietdonhang($madh,$mach);
+        } 
     }
     ?>

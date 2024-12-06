@@ -1,0 +1,247 @@
+/* Container của chi tiết đơn hàng */
+.content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+}
+
+h2 {
+    color: #db5a04;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.content a {
+    display: inline-block;
+    background-color: #db5a04;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.content a:hover {
+    background-color: #c44d04;
+}
+
+/* Styling cho các trường thông tin */
+.info-box {
+padding: 15px;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.info-box p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Cải thiện giao diện khi hiển thị thông tin người nhận */
+.recipient-info {
+    background-color: #eef2f3;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.recipient-info p {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Table đơn hàng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #db5a04;
+    color: #fff;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+td a {
+    color: #db5a04;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+/* Container chính của chi tiết đơn hàng */
+.order-detail-container {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+}
+
+h2 {
+    color: #db5a04;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+/* Thông tin chung của đơn hàng */
+.order-info {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.8;
+}
+
+.order-info p {
+    margin-bottom: 15px;
+}
+
+.order-info .order-label {
+    font-weight: bold;
+    color: #db5a04;
+}
+
+/* Thông tin người nhận */
+.recipient-info {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.recipient-info p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Bảng chi tiết đơn hàng */
+.order-items-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.order-items-table th, .order-items-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.order-items-table th {
+    background-color: #db5a04;
+    color: #fff;
+}
+
+.order-items-table td {
+    background-color: #fafafa;
+}
+
+.order-items-table .item-name {
+    font-weight: bold;
+}
+
+.order-items-table .item-quantity {
+    text-align: center;
+}
+
+.order-items-table .item-price {
+    text-align: right;
+}
+
+/* Nút quay lại */
+.back-button {
+    display: inline-block;
+    background-color: #db5a04;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #c44d04;
+}
+/* Container chính của chi tiết đơn hàng */
+.order-detail-container {
+background-color: #ffffff;
+padding: 25px;
+border-radius: 10px;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+margin: 20px auto;
+width: 80%;
+}
+
+/* Tiêu đề chính */
+h2 {
+    color: #db5a04;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+/* Tiêu đề cho thông tin chi tiết */
+.detail-title {
+    font-size: 20px; /* Kích thước chữ lớn hơn */
+    color: #db5a04; /* Màu chữ nổi bật */
+    font-weight: bold; /* Chữ đậm */
+    margin-bottom: 5px; /* Khoảng cách dưới tiêu đề */
+}
+
+/* Thông tin chi tiết */
+.detail-value {
+    font-size: 16px; /* Kích thước chữ thông tin */
+    color: #333; /* Màu chữ thông tin */
+    margin-bottom: 15px; /* Khoảng cách dưới thông tin */
+}
+
+/* Nút quay lại */
+.back-button {
+    display: inline-block;
+    background-color: #db5a04;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #c44d04;
+}

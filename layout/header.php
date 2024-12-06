@@ -16,9 +16,11 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Management Interface</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/DAY/day.css?v=5">
+    <link rel="stylesheet" href="css/DAY/day.css?v=1">
     <link rel="stylesheet" href="layout/style.css?v=3">
 </head>
+<style>
+</style>
 <body>
 
     <!-- Header -->
@@ -52,8 +54,11 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
             <span class="close" onclick="closeModal()">&times;</span>
             <h4>Xác nhận đăng xuất</h4>
             <p>Bạn có chắc chắn muốn đăng xuất không?</p>
-            <button class="button" onclick="confirmLogout()">Có</button>
-            <button onclick="closeModal()">Không</button>
+
+            
+                <button class="button" onclick="confirmLogout()">Có</button>
+                <button onclick="closeModal()">Không</button>
+            
         </div>
     </div>
 

@@ -103,5 +103,83 @@ class Order {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC); // Trả về chi tiết món ăn trong đơn hàng
     }
+
+
+
+    // danh sách đơn hàng
+    public function danhsachdonhang($mach) {
+        $sql = "SELECT dh.*, tt.tenttdh 
+                FROM donhang dh 
+                INNER JOIN tinhtrangdonhang tt ON dh.mattdh = tt.mattdh
+                WHERE dh.mach = ?"; // where mã cửa hàng
+
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            die("Error preparing statement: " . $this->conn->error);
+        }
+
+        // Gán tham số
+        $stmt->bind_param("i", $mach);
+
+        // Thực thi câu lệnh
+        $stmt->execute();
+
+        // Lấy kết quả
+        $result = $stmt->get_result();
+
+        if ($result === false) {
+            die("Error executing query: " . $stmt->error);
+        }
+
+        $orderList = $result->fetch_all(MYSQLI_ASSOC);
+
+        // Lấy danh sách trạng thái
+        $statusSql = "SELECT * FROM tinhtrangdonhang";
+        $statusStmt = $this->conn->prepare($statusSql);
+        $statusStmt->execute();
+        $statusResult = $statusStmt->get_result();
+        $statusList = $statusResult->fetch_all(MYSQLI_ASSOC);
+
+        // Gắn danh sách trạng thái vào từng đơn hàng
+        foreach ($orderList as &$order) {
+            $order['statusList'] = $statusList;
+        }
+
+        return $orderList;
+    }
+
+    public function xemchitietdonhang($madh, $mach) {
+        // Câu lệnh truy vấn SQL
+        $sql = "SELECT dh.*, ct.*, tt.tenttdh, ma.tenma 
+                FROM donhang dh 
+                INNER JOIN chitietdonhang ct ON dh.madh = ct.madh 
+                INNER JOIN tinhtrangdonhang tt ON tt.mattdh = dh.mattdh 
+                INNER JOIN monan ma ON ct.mama = ma.mama 
+                WHERE dh.madh = ? AND dh.mach = ?"; // where mã cửa hàng
+
+        // Chuẩn bị câu lệnh truy vấn
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            die("Error preparing statement: " . $this->conn->error);
+        }
+
+        // Gán tham số cho truy vấn
+        $stmt->bind_param("ii", $madh, $mach);
+
+        // Thực thi câu lệnh
+        $stmt->execute();
+
+        // Lấy kết quả
+        $result = $stmt->get_result();
+
+        if ($result === false) {
+            die("Error executing query: " . $stmt->error);
+        }
+
+        // Trả về danh sách chi tiết đơn hàng
+        return $result->fetch_all(MYSQLI_ASSOC);
+}
 }
 ?>
