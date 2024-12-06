@@ -12,15 +12,10 @@
             return $this->orderModel->getAllOrdersByStore($storeId);
         }
 
-        public function getOrderDetails($madh) {
-            return $this->orderModel->getOrderDetails($madh);
-        }
-
+        
        
     
-        public function getOrderFoodList($madh) {
-            return $this->orderModel->getOrderDetailsById($madh);
-        }
+        
 
 
         
@@ -55,5 +50,15 @@
         public function getchitietdonhang($madh,$mach){
             return $this->orderModel->xemchitietdonhang($madh,$mach);
         } 
+
+
+        //tìm kiếm
+        public function searchOrders($searchQuery, $mach) {
+            // Gọi đúng hàm tìm kiếm từ model
+            return $this->orderModel->searchOrdersByCustomerNameOrPhone($searchQuery, $mach);
+        }
+        
+        
+        
     }
     ?>

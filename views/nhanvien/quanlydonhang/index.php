@@ -6,26 +6,31 @@ if (!isset($_SESSION["dangnhap"])) {
     header("Location: index.php?page=dangnhap"); 
     exit();
 }
+// Kiểm tra xem người dùng đã đăng nhập và có vai trò nhân viên bán hàng hay chưa
+if (!isset($_SESSION["mavaitro"]) || $_SESSION["mavaitro"] != 3) {
+    echo '<script>alert("Bạn không có quyền truy cập vào trang này!");</script>';
+    header("Location: index.php?page=trangchu"); // Chuyển hướng về trang chủ
+    exit();
+}
 
 include_once("models/Order.php");
 include_once("controllers/OrderController.php");
 
 // Khởi tạo controller
 $orderController = new OrderController();
+$mach = $_SESSION["mach"];
+// Kiểm tra nếu có truy vấn tìm kiếm
 
-// Lấy danh sách đơn hàng
-$mach = $_SESSION["mach"]; 
-$orderList = $orderController->selectdanhsachdonhang($mach);
-
-// Gắn CSS
-
-    // echo '<link rel="stylesheet" href="css/DAY/day.css">';
-    // echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">';
+$searchQuery = "";
+if (isset($_GET['search'])) {
+    $searchQuery = $_GET['search'];
+    $orderList = $orderController->searchOrders($searchQuery, $mach); 
+} else {
+    $orderList = $orderController->selectdanhsachdonhang($mach); 
+}
 
     require("layout/navnvbh.php");
 ?>
-
-
 
 <div style="padding: 20px;" class="content" id="content">
     <?php
@@ -104,6 +109,15 @@ if (isset($_REQUEST["chitietdonhang"])) {
     ?>
     <div >
     <h2 style="color: #db5a04">Quản lý đơn hàng</h2>
+        <!-- Form tìm kiếm -->
+    <div class="qldh-search-bar">
+        <form method="GET" action="index.php">
+            <input type="hidden" name="page" value="">
+            <input type="text" name="search" placeholder="Nhập tên hoặc SĐT cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
+            <button type="submit"><i class="fas fa-search"></i> Tìm</button>
+        </form>
+    </div>
+
         <?php if (!empty($orderList)): ?>
             <table>
                 <thead>

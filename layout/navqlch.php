@@ -10,8 +10,7 @@
                         <div class="dropdown-content">
                             <a href="index.php?page=phancongcalam">Phân công ca làm</a>
                             <a href="index.php?page=ChamCong">Chấm công</a>
-                            <a href="#">Xếp lịch</a>
-                            <a href="#">Tính lương</a>
+                            
                         </div>
                     </div>';
                     echo 

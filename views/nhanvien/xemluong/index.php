@@ -11,8 +11,16 @@ if (isset($_SESSION["dangnhap"])) {
 
 // Sidebar
 echo '<link rel="stylesheet" href="css/DAY/day.css">';
-require("layout/navnvbh.php");
-
+// Phân biệt vai trò và require file navbar tương ứng
+if ($_SESSION['mavaitro'] == 3) {
+    require("layout/navnvbh.php"); // Navbar cho nhân viên bán hàng
+} elseif ($_SESSION['mavaitro'] == 4) {
+    require("layout/navnvb.php"); // Navbar cho vai trò khác
+} else {
+    echo '<script>alert("Bạn không có quyền truy cập!");</script>';
+    header('Location: index.php?page=trangchu');
+    exit();
+}
 // Thêm liên kết đến thư viện SweetAlert2
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 
