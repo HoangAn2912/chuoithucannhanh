@@ -1,7 +1,4 @@
 <?php
-if(!isset($_SESSION['dangnhap'])){
-    header("Refresh: 0; url=index.php?page=dangnhap");
-}
 require_once '../../models/mketnoi.php';
 require_once '../../models/mQLNV.php';
 
@@ -10,13 +7,13 @@ $db = $database->ketnoi();
 $employeeModel = new EmployeeModel($db);
 
 if (isset($_GET['mand'])) {
-    $editEmployee = $employeeModel->getEmployeeById($_GET['mand']);
+    $editEmployee = $employeeModel->layNhanVienTheoVaiTro($_GET['mand']);
     if (!$editEmployee) {
         echo "Không tìm thấy thông tin nhân viên.";
         exit();
     }
-    $branches = $employeeModel->getBranches();
-    $roles = $employeeModel->getRoles();
+    $branches = $employeeModel->layCuaHang();
+    $roles = $employeeModel->layVaiTro();
 } else {
     header("Location: ../../index.php?page=qlnv");
     exit();
@@ -112,6 +109,10 @@ if (isset($_GET['mand'])) {
                                 }
                                 ?>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editEmployeePhone">Mật Khẩu</label>
+                            <input type="password" name="matkhau" id="editEmployeePass" placeholder="Nhập mật khẩu mới" >
                         </div>
                     </div>
                     <div class="back-button-view">

@@ -9,36 +9,16 @@ $employeeModel = new EmployeeModel($db);
 
 $mach = $_SESSION['mach'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employeeName'])) {
-    $data = [
-        'tennd' => $_POST['employeeName'],
-        'ngaysinh' => $_POST['employeeBirthday'],
-        'gioitinh' => $_POST['employeeGender'],
-        'sodienthoai' => $_POST['employeePhone'],
-        'email' => $_POST['employeeEmail'],
-        'diachi' => $_POST['employeeAddress'],
-        'matkhau' => md5($_POST['matkhau']),
-        'mavaitro' => $_POST['employeePosition'],
-        'mach' => $_POST['branch']
-    ];
-    if ($employeeModel->addEmployee($data)) {
-        header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=success");
-    } else {
-        header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=error");
-    }
-    exit();
-}
-
 $searchQuery = '';
 if (isset($_GET['search'])) {
     $searchQuery = $_GET['search'];
-    $employees = $employeeModel->searchEmployeesByName($searchQuery, $mach);
+    $employees = $employeeModel->timKiemNhanVien($searchQuery, $mach);
 } else {
-    $employees = $employeeModel->getKitchenAndSalesEmployees($mach);
+    $employees = $employeeModel->layThongTinNhanVien($mach);
 }
 
-$branches = $employeeModel->getBranches();
-$roles = $employeeModel->getRoles();
+$branches = $employeeModel->layCuaHang();
+$roles = $employeeModel->layVaiTro();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +85,7 @@ $roles = $employeeModel->getRoles();
         <div class="overlay" id="overlay" onclick="toggleForm()"></div>
         <div class="add-employee-form" id="employeeForm" style="display: none;">
             <h3>Thêm mới nhân viên</h3>
-            <form method="POST" action="" onsubmit="return confirmAddEmployee()">
+            <form method="POST" action="controllers/cQLNV.php?action=add" onsubmit="return confirmAddEmployee()">
                 <input type="text" name="employeeName" placeholder="Tên nhân viên" required />
                 <input type="date" name="employeeBirthday" placeholder="Ngày sinh" required />
                 <select name="employeeGender" required>
@@ -142,9 +122,11 @@ $roles = $employeeModel->getRoles();
         </div>
     </div>
     <?php
-    if (isset($_GET['status']) && $_GET['status'] == 'success') {
+    if ($_GET['status'] == 'success') {
         echo "<script>alert('Thực hiện thành công!');</script>";
-    } elseif (isset($_GET['status']) && $_GET['status'] == 'error') {
+    } elseif ($_GET['status'] == 'email_exists') {
+        echo "<script>alert('Email đã tồn tại! vui lòng thực hiện lại');</script>";
+    } elseif ($_GET['status'] == 'error') {
         echo "<script>alert('Có lỗi xảy ra.');</script>";
     }
     ?>

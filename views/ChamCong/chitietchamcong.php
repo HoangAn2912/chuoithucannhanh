@@ -1,7 +1,4 @@
 <?php
-if(!isset($_SESSION['dangnhap'])){
-    header("Refresh: 0; url=index.php?page=dangnhap");
-}
 error_reporting(0);
 require_once '../../controllers/cChamCong.php';
 $cChamCong = new cChamCong();

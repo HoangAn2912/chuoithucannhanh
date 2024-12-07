@@ -1,15 +1,12 @@
 <?php
 error_reporting(0);
 require_once '../../models/mQLNV.php';
-if(!isset($_SESSION['dangnhap'])){
-    header("Refresh: 0; url=index.php?page=dangnhap");
-}
 $database = new ketnoi();
 $db = $database->ketnoi();
 $employeeModel = new EmployeeModel($db);
 
 if (isset($_GET['mand'])) {
-    $employeeDetail = $employeeModel->getEmployeeById($_GET['mand']);
+    $employeeDetail = $employeeModel->layNhanVienTheoVaiTro($_GET['mand']);
 } else {
     header("Location: ../../index.php?page=qlnv");
     exit();
