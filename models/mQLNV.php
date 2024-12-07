@@ -35,10 +35,18 @@ class EmployeeModel {
                 FROM nguoidung 
                 LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
                 LEFT JOIN trangthailamviec ON nguoidung.mattlv = trangthailamviec.mattlv
-                WHERE nguoidung.tennd LIKE ? AND nguoidung.mach = ? AND nguoidung.mavaitro IN (3, 4,0)";
+                WHERE nguoidung.tennd LIKE ? AND nguoidung.mach = ? AND nguoidung.mavaitro IN (3, 4,0)
+                ORDER BY 
+                CASE 
+                    WHEN nguoidung.tennd = ? THEN 1   -- Tên khớp chính xác
+                    WHEN nguoidung.tennd LIKE CONCAT('%', ?, '%') THEN 2 -- Tên chứa từ khoá
+                    ELSE 3  -- Các trường hợp khác
+                END,
+                FIELD(nguoidung.mavaitro, 3, 4, 0),  -- Ưu tiên vai trò
+                nguoidung.mand ASC";
         $stmt = $this->conn->prepare($sql);
         $searchTerm = "%$name%";
-        $stmt->bind_param("si", $searchTerm, $mach);
+        $stmt->bind_param("siss", $searchTerm, $mach, $name, $name);
         $stmt->execute();
         $result = $stmt->get_result();
         $employees = [];
