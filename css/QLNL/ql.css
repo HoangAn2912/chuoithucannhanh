@@ -68,6 +68,14 @@ th::after {
     cursor: pointer;
     border-radius: 5px;
 }
+.filter{
+    background-color:  #ec9262;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 .update{
     background-color:  #ec9262;
     color: white;

@@ -151,11 +151,7 @@ if(!isset($_SESSION['dangnhap'])){
 
 <div class="sidebar">
     <form action="" method="post">
-        <h3>Cửa hàng 
-            <button type="submit" style="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter">
-                <i class="fas fa-filter" style="margin-left: 80px;"></i>
-            </button>
-        </h3>
+        <h3>Cửa hàng </h3>
         <div>
             <?php
                 include_once("controllers/cCuaHang.php");
@@ -187,6 +183,7 @@ if(!isset($_SESSION['dangnhap'])){
             <label>Đến:</label>
             <input type="date" class="date-input" name="dateTo">
         </div>
+        <button type="submit" class ="filter" name="filter">Lọc</button>
     </form>
 </div>
 

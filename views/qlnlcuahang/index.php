@@ -11,15 +11,21 @@ if(!isset($_SESSION['dangnhap'])){
 ?>
 <div class="sidebar">
     <form action="" method="post">
-        <h4>Trạng thái <button type="submit" style ="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h4>
+        <h4>Trạng thái</h4>
             <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Đã duyệt"> Đã duyệt <br>
             <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Chờ duyệt"> Chờ duyệt <br>
             <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Hết hàng"> Hết hàng <br>
-            <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Còn hàng"> Còn hàng
+            <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Còn hàng"> Còn hàng <br>
+        <button type="submit" class ="filter" name="filter">Lọc</button>
     </form>
 </div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
-        <h4 style="color: #db5a04">DANH SÁCH NGUYÊN LIỆU</h4>
+
+        <h1 style="color: #db5a04; display: flex; justify-content: center; align-items: center; ">DANH SÁCH NGUYÊN LIỆU</h1>
+        <form action="" method="post" style ="display: flex; align-items: center; justify-content: center; margin: 20px; ">
+            <button type="submit" name="" style ="margin: 10px;" class ="filter"><a href="index.php?page=qlnlcuahang/taodanhsachdexuat" style ="text-decoration:none; color: white;">Tạo danh sách đề xuất</a></button>
+            <button type="submit" name="" style ="margin: 10px;" class ="filter"><a href="index.php?page=qlnlcuahang/taodonnhaphang" style ="text-decoration:none; color: white;">Tạo danh sách nhập kho</a></button>
+        </form>
         <div class="table-material">
             <form action="" method="post"  class="table-wrapper">
                 <table>
@@ -49,7 +55,8 @@ if(!isset($_SESSION['dangnhap'])){
                         }else{
                             $DS = $nguyenlieu->getDistanctNguyenLieuByMaCH($mach);
                         }
-                        foreach($DS as $r) {
+                        if($DS){
+                            foreach($DS as $r) {
                                 if ($r['trangthai'] !== 'Đã xóa') {
                                     echo 
                                     '
@@ -59,7 +66,7 @@ if(!isset($_SESSION['dangnhap'])){
                                         <td>'.$r["tennl"].'</td>
                                         <td>'.$r["SoLuongHienCo"].'</td>
                                         <td>'.$r["donvitinh"].'</td>
-                                        <td>'.$r["dongia"].'</td>
+                                        <td>'.number_format($r['dongia'], 0, ',', '.') .'</td>
                                         <td>'.$r["TinhTrang"].'</td>
                                         <td>
                                             <div class="dropdown">
@@ -81,6 +88,10 @@ if(!isset($_SESSION['dangnhap'])){
                                 }
                             }   
                         }
+                    }else{
+                        echo '<tr><td colspan="8">Không có dữ liệu</td></tr>';
+                    }
+                        
                 ?> 
                 </table>
             </form>
