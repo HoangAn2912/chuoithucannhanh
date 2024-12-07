@@ -15,7 +15,7 @@ if(!isset($_SESSION['dangnhap'])){
             <div class="detail" >
                 <div class="headerdetail">
                     <img src="image/'.$list[0]["hinh"].'" alt="Hình ảnh nguyên liệu">
-                    <h1>Thông tin chi tiết nguyên liệu</h1>
+                    <h1 style="color: white;">Thông tin chi tiết nguyên liệu</h1>
                     <span><button class="close-btn" style="padding-left: 100px;">✖</button></span>
                 </div>
                 <div class="info">
@@ -29,7 +29,7 @@ if(!isset($_SESSION['dangnhap'])){
                     </div>
                     <div class="info-item">
                         <div class="info-label">Tên nguyên liệu:</div>
-                        <div class="info-value">'.$list[0]['tennl'].'></div>
+                        <div class="info-value">'.$list[0]['tennl'].'</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Đơn vị tính:</div>
