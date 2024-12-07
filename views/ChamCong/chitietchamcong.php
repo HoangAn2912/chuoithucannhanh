@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
+    header("Refresh: 0; url=../../index.php"); 
+    exit();
+}
 error_reporting(0);
 require_once '../../controllers/cChamCong.php';
 $cChamCong = new cChamCong();
