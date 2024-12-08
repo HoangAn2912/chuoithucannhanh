@@ -141,10 +141,6 @@ if (isset($_POST["btn-detail"])) {
                     <div class="info-value"><?php echo $list[0]['mama']; ?></div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Cửa hàng:</div>
-                    <div class="info-value"><?php echo $ch[0]['tench']; ?></div>
-                </div>
-                <div class="info-item">
                     <div class="info-label">Tên món ăn:</div>
                     <div class="info-value"><?php echo $list[0]['tenma']; ?></div>
                 </div>
