@@ -26,10 +26,6 @@ if(!isset($_SESSION['dangnhap'])){
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <input type="file" id="hinh" name="hinh" required>
-                    </div>
-                    <div class="form-group">
                         <label for="loai">Loại món ăn</label>
                         <input type="text" id="loai" name="loai" required>
                     </div>
@@ -64,12 +60,11 @@ if(!isset($_SESSION['dangnhap'])){
                 $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
             }
         
-        }if(move_uploaded_file($_FILES['hinh']['tmp_name'],'img/'.$hinhanh)){
-            $monan->addMonAn($name, $loai, $gia, $congthuc,$hinhanh);
-        }else {
-            echo '<script>alert("Cập nhật ảnh không thành công!");</script>';
         }
-    }
+            $monan->addMonAn($name, $loai, $gia, $congthuc,$hinhanh);
+        
+        }
+    
     
 
 ?>

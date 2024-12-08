@@ -91,9 +91,9 @@ class cMonAn {
 
     public function updateMonAn($mama, $name, $loai, $gia, $congthuc) {
         $monan = new mMonAn();
-        if(empty($congthuc)) $congthuc = "null";
-        $sql = "UPDATE monan SET tenma = $name, maloaima = $loai, giaban = $gia, congthuc = $congthuc WHERE mama = $mama";
-        return $monan->updateMonAn($sql);
+        // if(empty($congthuc)) $congthuc = "null";
+        // $sql = "UPDATE monan SET tenma = '$name', maloaima = '$loai', giaban = $gia, congthuc = '$congthuc' WHERE mama = $mama";
+        return $monan->updateMonAn($mama, $name, $loai, $gia, $congthuc);
     }
     
 }
