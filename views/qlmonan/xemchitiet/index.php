@@ -79,7 +79,7 @@ if (isset($_POST["btn-detail"])) {
             }
         }
 
-        $monan->addMonAn($name, $loai, $gia, $congthuc);
+        $monan->addMonAn($name, $loai, $gia, $congthuc, 'hinhanh');
     }
 ?>
 <div class="sidebar">
