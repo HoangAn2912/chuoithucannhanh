@@ -16,12 +16,8 @@
     include_once("controllers/cNguoiDung.php");
     include_once("views/nhanvien/dangkycalam/vdangkycalam.php");
 ?>
-<div class="sidebar">
-    <a href="#"><i class="fas fa-cogs"></i> Cài đặt</a>
-    <a href="#"><i class="fas fa-question-circle"></i> Hỗ trợ</a>
-</div>
-<div style="margin-left: 210px; padding: 20px;">
-    <h2 style="color: black; text-align: center;">ĐĂNG KÝ CA LÀM</h2>
+<div style="padding: 20px;">
+    <h1 style="color: #db5a04; display: flex; justify-content: center; align-items: center; ">ĐĂNG KÝ CA LÀM</h1>
     <div class="shift">
         <div class="timetable-container">
             <h4>LỊCH ĐĂNG KÝ</h4>
@@ -114,7 +110,7 @@
         <h4>DANH SÁCH ĐÃ CHỌN</h4>
         <form action="" method="post">
             <table>
-                <thead>
+                <thead style ="background-color: orange;">
                     <tr>
                         <th>Ngày đăng ký</th>
                         <th>Ca đăng ký</th>
