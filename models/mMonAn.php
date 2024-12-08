@@ -22,5 +22,8 @@ class mMonAn {
     public function insertMonAn($sql){
         return  $this->conn->query($sql);
     }
+    public function updateMonAn($sql){
+        return  $this->conn->query($sql);
+    }
 }
 ?>
