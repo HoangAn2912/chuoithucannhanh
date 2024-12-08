@@ -27,9 +27,6 @@ if(!isset($_SESSION['dangnhap'])){
         header("Location:index.php?page=qlnlchuoicuahang/capnhat");
     }
 ?>
-<div id="notification" class="notification">
-    <span></span>
-</div>
 <div class="sidebar">
 <form action=""  method="post">
         <h4>Trạng thái</h4>
