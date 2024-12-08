@@ -4,7 +4,7 @@ if(!isset($_SESSION['dangnhap'])){
 }
     echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
-    echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
+    echo '<script src="js/js_quanlynguyenlieu/qlnl.js?v=1.0"></script>';
     echo require("layout/navqlchuoi.php");
     include_once("views/qlnlchuoicuahang/themnl.php");
     include_once("views/qlnlchuoicuahang/xemchitiet/vxemchitiet.php");

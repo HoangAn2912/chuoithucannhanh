@@ -6,10 +6,15 @@ $(document).ready(function() {
 
     const $form = $("#ingredientForm");
     const $submitButton = $form.find(".btn-update");
+    const $submitAdd = $form.find(".btn-add");
     let isValid = true;
 
     function updateSubmitButton() {
         $submitButton.prop('disabled', !isValid);
+    }
+
+    function updateSubmitAdd(){
+        $submitAdd.prop('disabled', !isValid);
     }
 
     function CheckSupplierName() {
@@ -35,6 +40,7 @@ $(document).ready(function() {
         }
 
         updateSubmitButton();
+        updateSubmitAdd()
     }
     $("#supplierName").on("blur", CheckSupplierName);
 
@@ -60,6 +66,7 @@ $(document).ready(function() {
         }
 
         updateSubmitButton();
+        updateSubmitAdd()
     }
     $("#name").on("blur", CheckIngredientName);
 
@@ -85,6 +92,7 @@ $(document).ready(function() {
         }
 
         updateSubmitButton();
+        updateSubmitAdd()
     }
     $("#unit").on("blur", CheckUnit);
 
@@ -110,6 +118,7 @@ $(document).ready(function() {
         }
 
         updateSubmitButton();
+        updateSubmitAdd()
     }
     $("#supplierPhone").on("blur", CheckSupplierPhone);
 
@@ -134,6 +143,7 @@ $(document).ready(function() {
         }
 
         updateSubmitButton();
+        updateSubmitAdd()
     }
 
     $("#price").on("blur", CheckPrice);
@@ -160,6 +170,7 @@ $(document).ready(function() {
         }
 
         updateSubmitButton();
+        updateSubmitAdd()
     }
     $("#supplierEmail").on("blur", CheckEmail);
     

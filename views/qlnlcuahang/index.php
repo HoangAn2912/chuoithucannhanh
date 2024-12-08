@@ -9,7 +9,7 @@ if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
 }
     echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
-    echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
+    echo '<script src="js/js_quanlynguyenlieu/qlnl.js?v=1.0"></script>';
     require_once('layout/navqlch.php');
     include_once("views/qlnlcuahang/vqlnl.php");
 ?>
