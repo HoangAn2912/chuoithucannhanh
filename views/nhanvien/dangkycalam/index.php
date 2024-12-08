@@ -2,6 +2,13 @@
     if(!isset($_SESSION['dangnhap'])){
         header("Refresh: 0; url=index.php?page=dangnhap");
     }
+    if(!isset($_SESSION['dangnhap'])){
+        header("Refresh: 0; url=index.php?page=dangnhap");
+    }
+    if (!isset($_SESSION['mavaitro']) || ($_SESSION['mavaitro'] != 3 && $_SESSION['mavaitro'] != 4)) {
+        header("Refresh: 0; url=index.php"); 
+        exit();
+    }
     $nguoidung = new cNguoiDung();
     $nhanvien=$nguoidung->getNguoiDungById($_SESSION['dangnhap']);
     if($nhanvien[0]['mavaitro']==3){

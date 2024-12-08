@@ -79,7 +79,7 @@ if (isset($_POST["btn-detail"])) {
             }
         }
 
-        $monan->addMonAn($name, $loai, $gia, $congthuc);
+        $monan->addMonAn($name, $loai, $gia, $congthuc, 'hinhanh');
     }
 ?>
 <div class="sidebar">
@@ -139,10 +139,6 @@ if (isset($_POST["btn-detail"])) {
                 <div class="info-item">
                     <div class="info-label">Mã món ăn:</div>
                     <div class="info-value"><?php echo $list[0]['mama']; ?></div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">Cửa hàng:</div>
-                    <div class="info-value"><?php echo $ch[0]['tench']; ?></div>
                 </div>
                 <div class="info-item">
                     <div class="info-label">Tên món ăn:</div>

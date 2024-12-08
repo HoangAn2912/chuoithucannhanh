@@ -3,6 +3,10 @@
 if(!isset($_SESSION['dangnhap'])){
     header("Refresh: 0; url=index.php?page=dangnhap");
 }
+if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
+    header("Refresh: 0; url=index.php"); 
+    exit();
+}
     echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';

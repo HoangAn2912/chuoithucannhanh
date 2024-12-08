@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
+    header("Refresh: 0; url=../../index.php"); 
+    exit();
+}
 require_once '../../models/mketnoi.php';
 require_once '../../models/mQLNV.php';
 
@@ -10,6 +15,10 @@ if (isset($_GET['mand'])) {
     $editEmployee = $employeeModel->layNhanVienTheoVaiTro($_GET['mand']);
     if (!$editEmployee) {
         echo "Không tìm thấy thông tin nhân viên.";
+        exit();
+    }
+    if ($_SESSION['mach'] != $editEmployee['mach']) {
+        echo "<script>alert('Nhân viên này không thuộc cửa hàng của bạn'); window.location.href='../../index.php?page=qlnv';</script>";
         exit();
     }
     $branches = $employeeModel->layCuaHang();
