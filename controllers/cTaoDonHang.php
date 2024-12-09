@@ -106,8 +106,9 @@ class MonAnController {
     public function checkout() {
         $mand = $_SESSION['dangnhap'];
         $mach = $_SESSION['mach'];
-        $mattdh = 5; // mã trạng thái là 4 vì nhân viên đặt và thanh toán tại chỗ luôn
-
+        $mattdh = 2; 
+        $tennd = "NV" . $_SESSION['tennd']; // Add the prefix "NV" to the username
+    
         // Kiểm tra số lượng sản phẩm trong kho trước khi thanh toán
         foreach ($_SESSION['cart'] as $id => $item) {
             $query = "SELECT soluong FROM monan WHERE mama = ?";
@@ -116,20 +117,20 @@ class MonAnController {
             $stmt->execute();
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
-
+    
             if ($item['quantity'] > $row['soluong']) {
                 $_SESSION['error_message'] = "Số lượng sản phẩm trong giỏ hàng vượt quá số lượng có trong kho.";
                 return false;
             }
         }
-
+    
         // Tạo đơn hàng mới
-        $query = "INSERT INTO donhang (mattdh, makh, mach) VALUES (?, ?, ?)";
+        $query = "INSERT INTO donhang (mattdh, makh, mach, tennguoinhan) VALUES (?, ?, ?, ?)";
         $stmt = $this->model->conn->prepare($query);
-        $stmt->bind_param("iii", $mattdh, $mand, $mach);
+        $stmt->bind_param("iiis", $mattdh, $mand, $mach, $tennd);
         $stmt->execute();
         $madh = $stmt->insert_id;
-
+    
         // Lưu chi tiết đơn hàng và cập nhật số lượng món ăn
         foreach ($_SESSION['cart'] as $id => $item) {
             // Lưu chi tiết đơn hàng
@@ -141,7 +142,7 @@ class MonAnController {
             $ghichu = $item['note']; // Lấy ghi chú từ session
             $stmt->bind_param("iiiiis", $giamgia, $soluong, $dongia, $madh, $id, $ghichu);
             $stmt->execute();
-
+    
             // Cập nhật số lượng món ăn
             $query = "UPDATE monan SET soluong = soluong - ? WHERE mama = ?";
             $stmt = $this->model->conn->prepare($query);
