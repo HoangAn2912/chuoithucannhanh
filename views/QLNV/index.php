@@ -1,9 +1,10 @@
 <?php
-if(!isset($_SESSION['dangnhap'])){
+session_start();
+if (!isset($_SESSION['dangnhap'])) {
     header("Refresh: 0; url=index.php?page=dangnhap");
 }
 if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
-    header("Refresh: 0; url=index.php"); 
+    header("Refresh: 0; url=index.php");
     exit();
 }
 
@@ -54,7 +55,7 @@ $roles = $employeeModel->layVaiTro();
             <table class="employee-list title-list">
                 <thead>
                     <tr>
-                        <th>Mã nhân viên</th>
+                        <th>Số thứ tự</th>
                         <th>Tên nhân viên</th>
                         <th>Chức vụ</th>
                         <th>Trạng thái</th>
@@ -62,23 +63,26 @@ $roles = $employeeModel->layVaiTro();
                     </tr>
                 </thead>
                 <tbody id="employee-list">
-                    <?php
+                <?php
+                    $stt = 1; // Khởi tạo số thứ tự bắt đầu từ 1
                     if (isset($employees) && count($employees) > 0) {
                         foreach ($employees as $employee) {
+                            $formattedStt = str_pad($stt, 3, '00', STR_PAD_LEFT);
                             echo "<tr>";
-                            echo "<td>{$employee['mand']}</td>";
+                            echo "<td>{$formattedStt}</td>"; 
                             echo "<td>{$employee['tennd']}</td>";
                             echo "<td>{$employee['tenvaitro']}</td>";
                             echo "<td>{$employee['tenttlv']}</td>";
                             echo "<td class='td-btn-qlnv'>
-                                    <a href='views/QLNV/xemchitiet.php?mand={$employee['mand']}'>Xem chi tiết</a>
-                                    <a href='views/QLNV/update.php?mand={$employee['mand']}'>Sửa</a>
+                                    <a href='views/QLNV/xemchitiet.php?mand=" . $employeeModel->maKhoa($employee['mand']) . "'>Xem chi tiết</a>
+                                    <a href='views/QLNV/update.php?mand=" . $employeeModel->maKhoa($employee['mand']) . "'>Sửa</a>
                                     <a href='controllers/cQLNV.php?action=delete&mand={$employee['mand']}' onclick='return confirm(\"Bạn có chắc chắn muốn xóa nhân viên không?\")'>Xóa</a>
-                                  </td>";
+                                </td>";
                             echo "</tr>";
+                            $stt++; // Tăng số thứ tự sau mỗi lần lặp
                         }
                     } else {
-                        echo "<tr><td colspan='4'>Không tìm thấy nhân viên</td></tr>";
+                        echo "<tr><td colspan='5'>Không tìm thấy nhân viên</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -127,12 +131,14 @@ $roles = $employeeModel->layVaiTro();
         </div>
     </div>
     <?php
-    if ($_GET['status'] == 'success') {
-        echo "<script>alert('Thực hiện thành công!');</script>";
-    } elseif ($_GET['status'] == 'email_exists') {
-        echo "<script>alert('Email đã tồn tại! vui lòng thực hiện lại');</script>";
-    } elseif ($_GET['status'] == 'error') {
-        echo "<script>alert('Có lỗi xảy ra.');</script>";
+    if (isset($_GET['status'])) {
+        if ($_GET['status'] == 'success') {
+            echo "<script>alert('Thực hiện thành công!');</script>";
+        } elseif ($_GET['status'] == 'email_exists') {
+            echo "<script>alert('Email đã tồn tại! vui lòng thực hiện lại');</script>";
+        } elseif ($_GET['status'] == 'error') {
+            echo "<script>alert('Có lỗi xảy ra.');</script>";
+        }
     }
     ?>
     <script src="js/QLNV/jss.js"></script>

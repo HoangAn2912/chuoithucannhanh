@@ -22,9 +22,9 @@ class cNguyenLieu {
         $nl = $nguyenlieu->selectNguyenLieu($sql);
         return $nl;
     }
-    public function addNguyenLieu($tennl, $donvitinh, $ten_ncc, $email_ncc, $sodienthoai_ncc, $hinhanh) {
-        $sql = "INSERT INTO nguyenlieu(tennl, donvitinh, ten_ncc, email_ncc, sodienthoai_ncc, hinh) 
-                VALUES ('$tennl','$donvitinh','$ten_ncc','$email_ncc','$sodienthoai_ncc', '$hinhanh')";
+    public function addNguyenLieu($tennl, $donvitinh,$dongia, $ten_ncc, $email_ncc, $sodienthoai_ncc, $hinhanh) {
+        $sql = "INSERT INTO nguyenlieu(tennl, donvitinh, dongia, ten_ncc, email_ncc, sodienthoai_ncc, hinh) 
+                VALUES ('$tennl','$donvitinh','$dongia','$ten_ncc','$email_ncc','$sodienthoai_ncc', '$hinhanh')";
         $nguyenlieu = new mNguyenLieu();
         $test = "SELECT * FROM nguyenlieu WHERE tennl = '$tennl'";
         if ($nguyenlieu->selectNguyenLieu($test)) {

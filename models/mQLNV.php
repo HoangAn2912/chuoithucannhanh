@@ -2,6 +2,8 @@
 require_once 'mketnoi.php';
 class EmployeeModel {
     private $conn;
+    private $taoKhoa = "HoangPhi.$1026%&#"; 
+    private $cipher = "AES-256-CBC";  
 
     public function __construct($db) {
         $this->conn = $db;
@@ -27,8 +29,6 @@ class EmployeeModel {
         }
         return $employees;
     }
-    
-    
     public function timKiemNhanVien($name, $mach) {
         $sql = "SELECT nguoidung.mand, nguoidung.tennd, nguoidung.sodienthoai, nguoidung.email, nguoidung.diachi, 
                        COALESCE(vaitro.tenvaitro, 'Không có') AS tenvaitro, trangthailamviec.tenttlv 
@@ -57,9 +57,6 @@ class EmployeeModel {
         }
         return $employees;
     }
-    
-    
-
     public function layCuaHang() {
         $sql = "SELECT mach, tench FROM cuahang";
         $result = $this->conn->query($sql);
@@ -100,8 +97,12 @@ class EmployeeModel {
         $sql = "INSERT INTO nguoidung (tennd, ngaysinh, gioitinh, sodienthoai, email, diachi, matkhau, mavaitro, mach, mattlv) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("ssissssii", $data['tennd'], $data['ngaysinh'], $data['gioitinh'], $data['sodienthoai'], $data['email'], $data['diachi'], $data['matkhau'], $data['mavaitro'], $data['mach']);
-        return $stmt->execute();
-    }    
+        if ($stmt->execute()) {
+            return "Thêm thành công";
+        } else {
+            return "Lỗi khi thêm nhân viên";
+        }
+    }   
 
     public function updateEmployee($data) {
         $currentDetailsSql = "SELECT mavaitro, mach FROM nguoidung WHERE mand = ?";
@@ -168,6 +169,25 @@ class EmployeeModel {
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
-     
+
+    // Mã hóa
+    public function maKhoa($duLieu) {
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($this->cipher)); // Tạo IV ngẫu nhiên
+        $duLieuMaHoa = openssl_encrypt($duLieu, $this->cipher, $this->taoKhoa, 0, $iv); // Mã hóa dữ liệu
+        return base64_encode(json_encode(['duLieu' => $duLieuMaHoa, 'iv' => base64_encode($iv)])); // Đóng gói IV và dữ liệu mã hóa
+    }
+
+    // Giải mã
+    public function giaiMa($duLieu) {
+        $duLieuGiaiMa = json_decode(base64_decode($duLieu), true); // Giải mã JSON
+        if (isset($duLieuGiaiMa['duLieu']) && isset($duLieuGiaiMa['iv'])) {
+            $iv = base64_decode($duLieuGiaiMa['iv']); // Giải mã IV
+            if (strlen($iv) === openssl_cipher_iv_length($this->cipher)) { // Kiểm tra độ dài IV
+                return openssl_decrypt($duLieuGiaiMa['duLieu'], $this->cipher, $this->taoKhoa, 0, $iv); // Giải mã dữ liệu
+            }
+        }
+        return false; // Trả về false nếu giải mã không thành công
+    }
+
 }
 ?>

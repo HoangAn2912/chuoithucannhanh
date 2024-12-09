@@ -1,6 +1,5 @@
 <?php
-session_start(); 
-
+// session_start(); 
 // Kiểm tra nếu người dùng đã đăng nhập
 if (!isset($_SESSION["dangnhap"])) {
     header("Location: index.php?page=dangnhap"); 
@@ -19,35 +18,11 @@ include_once("controllers/OrderController.php");
 // Khởi tạo controller
 $orderController = new OrderController();
 $mach = $_SESSION["mach"];
-// Kiểm tra nếu có truy vấn tìm kiếm
-
-$searchQuery = "";
-if (isset($_GET['search'])) {
-    $searchQuery = $_GET['search'];
-    $orderList = $orderController->searchOrders($searchQuery, $mach); 
-} else {
-    $orderList = $orderController->selectdanhsachdonhang($mach); 
-}
 
     require("layout/navnvbh.php");
 ?>
-
 <div style="padding: 20px;" class="content" id="content">
     <?php
-session_start(); // Bắt đầu session
-
-// Kiểm tra nếu người dùng đã đăng nhập
-if (!isset($_SESSION["dangnhap"])) {
-    header("Location: index.php?page=dangnhap"); // Chuyển hướng nếu chưa đăng nhập
-    exit();
-}
-
-// Gọi các file cần thiết
-include_once("models/Order.php");
-include_once("controllers/OrderController.php");
-
-// Khởi tạo controller
-$orderController = new OrderController();
 
 // Kiểm tra xem người dùng yêu cầu hiển thị chi tiết đơn hàng hay không
 if (isset($_REQUEST["chitietdonhang"])) {
@@ -105,14 +80,24 @@ if (isset($_REQUEST["chitietdonhang"])) {
 } else {
     // Lấy danh sách đơn hàng
     $mach = $_SESSION["mach"]; 
-    $orderList = $orderController->selectdanhsachdonhang($mach);
+    // $orderList = $orderController->selectdanhsachdonhang($mach);
+    $searchQuery = "";
+    if (isset($_GET['search'])) {
+        $searchQuery = $_GET['search'];
+        // echo $searchQuery;
+        $orderList = $orderController->searchOrders($searchQuery, $mach); 
+       // var_dump($orderList);
+    } else {
+        $orderList = $orderController->selectdanhsachdonhang($mach); 
+    }
+    
     ?>
     <div >
     <h2 style="color: #db5a04">Quản lý đơn hàng</h2>
         <!-- Form tìm kiếm -->
     <div class="qldh-search-bar">
         <form method="GET" action="index.php">
-            <input type="hidden" name="page" value="">
+            <input type="hidden" name="page" value="nhanvien/quanlydonhang">
             <input type="text" name="search" placeholder="Nhập tên hoặc SĐT cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
             <button type="submit"><i class="fas fa-search"></i> Tìm</button>
         </form>
@@ -132,6 +117,7 @@ if (isset($_REQUEST["chitietdonhang"])) {
                     </tr>
                 </thead>
                 <tbody>
+                    
                     <?php foreach ($orderList as $order): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($order['madh']); ?></td>
