@@ -26,8 +26,8 @@ echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 
 $cChamCong = new cChamCong();
 
-// Mặc định lương mỗi giờ là 25,000 VND
-$hourlyRate = 25000;
+// Mặc định lương mỗi giờ là 50,000 VND
+$hourlyRate = 50000;
 
 // Lấy giá trị tháng và năm từ GET
 $month = isset($_GET['month']) && $_GET['month'] !== '' ? (int)$_GET['month'] : null;
