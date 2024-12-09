@@ -26,19 +26,19 @@
 				
 				if ($result) {
 					$row = mysqli_fetch_assoc($result);
+					$current_mattdh = $row['mattdh'];
 					
-					// Bước 2: Nếu mattdh hiện tại là 3 hoặc lớn hơn 3, không cho phép cập nhật
-					if ($row['mattdh'] >= 3) {
-						return false; // Trả về false để chỉ ra rằng không thể cập nhật
+					if (($current_mattdh == 3 && $mattdh == 2) || ($current_mattdh == 4 && $mattdh == 3)) {
+						return false; 
 					}
 				}
-		
-				// Bước 3: Tiến hành cập nhật nếu điều kiện không bị chặn
+				
 				$sqlUpdate = "UPDATE donhang SET mattdh = $mattdh WHERE madh = $madh";
 				$kq = mysqli_query($con, $sqlUpdate);
-				return $kq; // Trả về kết quả của câu lệnh UPDATE
+				return $kq; 
 			}
 		}
+		
 		
 
         public function cUpdateTinhTrang($madh, $mattdh){
