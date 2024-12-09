@@ -107,7 +107,14 @@ class MonAnController {
         $mand = $_SESSION['dangnhap'];
         $mach = $_SESSION['mach'];
         $mattdh = 2; 
-        $tennd = "NV" . $_SESSION['tennd']; // Add the prefix "NV" to the username
+    
+        $query = "SELECT tennd FROM nguoidung WHERE mand = ?";
+        $stmt = $this->model->conn->prepare($query);
+        $stmt->bind_param("i", $mand);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $tennd = "Nhân Viên " . $row['tennd']; 
     
         // Kiểm tra số lượng sản phẩm trong kho trước khi thanh toán
         foreach ($_SESSION['cart'] as $id => $item) {
