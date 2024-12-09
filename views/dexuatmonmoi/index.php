@@ -10,7 +10,23 @@ if (!isset($_SESSION['mavaitro']) || ($_SESSION['mavaitro'] != 3 && $_SESSION['m
     header("Refresh: 0; url=index.php"); 
     exit();
 }
+include_once ('controllers/cNguoiDung.php');
+    $nguoidung = new cNguoiDung();
+    if(isset($_SESSION['dangnhap'])){
+        $taikhoan = $nguoidung->getNguoiDungByID($_SESSION["dangnhap"]);
+        $role = $taikhoan[0]['mavaitro'];
+        if($role == 4){
+            require("layout/navnvb.php");
+        }elseif($role == 3){
+            require("layout/navnvbh.php");
+        }elseif($role == 2){
+            require("layout/navqlch.php");
+        }elseif($role == 1){
+            require("layout/navqlchuoi.php");
+        }
+    }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +37,6 @@ if (!isset($_SESSION['mavaitro']) || ($_SESSION['mavaitro'] != 3 && $_SESSION['m
     <link rel="stylesheet" href="css/dexuatmonmoi/main.css">
 </head>
 <body>
-    
 <main>
         <h1>Đề Xuất Món Mới</h1>
         <form method="post">
