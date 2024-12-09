@@ -8,17 +8,6 @@
             $this->orderModel = new Order(); // Khởi tạo mà không cần tham số
         }
 
-        public function listOrders($storeId) {
-            return $this->orderModel->getAllOrdersByStore($storeId);
-        }
-
-        
-       
-    
-        
-
-
-        
         public function mUpdateTinhTrang($madh, $mattdh) {
             $p = new ketnoi();
             $con = $p->ketnoi();
@@ -54,11 +43,7 @@
 
         //tìm kiếm
         public function searchOrders($searchQuery, $mach) {
-            // Gọi đúng hàm tìm kiếm từ model
             return $this->orderModel->searchOrdersByCustomerNameOrPhone($searchQuery, $mach);
         }
-        
-        
-        
     }
     ?>
