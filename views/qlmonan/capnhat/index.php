@@ -26,10 +26,6 @@ if(!isset($_SESSION['dangnhap'])){
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label>Hình ảnh</label>
-                        <input type="file" id="hinh" name="hinh" required>
-                    </div>
-                    <div class="form-group">
                         <label for="loai">Loại món ăn</label>
                         <input type="text" id="loai" name="loai" required>
                     </div>
@@ -64,19 +60,23 @@ if(!isset($_SESSION['dangnhap'])){
                 $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
             }
         
-        }if(move_uploaded_file($_FILES['hinh']['tmp_name'],'img/'.$hinhanh)){
-            $monan->addMonAn($name, $loai, $gia, $congthuc,$hinhanh);
-        }else {
-            echo '<script>alert("Cập nhật ảnh không thành công!");</script>';
         }
-    }
+            $monan->addMonAn($name, $loai, $gia, $congthuc,$hinhanh);
+        
+        }
+    
     
 
 ?>
 <?php
     if(isset($_POST["edit"])){
+        
+        include_once("controllers/cMonAn.php");
+        $monan = new cMonAn();
+        $ma=$monan->getMonAnByMaMonAn($_POST["edit"]);
         echo 
-        '<div class="container" id="ingredient">
+        '<form method="post">
+        <div class="container" id="ingredient">
             <div class="header">
                 <span><button class="close-btn" onclick="closeUpdates()">✖</button></span>
             </div>
@@ -84,16 +84,16 @@ if(!isset($_SESSION['dangnhap'])){
             <div class="updateMaterial">
                 <div class="form-group">
                     <label for="name">Tên món ăn</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" value="'.htmlspecialchars($ma[0]['tenma']).'" required>
                 </div>
                 <div class="form-group">
                     <label for="loai">Loại món</label>
-                    <input type="text" id="loai" name="loai" required>
+                    <input type="text" id="loai" name="loai" value="'.htmlspecialchars($ma[0]['maloaima']).'" required>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="gia">Đơn giá</label>
-                    <input type="text" id="gia" name="gia" required>
+                    <input type="text" id="gia" name="gia" value="'.htmlspecialchars($ma[0]['giaban']).'" required>
                 </div>
                 <div class="form-group scrollable-container">
                         <label for="congthuc">Công thức</label>';
@@ -106,13 +106,12 @@ if(!isset($_SESSION['dangnhap'])){
                             echo '<input type="number" placeholder="Định lượng" name="dinhluong[]"> <br>';
                         }
                     echo '</div>
-                <div class="form-group">
-                    <label for="nguyenlieu">Nguyên liệu</label>
-                    <input type="text" id="nguyenlieu" name="nguyenlieu" required>
-                </div>
+                
             </div>
-            <button class="btn-update">Sửa</button>
-        </div>';
+            <input type="hidden" name="mama" value="' . $ma[0]['mama'] . '">
+            <button class="btn-update" type="submit" name="btn-update">Cập nhật</button>
+        </div>
+        </form>';
     }
     foreach ($_POST['dinhluong'] as $key => $dinhluong) {
         if(!empty($dinhluong)){
@@ -173,7 +172,7 @@ if(!isset($_SESSION['dangnhap'])){
                                 echo '<div class="dropdown-content" style="background-color: white; min-width: 50px; border-radius: 10px; border: 1px solid;">';
                                     echo '<ul type=none>';
                                         echo '<li><button class="delete" name="delete" onclick="return confirm(\'Ban co chac muon xoa sp nay khong?\')" type="submit">xóa</button></li>';
-                                        echo '<li><button class="edit" name="edit">sửa</button></li>';
+                                        echo '<li><button class="edit" name="edit" value ="'.$i['mama'].'">sửa</button></li>';
                                     echo '</ul>';
                             echo '</div>';
                             echo '</div>';
@@ -203,4 +202,27 @@ if(!isset($_SESSION['dangnhap'])){
     }
 </script>
 </html>
+<?php 
 
+if (isset($_POST["btn-update"])) {
+    $name = $_POST['name'];
+    $loai = $_POST['loai'];
+    $gia = $_POST['gia'];
+    $mama = $_POST['mama']; // Lấy mã món ăn từ input ẩn
+
+    $congthuc = '';
+    foreach ($_POST['dinhluong'] as $key => $dinhluong) {
+        if (!empty($dinhluong)) {
+            $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key] . ', Dinhluong: ' . $dinhluong . ', ';
+        }
+    }
+    if($monan->updateMonAn($mama, $name, $loai, $gia, $congthuc)){
+        echo '<script>alert("Cập nhật thành công!");</script>';
+    } else {
+        echo '<script>alert("Cập nhật del thành công!");</script>';
+    }
+}
+
+
+
+?>

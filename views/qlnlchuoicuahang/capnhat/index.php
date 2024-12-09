@@ -5,20 +5,15 @@ if(!isset($_SESSION['dangnhap'])){
 }
     echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
-    echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
+    echo '<script src="js/js_quanlynguyenlieu/qlnl.js?v=1.0"></script>';
     require_once('layout/navqlchuoi.php');
     include_once('views/qlnlchuoicuahang/themnl.php');
     include_once("views/qlnlchuoicuahang/capnhat/edit.php");
 ?>
-    <div class="sidebar">
-        <form action=""  method="post">
-            <button class="add" name="add">Thêm mới</button>
-            <button class="update" name="update">Cập nhật</button>
-        </form>
-    </div>
-    <div style="margin-left: 210px; padding: 20px;" class="content">
-        <h4 style="color: #db5a04">DANH SÁCH NGUYÊN LIỆU</h4>
-        <div class="table-material">
+    <div class="content">
+        <h1 style="color: #db5a04; display: flex; justify-content: center; align-items: center; ">DANH SÁCH NGUYÊN LIỆU</h1>
+        <button type="submit" name="" style ="margin: 10px;" class ="filter"><a href="index.php?page=qlnlchuoicuahang/xemchitiet" style ="text-decoration:none; color: white;">Quay lại</a></button>
+        <div class="table-material" style ="margin: 10px;">
             <form action="" method="post" class="table-wrapper">
                 <table>
                     <thead>

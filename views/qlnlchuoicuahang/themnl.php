@@ -50,13 +50,14 @@ if(!isset($_SESSION['dangnhap'])){
     if(isset($_POST["btn-add"])){
         $name = $_POST['name'];
         $unit = $_POST['unit'];
+        $price = $_POST["price"];
         $supplierName =  $_POST['supplierName'];
         $supplierPhone =  $_POST['supplierPhone'];
         $supplierEmail = $_POST['supplierEmail'];
         $hinhanh= $_FILES['hinh']['name'];
         $dsch = $cuahang->getCuaHang();
         if(move_uploaded_file($_FILES['hinh']['tmp_name'],'image/'.$hinhanh)){
-            $nguyenlieu->addNguyenLieu($name, $unit, $supplierName, $supplierEmail, $supplierPhone, $hinhanh);
+            $nguyenlieu->addNguyenLieu($name, $unit,$price, $supplierName, $supplierEmail, $supplierPhone, $hinhanh);
             $nl_new = $nguyenlieu->getNguyenLieuByIDMax();
             if ($nl_new) {
                 foreach($dsch as $i){

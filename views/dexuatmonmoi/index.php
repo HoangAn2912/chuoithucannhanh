@@ -3,6 +3,13 @@ include_once("views/dexuatmonmoi/handle.php");
 if(!isset($_SESSION['dangnhap'])){
     header("Refresh: 0; url=index.php?page=dangnhap");
 }
+if(!isset($_SESSION['dangnhap'])){
+    header("Refresh: 0; url=index.php?page=dangnhap");
+}
+if (!isset($_SESSION['mavaitro']) || ($_SESSION['mavaitro'] != 3 && $_SESSION['mavaitro'] != 4)) {
+    header("Refresh: 0; url=index.php"); 
+    exit();
+}
 ?>
 
 <!DOCTYPE html>

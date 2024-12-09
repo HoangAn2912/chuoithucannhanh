@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include_once("models/mMonAn.php");
 
 class cMonAn {
@@ -75,10 +76,25 @@ class cMonAn {
         $DanhSachMA = $monan->selectMonAn($sql);
         return $DanhSachMA;
     }
+
+    public function getMonAnByName($name){
+        
+        $sql = "SELECT * FROM monan WHERE tenma = '$name'";
+        $monan = new mMonAn();
+
+        $DanhSachMA = $monan->selectMonAn($sql);
+        if(count($DanhSachMA) != 0) return false;
+
+        return true;
+    }
     
 
-    
-
+    public function updateMonAn($mama, $name, $loai, $gia, $congthuc) {
+        $monan = new mMonAn();
+        // if(empty($congthuc)) $congthuc = "null";
+        // $sql = "UPDATE monan SET tenma = '$name', maloaima = '$loai', giaban = $gia, congthuc = '$congthuc' WHERE mama = $mama";
+        return $monan->updateMonAn($mama, $name, $loai, $gia, $congthuc);
+    }
     
 }
 ?>

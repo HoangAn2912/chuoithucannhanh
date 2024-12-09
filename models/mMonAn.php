@@ -22,5 +22,13 @@ class mMonAn {
     public function insertMonAn($sql){
         return  $this->conn->query($sql);
     }
+    public function updateMonAn($mama, $name, $loai, $gia, $congthuc){
+        $sql = "UPDATE monan 
+            SET tenma = ?, maloaima = ?, giaban = ?, dinhluong = ? 
+            WHERE mama = ?";
+        $stmt = $this->conn->prepare($sql);
+
+        return $stmt->execute([$name, $loai, $gia, $congthuc, $mama]);
+    }
 }
 ?>

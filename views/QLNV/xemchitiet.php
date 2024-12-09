@@ -1,15 +1,20 @@
 <?php
-error_reporting(0);
-require_once '../../models/mQLNV.php';
-if(!isset($_SESSION['dangnhap'])){
-    header("Refresh: 0; url=index.php?page=dangnhap");
+session_start();
+if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
+    header("Refresh: 0; url=../../index.php");
+    exit();
 }
+require_once '../../models/mQLNV.php';
 $database = new ketnoi();
 $db = $database->ketnoi();
 $employeeModel = new EmployeeModel($db);
 
 if (isset($_GET['mand'])) {
-    $employeeDetail = $employeeModel->getEmployeeById($_GET['mand']);
+    $employeeDetail = $employeeModel->layNhanVienTheoVaiTro($_GET['mand']);
+    if ($_SESSION['mach'] != $employeeDetail['mach']) {
+        echo "<script>alert('Nhân viên này không thuộc cửa hàng của bạn'); window.location.href='../../index.php?page=qlnv';</script>";
+        exit();
+    }
 } else {
     header("Location: ../../index.php?page=qlnv");
     exit();

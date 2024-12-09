@@ -4,7 +4,7 @@ if(!isset($_SESSION['dangnhap'])){
 }
     echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
-    echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
+    echo '<script src="js/js_quanlynguyenlieu/qlnl.js?v=1.0"></script>';
     echo require("layout/navqlchuoi.php");
     include_once("views/qlnlchuoicuahang/themnl.php");
     include_once("views/qlnlchuoicuahang/xemchitiet/vxemchitiet.php");
@@ -27,12 +27,9 @@ if(!isset($_SESSION['dangnhap'])){
         header("Location:index.php?page=qlnlchuoicuahang/capnhat");
     }
 ?>
-<div id="notification" class="notification">
-    <span></span>
-</div>
 <div class="sidebar">
 <form action=""  method="post">
-        <h4>Trạng thái <button type="submit" style ="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h4>
+        <h4>Trạng thái</h4>
            <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Đã duyệt"> Đã duyệt <br>
            <input type="checkbox" style ="margin-bottom: 30px;" name="trangthai[]" value= "Chờ duyệt"> Chờ duyệt
             
@@ -45,13 +42,15 @@ if(!isset($_SESSION['dangnhap'])){
                         echo '<input style ="margin-bottom: 30px;" type="checkbox" name="cuahang[]" value="'.$i['mach'].'"> '.$i['tench'].'<br>';
                     }
                 ?>
-            <button class="add" name="add">Thêm mới</button>
-            <button class="update" name="update">Cập nhật</button>
-
+        <button type="submit" class ="filter" name="filter">Lọc nguyên liệu</button>
     </form>
 </div>
-    <div style="margin-left: 210px; padding: 20px;" class="content">
-        <h3 style="color: #db5a04">Quản lý nguyên liệu</h3>
+    <div style="margin-left: 210px; padding: 20px; text-align: center;" class="content">
+        <h1 style="color: #db5a04;">QUẢN LÝ NGUYÊN LIỆU</h1>
+        <form action="" method="post" style ="margin: 20px;">
+            <button class="add" name="add">Thêm mới</button>
+            <button class="update" name="update">Cập nhật</button>
+        </form>
         <div class="table-material" style ="max-height: 400px; overflow-y: auto;">
             <form action="" method="post">
                 <div class="table-wrapper">
