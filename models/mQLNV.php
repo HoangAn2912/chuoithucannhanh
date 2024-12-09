@@ -3,6 +3,8 @@ require_once 'mketnoi.php';
 class EmployeeModel {
     private $conn;
 
+    private  $taoKhoa = '%HoangPhi@123';
+
     public function __construct($db) {
         $this->conn = $db;
     }
@@ -168,6 +170,21 @@ class EmployeeModel {
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    function maKhoa($mand) {
+        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+        $encrypted = openssl_encrypt($mand, 'aes-256-cbc', $this->taoKhoa, 0, $iv);
+        return base64_encode($encrypted . '::' . $iv); 
+    }
+    
+    function giaiMa($encryptedMand) {
+        list($encrypted_data, $iv) = explode('::', base64_decode($encryptedMand), 2);
+        if (strlen($iv) !== openssl_cipher_iv_length('aes-256-cbc')) {
+            return false; 
+        }
+        return openssl_decrypt($encrypted_data, 'aes-256-cbc', $this->taoKhoa, 0, $iv); 
+    }
+    
      
 }
 ?>

@@ -106,7 +106,7 @@ class MonAnController {
     public function checkout() {
         $mand = $_SESSION['dangnhap'];
         $mach = $_SESSION['mach'];
-        $mattdh = 4; // mã trạng thái là 4 vì nhân viên đặt và thanh toán tại chỗ luôn
+        $mattdh = 5; // mã trạng thái là 4 vì nhân viên đặt và thanh toán tại chỗ luôn
 
         // Kiểm tra số lượng sản phẩm trong kho trước khi thanh toán
         foreach ($_SESSION['cart'] as $id => $item) {

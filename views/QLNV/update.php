@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
-    header("Refresh: 0; url=../../index.php"); 
+    header("Refresh: 0; url=../../index.php");
     exit();
 }
 require_once '../../models/mketnoi.php';
@@ -12,13 +12,14 @@ $db = $database->ketnoi();
 $employeeModel = new EmployeeModel($db);
 
 if (isset($_GET['mand'])) {
-    $editEmployee = $employeeModel->layNhanVienTheoVaiTro($_GET['mand']);
-    if (!$editEmployee) {
-        echo "Không tìm thấy thông tin nhân viên.";
+    $mand = $employeeModel->giaiMa($_GET['mand']);
+    if ($mand === false) {
+        echo "Lỗi giải mã mand.";
         exit();
     }
-    if ($_SESSION['mach'] != $editEmployee['mach']) {
-        echo "<script>alert('Nhân viên này không thuộc cửa hàng của bạn'); window.location.href='../../index.php?page=qlnv';</script>";
+    $editEmployee = $employeeModel->layNhanVienTheoVaiTro($mand);
+    if (!$editEmployee) {
+        echo "<script>alert('Không tìm thấy nhân viên này'); window.location.href='../../index.php?page=qlnv';</script>";
         exit();
     }
     $branches = $employeeModel->layCuaHang();
