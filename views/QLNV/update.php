@@ -35,7 +35,7 @@ if (isset($_GET['mand'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa nhân viên</title>
-    <link rel="stylesheet" href="../../css/QLNV/update.css?v=4">
+    <link rel="stylesheet" href="../../css/QLNV/update.css?v=2">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script>
         function confirmEditEmployee() {
@@ -89,11 +89,11 @@ if (isset($_GET['mand'])) {
                     <div class="form-row">
                         <div class="form-group">
                             <label for="editEmployeeEmail">Email</label>
-                            <input type="email" name="email" id="editEmployeeEmail" value="<?php echo htmlspecialchars($editEmployee['email']); ?>" required>
+                            <input type="email" name="email" id="editEmployeeEmail" value="<?php echo htmlspecialchars($editEmployee['email']); ?>" required readonly >
                         </div>
                         <div class="form-group">
                             <label for="editEmployeePhone">Số điện thoại</label>
-                            <input type="text" name="sodienthoai" id="editEmployeePhone" value="<?php echo htmlspecialchars($editEmployee['sodienthoai']); ?>" required>
+                            <input type="text" name="sodienthoai" id="editEmployeePhone" value="<?php echo htmlspecialchars($editEmployee['sodienthoai']); ?>" required pattern="\d{10}" title="Số điện thoại phải có 10 chữ số" />
                         </div>
                     </div>
                     <div class="form-row">

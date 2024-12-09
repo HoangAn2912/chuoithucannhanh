@@ -33,7 +33,7 @@ $roles = $employeeModel->layVaiTro();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý nhân viên</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/QLNV/style.css?v=4">
+    <link rel="stylesheet" href="css/QLNV/style.css?v=6">
 </head>
 <body>
     <?php require('layout/navqlch.php'); ?>
@@ -95,19 +95,19 @@ $roles = $employeeModel->layVaiTro();
         <div class="add-employee-form" id="employeeForm" style="display: none;">
             <h3>Thêm mới nhân viên</h3>
             <form method="POST" action="controllers/cQLNV.php?action=add" onsubmit="return confirmAddEmployee()">
-                <input type="text" name="employeeName" placeholder="Tên nhân viên" required />
-                <input type="date" name="employeeBirthday" placeholder="Ngày sinh" required />
+                <input type="text" name="employeeName" placeholder="Tên nhân viên *" required />
+                <input type="date" name="employeeBirthday" placeholder="Ngày sinh *" required />
                 <select name="employeeGender" required>
-                    <option value="">Giới tính</option>
+                    <option value="">Giới tính *</option>
                     <option value="1">Nam</option>
                     <option value="0">Nữ</option>
                 </select>
-                <input type="text" name="employeeAddress" placeholder="Địa chỉ" required />
-                <input type="email" name="employeeEmail" placeholder="Email" required />
-                <input type="text" name="employeePhone" placeholder="Số điện thoại" required />
-                <input type="password" name="matkhau" placeholder="Mật khẩu" required />
+                <input type="text" name="employeeAddress" placeholder="Địa chỉ *" required />
+                <input type="email" name="employeeEmail" placeholder="Email *" required />
+                <input type="text" name="employeePhone" placeholder="Số điện thoại *" required pattern="\d{10}" title="Số điện thoại phải có 10 chữ số" />
+                <input type="password" name="matkhau" placeholder="Mật khẩu *" required />
                 <select name="employeePosition" required>
-                    <option value="">Chức vụ</option>
+                    <option value="">Chức vụ *</option>
                     <?php
                     if (isset($roles) && count($roles) > 0) {
                         foreach ($roles as $role) {
@@ -117,7 +117,7 @@ $roles = $employeeModel->layVaiTro();
                     ?>
                 </select>
                 <select name="branch" required>
-                    <option value="">Chi nhánh</option>
+                    <option value="">Chi nhánh *</option>
                     <?php
                     if (isset($branches) && count($branches) > 0) {
                         foreach ($branches as $branch) {
