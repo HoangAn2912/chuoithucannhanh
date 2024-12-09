@@ -12,7 +12,7 @@ $employeeModel = new EmployeeModel($db);
 if (isset($_GET['mand'])) {
     $mand = $employeeModel->giaiMa($_GET['mand']);
     if ($mand === false) {
-        echo "Lỗi giải mã mand.";
+        echo "<script>alert('Giải mã lỗi xíu, thử lại sau nha'); window.location.href='../../index.php?page=qlnv';</script>";
         exit();
     }
     $employeeDetail = $employeeModel->layNhanVienTheoVaiTro($mand);
