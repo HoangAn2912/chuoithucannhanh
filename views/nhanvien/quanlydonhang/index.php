@@ -170,7 +170,7 @@ if (isset($_REQUEST["chitietdonhang"])) {
 
     function updateTinhTrang(madh, mattdh) {
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "controllers/updateTinhTrangDH.php", true);
+        xhr.open("POST", "controllers/updateTinhTrangDH1.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
