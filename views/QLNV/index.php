@@ -55,7 +55,7 @@ $roles = $employeeModel->layVaiTro();
             <table class="employee-list title-list">
                 <thead>
                     <tr>
-                        <th>Mã nhân viên</th>
+                        <th>Số thứ tự</th>
                         <th>Tên nhân viên</th>
                         <th>Chức vụ</th>
                         <th>Trạng thái</th>
@@ -63,11 +63,13 @@ $roles = $employeeModel->layVaiTro();
                     </tr>
                 </thead>
                 <tbody id="employee-list">
-                    <?php
+                <?php
+                    $stt = 1; // Khởi tạo số thứ tự bắt đầu từ 1
                     if (isset($employees) && count($employees) > 0) {
                         foreach ($employees as $employee) {
+                            $formattedStt = str_pad($stt, 3, '00', STR_PAD_LEFT);
                             echo "<tr>";
-                            echo "<td>{$employee['mand']}</td>";
+                            echo "<td>{$formattedStt}</td>"; 
                             echo "<td>{$employee['tennd']}</td>";
                             echo "<td>{$employee['tenvaitro']}</td>";
                             echo "<td>{$employee['tenttlv']}</td>";
@@ -75,8 +77,9 @@ $roles = $employeeModel->layVaiTro();
                                     <a href='views/QLNV/xemchitiet.php?mand=" . $employeeModel->maKhoa($employee['mand']) . "'>Xem chi tiết</a>
                                     <a href='views/QLNV/update.php?mand=" . $employeeModel->maKhoa($employee['mand']) . "'>Sửa</a>
                                     <a href='controllers/cQLNV.php?action=delete&mand={$employee['mand']}' onclick='return confirm(\"Bạn có chắc chắn muốn xóa nhân viên không?\")'>Xóa</a>
-                                  </td>";
+                                </td>";
                             echo "</tr>";
+                            $stt++; // Tăng số thứ tự sau mỗi lần lặp
                         }
                     } else {
                         echo "<tr><td colspan='5'>Không tìm thấy nhân viên</td></tr>";
