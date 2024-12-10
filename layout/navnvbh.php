@@ -43,8 +43,4 @@
         </div>';
     }
     ?>
-    <div class="search-container">
-        <input type="text" placeholder="Tìm kiếm..." class="search-bar">
-        <span class="search-icon fas fa-search "></span>
-    </div>
 </div>

@@ -20,43 +20,36 @@
 
         public function selectAllKhachHangTheoTen($tennd){
 			$p = new ketnoi();
-			$con = $p -> ketnoi();
-			if($con -> connect_errno){
+			$con = $p->ketnoi();
+			if ($con->connect_errno) {
 				return false;
-			}else{
-				$sql = "select tennd from khachhang where tennd like N'%$tennd%'";	
+			} else {
+				// Sử dụng LIKE với dấu % để tìm kiếm một phần tên
+				$sql = "SELECT * FROM khachhang WHERE tennd LIKE N'%$tennd%'";
 				$kq = mysqli_query($con, $sql);
 				return $kq;
 			}
 		}
+		
 		public function selectMotKhachHang($makh) {
 			$p = new ketnoi();
-			$con = $p->ketnoi();  // Kết nối đến cơ sở dữ liệu
+			$con = $p->ketnoi();  
 		
 			if ($con->connect_errno) {
-				// Nếu có lỗi kết nối cơ sở dữ liệu
 				return false;
 			} else {
-				// Sử dụng prepared statement để bảo vệ truy vấn khỏi SQL Injection
 				$sql = "SELECT * FROM khachhang WHERE makh = ?";
 				if ($stmt = $con->prepare($sql)) {
-					// Gắn giá trị vào placeholder
-					$stmt->bind_param("i", $makh); // "i" là kiểu dữ liệu integer
-		
-					// Thực thi truy vấn
+					$stmt->bind_param("i", $makh); 
 					$stmt->execute();
 		
-					// Lấy kết quả
 					$result = $stmt->get_result();
 					if ($result->num_rows > 0) {
-						// Trả về dữ liệu nếu tìm thấy
 						return $result;
 					} else {
-						// Trả về false nếu không tìm thấy khách hàng
 						return false;
 					}
 				} else {
-					// Nếu không thể chuẩn bị câu lệnh SQL
 					return false;
 				}
 			}
@@ -120,6 +113,22 @@
 			}
 		}
 		
-
+		public function selectNguoiDung($mand) {
+			$p = new ketnoi();
+			$con = $p->ketnoi();
+			if ($con->connect_errno) {
+				return false;
+			} else {
+				$sql = "SELECT mavaitro FROM nguoidung WHERE mand = $mand";
+				$kq = mysqli_query($con, $sql);
+				
+				if ($kq && mysqli_num_rows($kq) > 0) {
+					$row = mysqli_fetch_assoc($kq); // Lấy một hàng kết quả
+					return $row['mavaitro']; // Trả về trực tiếp mã vai trò
+				} else {
+					return null; // Trường hợp không tìm thấy kết quả
+				}
+			}
+		}
     }
 ?>

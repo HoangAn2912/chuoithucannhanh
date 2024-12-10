@@ -45,6 +45,24 @@ function validatePhone(phone) {
     return regex.test(phone);
 }
 
+// Kiểm tra tính hợp lệ của ngày sinh
+function validateBirthDate(birthDateString) {
+    const birthDate = new Date(birthDateString);
+    const currentDate = new Date();
+
+    // Tính tuổi dựa trên năm, tháng, ngày
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+    const monthDiff = currentDate.getMonth() - birthDate.getMonth();
+    const dayDiff = currentDate.getDate() - birthDate.getDate();
+
+    // Kiểm tra tuổi lớn hơn hoặc bằng 5
+    return (
+        birthDate < currentDate &&
+        (age > 5 || (age === 5 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0))))
+    );
+}
+
+
 // Hiển thị lỗi dưới trường input
 function showError(input, message) {
     const errorElement = document.createElement("div");
@@ -72,10 +90,12 @@ function clearError(input) {
 document.getElementById("addCustomerForm").addEventListener("submit", function (e) {
     const nameInput = document.getElementById("tennd");
     const phoneInput = document.getElementById("sodienthoai");
+    const birthDateInput = document.getElementById("ngaysinh"); // Thêm input ngày sinh
     let isValid = true;
 
     clearError(nameInput);
     clearError(phoneInput);
+    clearError(birthDateInput);
 
     // Kiểm tra tên người dùng
     if (!validateName(nameInput.value)) {
@@ -86,6 +106,12 @@ document.getElementById("addCustomerForm").addEventListener("submit", function (
     // Kiểm tra số điện thoại
     if (!validatePhone(phoneInput.value)) {
         showError(phoneInput, "Số điện thoại phải bắt đầu bằng 02, 03, ..., 09 và đủ 10 số.");
+        isValid = false;
+    }
+
+    // Kiểm tra ngày sinh
+    if (!validateBirthDate(birthDateInput.value)) {
+        showError(birthDateInput, "Ngày sinh phải nhỏ hơn ngày hiện tại và lớn hơn 5 tuổi.");
         isValid = false;
     }
 
@@ -96,10 +122,12 @@ document.getElementById("addCustomerForm").addEventListener("submit", function (
 document.getElementById("editCustomerForm").addEventListener("submit", function (e) {
     const nameInput = document.getElementById("edit-tennd");
     const phoneInput = document.getElementById("edit-sodienthoai");
+    const birthDateInput = document.getElementById("edit-ngaysinh"); // Thêm input ngày sinh
     let isValid = true;
 
     clearError(nameInput);
     clearError(phoneInput);
+    clearError(birthDateInput);
 
     // Kiểm tra tên người dùng
     if (!validateName(nameInput.value)) {
@@ -113,5 +141,14 @@ document.getElementById("editCustomerForm").addEventListener("submit", function 
         isValid = false;
     }
 
+    // Kiểm tra ngày sinh
+    if (!validateBirthDate(birthDateInput.value)) {
+        showError(birthDateInput, "Ngày sinh phải nhỏ hơn ngày hiện tại và lớn hơn 5 tuổi.");
+        isValid = false;
+    }
+
     if (!isValid) e.preventDefault(); // Ngăn chặn gửi biểu mẫu nếu không hợp lệ
 });
+
+
+

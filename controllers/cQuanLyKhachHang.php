@@ -19,8 +19,6 @@
 			$kq = $p -> selectAllKhachHangTheoTen($tennd);
 			if(mysqli_num_rows($kq) > 0){
 				return $kq;
-			}else{
-				echo "<script>alert('Khong co du lieu!')</script>";
 			}
 		}
 		public function getMotKhachHang($makh) {
@@ -69,6 +67,12 @@
 			$searchTerm = mysqli_real_escape_string($con, $searchTerm);  // Tránh SQL Injection
 			$sql = "SELECT * FROM khachhang WHERE tennd LIKE '%$searchTerm%'";
 			return mysqli_query($con, $sql);  // Trả về kết quả tìm kiếm
+		}
+
+		
+		public function getNguoidung($mand) {
+			$p = new modelQuanLyKhachHang();
+			return $p->selectNguoiDung($mand); // Trả về trực tiếp giá trị mã vai trò
 		}
     }
 
