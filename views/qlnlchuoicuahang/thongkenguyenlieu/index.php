@@ -63,7 +63,26 @@ if(!isset($_SESSION['dangnhap'])){
         }
     }
 ?>
+
+
+
 <?php
+    // $chartData = [];
+    // foreach ($DS as $item) {
+    //     $store = $item['mach'];
+    //     $ingredient = $item['tennl'];
+    //     $quantity = $item['soluongnhapkho'];
+        
+    //     if (!isset($chartData[$store])) {
+    //         $chartData[$store] = [];
+    //     }
+    //     if (!isset($chartData[$store][$ingredient])) {
+    //         $chartData[$store][$ingredient] = 0;
+    //     }
+    //     $chartData[$store][$ingredient] = $quantity; 
+    // }
+
+    // $chartDataJson = json_encode($chartData);
     $chartData = [];
     foreach ($DS as $item) {
         $store = $item['mach'];
@@ -76,7 +95,7 @@ if(!isset($_SESSION['dangnhap'])){
         if (!isset($chartData[$store][$ingredient])) {
             $chartData[$store][$ingredient] = 0;
         }
-        $chartData[$store][$ingredient] = $quantity; 
+        $chartData[$store][$ingredient] += $quantity; 
     }
 
     $chartDataJson = json_encode($chartData);
