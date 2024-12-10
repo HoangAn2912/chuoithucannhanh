@@ -154,13 +154,13 @@ class cKhoNguyenLieu {
         $nguyenlieu = new mKhoNguyenLieu();
         if($nguyenlieu->updateNguyenLieu($sql)){
             echo '<script>
-                    alert("Cập nhật thành công");
+                    alert("Nhập kho thành công");
                     window.location.href = "index.php?page=qlnlcuahang";
                   </script>';
             return true;
         } else {
             echo '<script>
-                    alert("Cập nhật thất bại");
+                    alert("Nhập kho thất bại");
                     window.location.href = "index.php?page=qlnlcuahang";
                   </script>';
             return false;
@@ -168,7 +168,7 @@ class cKhoNguyenLieu {
     }
 
     public function addNguyenLieu($manl,$mach){
-        $sql = "INSERT INTO khonguyenlieu (mach, manl) VALUES ('$mach', '$manl')";
+        $sql = "INSERT INTO khonguyenlieu (mach, manl, SoLuongHienCo) VALUES ('$mach', '$manl',0)";
         $nguyenlieu = new mKhoNguyenLieu();
         return $nguyenlieu->insertNguyenLieu($sql);
     }
@@ -189,6 +189,12 @@ class cKhoNguyenLieu {
                   </script>';
             return false;
         }
+    }
+
+    public function resetNguyenLieuByCH($mach){
+        $sql = "UPDATE khonguyenlieu SET SoLuongBoSung = 0 , SoLuongHienCo = 0, TinhTrang='Hết hàng' WHERE mach ='$mach'";
+        $nguyenlieu = new mKhoNguyenLieu();
+        $nguyenlieu->updateNguyenLieu($sql);
     }
 }
 ?>

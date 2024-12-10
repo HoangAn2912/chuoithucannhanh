@@ -69,7 +69,7 @@
                                             <td><img src="image/'.$r['hinh'].'" width="50" height="50"></td>
                                             <td>'.$r["tennl"].'</td>
                                             <td>'.number_format($r['dongia'], 0, ',', '.') .'</td>
-                                            <td><input type="number" name="soluong['.$r['NLCH_ID'].']"></td>
+                                            <td><input type="number" name="soluong['.$r['NLCH_ID'].']" value ="'.$r['SoLuongBoSung'].'"></td>
                                             <td>'.$r["donvitinh"].'</td>
                                             <td>'.$r["TinhTrang"].'</td>
                                         </tr>

@@ -57,13 +57,15 @@ if(!isset($_SESSION['dangnhap'])){
         $hinhanh= $_FILES['hinh']['name'];
         $dsch = $cuahang->getCuaHang();
         if(move_uploaded_file($_FILES['hinh']['tmp_name'],'image/'.$hinhanh)){
-            $nguyenlieu->addNguyenLieu($name, $unit,$price, $supplierName, $supplierEmail, $supplierPhone, $hinhanh);
-            $nl_new = $nguyenlieu->getNguyenLieuByIDMax();
-            if ($nl_new) {
-                foreach($dsch as $i){
-                    $khonguyenlieu->addNguyenLieu($nl_new[0]["manl"], $i["mach"]);
+            if($nguyenlieu->addNguyenLieu($name, $unit,$price, $supplierName, $supplierEmail, $supplierPhone, $hinhanh)){
+                $nl_new = $nguyenlieu->getNguyenLieuByIDMax();
+                if ($nl_new) {
+                    foreach($dsch as $i){
+                        $khonguyenlieu->addNguyenLieu($nl_new[0]["manl"], $i["mach"]);
+                    }
                 }
             }
+            
         } else {
             echo '<script>alert("Cập nhật ảnh không thành công!");</script>';
         }
