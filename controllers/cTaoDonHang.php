@@ -150,11 +150,11 @@ class MonAnController {
             $stmt->bind_param("iiiiis", $giamgia, $soluong, $dongia, $madh, $id, $ghichu);
             $stmt->execute();
     
-            // Cập nhật số lượng món ăn
-            $query = "UPDATE monan SET soluong = soluong - ? WHERE mama = ?";
-            $stmt = $this->model->conn->prepare($query);
-            $stmt->bind_param("ii", $soluong, $id);
-            $stmt->execute();
+            // // Cập nhật số lượng món ăn
+            // $query = "UPDATE monan SET soluong = soluong - ? WHERE mama = ?";
+            // $stmt = $this->model->conn->prepare($query);
+            // $stmt->bind_param("ii", $soluong, $id);
+            // $stmt->execute();
         }
         $this->clearCart();
         $_SESSION['checkout_success'] = true;
