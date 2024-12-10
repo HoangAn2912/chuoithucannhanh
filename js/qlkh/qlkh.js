@@ -33,9 +33,11 @@ function openEditModal(customerId) {
 }
 // Kiểm tra tính hợp lệ của tên người dùng
 function validateName(name) {
-    const regex = /^[a-zA-ZàáâãèéêìíòóôõùúưđàáạảãèéẹẻẽìíịỉĩòóọỏõùúụủũăắằặẳẵấầẩậẫơớờởợỡÀÁẠẢÃÈÉẸẺẼÌÍỊỈĨÒÓỌỎÕÙÚỤỦŨĂẮẰẶẲẴẤẦẨẬẪƠỚỜỞỢỠ]+$/;
+    const regex = /^[a-zA-Zàáảãạăắằặẳẵâấầẩẫđèéẻẽẹêềếểễễìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữự]+( [a-zA-Zàáảãạăắằặẳẵâấầẩẫđèéẻẽẹêềếểễễìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữự]+)*$/;
     return regex.test(name);
 }
+
+
 
 // Kiểm tra tính hợp lệ của số điện thoại
 function validatePhone(phone) {

@@ -26,6 +26,27 @@
     padding: 10px 20px;
     font-size: 14px;
 }
+.form-container {
+    display: flex;
+    justify-content: space-between; /* Căn trái phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: 100%;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa input và button */
+}
+
+.search-container input {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.search-container button {
+    padding: 5px 15px;
+}
+
 </style>
 
 
@@ -34,10 +55,18 @@
     <div class="main">
         <div class="container">
             <h1>Danh sách khách hàng</h1>
+<button class="btn btn-success mb-3" data-toggle="modal" data-target="#addCustomerModal">Thêm khách hàng</button>
+<form method="GET" action="index.php?page=qlkh" class="form-container">
+    
+    <div class="search-container">
+        <input type="text" name="search" placeholder="Tìm kiếm khách hàng" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>" />
+        <button class="btn btn-secondary" type="submit" name="submitSearch">Tìm kiếm</button>
+    </div>
+</form>
 
 
             <!-- Thêm khách hàng -->
-            <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addCustomerModal">Thêm khách hàng</button>
+            <!-- <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addCustomerModal">Thêm khách hàng</button> -->
 
             <!-- Table khách hàng -->
             <table class="table table-bordered">

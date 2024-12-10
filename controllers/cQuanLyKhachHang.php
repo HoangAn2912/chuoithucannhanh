@@ -63,6 +63,13 @@
 			$kq=$o->mDeleteKhachHang($makh);
 			return $kq;
 		}
+		public function searchKhachHangByName($searchTerm) {
+			$p = new ketnoi();
+			$con = $p -> ketnoi();
+			$searchTerm = mysqli_real_escape_string($con, $searchTerm);  // Tránh SQL Injection
+			$sql = "SELECT * FROM khachhang WHERE tennd LIKE '%$searchTerm%'";
+			return mysqli_query($con, $sql);  // Trả về kết quả tìm kiếm
+		}
     }
 
 	
