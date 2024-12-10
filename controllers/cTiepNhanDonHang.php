@@ -18,9 +18,8 @@
 			$con = $p->ketnoi();
 			
 			if ($con->connect_errno) {
-				return false; // Trả về false nếu có lỗi kết nối
+				return false; 
 			} else {
-				// Bước 1: Kiểm tra giá trị hiện tại của mattdh cho madh
 				$sqlCheck = "SELECT mattdh FROM donhang WHERE madh = $madh";
 				$result = mysqli_query($con, $sqlCheck);
 				

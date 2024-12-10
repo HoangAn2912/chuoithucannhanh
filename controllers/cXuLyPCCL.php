@@ -32,28 +32,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return $employee['tenvaitro'] === "Nhân viên bếp";
     });
 
+    $nvbhCount = 0;
+$nvbCount = 0;
+foreach ($registeredEmployees as $employee) {
+    if ($employee['tenvaitro'] == "Nhân viên bán hàng") {
+        $nvbhCount++;
+    } elseif ($employee['tenvaitro'] == "Nhân viên bếp") {
+        $nvbCount++;
+    }
+}
     // Hiển thị phần mặc định "Vui lòng chọn nhân viên"
     echo "<option value=''>Vui lòng chọn nhân viên</option>";
 
     // Hiển thị các option cho nhân viên bán hàng
-    echo "<optgroup label='Nhân viên bán hàng'>";
-    if (!empty($salesEmployees)) {
-        foreach ($salesEmployees as $employee) {
-            echo "<option value='{$employee['mand']}'>{$employee['tennd']} (NVBH)</option>";
-        }
-    } else {
-        echo "<option value=''>NVBH đã đủ số lượng</option>";
+echo "<optgroup label='Nhân viên bán hàng'>";
+if ($nvbhCount >= 3) {
+    echo "<option value=''>NVBH đã đủ số lượng</option>";
+} elseif (!empty($salesEmployees)) {
+    foreach ($salesEmployees as $employee) {
+        echo "<option value='{$employee['mand']}'>{$employee['tennd']} (NVBH)</option>";
     }
-    echo "</optgroup>";
+} else {
+    echo "<option value=''>NVBH chưa đủ số lượng</option>";
+}
+echo "</optgroup>";
 
     // Hiển thị các option cho nhân viên bếp
     echo "<optgroup label='Nhân viên bếp'>";
-    if (!empty($kitchenEmployees)) {
+    if ($nvbCount >= 2) {
+        echo "<option value=''>NVB đã đủ số lượng</option>";
+    } elseif (!empty($kitchenEmployees)) {
         foreach ($kitchenEmployees as $employee) {
             echo "<option value='{$employee['mand']}'>{$employee['tennd']} (NVB)</option>";
         }
     } else {
-        echo "<option value=''>NVB đã đủ số lượng</option>";
+        echo "<option value=''>NVB chưa đủ số lượng</option>";
     }
     echo "</optgroup>";
 

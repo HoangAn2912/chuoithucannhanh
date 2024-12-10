@@ -191,7 +191,6 @@ $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu c
           <p><strong>Ca làm:</strong> <span id="shiftTypeText"></span></p>
         </div>
 
-<!-- HTML phần để chọn nhân viên bán hàng và bếp -->
 <div class="form-group mb-3">
         <label for="employeeSales"><strong>Chọn nhân viên:</strong></label>
         <select class="form-control" id="employeeSales" name="employeeSales">
@@ -210,25 +209,24 @@ $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu c
 
 <script>
    $('#assignShiftModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Nút được nhấn để mở modal
-    var date = button.data('date'); // Lấy ngày
-    var shift = button.data('shift'); // Lấy ca làm
+    var button = $(event.relatedTarget); 
+    var date = button.data('date'); 
+    var shift = button.data('shift'); 
 
-    // Cập nhật modal
     var modal = $(this);
-    modal.find('#shiftDateText').text(date); // Cập nhật ngày
-    modal.find('#shiftTypeText').text(shift); // Cập nhật ca làm
+    modal.find('#shiftDateText').text(date); 
+    modal.find('#shiftTypeText').text(shift); 
 
-    // Gửi dữ liệu đến PHP qua AJAX để tải danh sách nhân viên
+    
     $.ajax({
-        url: "controllers/cXuLyPCCL.php", // File PHP xử lý
+        url: "controllers/cXuLyPCCL.php", 
         method: "POST",
         data: {
             ngaydangky: date,
             macalam: shift
         },
         success: function(response) {
-            $('#employeeSales').html(response); // Cập nhật danh sách nhân viên
+            $('#employeeSales').html(response); 
         },
         error: function() {
             alert("Lỗi khi tải dữ liệu nhân viên.");
@@ -237,18 +235,17 @@ $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu c
 });
 
 $('#assignShiftModal').on('click', '.btn-success', function() {
-    var mand = $("#employeeSales").val(); // Lấy giá trị nhân viên đã chọn
+    var mand = $("#employeeSales").val(); 
     if (!mand) {
         alert("Vui lòng chọn nhân viên.");
         return;
     }
 
-    var ngaydangky = $("#shiftDateText").text(); // Lấy ngày
-    var macalam = $("#shiftTypeText").text(); // Lấy ca làm
+    var ngaydangky = $("#shiftDateText").text(); 
+    var macalam = $("#shiftTypeText").text(); 
     
-    // Gửi thông tin đến PHP để lưu vào cơ sở dữ liệu
     $.ajax({
-        url: "controllers/cXuLyPCCL.php", // Đảm bảo đúng URL controller
+        url: "controllers/cXuLyPCCL.php", 
         method: "POST",
         data: {
             ngaydangky: ngaydangky,
@@ -256,10 +253,10 @@ $('#assignShiftModal').on('click', '.btn-success', function() {
             mand: mand
         },
         success: function(response) {
-            $('#assignShiftModal').modal('hide'); // Đóng modal
+            $('#assignShiftModal').modal('hide'); 
             setTimeout(function() {
-                location.reload(); // Tải lại trang nếu cần
-            }, 100); // Đợi một chút cho modal đóng hoàn toàn
+                location.reload(); 
+            }, 100); 
         },
         error: function() {
             alert("Lỗi khi phân công ca làm.");

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/qlkh/style.css">
-    <!-- <link rel="stylesheet" href="css/DAY/day.css"> -->
+    
 <style>
     .navbar a {
     color: white !important;
@@ -169,44 +169,7 @@
 </div>
 
   <!-- Modal Sửa Khách Hàng -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-function openEditModal(customerId) {
-    $.ajax({
-    url: 'controllers/controllerquanlykhachhang.php',
-    method: 'POST',
-    data: { action: 'getCustomer', makh: customerId },
-    dataType: 'json',  // Đảm bảo dữ liệu trả về là JSON
-    success: function(response) {
-        console.log(response); // Kiểm tra phản hồi từ server
-        if (response.status === 'success') {
-            let customer = response.data;  // Dữ liệu khách hàng từ server
-
-            // Điền dữ liệu vào form trong modal
-            $('#edit-makh').val(customer.makh);
-            $('#edit-tennd').val(customer.tennd);
-            $('#edit-ngaysinh').val(customer.ngaysinh);
-            $('#edit-gioitinh').val(customer.gioitinh);
-            $('#edit-sodienthoai').val(customer.sodienthoai);
-            $('#edit-email').val(customer.email);
-            $('#edit-matkhau').val(customer.matkhau);
-            $('#edit-diachi').val(customer.diachi);
-
-            // Hiển thị modal sửa khách hàng
-            $('#editCustomerModal').modal('show');
-        } else {
-            alert(response.message); // Nếu không tìm thấy khách hàng, thông báo lỗi
-        }
-    },
-    error: function() {
-        alert('Có lỗi xảy ra khi thực hiện yêu cầu!');
-    }
-});
-
-}
-
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <div class="modal fade" id="editCustomerModal" tabindex="-1" role="dialog" aria-labelledby="editCustomerModalLabel" aria-hidden="true" name="form1">
     <div class="modal-dialog" role="document">
@@ -279,12 +242,10 @@ if (isset($_POST['btnInsertKhachHang'])) {
     $result = $controller->cInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
 
     if ($result) {
-        echo "<script>alert('Thêm khách hàng thành công!');</script>";
-header("Refresh: 0.5; url=index.php?page=qlkh"); 
-exit();
-
+        echo "<script>alert('Thêm khách hàng thành công!'); window.location.href = 'index.php?page=qlkh';</script>";
+        exit();
     } else {
-        echo "<script>alert('Thêm khách hàng thất bại!');</script>";
+        echo "<script>alert('Email đã tồn tại!');</script>";
     }
 }
 
@@ -299,19 +260,18 @@ if (isset($_POST['btnEditKhachHang'])) {
     $diachi = $_POST['diachi'];
     $matkhau = $_POST['matkhau'];
 
-    echo $makh, $tennd,$ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau;
     // Gọi phương thức sửa
     $controller = new controlQuanLyKhachHang();
     $result = $controller->cUpdateKhachHang($makh, $tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
 
     if ($result) {
-        echo "<script>alert('Sửa khách hàng thành công!');</script>";
-        header("Location: index.php?page=qlkh"); 
+        echo "<script>alert('Sửa khách hàng thành công!'); window.location.href = 'index.php?page=qlkh';</script>";
         exit();
     } else {
-        echo "<script>alert('Sửa khách hàng thất bại!');</script>";
+        echo "<script>alert('Email đã tồn tại!');</script>";
     }
 }
+
 
 // Xử lý Xóa khách hàng
 if (isset($_POST['btnDeleteKhachHang'])) {
@@ -321,8 +281,7 @@ if (isset($_POST['btnDeleteKhachHang'])) {
     $result = $controller->cDeleteKhachHang($makh);
 
     if ($result) {
-        echo "<script>alert('Thêm khách hàng thành công!');</script>";
-        header("Refresh: 2; url=index.php?page=qlkh"); 
+        echo "<script>alert('Xóa khách hàng thành công!'); window.location.href = 'index.php?page=qlkh';</script>";
         exit();
     } else {
         echo "<script>alert('Xóa khách hàng thất bại!');</script>";
@@ -332,7 +291,8 @@ if (isset($_POST['btnDeleteKhachHang'])) {
 ?>
 
     <!-- Thêm bootstrap JS -->
-
+ 
+    <script src="js/qlkh/qlkh.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
