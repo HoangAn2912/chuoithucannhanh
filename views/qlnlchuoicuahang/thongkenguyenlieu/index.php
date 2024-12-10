@@ -63,6 +63,9 @@ if(!isset($_SESSION['dangnhap'])){
         }
     }
 ?>
+
+
+
 <?php
     $chartData = [];
     foreach ($DS as $item) {
@@ -76,7 +79,7 @@ if(!isset($_SESSION['dangnhap'])){
         if (!isset($chartData[$store][$ingredient])) {
             $chartData[$store][$ingredient] = 0;
         }
-        $chartData[$store][$ingredient] = $quantity; 
+        $chartData[$store][$ingredient] += $quantity; 
     }
 
     $chartDataJson = json_encode($chartData);

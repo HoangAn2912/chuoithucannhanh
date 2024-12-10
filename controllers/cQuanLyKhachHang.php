@@ -1,7 +1,7 @@
 <?php
 
     include_once("models/mQuanLyKhachHang.php");
-	
+	include_once("mketnoi.php");
     class controlQuanLyKhachHang {
       
         public function getAllKhachHang (){
@@ -40,20 +40,37 @@
 				$p = new modelQuanLyKhachHang();
 				$kq = $p->mUpdateKhachHang($makh, $tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
 				return $kq;
-
-				
 			}
 		
-            public function cInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau){
-                $p = new modelQuanLyKhachHang();
-                $kq = $p->mInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
-                return $kq;
-            }
+		public function cInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau) {
+			$p = new ketnoi();
+			$con = $p -> ketnoi();
+
+			$query = "SELECT * FROM khachhang WHERE email = '$email'";
+			$result = mysqli_query($con, $query);
+			if (mysqli_num_rows($result) > 0) {
+				return false; 
+			}
+			
+			$p = new modelQuanLyKhachHang();
+            $kq = $p->mInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
+			return $kq;
+		}
+			
             
 		public function cDeleteKhachHang($makh){
 			$o=new modelQuanLyKhachHang();
 			$kq=$o->mDeleteKhachHang($makh);
 			return $kq;
 		}
+		public function searchKhachHangByName($searchTerm) {
+			$p = new ketnoi();
+			$con = $p -> ketnoi();
+			$searchTerm = mysqli_real_escape_string($con, $searchTerm);  // Tránh SQL Injection
+			$sql = "SELECT * FROM khachhang WHERE tennd LIKE '%$searchTerm%'";
+			return mysqli_query($con, $sql);  // Trả về kết quả tìm kiếm
+		}
     }
+
+	
 ?>

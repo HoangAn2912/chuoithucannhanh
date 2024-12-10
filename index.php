@@ -5,7 +5,7 @@
     if(isset($_GET["page"]))
         $page=$_GET["page"];
     else
-        $page='trangchu';
+        $page='dangnhap';
     
     if(isset($_GET["cate"]))
         $cate=$_GET["cate"];

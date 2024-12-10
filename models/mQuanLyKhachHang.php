@@ -81,6 +81,17 @@
 				return $kq;
 			}
 		}
+
+		public function checkEmailTrungLap($email) {
+			$p = new ketnoi();
+			$con = $p -> ketnoi();
+			$sql = "SELECT * FROM khachhang WHERE email = '$email'";
+			$result = mysqli_query($con, $sql);
+			if (mysqli_num_rows($result) > 0) {
+				return true; 
+			}
+			return false; 
+		}
 		
         public function mInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau){
             $p = new ketnoi();
@@ -108,6 +119,7 @@
 				return false;
 			}
 		}
+		
 
     }
 ?>
