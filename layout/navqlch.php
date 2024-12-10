@@ -1,5 +1,5 @@
     <!-- Navigation bar -->
-    <div class="navbar" style="">
+    <div class="navbar">
         <div>
             <img src="layout/Screenshot_2024-10-21_225419-removebg-preview.png"  width="50" height="50" style="padding-right: 250px; "alt="">
         </div>
