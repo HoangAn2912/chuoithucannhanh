@@ -66,7 +66,7 @@
                     if($role == 1){
                         echo '<a href="index.php?page=qlnlchuoicuahang/thongkenguyenlieu" class="tile"><i class="fas fa-boxes"></i>Thống kê nguyên liệu</a>';
                         echo '<a href="index.php?page=qlnlchuoicuahang/xemchitiet" class="tile"><i class="fas fa-warehouse"></i>Quản lý nguyên liệu</a>';
-                        echo '<a href="index.php?page=qlmonan/xemchitiet" class="tile"><i class="fas fa-chart-line"></i>Thống kê doanh thu</a>';
+                        echo '<a href="index.php?page=qlnlchuoicuahang/thongkedoanhthu" class="tile"><i class="fas fa-chart-line"></i>Thống kê doanh thu</a>';
                         echo '<a href="index.php?page=qlmonan/xemchitiet" class="tile"><i class="fas fa-utensils"></i>Quản lý món ăn</a>';
                     } elseif($role == 2){
                         echo '<a href="index.php?page=qlnlcuahang" class="tile"><i class="fas fa-warehouse"></i>Quản lý nguyên liệu</a>';

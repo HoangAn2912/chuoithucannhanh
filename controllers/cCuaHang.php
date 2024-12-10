@@ -15,5 +15,24 @@ class cCuaHang {
         $DSCuaHang = $cuahang->selectCuaHang($sql);
         return $DSCuaHang;
     }
+
+    public function cGetNameStoreByID($storeIDs) {
+        // Kết nối cơ sở dữ liệu
+        $p = new ketnoi();
+        $conn = $p->ketnoi();
+
+        // Chuyển mảng ID cửa hàng thành chuỗi để sử dụng trong câu truy vấn SQL
+        $storeIDsStr = implode(',', $storeIDs);
+
+        // Câu truy vấn SQL để lấy tên cửa hàng theo ID
+        $sql = "SELECT mach, tench FROM cuahang WHERE mach IN ($storeIDsStr)";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
 ?>
