@@ -86,19 +86,36 @@
     }
 
         // hàm tìm kiếm 
-    public function searchOrdersByCustomerNameOrPhone($searchQuery, $mach) {
-        $stmt = $this->conn->prepare(
-            "SELECT donhang.*, tinhtrangdonhang.tenttdh 
-             FROM donhang
-             JOIN tinhtrangdonhang ON donhang.mattdh = tinhtrangdonhang.mattdh
-             WHERE (donhang.tennguoinhan LIKE ? OR donhang.sdtnguoinhan LIKE ?)
-             AND donhang.mach = ?"
-        );
-        $searchTerm = "%" . $searchQuery . "%";
-        $stmt->bind_param("ssi", $searchTerm, $searchTerm, $mach);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
+        public function searchOrdersByCustomerNameOrPhone($searchQuery, $mach) {
+            // Truy vấn lấy danh sách đơn hàng
+            $stmt = $this->conn->prepare(
+                "SELECT donhang.*, tinhtrangdonhang.tenttdh, tinhtrangdonhang.mattdh
+                 FROM donhang
+                 LEFT JOIN tinhtrangdonhang ON donhang.mattdh = tinhtrangdonhang.mattdh
+                 WHERE (donhang.tennguoinhan LIKE ? OR donhang.sdtnguoinhan LIKE ?)
+                 AND donhang.mach = ?"
+            );
+        
+            $searchTerm = "%" . $searchQuery . "%";
+            $stmt->bind_param("ssi", $searchTerm, $searchTerm, $mach);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $orders = $result->fetch_all(MYSQLI_ASSOC);
+        
+            // Lấy danh sách tất cả trạng thái đơn hàng
+            $statusSql = "SELECT * FROM tinhtrangdonhang";
+            $statusStmt = $this->conn->prepare($statusSql);
+            $statusStmt->execute();
+            $statusResult = $statusStmt->get_result();
+            $statusList = $statusResult->fetch_all(MYSQLI_ASSOC);
+        
+            // Gắn danh sách trạng thái vào từng đơn hàng dưới dạng mảng
+            foreach ($orders as &$order) {
+                // Lấy tất cả các trạng thái và gắn vào đơn hàng
+                $order['statusList'] = $statusList;
+            }
+        
+            return $orders;
+        }
     }
     ?>
