@@ -83,6 +83,7 @@
                         echo '<a href=\'index.php?page=taodonhang\' class=\'tile\'><i class="fas fa-shopping-cart"></i>Tạo đơn hàng</a>';
                         echo '<a href=\'index.php?page=bantrong\' class=\'tile\'><i class="fas fa-chair"></i>Xem bàn trống</a>';
                         echo '<a href=\'index.php?page=nhanvien/quanlydonhang\' class=\'tile\'><i class="fas fa-box"></i>Quản lý đơn hàng</a>';
+                        echo '<a href="index.php?page=qlkh" class="tile"><i class="fas fa-users"></i>Quản lý khách hàng</a>';
                     } elseif($role == 4){
                         echo '<a href=\'index.php?page=nhanvien/xemluong\' class=\'tile\'><i class="fas fa-money-bill"></i>Xem lương</a>';
                         echo '<a href=\'index.php?page=xemlichlamviec\' class=\'tile\'><i class="fas fa-calendar"></i>Xem lịch làm việc</a>';
