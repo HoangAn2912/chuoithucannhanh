@@ -21,7 +21,7 @@ $mach = $_SESSION["mach"];
 
     require("layout/navnvbh.php");
 ?>
-<div style="padding: 20px;" class="content" id="content">
+<div  class="content" id="content">
     <?php
 
 // Kiểm tra xem người dùng yêu cầu hiển thị chi tiết đơn hàng hay không
@@ -90,15 +90,14 @@ if (isset($_REQUEST["chitietdonhang"])) {
     } else {
         $orderList = $orderController->selectdanhsachdonhang($mach); 
     }
-    
     ?>
     <div >
-    <h2 style="color: #db5a04">Quản lý đơn hàng</h2>
+    <center><h1 style="color: #db5a04">Quản lý đơn hàng</h1></center>
         <!-- Form tìm kiếm -->
     <div class="qldh-search-bar">
         <form method="GET" action="index.php">
             <input type="hidden" name="page" value="nhanvien/quanlydonhang">
-            <input type="text" name="search" placeholder="Nhập tên hoặc SĐT cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
+            <input type="text" name="search" placeholder="Nhập Tên hoặc SĐT cần tìm..." value="<?php echo $searchQuery; ?>" />
             <button type="submit"><i class="fas fa-search"></i> Tìm</button>
         </form>
     </div>
@@ -129,13 +128,13 @@ if (isset($_REQUEST["chitietdonhang"])) {
                                 <select class="custom-select" onchange="confirmUpdateTinhTrang(<?php echo $order['madh']; ?>, this.value)">
                                     <?php foreach ($order['statusList'] as $status): ?>
                                         <option value="<?php echo $status['mattdh']; ?>" <?php echo ($status['mattdh'] == $order['mattdh']) ? 'selected' : ''; ?>>
-                                            <?php echo htmlspecialchars($status['tenttdh']); ?>
+                                            <?php echo $status['tenttdh']; ?>   
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
                             <td>
-                                <a href="index.php?page=nhanvien/quanlydonhang&chitietdonhang=<?php echo htmlspecialchars($order['madh']); ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                                <a href="index.php?page=nhanvien/quanlydonhang&chitietdonhang=<?php echo $order['madh']; ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -192,7 +191,52 @@ if (isset($_REQUEST["chitietdonhang"])) {
     <title>Quản lý đơn hàng</title>
     <link rel="stylesheet" href="css/DAY/qldh.css">
 <style>  
-    
+        /* Container cho thanh tìm kiếm */
+    .qldh-search-bar {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    /* Input tìm kiếm */
+    .qldh-search-bar input[type="text"] {
+        padding: 8px 15px;
+        border: 2px solid #ccc;
+        border-radius: 20px;
+        font-size: 14px;
+        width: 60%;
+        max-width: 250px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        margin-right: 10px;
+    }
+
+    /* Khi focus vào ô input */
+    .qldh-search-bar input[type="text"]:focus {
+        border-color: #4CAF50; /* Màu xanh khi focus */
+        box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+    }
+
+    /* Nút tìm kiếm */
+    .qldh-search-bar button {
+        padding: 8px 15px;
+        background-color: orange;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Hiệu ứng hover cho nút tìm kiếm */
+    .qldh-search-bar button:hover {
+        background-color: #45a049;
+    }
+
+    /* Biểu tượng tìm kiếm */
+    .qldh-search-bar button i {
+        font-size: 16px;
+    }
+
 </style>
 
 </head>
