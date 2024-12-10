@@ -21,12 +21,12 @@
             <a href="#">Đăng nhập</a>
         </div>
     </header> -->
-    <div class="sidebar">
+    <!-- <div class="sidebar">
         <a href="#"><i class="fas fa-cogs"></i> Cài đặt</a>
         <a href="#"><i class="fas fa-question-circle"></i> Hỗ trợ</a>
-    </div>
+    </div> -->
 
-    <div class="main-content">
+    <div class="main-content" style ="margin-left: 0;">
         <form action="" method="POST">
             <table>
                 <tr>
