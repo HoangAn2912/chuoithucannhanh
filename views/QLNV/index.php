@@ -2,8 +2,7 @@
 session_start();
 if (!isset($_SESSION['dangnhap'])) {
     header("Refresh: 0; url=index.php?page=dangnhap");
-}
-if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
+} elseif (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
     header("Refresh: 0; url=index.php");
     exit();
 }

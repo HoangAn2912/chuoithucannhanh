@@ -1,10 +1,10 @@
 <?php
 require_once 'controllers/cChamCong.php';
-if(!isset($_SESSION['dangnhap'])){
+session_start();
+if (!isset($_SESSION['dangnhap'])) {
     header("Refresh: 0; url=index.php?page=dangnhap");
-}
-if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
-    header("Refresh: 0; url=index.php"); // Điều hướng về trang chủ nếu vai trò không phải 2
+} elseif (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
+    header("Refresh: 0; url=index.php");
     exit();
 }
 
