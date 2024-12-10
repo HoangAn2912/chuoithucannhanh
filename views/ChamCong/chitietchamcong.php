@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
-    header("Refresh: 0; url=../../index.php"); 
+    header("Refresh: 0; url=../../index.php?page=trangchu"); 
     exit();
 }
 error_reporting(0);

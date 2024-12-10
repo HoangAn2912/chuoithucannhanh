@@ -1,9 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['dangnhap'])) {
-    header("Refresh: 0; url=index.php?page=dangnhap");
-} elseif (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 3) {
-    header("Refresh: 0; url=index.php");
+    header("Location: index.php?page=dangnhap");
+    exit();
+} elseif ($_SESSION['mavaitro'] != 3) {
+    header("Location: index.php?page=trangchu");
     exit();
 }
 require_once 'controllers/cTaoDonHang.php';
