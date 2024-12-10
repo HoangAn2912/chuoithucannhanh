@@ -19,7 +19,7 @@
                         <a href="#">Thống kê <i class="fas fa-caret-down"></i></a>
                         <div class="dropdown-content">
                             <a href="index.php?page=qlnlchuoicuahang/thongkenguyenlieu">Thống kê nguyên liệu</a>
-                            <a href="index.php?page=qlmonan/xemchitiet">Thống kê doanh thu</a>
+                            <a href="index.php?page=qlnlchuoicuahang/thongkedoanhthu">Thống kê doanh thu</a>
                         </div>
                     </div>';
                 }
