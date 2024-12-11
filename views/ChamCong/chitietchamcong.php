@@ -10,9 +10,7 @@ $cChamCong = new cChamCong();
 $CaLam = $cChamCong->getCaLam();
 $attendanceDetails = [];
 
-session_start();
 $loggedInManagerStoreId = $_SESSION['mach'];
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET['date'])) {
     $shiftId = $_GET['shift'];
@@ -27,7 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET[
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Tiết Chấm Công</title>
-    <link rel="stylesheet" href="../../css/ChamCong/chitiet.css?v=4">
+    <link rel="stylesheet" href="../../css/ChamCong/chitiet.css?v=2">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+        window.attendanceDetails = <?php echo json_encode($attendanceDetails); ?>;
+        window.shift = <?php echo json_encode(isset($_GET['shift']) ? $_GET['shift'] : ''); ?>;
+        window.date = <?php echo json_encode(isset($_GET['date']) ? $_GET['date'] : date('Y-m-d')); ?>;
+        window.cuaHang = <?php echo json_encode($_SESSION['mach']); ?>;
+    </script>
+    <script src="../../js/chamcong/xuatExcel.js"></script>
 </head>
 <body>
     <div class="main">
@@ -48,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET[
                     <label for="date">Chọn ngày chấm công:</label>
                     <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" required>
                 </div>
-
                 <button type="submit">Lọc</button>
             </form>
         </div>
@@ -85,6 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['shift']) && isset($_GET[
         <div class="back-button-view">  
             <button onclick="window.location.href='../../index.php?page=ChamCong'">Quay lại</button>  
         </div> 
+        <div class="export-button-view">
+            <button id="export">Xuất Excel</button>
+        </div>
     </div>
 </body>
 </html>

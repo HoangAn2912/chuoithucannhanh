@@ -173,3 +173,16 @@ h3 {
 .chon-ngay label {
     font-weight: bold;
 }
+
+.export-button-view button{
+    border-color: 1px solid #000000;
+    float: right;
+    background-color: #0e953e;
+    color: white;
+    border: none;
+    padding: 7px 15px; 
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}

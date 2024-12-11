@@ -84,8 +84,12 @@ if (!isset($_SESSION['dangnhap'])) {
             return confirm('Bạn có chắc chắn muốn lưu thông tin chấm công không?');
         }
         <?php if (isset($_SESSION['error_message'])): ?>
-                alert("<?php echo $_SESSION['error_message']; ?>");
-                <?php unset($_SESSION['error_message']); ?>
+            alert("<?php echo $_SESSION['error_message']; ?>");
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['success_message'])): ?>
+            alert("<?php echo $_SESSION['success_message']; ?>");
+            <?php unset($_SESSION['success_message']); ?>
         <?php endif; ?>
     </script>
 </body>

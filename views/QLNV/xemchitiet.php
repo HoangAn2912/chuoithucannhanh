@@ -20,6 +20,13 @@ if (isset($_GET['mand'])) {
     header("Location: ../../index.php?page=qlnv");
     exit();
 }
+
+if (isset($employeeDetail['ngaysinh'])) {
+    $date = DateTime::createFromFormat('Y-m-d', $employeeDetail['ngaysinh']);
+    $formattedDate = $date ? $date->format('d-m-Y') : $employeeDetail['ngaysinh'];
+} else {
+    $formattedDate = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +56,8 @@ if (isset($_GET['mand'])) {
                         </div>  
                         <div class="form-group">  
                             <label for="employeeBirthdayDetail">Ngày sinh</label>  
-                            <input type="text" id="employeeBirthdayDetail" value="<?php echo htmlspecialchars($employeeDetail['ngaysinh']); ?>" readonly>  
-                        </div>  
+                            <input type="text" id="employeeBirthdayDetail" value="<?php echo htmlspecialchars($formattedDate); ?>" readonly>  
+                        </div> 
                     </div>  
                     <div class="form-row">  
                         <div class="form-group">  
