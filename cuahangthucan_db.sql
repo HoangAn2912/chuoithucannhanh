@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 05, 2024 lúc 03:45 AM
+-- Thời gian đã tạo: Th12 11, 2024 lúc 01:48 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `cuahangthucan_db`
 --
+CREATE DATABASE IF NOT EXISTS `cuahangthucan_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cuahangthucan_db`;
 
 -- --------------------------------------------------------
 
@@ -136,37 +138,35 @@ CREATE TABLE `chamcong` (
   `thoigianvao` time DEFAULT NULL,
   `trangthai` varchar(30) NOT NULL,
   `ghichu` text DEFAULT NULL,
-  `mand` int(11) NOT NULL,
-  `manvbh` int(11) NOT NULL,
-  `manvb` int(11) NOT NULL
+  `mand` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `chamcong`
 --
 
-INSERT INTO `chamcong` (`machamcong`, `macalam`, `ngaychamcong`, `thoigianvao`, `trangthai`, `ghichu`, `mand`, `manvbh`, `manvb`) VALUES
-(13, 1, '2024-01-01', NULL, 'Có mặt', NULL, 22, 0, 1),
-(14, 2, '2024-01-02', NULL, 'Có mặt', NULL, 22, 0, 1),
-(15, 3, '2024-01-03', NULL, 'Có mặt', NULL, 23, 0, 2),
-(16, 4, '2024-01-04', NULL, 'Có mặt', NULL, 23, 0, 2),
-(17, 1, '2024-01-01', NULL, 'Có mặt', NULL, 7, 1, 0),
-(18, 2, '2024-01-02', NULL, 'Có mặt', NULL, 7, 1, 0),
-(19, 3, '2024-01-03', NULL, 'Có mặt', NULL, 8, 2, 0),
-(20, 4, '2024-01-04', NULL, 'Có mặt', NULL, 8, 2, 0),
-(21, 1, '2024-01-01', NULL, 'Có mặt', NULL, 22, 0, 1),
-(22, 2, '2024-01-02', NULL, 'Có mặt', NULL, 22, 0, 1),
-(23, 3, '2024-01-03', NULL, 'Có mặt', NULL, 23, 0, 2),
-(24, 4, '2024-01-04', NULL, 'Có mặt', NULL, 23, 0, 2),
-(25, 1, '2024-01-01', NULL, 'Có mặt', NULL, 7, 1, 0),
-(26, 2, '2024-01-02', NULL, 'Có mặt', NULL, 7, 1, 0),
-(27, 3, '2024-01-03', NULL, 'Có mặt', NULL, 8, 2, 0),
-(28, 4, '2024-01-04', NULL, 'Có mặt', NULL, 8, 2, 0),
-(67, 1, '2024-11-21', '09:31:35', 'có mặt', 'ddur', 10, 0, 0),
-(68, 1, '2024-11-21', '09:31:50', 'có mặt', 'co mat', 10, 0, 0),
-(69, 4, '2024-11-21', '09:32:13', 'vắng', 'vang', 10, 0, 0),
-(70, 1, '2024-11-21', '10:11:15', 'có mặt', '', 7, 0, 0),
-(71, 4, '2024-11-21', '10:11:32', 'vắng', '', 22, 0, 0);
+INSERT INTO `chamcong` (`machamcong`, `macalam`, `ngaychamcong`, `thoigianvao`, `trangthai`, `ghichu`, `mand`) VALUES
+(13, 1, '2024-01-01', NULL, 'Có mặt', NULL, 22),
+(14, 2, '2024-01-02', NULL, 'Có mặt', NULL, 22),
+(15, 3, '2024-01-03', NULL, 'Có mặt', NULL, 23),
+(16, 4, '2024-01-04', NULL, 'Có mặt', NULL, 23),
+(17, 1, '2024-01-01', NULL, 'Có mặt', NULL, 7),
+(18, 2, '2024-01-02', NULL, 'Có mặt', NULL, 7),
+(19, 3, '2024-01-03', NULL, 'Có mặt', NULL, 8),
+(20, 4, '2024-01-04', NULL, 'Có mặt', NULL, 8),
+(21, 1, '2024-01-01', NULL, 'Có mặt', NULL, 22),
+(22, 2, '2024-01-02', NULL, 'Có mặt', NULL, 22),
+(23, 3, '2024-01-03', NULL, 'Có mặt', NULL, 23),
+(24, 4, '2024-01-04', NULL, 'Có mặt', NULL, 23),
+(25, 1, '2024-01-01', NULL, 'Có mặt', NULL, 7),
+(26, 2, '2024-01-02', NULL, 'Có mặt', NULL, 7),
+(27, 3, '2024-01-03', NULL, 'Có mặt', NULL, 8),
+(28, 4, '2024-01-04', NULL, 'Có mặt', NULL, 8),
+(67, 1, '2024-11-21', '09:31:35', 'có mặt', 'ddur', 10),
+(68, 1, '2024-11-21', '09:31:50', 'có mặt', 'co mat', 10),
+(69, 4, '2024-11-21', '09:32:13', 'vắng', 'vang', 10),
+(70, 1, '2024-11-21', '10:11:15', 'có mặt', '', 7),
+(71, 4, '2024-11-21', '10:11:32', 'vắng', '', 22);
 
 -- --------------------------------------------------------
 
@@ -190,11 +190,9 @@ CREATE TABLE `chitietdonhang` (
 
 INSERT INTO `chitietdonhang` (`mactdh`, `giamgia`, `soluong`, `dongia`, `ghichu`, `madh`, `mama`) VALUES
 (1, 5000, 2, 75000, 'Không lấy tương ớt mà hãy lấy tương cà', 1, 1),
-(2, 0, 1, 15000, 'Không lấy đá', 2, 6),
-(3, 10000, 1, 90000, NULL, 3, 11),
-(5, 0, 1, 29000, NULL, 12, 1),
-(6, 0, 1, 29000, NULL, 13, 1),
-(7, 0, 1, 25000, '123', 14, 16);
+(8, 0, 1, 29000, 'ádasas', 15, 1),
+(9, 0, 1, 29000, '123', 16, 1),
+(10, 0, 1, 29000, '', 17, 1);
 
 -- --------------------------------------------------------
 
@@ -242,6 +240,10 @@ INSERT INTO `dangkycalam` (`madkcl`, `mand`, `ngaydangky`, `macalam`, `mattdk`) 
 (4, 7, '2024-12-02', 1, 1),
 (5, 7, '2024-12-02', 3, 1),
 (9, 22, '2024-12-02', 1, 1),
+(10, 22, '2024-12-02', 3, 1),
+(4, 7, '2024-12-02', 1, 1),
+(5, 7, '2024-12-02', 3, 1),
+(9, 22, '2024-12-02', 1, 1),
 (10, 22, '2024-12-02', 3, 1);
 
 -- --------------------------------------------------------
@@ -280,6 +282,16 @@ CREATE TABLE `donhang` (
   `diachinguoinhan` varchar(255) DEFAULT NULL,
   `emailnguoinhan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `donhang`
+--
+
+INSERT INTO `donhang` (`madh`, `ngaydat`, `mattdh`, `makh`, `mach`, `tennguoinhan`, `sdtnguoinhan`, `diachinguoinhan`, `emailnguoinhan`) VALUES
+(1, '2024-12-09 22:23:31', 3, 38, 1, NULL, NULL, NULL, NULL),
+(15, '2024-12-09 17:06:28', 4, 7, 1, NULL, NULL, NULL, NULL),
+(16, '2024-12-09 20:34:35', 5, 7, 1, NULL, NULL, NULL, NULL),
+(17, '2024-12-10 00:43:07', 4, 7, 1, 'Nhân Viên Nguyễn Văn Hùng', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -340,16 +352,26 @@ INSERT INTO `khachhang` (`makh`, `tennd`, `sodienthoai`, `email`, `diachi`, `mat
 (7, 'Nguyễn Văn A', '0987654321', 'khcn4a@gmail.com', 'Quận 4', '202cb962ac59075b964b07152d234b70', 5, '1991-06-20', 1),
 (8, 'Trần Thị B', '0912345678', 'khcn4b@gmail.com', 'Quận 4', '202cb962ac59075b964b07152d234b70', 5, '1996-10-08', 0),
 (9, 'Nguyễn Văn A', '0987654321', 'khcn5a@gmail.com', 'Quận 5', '202cb962ac59075b964b07152d234b70', 5, '2000-01-25', 1),
-(10, 'Trần Thị B', '0912345678', NULL, 'Quận 5', NULL, 5, '1999-11-30', 0),
-(34, 'aaaaa', '099299222', NULL, '424 haa', NULL, 5, '2002-12-12', 1),
-(35, 'hoangan292', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(36, 'Hoàng Ann', '0912328222', 'a@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2002-02-18', 1),
-(37, 'Hoàng An', '0912328222', NULL, '123', NULL, 5, '2002-02-18', 1),
-(38, 'Hoàng A', '0912328222', NULL, '123', NULL, 5, '2002-02-19', 1),
-(39, 'Hoàng Ann', '99999999999', NULL, '123', NULL, 5, '2002-12-12', 1),
-(40, 'Hoàng An', '423423423', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2002-02-22', 1),
-(41, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2002-02-02', 1),
-(42, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-03', 1);
+(47, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-05', 0),
+(48, 'Hoàng An', '0912328222', 'ad1@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-11', 1),
+(49, 'Hoàng An', '0912328222', '123@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-12', 1),
+(50, 'Hoàng Ann', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-05', 1),
+(51, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-12', 1),
+(52, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-11', 1),
+(53, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-05', 1),
+(54, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-05', 1),
+(55, 'Hoàng An', '0912328222', 'ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-04', 1),
+(56, 'Hoàng An', '0912328222', 'ad4@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-13', 1),
+(57, 'Hoàng An', '0912328222', 'ad5@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-11', 1),
+(58, 'Nguyen Van AN', '0912328222', '1231222@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-05', 1),
+(59, 'Hoàng', '0912328222', 'nvbhcn123a@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-04', 1),
+(60, 'hOÀNG', '0912328222', 'a3d@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-05', 1),
+(61, 'Nguyễn Văn Bảo', '0912328222', 'a1d@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-26', 1),
+(62, 'Nguyễn', '0912328222', '1ad@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-03', 1),
+(63, 'Hoàng Ann', '0987654321', 'ad6@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-06', 0),
+(64, 'Hoàng An', '0912328222', '111@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-12', 1),
+(65, 'Hoàng An', '0912328222', 'a9d@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2024-12-11', 1),
+(66, 'Hoàng An', '0912328222', 'ad11@gmail.com', '123', '202cb962ac59075b964b07152d234b70', 5, '2022-07-20', 0);
 
 -- --------------------------------------------------------
 
@@ -501,26 +523,26 @@ CREATE TABLE `khonguyenlieu` (
 --
 
 INSERT INTO `khonguyenlieu` (`NLCH_ID`, `mach`, `manl`, `NgayNhap`, `SoLuongBoSung`, `SoLuongHienCo`, `TinhTrang`) VALUES
-(150, 1, 1, '2024-11-16', 0, 0, 'Hết hàng'),
-(151, 1, 2, '2024-11-16', 0, 0, 'Hết hàng'),
-(152, 1, 3, '2024-11-16', 0, 100, 'Còn hàng'),
-(153, 1, 4, '2024-11-16', 0, 150, 'Còn hàng'),
-(154, 1, 5, '2024-11-16', 0, 90, 'Còn hàng'),
-(155, 1, 6, '2024-11-16', 0, 100, 'Còn hàng'),
-(156, 1, 7, '2024-11-16', 0, 200, 'Còn hàng'),
-(157, 1, 8, '2024-11-16', 0, 230, 'Còn hàng'),
-(158, 1, 9, '2024-11-16', 0, 150, 'Còn hàng'),
-(159, 1, 10, '2024-11-16', 0, 140, 'Còn hàng'),
-(160, 1, 11, '2024-11-16', 0, 320, 'Còn hàng'),
-(161, 1, 12, '2024-11-16', 0, 0, 'Hết hàng'),
-(162, 1, 13, '2024-11-16', 0, 130, 'Còn hàng'),
+(150, 1, 1, '2024-12-11', 100, 0, 'Đã duyệt'),
+(151, 1, 2, '2024-12-08', 0, 0, 'Hết hàng'),
+(152, 1, 3, '2024-12-05', 0, 0, 'Hết hàng'),
+(153, 1, 4, '2024-11-16', 0, 0, 'Hết hàng'),
+(154, 1, 5, '2024-11-16', 0, 0, 'Hết hàng'),
+(155, 1, 6, '2024-11-16', 0, 0, 'Hết hàng'),
+(156, 1, 7, '2024-11-16', 0, 0, 'Hết hàng'),
+(157, 1, 8, '2024-11-16', 0, 0, 'Hết hàng'),
+(158, 1, 9, '2024-11-16', 0, 0, 'Hết hàng'),
+(159, 1, 10, '2024-11-16', 0, 0, 'Hết hàng'),
+(160, 1, 11, '2024-11-16', 0, 0, 'Hết hàng'),
+(161, 1, 12, '2024-12-10', 0, 0, 'Hết hàng'),
+(162, 1, 13, '2024-11-16', 0, 0, 'Hết hàng'),
 (163, 1, 14, '2024-11-16', 0, 0, 'Hết hàng'),
-(164, 1, 15, '2024-11-16', 0, 130, 'Còn hàng'),
+(164, 1, 15, '2024-11-16', 0, 0, 'Hết hàng'),
 (165, 1, 16, '2024-11-16', 0, 0, 'Hết hàng'),
-(166, 1, 17, '2024-11-16', 0, 300, 'Còn hàng'),
-(167, 1, 18, '2024-11-16', 0, 200, 'Còn hàng'),
-(168, 1, 19, '2024-11-16', 200, 0, 'Hết hàng'),
-(169, 1, 20, '2024-11-16', 200, 0, 'Hết hàng'),
+(166, 1, 17, '2024-11-16', 0, 0, 'Hết hàng'),
+(167, 1, 18, '2024-11-16', 0, 0, 'Hết hàng'),
+(168, 1, 19, '2024-11-16', 0, 0, 'Hết hàng'),
+(169, 1, 20, '2024-11-16', 0, 0, 'Hết hàng'),
 (170, 1, 21, '2024-11-16', 0, 0, 'Hết hàng'),
 (171, 2, 1, '2024-11-16', 0, 110, 'Còn hàng'),
 (172, 2, 2, '2024-11-16', 0, 130, 'Còn hàng'),
@@ -605,7 +627,52 @@ INSERT INTO `khonguyenlieu` (`NLCH_ID`, `mach`, `manl`, `NgayNhap`, `SoLuongBoSu
 (251, 5, 18, '2024-11-16', 0, 300, 'Còn hàng'),
 (252, 5, 19, '2024-11-16', 0, 510, 'Còn hàng'),
 (253, 5, 20, '2024-11-16', 0, 290, 'Còn hàng'),
-(254, 5, 21, '2024-11-16', 0, 130, 'Còn hàng');
+(254, 5, 21, '2024-11-16', 0, 130, 'Còn hàng'),
+(255, 1, 24, NULL, 0, 0, 'Hết hàng'),
+(256, 2, 24, NULL, NULL, NULL, 'Hết hàng'),
+(257, 3, 24, NULL, NULL, NULL, 'Hết hàng'),
+(258, 4, 24, NULL, NULL, NULL, 'Hết hàng'),
+(259, 5, 24, NULL, NULL, NULL, 'Hết hàng'),
+(260, 1, 25, NULL, 0, 0, 'Hết hàng'),
+(261, 2, 25, NULL, NULL, NULL, 'Hết hàng'),
+(262, 3, 25, NULL, NULL, NULL, 'Hết hàng'),
+(263, 4, 25, NULL, NULL, NULL, 'Hết hàng'),
+(264, 5, 25, NULL, NULL, NULL, 'Hết hàng'),
+(265, 1, 25, NULL, 0, 0, 'Hết hàng'),
+(266, 2, 25, NULL, NULL, NULL, 'Hết hàng'),
+(267, 3, 25, NULL, NULL, NULL, 'Hết hàng'),
+(268, 4, 25, NULL, NULL, NULL, 'Hết hàng'),
+(269, 5, 25, NULL, NULL, NULL, 'Hết hàng'),
+(270, 1, 26, NULL, 0, 0, 'Hết hàng'),
+(271, 2, 26, NULL, NULL, NULL, 'Hết hàng'),
+(272, 3, 26, NULL, NULL, NULL, 'Hết hàng'),
+(273, 4, 26, NULL, NULL, NULL, 'Hết hàng'),
+(274, 5, 26, NULL, NULL, NULL, 'Hết hàng'),
+(275, 1, 26, NULL, 0, 0, 'Hết hàng'),
+(276, 2, 26, NULL, NULL, NULL, 'Hết hàng'),
+(277, 3, 26, NULL, NULL, NULL, 'Hết hàng'),
+(278, 4, 26, NULL, NULL, NULL, 'Hết hàng'),
+(279, 5, 26, NULL, NULL, NULL, 'Hết hàng'),
+(280, 1, 26, NULL, 0, 0, 'Hết hàng'),
+(281, 2, 26, NULL, NULL, NULL, 'Hết hàng'),
+(282, 3, 26, NULL, NULL, NULL, 'Hết hàng'),
+(283, 4, 26, NULL, NULL, NULL, 'Hết hàng'),
+(284, 5, 26, NULL, NULL, NULL, 'Hết hàng'),
+(285, 1, 27, NULL, 0, 0, 'Hết hàng'),
+(286, 2, 27, NULL, NULL, NULL, 'Hết hàng'),
+(287, 3, 27, NULL, NULL, NULL, 'Hết hàng'),
+(288, 4, 27, NULL, NULL, NULL, 'Hết hàng'),
+(289, 5, 27, NULL, NULL, NULL, 'Hết hàng'),
+(290, 1, 24, NULL, NULL, 0, 'Hết hàng'),
+(291, 2, 24, NULL, NULL, 0, 'Hết hàng'),
+(292, 3, 24, NULL, NULL, 0, 'Hết hàng'),
+(293, 4, 24, NULL, NULL, 0, 'Hết hàng'),
+(294, 5, 24, NULL, NULL, 0, 'Hết hàng'),
+(295, 1, 25, NULL, NULL, 0, 'Hết hàng'),
+(296, 2, 25, NULL, NULL, 0, 'Hết hàng'),
+(297, 3, 25, NULL, NULL, 0, 'Hết hàng'),
+(298, 4, 25, NULL, NULL, 0, 'Hết hàng'),
+(299, 5, 25, NULL, NULL, 0, 'Hết hàng');
 
 -- --------------------------------------------------------
 
@@ -796,19 +863,43 @@ INSERT INTO `lichlamviec` (`malamviec`, `cocalam`, `mand`, `ngaylamviec`, `macal
 (199, NULL, 9, '2024-12-02', 3),
 (202, NULL, 22, '2024-12-02', 3),
 (207, NULL, 23, '2024-12-02', 3),
-(211, NULL, 7, '2024-12-02', 4),
 (212, NULL, 0, '2024-12-02', 4),
 (213, NULL, 0, '2024-12-02', 4),
 (214, NULL, 8, '2024-12-02', 4),
 (215, NULL, 22, '2024-12-02', 4),
-(216, NULL, 9, '2024-12-02', 4),
 (217, NULL, 22, '2024-12-03', 1),
-(218, NULL, 7, '2024-12-09', 1),
-(219, NULL, 7, '2024-12-10', 1),
 (220, NULL, 47, '2024-12-10', 1),
 (221, NULL, 48, '2024-12-10', 1),
 (222, NULL, 52, '2024-12-10', 1),
-(223, NULL, 53, '2024-12-10', 1);
+(223, NULL, 53, '2024-12-10', 1),
+(225, NULL, 8, '2024-12-16', 1),
+(226, NULL, 47, '2024-12-16', 1),
+(227, NULL, 46, '2024-12-16', 1),
+(228, NULL, 50, '2024-12-16', 1),
+(229, NULL, 51, '2024-12-16', 1),
+(232, NULL, 47, '2024-12-16', 2),
+(233, NULL, 49, '2024-12-16', 2),
+(234, NULL, 23, '2024-12-16', 2),
+(235, NULL, 51, '2024-12-16', 2),
+(238, NULL, 9, '2024-12-16', 3),
+(239, NULL, 49, '2024-12-16', 3),
+(240, NULL, 23, '2024-12-16', 3),
+(241, NULL, 51, '2024-12-16', 3),
+(242, NULL, 7, '2024-12-16', 4),
+(243, NULL, 47, '2024-12-16', 4),
+(244, NULL, 49, '2024-12-16', 4),
+(245, NULL, 23, '2024-12-17', 1),
+(246, NULL, 52, '2024-12-17', 1),
+(247, NULL, 8, '2024-12-17', 1),
+(248, NULL, 47, '2024-12-17', 1),
+(249, NULL, 49, '2024-12-17', 1),
+(250, NULL, 50, '2024-12-17', 2),
+(251, NULL, 52, '2024-12-17', 2),
+(252, NULL, 7, '2024-12-16', 2),
+(253, NULL, 7, '2024-12-17', 2),
+(254, NULL, 7, '2024-12-18', 2),
+(255, NULL, 7, '2024-12-19', 2),
+(256, NULL, 7, '2024-12-20', 2);
 
 -- --------------------------------------------------------
 
@@ -950,7 +1041,127 @@ INSERT INTO `lichsunhapkho` (`ID`, `StoreIngredientID`, `ngaynhapkho`, `soluongn
 (106, 254, '2024-11-17', 130),
 (136, 150, '2024-11-19', 30),
 (137, 150, '2024-11-19', 30),
-(138, 192, '2024-11-20', 12);
+(138, 192, '2024-11-20', 12),
+(139, 152, '2024-12-05', 100),
+(140, 150, '2024-12-08', 1),
+(141, 151, '2024-12-08', 1),
+(142, 161, '2024-12-10', 1),
+(151, 213, '2024-12-11', 90),
+(152, 214, '2024-12-11', 20),
+(153, 215, '2024-12-11', 40),
+(154, 216, '2024-12-11', 50),
+(155, 217, '2024-12-11', 40),
+(156, 218, '2024-12-11', 40),
+(157, 219, '2024-12-11', 20),
+(158, 220, '2024-12-11', 30),
+(159, 221, '2024-12-11', 40),
+(160, 222, '2024-12-11', 40),
+(161, 223, '2024-12-11', 50),
+(162, 224, '2024-12-11', 40),
+(163, 225, '2024-12-11', 50),
+(164, 226, '2024-12-11', 60),
+(165, 227, '2024-12-11', 50),
+(166, 228, '2024-12-11', 50),
+(167, 229, '2024-12-11', 50),
+(168, 230, '2024-12-11', 50),
+(169, 231, '2024-12-11', 50),
+(170, 232, '2024-12-11', 50),
+(171, 233, '2024-12-11', 50),
+(172, 258, '2024-12-11', 50),
+(173, 283, '2024-12-11', 50),
+(174, 150, '2024-12-11', 12),
+(175, 151, '2024-12-11', 13),
+(176, 152, '2024-12-11', 12),
+(177, 153, '2024-12-11', 14),
+(178, 154, '2024-12-11', 16),
+(179, 155, '2024-12-11', 17),
+(180, 156, '2024-12-11', 18),
+(181, 157, '2024-12-11', 19),
+(182, 158, '2024-12-11', 20),
+(183, 159, '2024-12-11', 21),
+(184, 160, '2024-12-11', 22),
+(185, 161, '2024-12-11', 23),
+(186, 162, '2024-12-11', 24),
+(187, 163, '2024-12-11', 35),
+(188, 164, '2024-12-11', 36),
+(189, 165, '2024-12-11', 37),
+(190, 166, '2024-12-11', 38),
+(191, 167, '2024-12-11', 39),
+(192, 168, '2024-12-11', 40),
+(193, 169, '2024-12-11', 41),
+(194, 170, '2024-12-11', 42),
+(195, 255, '2024-12-11', 12),
+(196, 280, '2024-12-11', 12),
+(197, 171, '2024-12-11', 12),
+(198, 172, '2024-12-11', 23),
+(199, 173, '2024-12-11', 23),
+(200, 174, '2024-12-11', 23),
+(201, 175, '2024-12-11', 23),
+(202, 176, '2024-12-11', 23),
+(203, 177, '2024-12-11', 23),
+(204, 178, '2024-12-11', 23),
+(205, 179, '2024-12-11', 23),
+(206, 180, '2024-12-11', 23),
+(207, 181, '2024-12-11', 23),
+(208, 182, '2024-12-11', 23),
+(209, 183, '2024-12-11', 23),
+(210, 184, '2024-12-11', 23),
+(211, 185, '2024-12-11', 23),
+(212, 186, '2024-12-11', 23),
+(213, 187, '2024-12-11', 23),
+(214, 188, '2024-12-11', 23),
+(215, 189, '2024-12-11', 21),
+(216, 190, '2024-12-11', 23),
+(217, 191, '2024-12-11', 40),
+(218, 256, '2024-12-11', 20),
+(219, 281, '2024-12-11', 17),
+(220, 192, '2024-12-11', 11),
+(221, 193, '2024-12-11', 12),
+(222, 194, '2024-12-11', 10),
+(223, 195, '2024-12-11', 16),
+(224, 196, '2024-12-11', 17),
+(225, 197, '2024-12-11', 18),
+(226, 198, '2024-12-11', 50),
+(227, 199, '2024-12-11', 60),
+(228, 200, '2024-12-11', 50),
+(229, 201, '2024-12-11', 40),
+(230, 202, '2024-12-11', 40),
+(231, 203, '2024-12-11', 30),
+(232, 204, '2024-12-11', 40),
+(233, 205, '2024-12-11', 40),
+(234, 206, '2024-12-11', 40),
+(235, 207, '2024-12-11', 40),
+(236, 208, '2024-12-11', 40),
+(237, 209, '2024-12-11', 30),
+(238, 210, '2024-12-11', 40),
+(239, 211, '2024-12-11', 30),
+(240, 212, '2024-12-11', 20),
+(241, 257, '2024-12-11', 30),
+(242, 282, '2024-12-11', 30),
+(243, 234, '2024-12-11', 10),
+(244, 235, '2024-12-11', 20),
+(245, 236, '2024-12-11', 30),
+(246, 237, '2024-12-11', 40),
+(247, 238, '2024-12-11', 30),
+(248, 239, '2024-12-11', 40),
+(249, 240, '2024-12-11', 50),
+(250, 241, '2024-12-11', 30),
+(251, 242, '2024-12-11', 20),
+(252, 243, '2024-12-11', 20),
+(253, 244, '2024-12-11', 30),
+(254, 245, '2024-12-11', 30),
+(255, 246, '2024-12-11', 30),
+(256, 247, '2024-12-11', 30),
+(257, 248, '2024-12-11', 30),
+(258, 249, '2024-12-11', 30),
+(259, 250, '2024-12-11', 30),
+(260, 251, '2024-12-11', 30),
+(261, 252, '2024-12-11', 30),
+(262, 253, '2024-12-11', 30),
+(263, 254, '2024-12-11', 30),
+(264, 259, '2024-12-11', 30),
+(265, 284, '2024-12-11', 30),
+(266, 150, '2024-12-11', 100);
 
 -- --------------------------------------------------------
 
@@ -1003,7 +1214,7 @@ CREATE TABLE `monan` (
   `maloaima` int(11) NOT NULL,
   `giaban` decimal(10,0) NOT NULL,
   `soluong` int(11) NOT NULL,
-  `dinhluong` decimal(10,0) NOT NULL,
+  `dinhluong` varchar(255) NOT NULL,
   `trangthai` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1012,28 +1223,28 @@ CREATE TABLE `monan` (
 --
 
 INSERT INTO `monan` (`mama`, `tenma`, `hinhanh`, `maloaima`, `giaban`, `soluong`, `dinhluong`, `trangthai`) VALUES
-(1, 'Gà Rán Giòn', 'garan.jpg', 1, 29000, 98, 0, 'Còn hàng'),
-(2, 'Gà Rán Cay', 'garancay.jpg', 1, 33000, 50, 0, 'Còn hàng'),
-(3, 'Gà Rán Phô Mai', 'garanphomai.jpg', 1, 35000, 30, 0, 'Còn hàng'),
-(4, 'Gà Rán Nguyên Con', 'garannguyencon.jpg', 1, 190000, 20, 0, 'Còn hàng'),
-(5, 'Gà Rán Combo', 'garancombo.jpg', 5, 299000, 10, 0, 'Còn hàng'),
-(6, 'Nước Ngọt Coca', 'nuocngotcoca.jpg', 2, 15000, 200, 0, 'Còn hàng'),
-(7, 'Nước Ngọt Pepsi', 'nuocngotpepsi.jpg', 2, 15000, 200, 0, 'Còn hàng'),
-(8, 'Nước Ngọt Sprite', 'nuocngotsprite.jpg', 2, 15000, 200, 0, 'Còn hàng'),
-(9, 'Nước Ngọt Fanta', 'nuocngotpanta.jpg', 2, 15000, 200, 0, 'Còn hàng'),
-(10, 'Nước Ngọt Coca + Gà Rán', 'garanvacoca.jpg', 5, 39000, 50, 0, 'Còn hàng'),
-(11, 'Mì Ý Bolognese', 'myyolo.jpg', 3, 39000, 30, 0, 'Còn hàng'),
-(12, 'Mì Ý Trung Quốc', 'myytrungquoc.jpg', 3, 39000, 25, 0, 'Còn hàng'),
-(13, 'Mì Ý Hải Sản', 'myyhaisan.jpg', 3, 49000, 20, 0, 'Còn hàng'),
-(14, 'Mì Ý Việt + Gà Rán Cay', 'myyvietvagarancay.jpg', 5, 63000, 15, 0, 'Còn hàng'),
-(15, 'Khoai Tây Chiên', 'khoaitaychien.jpg', 4, 19000, 100, 0, 'Còn hàng'),
-(16, 'Khoai Tây Chiên Phô Mai', 'khoaitaychienphomai.jpg', 4, 25000, 80, 0, 'Còn hàng'),
-(17, 'Gà Rán + Khoai Tây Chiên ', 'garanvakhoaitaychien.jpg', 5, 49000, 30, 0, 'Còn hàng'),
-(18, 'Cánh Gà Rán', 'canhgaran.jpg', 1, 29000, 15, 0, 'Còn hàng'),
-(19, 'Combo Gà Rán', 'combogaran.jpg', 5, 79000, 10, 0, 'Còn hàng'),
-(20, 'Mì Ý Tương Đen', 'mytuongden.jpg', 3, 39000, 12, 0, 'Còn hàng'),
-(21, 'Combo Đặt Biệt', 'combodatbiet.jpg', 5, 299000, 8, 0, 'Còn hàng'),
-(22, 'Gà Rán + Mì Ý', 'garanvamyy.jpg', 5, 69000, 5, 0, 'Còn hàng');
+(1, 'Gà Rán Giòn', 'garan.jpg', 1, 29000, 95, '0', 'Còn hàng'),
+(2, 'Gà Rán Cay', 'garancay.jpg', 1, 33000, 50, '0', 'Còn hàng'),
+(3, 'Gà Rán Phô Mai', 'garanphomai.jpg', 1, 35000, 30, '0', 'Còn hàng'),
+(4, 'Gà Rán Nguyên Con', 'garannguyencon.jpg', 1, 190000, 20, '0', 'Còn hàng'),
+(5, 'Gà Rán Combo', 'garancombo.jpg', 5, 299000, 10, '0', 'Còn hàng'),
+(6, 'Nước Ngọt Coca', 'nuocngotcoca.jpg', 2, 15000, 200, '0', 'Còn hàng'),
+(7, 'Nước Ngọt Pepsi', 'nuocngotpepsi.jpg', 2, 15000, 200, '0', 'Còn hàng'),
+(8, 'Nước Ngọt Sprite', 'nuocngotsprite.jpg', 2, 15000, 200, '0', 'Còn hàng'),
+(9, 'Nước Ngọt Fanta', 'nuocngotpanta.jpg', 2, 15000, 200, '0', 'Còn hàng'),
+(10, 'Nước Ngọt Coca + Gà Rán', 'garanvacoca.jpg', 5, 39000, 50, '0', 'Còn hàng'),
+(11, 'Mì Ý Bolognese', 'myyolo.jpg', 3, 39000, 30, '0', 'Còn hàng'),
+(12, 'Mì Ý Trung Quốc', 'myytrungquoc.jpg', 3, 39000, 25, '0', 'Còn hàng'),
+(13, 'Mì Ý Hải Sản', 'myyhaisan.jpg', 3, 49000, 20, '0', 'Còn hàng'),
+(14, 'Mì Ý Việt + Gà Rán Cay', 'myyvietvagarancay.jpg', 5, 63000, 15, '0', 'Còn hàng'),
+(15, 'Khoai Tây Chiên', 'khoaitaychien.jpg', 4, 19000, 100, '0', 'Còn hàng'),
+(16, 'Khoai Tây Chiên Phô Mai', 'khoaitaychienphomai.jpg', 4, 25000, 80, '0', 'Còn hàng'),
+(17, 'Gà Rán + Khoai Tây Chiên ', 'garanvakhoaitaychien.jpg', 5, 49000, 30, '0', 'Còn hàng'),
+(18, 'Cánh Gà Rán', 'canhgaran.jpg', 1, 29000, 15, '0', 'Còn hàng'),
+(19, 'Combo Gà Rán', 'combogaran.jpg', 5, 79000, 10, '0', 'Còn hàng'),
+(20, 'Mì Ý Tương Đen', 'mytuongden.jpg', 3, 39000, 12, '0', 'Còn hàng'),
+(21, 'Combo Đặt Biệt', 'combodatbiet.jpg', 5, 299000, 8, '0', 'Còn hàng'),
+(22, 'Gà Rán + Mì Ý', 'garanvamyy.jpg', 5, 69000, 5, '0', 'Còn hàng');
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1354,9 @@ INSERT INTO `nguyenlieu` (`manl`, `tennl`, `dongia`, `donvitinh`, `ten_ncc`, `em
 (19, 'Bánh mì sandwich ', 2000, 'Cái', 'Thực phẩm xanh', 'thucphamxanh@example.com', '0909090909', 'banhmisandwich.jpg', NULL),
 (20, 'Pasta', 50000, 'kg', 'Thực phẩm xanh', 'thucphamxanh@example.com', '0909090909', 'pasta.jpg', NULL),
 (21, 'Bánh mì kẹp', 3000, 'cái', 'Thực phẩm xanh', 'thucphamxanh@example.com', '0909090909', 'banhmikep.jpg', NULL),
-(22, 'Phô mai mozzarella', 120000, 'kg', 'Thực phẩm xanh', 'thucphamxanh@example.com', '0909090909', 'phomai.jpg', NULL);
+(22, 'Phô mai mozzarella', 120000, 'kg', 'Thực phẩm xanh', 'thucphamxanh@example.com', '0909090909', 'phomai.jpg', NULL),
+(24, 'cá', 15000, 'kg', 'hoangan', 'hoangan@gmail.com', '0934838366', 'apple.png', NULL),
+(25, 'cá2', 12000, 'kg', 'hoangan', 'hoangan@gmail.com', '0934838366', 'sample_report.docx', 'Đã xóa');
 
 -- --------------------------------------------------------
 
@@ -1161,6 +1374,9 @@ CREATE TABLE `tinhtrangdangkycalam` (
 --
 
 INSERT INTO `tinhtrangdangkycalam` (`mattdk`, `tendklich`) VALUES
+(1, 'Chờ duyệt'),
+(2, 'Đã duyệt'),
+(3, 'Bị từ chối'),
 (1, 'Chờ duyệt'),
 (2, 'Đã duyệt'),
 (3, 'Bị từ chối');
@@ -1266,9 +1482,7 @@ ALTER TABLE `calam`
 ALTER TABLE `chamcong`
   ADD PRIMARY KEY (`machamcong`),
   ADD KEY `fk_calam` (`macalam`),
-  ADD KEY `fk_nguoidung_chamcong` (`mand`),
-  ADD KEY `fk_nvbh_chamcong` (`manvbh`),
-  ADD KEY `fk_nvb_chamcong` (`manvb`);
+  ADD KEY `fk_nguoidung_chamcong` (`mand`);
 
 --
 -- Chỉ mục cho bảng `chitietdonhang`
@@ -1283,12 +1497,6 @@ ALTER TABLE `chitietdonhang`
 --
 ALTER TABLE `cuahang`
   ADD PRIMARY KEY (`mach`);
-
---
--- Chỉ mục cho bảng `dangkycalam`
---
-ALTER TABLE `dangkycalam`
-  ADD PRIMARY KEY (`madkcl`);
 
 --
 -- Chỉ mục cho bảng `danhsachdexuat`
@@ -1393,12 +1601,6 @@ ALTER TABLE `nguyenlieu`
   ADD PRIMARY KEY (`manl`);
 
 --
--- Chỉ mục cho bảng `tinhtrangdangkycalam`
---
-ALTER TABLE `tinhtrangdangkycalam`
-  ADD PRIMARY KEY (`mattdk`);
-
---
 -- Chỉ mục cho bảng `tinhtrangdonhang`
 --
 ALTER TABLE `tinhtrangdonhang`
@@ -1448,19 +1650,13 @@ ALTER TABLE `chamcong`
 -- AUTO_INCREMENT cho bảng `chitietdonhang`
 --
 ALTER TABLE `chitietdonhang`
-  MODIFY `mactdh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `mactdh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `cuahang`
 --
 ALTER TABLE `cuahang`
   MODIFY `mach` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT cho bảng `dangkycalam`
---
-ALTER TABLE `dangkycalam`
-  MODIFY `madkcl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `danhsachdexuat`
@@ -1472,7 +1668,7 @@ ALTER TABLE `danhsachdexuat`
 -- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `madh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `madh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `giohang`
@@ -1484,7 +1680,7 @@ ALTER TABLE `giohang`
 -- AUTO_INCREMENT cho bảng `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT cho bảng `khomonan`
@@ -1496,13 +1692,13 @@ ALTER TABLE `khomonan`
 -- AUTO_INCREMENT cho bảng `khonguyenlieu`
 --
 ALTER TABLE `khonguyenlieu`
-  MODIFY `NLCH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+  MODIFY `NLCH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
 
 --
 -- AUTO_INCREMENT cho bảng `lichlamviec`
 --
 ALTER TABLE `lichlamviec`
-  MODIFY `malamviec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
+  MODIFY `malamviec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- AUTO_INCREMENT cho bảng `lichsucapnhatnguyenlieu`
@@ -1514,7 +1710,7 @@ ALTER TABLE `lichsucapnhatnguyenlieu`
 -- AUTO_INCREMENT cho bảng `lichsunhapkho`
 --
 ALTER TABLE `lichsunhapkho`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=267;
 
 --
 -- AUTO_INCREMENT cho bảng `loaimonan`
@@ -1544,19 +1740,13 @@ ALTER TABLE `nguoidung`
 -- AUTO_INCREMENT cho bảng `nguyenlieu`
 --
 ALTER TABLE `nguyenlieu`
-  MODIFY `manl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT cho bảng `tinhtrangdangkycalam`
---
-ALTER TABLE `tinhtrangdangkycalam`
-  MODIFY `mattdk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `manl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `tinhtrangdonhang`
 --
 ALTER TABLE `tinhtrangdonhang`
-  MODIFY `mattdh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `mattdh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `trangthailamviec`
@@ -1663,7 +1853,462 @@ ALTER TABLE `monan`
 --
 ALTER TABLE `nguoidung`
   ADD CONSTRAINT `fk_cuahang_nguoidung` FOREIGN KEY (`mach`) REFERENCES `cuahang` (`mach`),
-  ADD CONSTRAINT `fk_lamviec_nguoidung` FOREIGN KEY (`mattlv`) REFERENCES `trangthailamviec` (`mattlv`);
+  ADD CONSTRAINT `fk_lamviec_nguoidung` FOREIGN KEY (`mattlv`) REFERENCES `trangthailamviec` (`mattlv`),
+  ADD CONSTRAINT `fk_vaitro` FOREIGN KEY (`mavaitro`) REFERENCES `vaitro` (`mavaitro`);
+--
+-- Cơ sở dữ liệu: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__bookmark`
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) NOT NULL DEFAULT '',
+  `user` varchar(255) NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `query` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__central_columns`
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) NOT NULL,
+  `col_name` varchar(64) NOT NULL,
+  `col_type` varchar(64) NOT NULL,
+  `col_length` text DEFAULT NULL,
+  `col_collation` varchar(64) NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) DEFAULT '',
+  `col_default` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__column_info`
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `column_name` varchar(64) NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `transformation` varchar(255) NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__designer_settings`
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) NOT NULL,
+  `settings_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__export_templates`
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `export_type` varchar(10) NOT NULL,
+  `template_name` varchar(64) NOT NULL,
+  `template_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__favorite`
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__history`
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db` varchar(64) NOT NULL DEFAULT '',
+  `table` varchar(64) NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__navigationhiding`
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) NOT NULL,
+  `item_name` varchar(64) NOT NULL,
+  `item_type` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__pdf_pages`
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__recent`
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Đang đổ dữ liệu cho bảng `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"cuahangthucan_db\",\"table\":\"donhang\"},{\"db\":\"cuahangthucan_db\",\"table\":\"monan\"},{\"db\":\"cuahangthucan_db\",\"table\":\"tinhtrangdonhang\"},{\"db\":\"cuahangthucan_db\",\"table\":\"giohang\"},{\"db\":\"cuahangthucan_db\",\"table\":\"chitietdonhang\"},{\"db\":\"cuahangthucan_db\",\"table\":\"nguoidung\"},{\"db\":\"cuahangthucan_db\",\"table\":\"vaitro\"},{\"db\":\"cuahangthucan_db\",\"table\":\"lichlamviec\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__relation`
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) NOT NULL DEFAULT '',
+  `master_table` varchar(64) NOT NULL DEFAULT '',
+  `master_field` varchar(64) NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__savedsearches`
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `search_name` varchar(64) NOT NULL DEFAULT '',
+  `search_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__table_coords`
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__table_info`
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `display_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__table_uiprefs`
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `prefs` text NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__tracking`
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text NOT NULL,
+  `schema_sql` text DEFAULT NULL,
+  `data_sql` longtext DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__userconfig`
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Đang đổ dữ liệu cho bảng `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2024-12-01 16:14:38', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"vi\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__usergroups`
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) NOT NULL,
+  `tab` varchar(64) NOT NULL,
+  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pma__users`
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) NOT NULL,
+  `usergroup` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Chỉ mục cho bảng `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Chỉ mục cho bảng `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Chỉ mục cho bảng `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Chỉ mục cho bảng `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Chỉ mục cho bảng `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Chỉ mục cho bảng `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Chỉ mục cho bảng `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Chỉ mục cho bảng `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Chỉ mục cho bảng `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Chỉ mục cho bảng `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Chỉ mục cho bảng `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Chỉ mục cho bảng `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Chỉ mục cho bảng `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Cơ sở dữ liệu: `qlbh`
+--
+CREATE DATABASE IF NOT EXISTS `qlbh` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `qlbh`;
+--
+-- Cơ sở dữ liệu: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
