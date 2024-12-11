@@ -184,8 +184,8 @@ class cKhoNguyenLieu {
             return true;
         } else {
             echo '<script>
-                    alert("Đề xuất thất bại thất bại");
-                    window.location.href = "index.php?page=qlnlcuahang";
+                    alert("Vui lòng nhập số lượng đề xuất");
+                    window.location.href = "index.php?page=qlnlcuahang/taodanhsachdexuat";
                   </script>';
             return false;
         }
