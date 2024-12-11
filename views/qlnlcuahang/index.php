@@ -58,7 +58,7 @@ if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
         });
 
         function closeModal() {
-            document.getElementById('confirmReset').style.display = 'none';
+            document.getElementById('confirmreset').style.display = 'none';
         }
 </script>
 

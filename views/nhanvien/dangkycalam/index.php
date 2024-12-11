@@ -108,7 +108,7 @@
                 </table>
                 <input type="hidden" name="ngaylam" id="selected_date">
                 <input type="hidden" name="ca" id="selected_shift">
-                <button type="submit"  name="btn-confirm" id="btn_confirm" class="btn-confirm"> xác nhận
+                <button type="submit"  name="btn-confirm" id="btn_confirm" class="btn-confirm" style ="display: none"> xác nhận
             </form>
         </div>
     </div>

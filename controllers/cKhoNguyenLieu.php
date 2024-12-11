@@ -142,7 +142,7 @@ class cKhoNguyenLieu {
                     echo '<td>'.$j['donvitinh'].'</td>';
                     echo '<td>'.number_format($j['dongia'], 0, ',', '.') . '</td>';
                     echo '<td>'.$j['TinhTrang'].'</td>';
-                    echo '<td><button class="btn-detail" name="btn-detail" value="'.$j['NLCH_ID'].'">Xem chi tiết</button></td>';
+                    echo '<td><button class="btn-detail" name="btn-detail" value="'.$j['NLCH_ID'].'" onclick="saveScrollPosition()">Xem chi tiết</button></td>';
                     echo '</tr>';
                 }
             }
