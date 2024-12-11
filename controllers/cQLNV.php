@@ -12,7 +12,7 @@ if (isset($_GET['action'])) {
     }
 
     if ($_GET['action'] == 'delete' && isset($_GET['mand'])) {
-        $mand = $_GET['mand'];
+        $mand = $employeeModel->giaiMa($_GET['mand']);
         if ($employeeModel->deleteEmployee($mand)) {
             header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=success");
         } else {

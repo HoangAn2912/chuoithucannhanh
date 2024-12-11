@@ -20,7 +20,8 @@ class cChamCong {
     public function luuChamCong($data) {
         $hasError = false; // Biến để kiểm tra xem có lỗi xảy ra hay không
         $hasSelectedEmployee = false; // Biến để kiểm tra xem có nhân viên nào được chọn hay không
-    
+        $errorMessages = []; // Mảng để lưu trữ các thông báo lỗi
+     
         foreach ($data as $employeeId => $attendance) {
             if (isset($attendance['status'])) { // Chỉ lưu nếu ô radio được chọn
                 $hasSelectedEmployee = true; // Đánh dấu rằng có nhân viên được chọn
@@ -29,26 +30,28 @@ class cChamCong {
                 $date = date('Y-m-d');
                 $time = date('H:i:s'); // Lấy thời gian hiện tại theo múi giờ Việt Nam
                 $shiftId = $attendance['shift'] ?? 0;
-                
+                 
                 $employee = $this->model->getNhanVienByCuaHang($employeeId, $_SESSION['mach']);
                 $mand = $employee['mand']; // Lấy mã người dùng từ thông tin nhân viên
                 $tennd = $employee['tennd']; // Lấy tên nhân viên
-    
+     
                 // Kiểm tra xem nhân viên đã được chấm công cho ca làm và ngày này chưa
                 if ($this->model->kiemTraChamCongChua($mand, $shiftId, $date)) {
-                    $_SESSION['error_message'] = "LỖI! Nhân viên $tennd đã được chấm công trước đó!";
+                    $errorMessages[] = "LỖI!!! Nhân viên $tennd đã được chấm công trong ca làm này!";
                     $hasError = true; // Đánh dấu rằng có lỗi xảy ra
                     continue;
                 }
-    
+     
                 $this->model->luuChamCong($mand, $status, $note, $date, $time, $shiftId);
             }
         }
-    
+     
         if (!$hasSelectedEmployee) {
             $_SESSION['error_message'] = "Bạn chưa chọn nhân viên nào để chấm công!";
-        } elseif (!$hasError) {
-            $_SESSION['success_message'] = "Thông tin chấm công đã được lưu thành công!";
+        } elseif ($hasError) {
+            $_SESSION['error_messages'] = $errorMessages; // Lưu các thông báo lỗi vào session
+        } else {
+            $_SESSION['success_message'] = "Chấm công thành công!";
         }
     }
 

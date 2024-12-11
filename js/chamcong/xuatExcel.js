@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (exportButton) {
         exportButton.addEventListener("click", function () {
             if (!window.attendanceDetails || window.attendanceDetails.length === 0) {
-                alert("Không có dữ liệu để xuất.");
+                alert("Không có dữ liệu để xuất");
                 return;
             }
 
