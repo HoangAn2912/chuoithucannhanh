@@ -7,12 +7,61 @@ if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
     header("Refresh: 0; url=index.php"); 
     exit();
 }
-    echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     echo '<script src="js/js_quanlynguyenlieu/qlnl.js?v=1.0"></script>';
     require_once('layout/navqlch.php');
     include_once("views/qlnlcuahang/vqlnl.php");
 ?>
+
+<?php
+    include_once ('controllers/cNguoiDung.php');
+    include_once ('controllers/cKhoNguyenLieu.php');
+    $nguyenlieu = new cKhoNguyenLieu();
+    $nguoidung = new cNguoiDung();
+    $taikhoan = $nguoidung->getNguoiDungByID($_SESSION["dangnhap"]);
+    $mach = $taikhoan[0]['mach'];
+    if (isset($_POST["cf"])) {
+        $nguyenlieu->resetNguyenLieuByCH($mach);
+    }
+?>
+
+<div id="confirmreset" class="modal">
+        <div class="modal-content">
+            <h4>Xác nhận reset kho nguyên liệu</h4>
+            <p>Bạn có chắc muốn xóa tất cả số liệu nhập kho trong hôm nay không?</p>
+            <form action="" method="post">
+                <button type="submit" name="cf">Có</button>
+                <button type="button" onclick="closeModal()">Không</button>
+            </form>
+        </div>
+    </div>
+
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const resetBtn = document.getElementById('reset');
+            const confirmModal = document.getElementById('confirmreset');
+
+            if (resetBtn) {
+                resetBtn.onclick = function(event) {
+                    event.preventDefault();
+                    confirmModal.style.display = 'block';
+                };
+            }
+
+            window.onclick = function(event) {
+                if (event.target === confirmModal) {
+                    closeModal();
+                }
+            };
+        });
+
+        function closeModal() {
+            document.getElementById('confirmreset').style.display = 'none';
+        }
+</script>
+
 <div class="sidebar">
     <form action="" method="post">
         <h4>Trạng thái</h4>
@@ -29,6 +78,7 @@ if (!isset($_SESSION['mavaitro']) || $_SESSION['mavaitro'] != 2) {
         <form action="" method="post" style ="display: flex; align-items: center; justify-content: center; margin: 20px; ">
             <button type="submit" name="" style ="margin: 10px;" class ="filter"><a href="index.php?page=qlnlcuahang/taodanhsachdexuat" style ="text-decoration:none; color: white;">Tạo danh sách đề xuất</a></button>
             <button type="submit" name="" style ="margin: 10px;" class ="filter"><a href="index.php?page=qlnlcuahang/taodonnhaphang" style ="text-decoration:none; color: white;">Tạo danh sách nhập kho</a></button>
+            <button type="submit" id="reset" name="reset" style ="margin: 10px;" class ="filter">Reset</button>
         </form>
         <div class="table-material">
             <form action="" method="post"  class="table-wrapper">

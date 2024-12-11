@@ -1,5 +1,5 @@
 <?php
-    echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
     echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
     echo '<script src="js/js_quanlynguyenlieu/quanlynguyenlieu.js?v=1.0"></script>';
     require_once('layout/navqlch.php');
@@ -69,7 +69,7 @@
                                             <td><img src="image/'.$r['hinh'].'" width="50" height="50"></td>
                                             <td>'.$r["tennl"].'</td>
                                             <td>'.number_format($r['dongia'], 0, ',', '.') .'</td>
-                                            <td><input type="number" name="soluong['.$r['NLCH_ID'].']"></td>
+                                            <td><input type="number" name="soluong['.$r['NLCH_ID'].']" value ="'.$r['SoLuongBoSung'].'"></td>
                                             <td>'.$r["donvitinh"].'</td>
                                             <td>'.$r["TinhTrang"].'</td>
                                         </tr>

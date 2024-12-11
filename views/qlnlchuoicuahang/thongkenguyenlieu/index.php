@@ -2,7 +2,7 @@
 if(!isset($_SESSION['dangnhap'])){
     header("Refresh: 0; url=index.php?page=dangnhap");
 }
-    echo '<link rel="stylesheet" href="css/QLNL/ql.css">';
+    echo '<link rel="stylesheet" href="css/QLNL/qlnl.css">';
     echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
     echo require("layout/navqlchuoi.php");
 ?>

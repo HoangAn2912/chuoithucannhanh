@@ -21,7 +21,7 @@ $mach = $_SESSION["mach"];
 
     require("layout/navnvbh.php");
 ?>
-<div  class="content" id="content">
+<div style="padding: 20px;" class="content" id="content">
     <?php
 
 // Kiểm tra xem người dùng yêu cầu hiển thị chi tiết đơn hàng hay không
@@ -31,52 +31,64 @@ if (isset($_REQUEST["chitietdonhang"])) {
     $orderDetails = $orderController->getchitietdonhang($madh,$mach);
 
     if (!empty($orderDetails)) {
-        $order = $orderDetails[0]; // Lấy đơn hàng đầu tiên (nếu cần)
+        // Lấy thông tin chung của đơn hàng (hiển thị một lần)
+        $order = $orderDetails[0]; // Lấy thông tin từ đơn hàng đầu tiên vì chúng đều giống nhau
         ?>
-        <div style="padding: 20px;" class="content" id="content">
-            <h2 style="color: #db5a04">Chi tiết đơn hàng</h2>
-           <center>
-           <div class="order-detail-container">
-    <div class="recipient-info">
-        <p class="detail-title">Mã đơn hàng:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["madh"]); ?></p>
-
-        <p class="detail-title">Ngày đặt:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["ngaydat"]); ?></p>
-
-        <p class="detail-title">Tên người nhận:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["tennguoinhan"]); ?></p>
-
-        <p class="detail-title">Số điện thoại người nhận:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["sdtnguoinhan"]); ?></p>
-
-        <p class="detail-title">Địa chỉ người nhận:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["diachinguoinhan"]); ?></p>
-
-        <p class="detail-title">Email người nhận:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["emailnguoinhan"]); ?></p>
-
-        <p class="detail-title">Tên món ăn:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["tenma"]); ?></p>
-
-        <p class="detail-title">Số lượng:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["soluong"]); ?></p>
-
-        <p class="detail-title">Đơn giá:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["dongia"]); ?></p>
-
-        <p class="detail-title">Ghi chú:</p>
-        <p class="detail-value"><?php echo htmlspecialchars($order["ghichu"]); ?></p>
-    </div>
-    <a href="index.php?page=nhanvien/quanlydonhang" class="back-button">Quay lại</a>
-</div>
-           </center>
+        <div class="order-detail-container">
+            <div class="recipient-info">
+                <p class="detail-title">Mã đơn hàng:</p>
+                <p class="detail-value"><?php echo htmlspecialchars($order["madh"]); ?></p>
+    
+                <p class="detail-title">Ngày đặt:</p>
+                <p class="detail-value"><?php echo htmlspecialchars($order["ngaydat"]); ?></p>
+    
+                <p class="detail-title">Tên người nhận:</p>
+                <p class="detail-value"><?php echo htmlspecialchars($order["tennguoinhan"]); ?></p>
+    
+                <p class="detail-title">Số điện thoại người nhận:</p>
+                <p class="detail-value"><?php echo htmlspecialchars($order["sdtnguoinhan"]); ?></p>
+    
+                <p class="detail-title">Địa chỉ người nhận:</p>
+                <p class="detail-value"><?php echo htmlspecialchars($order["diachinguoinhan"]); ?></p>
+    
+                <p class="detail-title">Email người nhận:</p>
+                <p class="detail-value"><?php echo htmlspecialchars($order["emailnguoinhan"]); ?></p>
+            </div>
+        </div>
+    
+        <div class="order-items">
+            <h3>Danh sách món ăn</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên món ăn</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Lặp qua các món ăn trong đơn hàng
+                    foreach ($orderDetails as $orderItem) {
+                        ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($orderItem["tenma"]); ?></td>
+                            <td><?php echo htmlspecialchars($orderItem["soluong"]); ?></td>
+                            <td><?php echo htmlspecialchars($orderItem["dongia"]); ?></td>
+                            <td><?php echo htmlspecialchars($orderItem["ghichu"]); ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
         <?php
     } else {
         echo "<p>Không tìm thấy chi tiết đơn hàng.</p>";
-        echo '<a href="index.php?page=nhanvien/quanlydonhang" class="btn btn-secondary">Quay lại</a>';
     }
+    
 } else {
     // Lấy danh sách đơn hàng
     $mach = $_SESSION["mach"]; 
@@ -90,14 +102,15 @@ if (isset($_REQUEST["chitietdonhang"])) {
     } else {
         $orderList = $orderController->selectdanhsachdonhang($mach); 
     }
+    
     ?>
     <div >
-    <center><h1 style="color: #db5a04">Quản lý đơn hàng</h1></center>
+    <h2 style="color: #db5a04">Quản lý đơn hàng</h2>
         <!-- Form tìm kiếm -->
     <div class="qldh-search-bar">
         <form method="GET" action="index.php">
             <input type="hidden" name="page" value="nhanvien/quanlydonhang">
-            <input type="text" name="search" placeholder="Nhập Tên hoặc SĐT cần tìm..." value="<?php echo $searchQuery; ?>" />
+            <input type="text" name="search" placeholder="Nhập tên hoặc SĐT cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
             <button type="submit"><i class="fas fa-search"></i> Tìm</button>
         </form>
     </div>
@@ -126,15 +139,15 @@ if (isset($_REQUEST["chitietdonhang"])) {
                             <td><?php echo htmlspecialchars($order['diachinguoinhan']); ?></td>
                             <td>
                                 <select class="custom-select" onchange="confirmUpdateTinhTrang(<?php echo $order['madh']; ?>, this.value)">
-                                    <?php foreach ($order['statusList'] as $status): ?>
+                                <?php foreach ($order['statusList'] as $status): ?>
                                         <option value="<?php echo $status['mattdh']; ?>" <?php echo ($status['mattdh'] == $order['mattdh']) ? 'selected' : ''; ?>>
-                                            <?php echo $status['tenttdh']; ?>   
+                                            <?php echo htmlspecialchars($status['tenttdh']); ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
                             <td>
-                                <a href="index.php?page=nhanvien/quanlydonhang&chitietdonhang=<?php echo $order['madh']; ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                                <a href="index.php?page=nhanvien/quanlydonhang&chitietdonhang=<?php echo htmlspecialchars($order['madh']); ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -191,7 +204,7 @@ if (isset($_REQUEST["chitietdonhang"])) {
     <title>Quản lý đơn hàng</title>
     <link rel="stylesheet" href="css/DAY/qldh.css">
 <style>  
-        /* Container cho thanh tìm kiếm */
+    /* Container cho thanh tìm kiếm */
     .qldh-search-bar {
         margin-bottom: 20px;
         text-align: left;

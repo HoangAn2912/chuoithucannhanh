@@ -29,11 +29,14 @@ class cNguyenLieu {
         $test = "SELECT * FROM nguyenlieu WHERE tennl = '$tennl'";
         if ($nguyenlieu->selectNguyenLieu($test)) {
             echo "<script>alert('Tên nguyên liệu đã tồn tại');</script>";
+            return false;
         } else {
             if ($nguyenlieu->insertNguyenLieu($sql)) {
                 echo "<script>alert('Thêm thành công');</script>";
+                return true;
             } else {
                 echo "<script>alert('Thêm thất bại');</script>";
+                return false;
             }
         }
     }
