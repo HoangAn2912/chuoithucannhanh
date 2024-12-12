@@ -14,9 +14,9 @@ if (isset($_GET['action'])) {
     if ($_GET['action'] == 'delete' && isset($_GET['mand'])) {
         $mand = $employeeModel->giaiMa($_GET['mand']);
         if ($employeeModel->deleteEmployee($mand)) {
-            header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=success");
+            header("Location: ../index.php?page=qlnv&status=success");
         } else {
-            header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=error");
+            header("Location: ../index.php?page=qlnv&status=error");
         }
         exit();
     }
@@ -55,11 +55,11 @@ if (isset($_GET['action'])) {
         ];
         $result = $employeeModel->addEmployee($data);
         if ($result === "Thêm thành công") {
-            header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=success");
+            header("Location: ../index.php?page=qlnv&status=success");
         } elseif ($result === "Email đã tồn tại") {
-            header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=email_exists");
+            header("Location: ../index.php?page=qlnv&status=email_exists");
         } else {
-            header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=error");
+            header("Location: ../index.php?page=qlnv&status=error");
         }
         exit();
     }
@@ -92,9 +92,9 @@ if (isset($_GET['action'])) {
         }
     
         if ($employeeModel->updateEmployee($data)) {
-            header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=success");
+            header("Location: ../index.php?page=qlnv&status=success");
         } else {
-            header("Location: http://localhost/chuoithucannhanh/index.php?page=qlnv&status=error");
+            header("Location: ../index.php?page=qlnv&status=error");
         }
         exit();
     }
