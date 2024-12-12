@@ -1,5 +1,5 @@
 <?php
-    include_once("models/mTiepNhanDonHang.php");
+    // include_once("models/mTiepNhanDonHang.php");
 	include_once("../models/mketnoi.php");
     class controlDonHang {
 

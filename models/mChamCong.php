@@ -96,7 +96,7 @@ public function kiemTraChamCongChua($mand, $shiftId, $date) {
 
 
 // hàm tính lương
-public function tinhluong($mand, $hourlyRate = 25000, $month = null, $year = null) {
+public function tinhluong($mand, $hourlyRate = 50000, $month = null, $year = null) {
     // Truy vấn số ca làm việc của nhân viên, lọc theo tháng và năm nếu có
     $sql = "SELECT *, cc.macalam, COUNT(*) as soCa
             FROM chamcong cc 
@@ -110,7 +110,7 @@ public function tinhluong($mand, $hourlyRate = 25000, $month = null, $year = nul
         $sql .= " AND YEAR(cc.ngaychamcong) = ?";
     }
 
-    $sql .= " GROUP BY cc.macalam";
+    $sql .= " GROUP BY cc.macalam";//để đếm số lần làm việc theo từng mã ca
 
     // Chuẩn bị câu truy vấn
     $stmt = $this->conn->prepare($sql);

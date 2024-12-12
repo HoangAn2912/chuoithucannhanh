@@ -60,7 +60,7 @@ class cChamCong {
     }
 
     //xemluongcuaday
-    public function xemluong($mand, $hourlyRate = 25000, $month, $year) {
+    public function xemluong($mand, $hourlyRate = 50000, $month, $year) {
         // Gọi phương thức tinhluong trong model, truyền thêm tham số tháng và năm
         return $this->model->tinhluong($mand, $hourlyRate, $month, $year);
     }

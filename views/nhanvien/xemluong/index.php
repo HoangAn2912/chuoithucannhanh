@@ -21,7 +21,7 @@ if ($_SESSION['mavaitro'] == 3) {
     header('Location: index.php?page=trangchu');
     exit();
 }
-// Thêm liên kết đến thư viện SweetAlert2
+
 echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 
 $cChamCong = new cChamCong();
