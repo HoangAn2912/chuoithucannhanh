@@ -71,11 +71,6 @@
             foreach ($soluongNhap as $manl => $soluong) {
                 $nguyenlieu->updatequantityadd($soluong, $manl);
             }
-        }else {
-            echo '<script>
-                    alert("Không có nguyên liệu nào được đề xuất");
-                    window.location.href = "index.php?page=qlnlcuahang/taodanhsachdexuat";
-                    </script>';
         }
     }
 ?>
