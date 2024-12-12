@@ -128,3 +128,12 @@ body {
     transform: translateY(-50%);
     color: white;
 }
+
+.header_logo:hover{
+    background-color: #fb9200 !important;
+
+}
+.header_logo img{
+    box-sizing: content-box !important;
+
+}
