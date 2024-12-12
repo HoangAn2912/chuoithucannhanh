@@ -39,6 +39,12 @@ if (isset($_GET['mand'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script>
         function confirmEditEmployee() {
+            // Kiểm tra nếu email trống
+            var email = document.getElementById('editEmployeeEmail').value;
+            if (email === '') {
+                alert("Nhân viên này đã nghỉ việc, không được phép chỉnh sửa");
+                return false;
+            }
             return confirm("Bạn có chắc chắn muốn lưu các thay đổi?");
         }
 
@@ -49,8 +55,6 @@ if (isset($_GET['mand'])) {
         }
     </script>
 </head>
-<style>
-</style>
 <body>
     <div class="main">
         <div class="form-view-nhanvien">
@@ -98,16 +102,19 @@ if (isset($_GET['mand'])) {
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="editEmployeePosition">Chức vụ</label>
-                            <select name="mavaitro" id="editEmployeePosition" required>
-                                <option value="">Chức vụ</option>
+                        <label for="editEmployeePosition">Chức vụ</label>
+                        <select name="mavaitro" id="editEmployeePosition" <?php echo ($editEmployee['mavaitro'] == 0) ? 'disabled' : ''; ?>>
+                            <?php if ($editEmployee['mavaitro'] == 0): ?>
+                                <option value="" selected>Không có</option>
+                            <?php else: ?>
                                 <?php
                                 foreach ($roles as $role) {
                                     $selected = ($role['mavaitro'] == $editEmployee['mavaitro']) ? 'selected' : '';
                                     echo "<option value='{$role['mavaitro']}' {$selected}>{$role['tenvaitro']}</option>";
-                                }                                
+                                }
                                 ?>
-                            </select>
+                            <?php endif; ?>
+                        </select>
                         </div>
                         <div class="form-group">
                             <label for="editBranch">Chi nhánh</label>

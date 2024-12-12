@@ -77,8 +77,14 @@ if (isset($_GET['action'])) {
             'mavaitro' => $_POST['mavaitro'],
             'mach' => $_POST['mach']
         ];
+
+         // Kiểm tra nếu email trống
+         if (empty($data['email'])) {
+            echo "<script>alert('Nhân viên này đã nghỉ việc, không được phép chỉnh sửa'); window.location.href='../../index.php?page=qlnv';</script>";
+            exit();
+        }
     
-        // Check if new password is provided
+        // Kiểm tra nếu có mật khẩu mới
         if (!empty($_POST['matkhau'])) {
             $data['matkhau'] = md5($_POST['matkhau']);
         } else {
