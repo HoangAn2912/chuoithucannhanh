@@ -33,11 +33,11 @@ if (isset($_POST["btn-detail"])) {
     $monan = new cMonAn();
     if(isset($_POST["add"])){
         echo 
-        '<form method="post" enctype="multipart/form-data">
+        '<form method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
             <div class="container" id="ingredient-details">
                 <div class="header">
                     <span><button class="close-btn" onclick="closeIngredientDetails()">✖</button></span>
-                </div>s
+                </div>
                 <h3 style="color: #db5a04;">Thêm món ăn</h3>
                 <div class="themnguyenlieu">
                     <div class="form-group">
@@ -48,9 +48,15 @@ if (isset($_POST["btn-detail"])) {
                         <label>Hình ảnh</label>
                         <input type="file" id="hinh" name="hinh" required>
                     </div>
-                    <div class="form-group">
+                   <div class="form-group">
                         <label for="loai">Loại món ăn</label>
-                        <input type="text" id="loai" name="loai" required>
+                        <select id="loai" name="loai" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="gia">Đơn giá</label>
@@ -89,16 +95,8 @@ if (isset($_POST["btn-detail"])) {
 ?>
 <div class="sidebar">
     <form action="" method="post">
-        <h4>Trạng thái <button type="submit" style="background-color: rgba(0, 0, 0, 0); border: none; color: white" name="filter"><i class="fas fa-filter" style="margin-left: 80px;"></i></button></h4>
-        <input type="checkbox" style="margin-bottom: 30px;" name="trangthai[]" value="Đã duyệt"> Còn <br>
-        <input type="checkbox" style="margin-bottom: 30px;" name="trangthai[]" value="Chờ duyệt"> Hết <br>
-        <h4>Cửa hàng</h4>
-        <?php
-        $DScuaHang = $cuaHang->getCuaHang();
-        foreach ($DScuaHang as $i) {
-            echo '<input style="margin-bottom: 30px;" type="checkbox" name="cuahang[]" value="' . $i['mach'] . '"> ' . $i['tench'] . '<br>';
-        }
-        ?>
+      
+        
         <button class="add" name="add">Thêm mới</button>
         <button class="update" name="update">Cập nhật</button>
     </form>
@@ -186,4 +184,43 @@ if (isset($_POST["btn-detail"])) {
             details.style.display = "none";
         } 
     }
+</script>
+<script>
+function validateForm() {
+    // Lấy giá trị từ các trường input
+    const name = document.getElementById("name").value;
+    const loai = document.getElementById("loai").value;
+    const gia = parseFloat(document.getElementById("gia").value);
+    const dinhluongInputs = document.querySelectorAll('input[name="dinhluong[]"]');
+    
+    // Kiểm tra tên món ăn không được trống
+    if (name.trim() === "") {
+        alert("Tên món ăn không được để trống.");
+        return false;
+    }
+
+    // Kiểm tra loại món ăn không được trống
+    if (loai === "") {
+        alert("Loại món ăn không được để trống.");
+        return false;
+    }
+
+    // Kiểm tra đơn giá phải lớn hơn 0
+    if (isNaN(gia) || gia <= 0) {
+        alert("Đơn giá phải lớn hơn 0.");
+        return false;
+    }
+
+    // Kiểm tra định lượng nguyên liệu không được nhỏ hơn 0
+    for (let i = 0; i < dinhluongInputs.length; i++) {
+        const dinhluong = parseFloat(dinhluongInputs[i].value);
+        if (dinhluong <= 0) {
+            alert("Định lượng các nguyên liệu không được nhỏ hơn 0.");
+            return false;
+        }
+    }
+
+    // Nếu tất cả các điều kiện hợp lệ, cho phép gửi form
+    return true;
+}
 </script>
