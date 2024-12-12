@@ -32,10 +32,16 @@ class cNguyenLieu {
             return false;
         } else {
             if ($nguyenlieu->insertNguyenLieu($sql)) {
-                echo "<script>alert('Thêm thành công');</script>";
+                echo "<script>
+                    alert('Thêm thành công');
+                    window.location.href = 'index.php?page=qlnlchuoicuahang/xemchitiet';
+                </script>";
                 return true;
             } else {
-                echo "<script>alert('Thêm thất bại');</script>";
+                echo "<script>
+                    alert('Thêm thất bại');
+                    window.location.href = 'index.php?page=qlnlchuoicuahang/xemchitiet';
+                </script>";
                 return false;
             }
         }
