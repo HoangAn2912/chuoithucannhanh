@@ -49,7 +49,7 @@ class cChamCong {
         if (!$hasSelectedEmployee) {
             $_SESSION['error_message'] = "Bạn chưa chọn nhân viên nào để chấm công!";
         } elseif ($hasError) {
-            $_SESSION['error_messages'] = $errorMessages; // Lưu các thông báo lỗi vào session
+            $_SESSION['error_messages'] = $errorMessages; 
         } else {
             $_SESSION['success_message'] = "Chấm công thành công!";
         }
