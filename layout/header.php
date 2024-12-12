@@ -72,7 +72,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
                 logoutModal.style.display = 'block';
             };
         }
-
+            //đóng nếu không
         function closeModal() {
             logoutModal.style.display = 'none';
         }
@@ -83,7 +83,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] === 'yes') {
 
         window.onclick = function(event) {
             if (event.target === logoutModal) {
-                closeModal();
+                closeModal();//đóng nếu ấn bên ngoài
             }
         }
     </script>

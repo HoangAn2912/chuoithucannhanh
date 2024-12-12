@@ -3,7 +3,7 @@
         <div>
         <a href="index.php?page=trangchu" class="header_logo"><img src="layout/Screenshot_2024-10-21_225419-removebg-preview.png"  width="50" height="50" style="padding-right: 250px; "alt=""></a>
         </div>
-        <a href="index.php?page=trangchu">Trang Chủ</a>
+        <a href="index.php?page=trangchu">Trang chủ</a>
             <?php
 
                 if (isset($_SESSION["dangnhap"])){
