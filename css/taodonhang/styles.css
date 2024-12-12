@@ -115,7 +115,7 @@ button {
 }  
 
 button:hover {  
-    background-color: #d46013;  
+    background-color: #ff5e00;  
 }  
 
 .order-summary {  
@@ -246,6 +246,10 @@ h2 {
 .btn-thanhtoan, .btn-huy {
     float: right;
     margin-left: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.btn-thanhtoan:hover, .btn-huy:hover {
+    transform: scale(1.1);
 }
 .note-item {
     padding: 2px;

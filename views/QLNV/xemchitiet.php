@@ -20,6 +20,13 @@ if (isset($_GET['mand'])) {
     header("Location: ../../index.php?page=qlnv");
     exit();
 }
+
+if (isset($employeeDetail['ngaysinh'])) {
+    $date = DateTime::createFromFormat('Y-m-d', $employeeDetail['ngaysinh']);
+    $formattedDate = $date ? $date->format('d-m-Y') : $employeeDetail['ngaysinh'];
+} else {
+    $formattedDate = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +35,7 @@ if (isset($_GET['mand'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết nhân viên</title>
-    <link rel="stylesheet" href="../../css/QLNV/views.css?v=1">
+    <link rel="stylesheet" href="../../css/QLNV/views.css?v=2">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>  
@@ -49,8 +56,8 @@ if (isset($_GET['mand'])) {
                         </div>  
                         <div class="form-group">  
                             <label for="employeeBirthdayDetail">Ngày sinh</label>  
-                            <input type="text" id="employeeBirthdayDetail" value="<?php echo htmlspecialchars($employeeDetail['ngaysinh']); ?>" readonly>  
-                        </div>  
+                            <input type="text" id="employeeBirthdayDetail" value="<?php echo htmlspecialchars($formattedDate); ?>" readonly>  
+                        </div> 
                     </div>  
                     <div class="form-row">  
                         <div class="form-group">  

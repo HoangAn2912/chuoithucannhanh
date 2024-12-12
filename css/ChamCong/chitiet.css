@@ -102,11 +102,14 @@ h3 {
     padding: 6px 20px;  
     cursor: pointer;  
     border-radius: 10px;  
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }  
 
 .filter-bar button:hover {  
-    background-color: #da6111;  
-}  
+    font-weight: bold;
+    background-color: #ff5e00;  
+    transform: scale(1.1); 
+}
 
 /* Bảng chi tiết chấm công */  
 .attendance-details {
@@ -160,6 +163,12 @@ h3 {
     cursor: pointer;
     font-size: 16px;
     margin-top: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.back-button-view button:hover{
+    background-color: #ff5e00;
+    transform: scale(1.1); 
 }
 
 .employee-list thead {
@@ -172,4 +181,23 @@ h3 {
 .select-calam label,
 .chon-ngay label {
     font-weight: bold;
+}
+
+.export-button-view button{
+    border: 1px solid  #0e953e;
+    float: right;
+    background-color: transparent;
+    color:  #0e953e;
+    padding: 7px 15px; 
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.export-button-view button:hover {
+    background-color: #0e953e;
+    color: white;
+    transform: scale(1.1); 
 }

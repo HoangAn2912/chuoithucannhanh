@@ -8,6 +8,14 @@ if (!isset($_SESSION['dangnhap'])) {
     exit();
 }
 
+
+if (isset($_SESSION['error_messages']) && count($_SESSION['error_messages']) > 0) {
+    foreach ($_SESSION['error_messages'] as $errorMessage) {
+        echo "<script>alert('$errorMessage');</script>";
+    }
+    unset($_SESSION['error_messages']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,8 +24,8 @@ if (!isset($_SESSION['dangnhap'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chấm Công Nhân Viên</title>
-    <link rel="stylesheet" href="css/QLNV/style.css?v=2">
-    <link rel="stylesheet" href="css/ChamCong/styles.css?v=2">
+    <link rel="stylesheet" href="css/QLNV/style.css?v=1">
+    <link rel="stylesheet" href="css/ChamCong/styles.css?v=1">
 </head>
 <style>
 </style>
@@ -46,7 +54,7 @@ if (!isset($_SESSION['dangnhap'])) {
                             <th>Tên nhân viên</th>
                             <th>Chức vụ</th>
                             <th>Ngày chấm công</th>
-                            <th>Ca làm</th>
+                            <th>Chọn ca làm</th>
                             <th>Trạng thái</th>
                             <th>Ghi chú</th>
                         </tr>
@@ -80,13 +88,23 @@ if (!isset($_SESSION['dangnhap'])) {
         </form> 
     </div>
     <script>
-        function confirmSaveAttendance() {
-            return confirm('Bạn có chắc chắn muốn lưu thông tin chấm công không?');
-        }
-        <?php if (isset($_SESSION['error_message'])): ?>
-                alert("<?php echo $_SESSION['error_message']; ?>");
-                <?php unset($_SESSION['error_message']); ?>
-        <?php endif; ?>
-    </script>
+    function confirmSaveAttendance() {
+        return confirm('Bạn có chắc chắn muốn lưu thông tin chấm công không?');
+    }
+    <?php if (isset($_SESSION['error_message'])): ?>
+        alert("<?php echo $_SESSION['error_message']; ?>");
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['error_messages']) && count($_SESSION['error_messages']) > 0): ?>
+        <?php foreach ($_SESSION['error_messages'] as $errorMessage): ?>
+            alert("<?php echo $errorMessage; ?>");
+        <?php endforeach; ?>
+        <?php unset($_SESSION['error_messages']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['success_message'])): ?>
+        alert("<?php echo $_SESSION['success_message']; ?>");
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+</script>
 </body>
 </html>

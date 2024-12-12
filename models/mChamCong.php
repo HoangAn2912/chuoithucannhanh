@@ -66,12 +66,13 @@ class mChamCong {
         }
     }
 public function laydulieuchamcong($mach, $shiftId, $date) {
-    $sql = "SELECT nguoidung.tennd,COALESCE(vaitro.tenvaitro, 'Không có') AS tenvaitro, calam.tenca, chamcong.trangthai, chamcong.ghichu
+    $sql = "SELECT nguoidung.tennd,COALESCE(vaitro.tenvaitro, 'Không có') AS tenvaitro, calam.tenca, chamcong.trangthai, chamcong.ghichu, chamcong.thoigianvao
             FROM chamcong
             JOIN nguoidung ON chamcong.mand = nguoidung.mand
             LEFT JOIN vaitro ON nguoidung.mavaitro = vaitro.mavaitro
             JOIN calam ON chamcong.macalam = calam.macalam
-            WHERE chamcong.macalam = ? AND chamcong.ngaychamcong = ? AND nguoidung.mach = ?";
+            WHERE chamcong.macalam = ? AND chamcong.ngaychamcong = ? AND nguoidung.mach = ?
+            ORDER BY chamcong.trangthai";
     $stmt = $this->conn->prepare($sql);
     $stmt->bind_param("isi", $shiftId, $date, $mach);
     $stmt->execute();

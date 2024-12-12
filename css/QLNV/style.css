@@ -99,7 +99,7 @@ h3 {
 }  
 
 .qlnv-search-bar button:hover {  
-    background-color: #da6111;  
+    background-color: #ff5e00;  
 }  
 
 /* Chọn chi nhánh */  
@@ -164,10 +164,13 @@ table.employee-list td a {
     text-decoration: none;  
     color: #FF7E29;  
     margin-right: 10px;  
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }  
 
 table.employee-list td a:hover {  
-    text-decoration: underline;  
+    text-decoration: underline; 
+    color: #ff5e00;  
+    transform: scale(1.3); 
 }  
 
 .add-NV {  
@@ -184,10 +187,12 @@ table.employee-list td a:hover {
     border-radius: 10px;  
     cursor: pointer;  
     margin-top: 20px;  
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }  
 
 .btn-add-NV:hover {  
-    background-color:#d76417 ; 
+    background-color:#ff5e00 ; 
+    transform: scale(1.1); 
 }  
 
 /* Form thêm nhân viên */  
@@ -244,7 +249,7 @@ table.employee-list td a:hover {
 }  
 
 #employeeForm button:hover {  
-    background-color: #d76417;  
+    background-color: #ff5e00;  
 }
 
 
@@ -319,12 +324,15 @@ table.employee-list td a:hover {
     cursor: pointer;  
     border-radius: 10px;  
     font-size: 16px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .btn-view-qlnv:hover,
 .btn-edit-qlnv:hover,
 .btn-delete-qlnv:hover {
-    background-color: #d76417;  
+    background-color: #ff5e00;  
+    transform: scale(1.1); 
+
 }
 
 #editEmployeePosition,
