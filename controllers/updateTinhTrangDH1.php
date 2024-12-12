@@ -14,13 +14,6 @@ if (isset($_POST['madh']) && isset($_POST['mattdh'])) {
     // Gọi hàm cUpdateTinhTrang từ controller
     $result = $control->cUpdateTinhTrang($madh, $mattdh);
 
-    // Kiểm tra kết quả và trả về thông báo cho AJAX
-//     if ($result) {
-//         // echo "Cập nhật tình trạng thành công!";
-//     } else {
-//         // echo "Cập nhật tình trạng thất bại!";
-//     }
-// } else {
-//     // echo "Dữ liệu không hợp lệ!";
+   
  }
 ?>
