@@ -14,7 +14,7 @@
             $sql = "SELECT dh.*, tt.tenttdh 
                     FROM donhang dh 
                     INNER JOIN tinhtrangdonhang tt ON dh.mattdh = tt.mattdh
-                    WHERE dh.mach = ?"; // where mã cửa hàng
+                    WHERE dh.mach = ?";
 
             $stmt = $this->conn->prepare($sql);
 
@@ -25,10 +25,8 @@
             // Gán tham số
             $stmt->bind_param("i", $mach);
 
-            // Thực thi câu lệnh
+            // lấykq
             $stmt->execute();
-
-            // Lấy kết quả
             $result = $stmt->get_result();
 
             if ($result === false) {
@@ -71,10 +69,8 @@
             // Gán tham số cho truy vấn
             $stmt->bind_param("ii", $madh, $mach);
 
-            // Thực thi câu lệnh
+            // Thực thi lấykq
             $stmt->execute();
-
-            // Lấy kết quả
             $result = $stmt->get_result();
 
             if ($result === false) {
