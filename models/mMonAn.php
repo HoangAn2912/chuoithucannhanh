@@ -30,5 +30,17 @@ class mMonAn {
 
         return $stmt->execute([$name, $loai, $gia, $congthuc, $mama]);
     }
+
+    public function mDeleteMonAn($mama){
+        $p = new ketnoi();
+        $sql = "DELETE FROM monan WHERE mama = '$mama'";	
+        try{
+            $con = $p -> ketnoi();
+            $kq = mysqli_query($con, $sql);
+            return $kq;
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }
 ?>

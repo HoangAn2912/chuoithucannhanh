@@ -1,4 +1,50 @@
-/* Container của chi tiết đơn hàng */
+/* Container cho thanh tìm kiếm */
+.qldh-search-bar {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Input tìm kiếm */
+.qldh-search-bar input[type="text"] {
+    padding: 8px 15px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    width: 60%;
+    max-width: 250px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 10px;
+}
+
+/* Khi focus vào ô input */
+.qldh-search-bar input[type="text"]:focus {
+    border-color: #4CAF50; /* Màu xanh khi focus */
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Nút tìm kiếm */
+.qldh-search-bar button {
+    padding: 8px 15px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hiệu ứng hover cho nút tìm kiếm */
+.qldh-search-bar button:hover {
+    background-color: #45a049;
+}
+
+/* Biểu tượng tìm kiếm */
+.qldh-search-bar button i {
+    font-size: 16px;
+}
+
+    /* Container của chi tiết đơn hàng */
 .content {
     background-color: #ffffff;
     padding: 20px;
@@ -108,6 +154,8 @@ td a:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     width: 80%;
+    height: 500px;
+    overflow: auto;
 }
 
 h2 {

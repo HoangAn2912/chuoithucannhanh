@@ -33,16 +33,20 @@ if (isset($_POST["btn-detail"])) {
     $monan = new cMonAn();
     if(isset($_POST["add"])){
         echo 
-        '<form method="post">
+        '<form method="post" enctype="multipart/form-data">
             <div class="container" id="ingredient-details">
                 <div class="header">
                     <span><button class="close-btn" onclick="closeIngredientDetails()">✖</button></span>
-                </div>
+                </div>s
                 <h3 style="color: #db5a04;">Thêm món ăn</h3>
                 <div class="themnguyenlieu">
                     <div class="form-group">
                         <label for="name">Tên món ăn</label>
                         <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hình ảnh</label>
+                        <input type="file" id="hinh" name="hinh" required>
                     </div>
                     <div class="form-group">
                         <label for="loai">Loại món ăn</label>
@@ -72,15 +76,16 @@ if (isset($_POST["btn-detail"])) {
         $name = $_POST['name'];
         $loai = $_POST['loai'];
         $gia=  $_POST['gia'];
+        $hinhanh= $_FILES['hinh']['name'];
         $congthuc = '';
         foreach ($_POST['dinhluong'] as $key => $dinhluong) {
             if(!empty($dinhluong)){
                 $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
             }
-        }
+        }if(move_uploaded_file($_FILES['hinh']['tmp_name'],'img/'.$hinhanh)){
 
-        $monan->addMonAn($name, $loai, $gia, $congthuc, 'hinhanh');
-    }
+        $monan->addMonAn($name, $loai, $gia, $congthuc, $hinhanh);
+    }}
 ?>
 <div class="sidebar">
     <form action="" method="post">

@@ -95,6 +95,12 @@ class cMonAn {
         // $sql = "UPDATE monan SET tenma = '$name', maloaima = '$loai', giaban = $gia, congthuc = '$congthuc' WHERE mama = $mama";
         return $monan->updateMonAn($mama, $name, $loai, $gia, $congthuc);
     }
+
+    public function cDeleteMonAn($mama){
+        $o=new mMonAn();
+        $kq=$o->mDeleteMonAn($mama);
+        return $kq;
+    }
     
 }
 ?>

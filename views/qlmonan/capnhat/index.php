@@ -9,6 +9,9 @@ if(!isset($_SESSION['dangnhap'])){
     include_once("controllers/cNguyenLieu.php");
     include_once("controllers/cMonAn.php");
 ?>
+<div class="sidebar">
+<a href="index.php?page=qlmonan/xemchitiet">Quay lại</a>
+</div>
 <?php
     include_once("controllers/cMonAn.php");
     $monan = new cMonAn();
@@ -24,6 +27,10 @@ if(!isset($_SESSION['dangnhap'])){
                     <div class="form-group">
                         <label for="name">Tên món ăn</label>
                         <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hình ảnh</label>
+                        <input type="file" id="hinh" name="hinh" required>
                     </div>
                     <div class="form-group">
                         <label for="loai">Loại món ăn</label>
@@ -60,11 +67,11 @@ if(!isset($_SESSION['dangnhap'])){
                 $congthuc .= 'ID: ' . $_POST['nguyenlieu_id'][$key]. ', Dinhluong: ' . $dinhluong.', ';
             }
         
-        }
+        }if(move_uploaded_file($_FILES['hinh']['tmp_name'],'img/'.$hinhanh)){
             $monan->addMonAn($name, $loai, $gia, $congthuc,$hinhanh);
         
         }
-    
+    }
     
 
 ?>
@@ -120,22 +127,6 @@ if(!isset($_SESSION['dangnhap'])){
     }
 ?>
 
-<div class="sidebar">
-    <form action=""  method="post">
-        <h4>Trạng thái</h4>
-            <a href=""><label><input type="checkbox" name="trangthai"> Còn</label></a>
-            <a href=""><label><input type="checkbox" name="trangthai"> Hết</label></a>
-        <h4>Cửa hàng</h4>
-            <a href=""><label><input type="checkbox" name="cuahang" value="1"> Cửa hàng 1</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="2"> Cửa hàng 2</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="3"> Cửa hàng 3</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="4"> Cửa hàng 4</label></a>
-            <a href=""><label><input type="checkbox" name="cuahang" value="5"> Cửa hàng 5</label></a>
-            <button class="add" name="add">Thêm mới</button>
-            <button class="update" name="update">Cập nhật</button>
-
-    </form>
-</div>
     <div style="margin-left: 210px; padding: 20px;" class="content">
         <h4 style="color: #db5a04">DANH SÁCH MÓN ĂN</h4>
         <div class="table-material" style ="max-height: 400px; overflow-y: auto;">
@@ -171,7 +162,8 @@ if(!isset($_SESSION['dangnhap'])){
                                 echo '<a href="#" class="option" style="text-decoration: none;">Tùy chọn <i class="fas fa-caret-down"></i></a>';
                                 echo '<div class="dropdown-content" style="background-color: white; min-width: 50px; border-radius: 10px; border: 1px solid;">';
                                     echo '<ul type=none>';
-                                        echo '<li><button class="delete" name="delete" onclick="return confirm(\'Ban co chac muon xoa sp nay khong?\')" type="submit">xóa</button></li>';
+                                    echo "<input type='hidden' name='mama' value='{$i["mama"]}' />";
+                                    echo "<li><button type='submit' class='btn btn-danger' name='btnDelete' onclick='return confirm(\"Bạn có xác định xóa món ăn này không?\");'>Xóa</button></li>";
                                         echo '<li><button class="edit" name="edit" value ="'.$i['mama'].'">sửa</button></li>';
                                     echo '</ul>';
                             echo '</div>';
@@ -219,10 +211,22 @@ if (isset($_POST["btn-update"])) {
     if($monan->updateMonAn($mama, $name, $loai, $gia, $congthuc)){
         echo '<script>alert("Cập nhật thành công!");</script>';
     } else {
-        echo '<script>alert("Cập nhật del thành công!");</script>';
+        echo '<script>alert("Cập nhật không thành công!");</script>';
     }
-}
 
+    
+}
+if (isset($_POST['btnDelete'])) {
+    $mama = $_POST['mama'];
+        $monan = new cMonAn();
+        $result = $monan->cDeleteMonAn($mama);
+        if ($result) {
+            echo "<script>alert('Xóa món ăn thành công!'); window.location.href = 'index.php?page=qlmonan/capnhat';</script>";
+            exit();
+        } else {
+            echo "<script>alert('Xóa món ăn thất bại!');</script>";
+        }
+    }
 
 
 ?>

@@ -105,59 +105,61 @@ if (isset($_REQUEST["chitietdonhang"])) {
     
     ?>
     <div >
-    <h2 style="color: #db5a04">Quản lý đơn hàng</h2>
+        <h2 style="color: #db5a04">Quản lý đơn hàng</h2>
         <!-- Form tìm kiếm -->
-    <div class="qldh-search-bar">
-        <form method="GET" action="index.php">
-            <input type="hidden" name="page" value="nhanvien/quanlydonhang">
-            <input type="text" name="search" placeholder="Nhập tên hoặc SĐT cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
-            <button type="submit"><i class="fas fa-search"></i> Tìm</button>
-        </form>
-    </div>
+            <div class="qldh-search-bar">
+            <form method="GET" action="index.php">
+                <input type="hidden" name="page" value="nhanvien/quanlydonhang">
+                <input type="text" name="search" placeholder="Nhập tên hoặc SĐT cần tìm..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
+                <button type="submit"><i class="fas fa-search"></i> Tìm</button>
+            </form>
+        </div>
 
         <?php if (!empty($orderList)): ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mã đơn hàng</th>
-                        <th>Ngày đặt</th>
-                        <th>Tên khách hàng</th>
-                        <th>Số điện thoại</th>
-                        <th>Địa chỉ</th>
-                        <th>Trạng thái</th>
-                        <th>Tùy chọn</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <?php foreach ($orderList as $order): ?>
+            <div style ="overflow: auto; height: 400px;">
+                <table>
+                    <thead style ="position: sticky; top: 0; z-index: 1;">
                         <tr>
-                            <td><?php echo htmlspecialchars($order['madh']); ?></td>
-                            <td><?php echo htmlspecialchars($order['ngaydat']); ?></td>
-                            <td><?php echo htmlspecialchars($order['tennguoinhan']); ?></td>
-                            <td><?php echo htmlspecialchars($order['sdtnguoinhan']); ?></td>
-                            <td><?php echo htmlspecialchars($order['diachinguoinhan']); ?></td>
-                            <td>
-                                <select class="custom-select" onchange="confirmUpdateTinhTrang(<?php echo $order['madh']; ?>, this.value)">
-                                <?php foreach ($order['statusList'] as $status): ?>
-                                        <option value="<?php echo $status['mattdh']; ?>" <?php echo ($status['mattdh'] == $order['mattdh']) ? 'selected' : ''; ?>>
-                                            <?php echo htmlspecialchars($status['tenttdh']); ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                            <td>
-                                <a href="index.php?page=nhanvien/quanlydonhang&chitietdonhang=<?php echo htmlspecialchars($order['madh']); ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
-                            </td>
+                            <th>Mã đơn hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Trạng thái</th>
+                            <th>Tùy chọn</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        
+                        <?php foreach ($orderList as $order): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($order['madh']); ?></td>
+                                <td><?php echo htmlspecialchars($order['ngaydat']); ?></td>
+                                <td><?php echo htmlspecialchars($order['tennguoinhan']); ?></td>
+                                <td><?php echo htmlspecialchars($order['sdtnguoinhan']); ?></td>
+                                <td><?php echo htmlspecialchars($order['diachinguoinhan']); ?></td>
+                                <td>
+                                    <select class="custom-select" onchange="confirmUpdateTinhTrang(<?php echo $order['madh']; ?>, this.value)">
+                                    <?php foreach ($order['statusList'] as $status): ?>
+                                            <option value="<?php echo $status['mattdh']; ?>" <?php echo ($status['mattdh'] == $order['mattdh']) ? 'selected' : ''; ?>>
+                                                <?php echo htmlspecialchars($status['tenttdh']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <a href="index.php?page=nhanvien/quanlydonhang&chitietdonhang=<?php echo htmlspecialchars($order['madh']); ?>" class="btn btn-primary btn-sm">Xem chi tiết</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         <?php else: ?>
             <p>Không có đơn hàng nào.</p>
         <?php endif; ?>
     </div>
-    <?php
+<?php
 }
 
 ?>
@@ -202,54 +204,9 @@ if (isset($_REQUEST["chitietdonhang"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý đơn hàng</title>
-    <link rel="stylesheet" href="css/DAY/qldh.css">
+    <link rel="stylesheet" href="css/DAY/qldh1.css">
 <style>  
-    /* Container cho thanh tìm kiếm */
-    .qldh-search-bar {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-
-    /* Input tìm kiếm */
-    .qldh-search-bar input[type="text"] {
-        padding: 8px 15px;
-        border: 2px solid #ccc;
-        border-radius: 20px;
-        font-size: 14px;
-        width: 60%;
-        max-width: 250px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        margin-right: 10px;
-    }
-
-    /* Khi focus vào ô input */
-    .qldh-search-bar input[type="text"]:focus {
-        border-color: #4CAF50; /* Màu xanh khi focus */
-        box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
-    }
-
-    /* Nút tìm kiếm */
-    .qldh-search-bar button {
-        padding: 8px 15px;
-        background-color: orange;
-        color: white;
-        border: none;
-        border-radius: 20px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    /* Hiệu ứng hover cho nút tìm kiếm */
-    .qldh-search-bar button:hover {
-        background-color: #45a049;
-    }
-
-    /* Biểu tượng tìm kiếm */
-    .qldh-search-bar button i {
-        font-size: 16px;
-    }
-
+    
 </style>
 
 </head>
