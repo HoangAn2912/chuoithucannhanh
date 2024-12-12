@@ -46,10 +46,10 @@ class modelLichLamViec {
             $kq = mysqli_query($con, $sql);
             
             if ($kq && mysqli_num_rows($kq) > 0) {
-                $row = mysqli_fetch_assoc($kq); // Lấy một hàng kết quả
-                return $row['mavaitro']; // Trả về trực tiếp mã vai trò
+                $row = mysqli_fetch_assoc($kq);
+                return $row['mavaitro']; 
             } else {
-                return null; // Trường hợp không tìm thấy kết quả
+                return null; 
             }
         }
     }

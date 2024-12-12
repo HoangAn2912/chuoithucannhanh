@@ -33,8 +33,8 @@ if ($mavaitro == 3) {
 <style>
     .navbar {
             display: flex;
-            justify-content: center; /* Căn giữa các mục */
-            align-items: center; /* Căn giữa theo chiều dọc */
+            justify-content: center;
+            align-items: center; 
         }
     .navbar a {
     color: white !important;
@@ -44,22 +44,22 @@ if ($mavaitro == 3) {
 }
 .form-container {
     display: flex;
-    justify-content: flex-end; /* Căn form sang phải */
-    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    justify-content: flex-end; 
+    align-items: center; 
     width: 100%;
 }
 
 .search-container {
     padding-top: 10px;
     display: flex;
-    gap: 10px; /* Khoảng cách giữa ô tìm kiếm và nút tìm kiếm */
+    gap: 10px; 
 }
 
 
 
 .search-container {
     display: flex;
-    gap: 10px; /* Khoảng cách giữa input và button */
+    gap: 10px; 
 }
 
 .search-container input {
@@ -68,8 +68,8 @@ if ($mavaitro == 3) {
 }
 
 .search{
-    border: 1px solid #333; /* Viền form */
-    border-radius: 20px; /* Bo tròn toàn bộ form */
+    border: 1px solid #333; 
+    border-radius: 20px; 
 }
 
 </style>
@@ -89,7 +89,6 @@ if ($mavaitro == 3) {
 </form>
 <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addCustomerModal">Thêm khách hàng</button>
            
-            <!-- Table khách hàng -->
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -163,7 +162,6 @@ if ($mavaitro == 3) {
    
 <form id="addCustomerForm" method="POST" action="index.php?page=qlkh" enctype="multipart/form-data" name="form1">
     <div class="modal-body">
-        <!-- Bảng không viền -->
         <table class="table" style="border: none;">
             <tr>
                 <td><label for="tennd">Họ và tên:</label></td>
@@ -207,7 +205,6 @@ if ($mavaitro == 3) {
         </table>
     </div>
     <div class="modal-footer text-center">
-        <!-- Canh giữa 2 nút -->
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
         <button type="submit" class="btn btn-success" name="btnInsertKhachHang" id="submitForm">Lưu</button>
 
@@ -279,7 +276,6 @@ if ($mavaitro == 3) {
 <?php
 // Xử lý Thêm khách hàng
 if (isset($_POST['btnInsertKhachHang'])) {
-    // Thêm khách hàng
     $tennd = $_POST['tennd'];
     $ngaysinh = $_POST['ngaysinh'];
     $gioitinh = $_POST['gioitinh'];
@@ -287,8 +283,6 @@ if (isset($_POST['btnInsertKhachHang'])) {
     $email = $_POST['email'];
     $diachi = $_POST['diachi'];
     $matkhau = $_POST['matkhau'];
-
-    // Gọi phương thức thêm
     $controller = new controlQuanLyKhachHang();
     $result = $controller->cInsertKhachHang($tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
 
@@ -302,7 +296,7 @@ if (isset($_POST['btnInsertKhachHang'])) {
 
 // Xử lý Sửa khách hàng
 if (isset($_POST['btnEditKhachHang'])) {
-    $makh = $_POST['makh']; // lấy mã khách hàng
+    $makh = $_POST['makh']; 
     $tennd = $_POST['tennd'];
     $ngaysinh = $_POST['ngaysinh'];
     $gioitinh = $_POST['gioitinh'];
@@ -310,8 +304,6 @@ if (isset($_POST['btnEditKhachHang'])) {
     $email = $_POST['email'];
     $diachi = $_POST['diachi'];
     $matkhau = $_POST['matkhau'];
-
-    // Gọi phương thức sửa
     $controller = new controlQuanLyKhachHang();
     $result = $controller->cUpdateKhachHang($makh, $tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau);
 
@@ -342,7 +334,6 @@ if (isset($_POST['btnDeleteKhachHang'])) {
 ?>
 
     <!-- Thêm bootstrap JS -->
- 
     <script src="js/qlkh/qlkh.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

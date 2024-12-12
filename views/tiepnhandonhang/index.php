@@ -72,10 +72,8 @@ $mach = $_SESSION["mach"];
                         echo "<td style='text-align: center;'>".number_format($tongtien, 0, ',', '.')." VNĐ</td>";
                         echo "<td style='text-align: center;'>".$r['ngaydat']."</td>";
 
-                        // Reset con trỏ dữ liệu về đầu danh sách trước khi hiển thị các tùy chọn tình trạng
                         mysqli_data_seek($tinhTrangOptions, 0); 
 
-                        // Dropdown tình trạng với các tùy chọn từ $tinhTrangOptions
                         echo "<td style='text-align: center;'><select onchange='confirmUpdateTinhTrang({$r['madh']}, this.value)'>";
                         while ($option = mysqli_fetch_assoc($tinhTrangOptions)) {
                             $selected = ($r['tinhtrang'] == $option['tenttdh']) ? 'selected' : '';
@@ -96,7 +94,6 @@ $mach = $_SESSION["mach"];
 </div>          
 
 <script>
-// Hàm xác nhận thay đổi tình trạng đơn hàng
 function confirmUpdateTinhTrang(madh, mattdh) {
     if (confirm("Bạn có chắc chắn muốn thay đổi tình trạng đơn hàng này?")) {
         updateTinhTrang(madh, mattdh);
@@ -106,7 +103,6 @@ function confirmUpdateTinhTrang(madh, mattdh) {
     }
 }
 
-// Hàm thực hiện gửi dữ liệu cập nhật tình trạng đơn hàng qua AJAX
 function updateTinhTrang(madh, mattdh) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "controllers/updateTinhTrangDH.php", true);
@@ -118,8 +114,6 @@ function updateTinhTrang(madh, mattdh) {
             location.reload();        
         }
     };
-    
-    // Gửi dữ liệu qua POST
     xhr.send("madh=" + encodeURIComponent(madh) + "&mattdh=" + encodeURIComponent(mattdh));
 }
 

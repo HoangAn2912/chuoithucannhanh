@@ -24,7 +24,6 @@
 			if ($con->connect_errno) {
 				return false;
 			} else {
-				// Sử dụng LIKE với dấu % để tìm kiếm một phần tên
 				$sql = "SELECT * FROM khachhang WHERE tennd LIKE N'%$tennd%'";
 				$kq = mysqli_query($con, $sql);
 				return $kq;
@@ -123,10 +122,10 @@
 				$kq = mysqli_query($con, $sql);
 				
 				if ($kq && mysqli_num_rows($kq) > 0) {
-					$row = mysqli_fetch_assoc($kq); // Lấy một hàng kết quả
-					return $row['mavaitro']; // Trả về trực tiếp mã vai trò
+					$row = mysqli_fetch_assoc($kq); 
+					return $row['mavaitro']; 
 				} else {
-					return null; // Trường hợp không tìm thấy kết quả
+					return null; 
 				}
 			}
 		}
