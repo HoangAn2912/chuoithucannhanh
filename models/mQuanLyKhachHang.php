@@ -24,7 +24,6 @@
 			if ($con->connect_errno) {
 				return false;
 			} else {
-				// Sử dụng LIKE với dấu % để tìm kiếm một phần tên
 				$sql = "SELECT * FROM khachhang WHERE tennd LIKE N'%$tennd%'";
 				$kq = mysqli_query($con, $sql);
 				return $kq;
@@ -58,22 +57,36 @@
 
         public function mUpdateKhachHang($makh, $tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau){
 			$p = new ketnoi();
-			$con = $p -> ketnoi();
-            $matkhau = md5($matkhau);
-			if($con -> connect_errno){
+			$con = $p->ketnoi();
+			$matkhau = md5($matkhau);
+			
+			if ($con->connect_errno) {
 				return false;
-			}else{
-				$sql = "UPDATE khachhang 
-            	SET tennd = '$tennd', 
-                ngaysinh = '$ngaysinh', 
-                gioitinh = $gioitinh, 
-                sodienthoai = '$sodienthoai', 
-                email = '$email', 
-                diachi = '$diachi' where makh = $makh";	
-				$kq = mysqli_query($con, $sql);
-				return $kq;
+			} else {
+				// Kiểm tra xem email đã tồn tại trong bảng nhưng không thuộc khách hàng hiện tại
+				$sqlCheckEmail = "SELECT * FROM khachhang WHERE email = '$email' AND makh != $makh";
+				$resultCheckEmail = mysqli_query($con, $sqlCheckEmail);
+		
+				if (mysqli_num_rows($resultCheckEmail) > 0) {
+					// Nếu email đã tồn tại, không cho phép sửa
+					return false;
+				} else {
+					// Thực hiện cập nhật nếu email không trùng lặp
+					$sql = "UPDATE khachhang 
+							SET tennd = '$tennd', 
+								ngaysinh = '$ngaysinh', 
+								gioitinh = $gioitinh, 
+								sodienthoai = '$sodienthoai', 
+								email = '$email', 
+								diachi = '$diachi' 
+							WHERE makh = $makh";
+					
+					$kq = mysqli_query($con, $sql);
+					return $kq;
+				}
 			}
 		}
+		
 
 		public function checkEmailTrungLap($email) {
 			$p = new ketnoi();
@@ -123,10 +136,10 @@
 				$kq = mysqli_query($con, $sql);
 				
 				if ($kq && mysqli_num_rows($kq) > 0) {
-					$row = mysqli_fetch_assoc($kq); // Lấy một hàng kết quả
-					return $row['mavaitro']; // Trả về trực tiếp mã vai trò
+					$row = mysqli_fetch_assoc($kq); 
+					return $row['mavaitro']; 
 				} else {
-					return null; // Trường hợp không tìm thấy kết quả
+					return null; 
 				}
 			}
 		}

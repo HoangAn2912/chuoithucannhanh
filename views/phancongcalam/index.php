@@ -50,50 +50,49 @@ $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu c
     <style>
         .navbar {
             display: flex;
-            justify-content: center; /* Căn giữa các mục */
-            align-items: center; /* Căn giữa theo chiều dọc */
+            justify-content: center; 
+            align-items: center; 
         }
 
-        /* CSS tô màu hàng ngang */
+  
         #th {
-            background-color: #FFD580; /* Màu cam nhẹ */
-            color: black; /* Chữ màu đen để dễ đọc */
+            background-color: #FFD580; 
+            color: black; 
             text-align: center;
         }
         th {
-            background-color: #FFD580; /* Màu cam nhẹ */
-            color: black; /* Chữ màu đen để dễ đọc */
+            background-color: #FFD580;
+            color: black; 
             text-align: center;
         }
         td {
             
             vertical-align: middle;
-            background-color: #f9f9f9; /* Nền nhạt */
+            background-color: #f9f9f9; 
         }
         td.has-shift {
-            background-color: #d4edda; /* Nền xanh lá */
+            background-color: #d4edda; 
             text-align: center;
         }
         td.empty-shift {
-            background-color: #f8d7da; /* Nền đỏ nhạt */
+            background-color: #f8d7da; 
             text-align: center;
         }
-        /* Thu hẹp cột Ngày/Ca */
+        
         th:first-child, td:first-child {
-            width: 120px; /* Đặt chiều rộng cụ thể, bạn có thể chỉnh giá trị này */
-            white-space: nowrap; /* Không cho phép xuống dòng */
-            text-align: center; /* Canh giữa nội dung */
+            width: 120px; 
+            white-space: nowrap; 
+            text-align: center; 
         }
 
-        /* Để làm mờ nền sau khi mở modal */
         .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt */
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         .modal-footer {
     display: flex;
-    justify-content: center; /* Căn giữa các nút */
-    gap: 10px; /* Khoảng cách giữa các nút */
+    justify-content: center; 
+    gap: 10px; 
 }
 
     </style>
@@ -113,11 +112,11 @@ $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu c
     // Lấy ngày đầu tuần (Thứ hai) của tuần cần xem
     $firstDayOfWeek = new DateTime();
     $firstDayOfWeek->setISODate($firstDayOfWeek->format('Y'), $firstDayOfWeek->format('W'));
-    $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu có
+    $firstDayOfWeek->modify("$weekOffset week"); 
 
     echo "<table class='table table-bordered'>";
     echo "<thead>";
-    echo "<tr><th id='th'>Ngày/Ca</th>"; // Tiêu đề hàng đầu tiên
+    echo "<tr><th id='th'>Ngày/Ca</th>";
     foreach ($shiftTypes as $shiftType) {
         echo "<th id='th'>$shiftType</th>";
     }
@@ -125,17 +124,17 @@ $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu c
     echo "</thead>";
 
     // Duyệt qua các ngày trong tuần
-    $dayIterator = clone $firstDayOfWeek; // Bản sao của ngày đầu tuần
+    $dayIterator = clone $firstDayOfWeek; 
     foreach ($daysOfWeek as $day) {
-        $date = $dayIterator->format('Y-m-d'); // Định dạng ngày là 'Y-m-d' (ví dụ: 2024-11-19)
+        $date = $dayIterator->format('Y-m-d'); 
         echo "<tr>";
-        echo "<td id='th'>$day <br> ({$dayIterator->format('d/m/Y')})</td>"; // Hiển thị tên ngày
+        echo "<td id='th'>$day <br> ({$dayIterator->format('d/m/Y')})</td>"; 
 
         // Duyệt qua các ca làm việc
         foreach ($shiftTypes as $shiftType) {
-            $assignedEmployees = []; // Lưu danh sách nhân viên đã đăng ký
-            $nvbhCount = 0; // Đếm số nhân viên bán hàng
-            $nvbCount = 0;  // Đếm số nhân viên bếp
+            $assignedEmployees = []; 
+            $nvbhCount = 0; 
+            $nvbCount = 0;  
         
             foreach ($lichLamViec as $shift) {
                 if ($shift['ngaylamviec'] == $date && $shift['tenca'] == $shiftType) {
@@ -157,7 +156,6 @@ $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu c
                 echo "$employee<br>";
             }
         
-           
            // Hiển thị nút phân công chỉ khi có nhóm nhân viên chưa đủ
             if ($nvbhCount < 3 || $nvbCount < 2) {
                 echo "<button class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#assignShiftModal' data-date='$date' data-shift='$shiftType'>Phân công ca</button>
@@ -263,8 +261,6 @@ $('#assignShiftModal').on('click', '.btn-success', function() {
         }
     });
 });
-
-
 
 </script>
 

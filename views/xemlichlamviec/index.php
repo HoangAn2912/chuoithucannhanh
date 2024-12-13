@@ -8,7 +8,6 @@ if(!isset($_SESSION['dangnhap'])){
 $mand = $_SESSION["dangnhap"];
 $weekOffset = isset($_GET['weekOffset']) ? $_GET['weekOffset'] : 0;
 
-// Lấy thông tin lịch làm việc
 include_once("controllers/cLichLamViec.php");
 
 $controller = new controlLichLamViec();
@@ -22,7 +21,7 @@ $currentWeekStart = $currentWeek->format('Y-m-d');
 // Tính toán tuần cần xem dựa trên $weekOffset
 $firstDayOfWeek = new DateTime();
 $firstDayOfWeek->setISODate($firstDayOfWeek->format('Y'), $firstDayOfWeek->format('W'));
-$firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu có
+$firstDayOfWeek->modify("$weekOffset week"); 
 $firstDayOfWeekStart = $firstDayOfWeek->format('Y-m-d');
 
 // Kiểm tra xem có phải tuần hiện tại hay không
@@ -42,34 +41,34 @@ $isCurrentWeek = ($firstDayOfWeekStart == $currentWeekStart);
     <style>
         .navbar {
             display: flex;
-            justify-content: center; /* Căn giữa các mục */
-            align-items: center; /* Căn giữa theo chiều dọc */
+            justify-content: center;
+            align-items: center; 
         }
         #th {
-            background-color: #FFD580; /* Màu cam nhẹ */
-            color: black; /* Chữ màu đen để dễ đọc */
+            background-color: #FFD580; 
+            color: black; 
             text-align: center;
         }
         th {
-            background-color: #FFD580; /* Màu cam nhẹ */
-            color: black; /* Chữ màu đen để dễ đọc */
+            background-color: #FFD580; 
+            color: black; 
             text-align: center;
         }
         td {
             text-align: center;
             vertical-align: middle;
-            background-color: #f9f9f9; /* Nền nhạt */
+            background-color: #f9f9f9; 
         }
         td.has-shift {
-            background-color: #d4edda; /* Nền xanh lá */
+            background-color: #d4edda; 
         }
         td.empty-shift {
-            background-color: #f8d7da; /* Nền đỏ nhạt */
+            background-color: #f8d7da; 
         }
 
             .btn-outline-warning {
-            color: #FB9200; /* Màu chữ vàng */
-            border-color: #FB9200; /* Màu viền vàng */
+            color: #FB9200; 
+            border-color: #FB9200; 
         }
 
         .btn-outline-warning:hover {
@@ -100,14 +99,14 @@ if ($mavaitro == 3) {
 
     <div class="shift">
  <?php
- $weekOffset = isset($_GET['weekOffset']) ? $_GET['weekOffset'] : 0;  // Lấy giá trị weekOffset từ form GET
+ $weekOffset = isset($_GET['weekOffset']) ? $_GET['weekOffset'] : 0;  
 
  ?>       
 <form method="GET" action="index.php?page=xemlichlamviec">
     <div class="text-center">
     <div class="text-center">
     <!-- Nút "Tuần trước" -->
-    <input type="hidden" name="page" value="xemlichlamviec"> <!-- Giữ tham số page -->
+    <input type="hidden" name="page" value="xemlichlamviec"> 
     <button type="submit" id="prevWeek" class="btn btn-outline-warning" name="weekOffset" value="<?php echo $weekOffset - 1; ?>">Tuần trước</button>
 
     <!-- Nút "Tuần hiện tại" -->
@@ -126,18 +125,18 @@ if ($mavaitro == 3) {
 
         // Lấy ngày hiện tại và xác định ngày đầu tuần (thứ Hai)
         $firstDayOfWeek = new DateTime();
-        $firstDayOfWeek->setISODate($firstDayOfWeek->format('Y'), $firstDayOfWeek->format('W')); // Lấy ISO tuần
-        $firstDayOfWeek->modify("$weekOffset week"); // Áp dụng offset tuần nếu có
+        $firstDayOfWeek->setISODate($firstDayOfWeek->format('Y'), $firstDayOfWeek->format('W')); 
+        $firstDayOfWeek->modify("$weekOffset week"); 
 
         echo "<table class='table table-bordered'>";
         echo "<thead><tr><th>Ca/Ngày</th>";
 
         // Hiển thị các ngày trong tuần
-        $dayIterator = clone $firstDayOfWeek; // Tạo bản sao của $firstDayOfWeek để không bị thay đổi trong vòng lặp
+        $dayIterator = clone $firstDayOfWeek; 
         foreach ($daysOfWeek as $day) {
             $date = $dayIterator->format('d/m/Y');
             echo "<th id='th'>$day ($date)</th>";
-            $dayIterator->modify('+1 day'); // Chuyển sang ngày tiếp theo
+            $dayIterator->modify('+1 day'); 
         }
         echo "</tr></thead>";
 
@@ -145,19 +144,17 @@ if ($mavaitro == 3) {
         foreach ($shiftTypes as $shiftType) {
             echo "<tr><td>$shiftType</td>";
 
-            // Tạo bản sao của ngày đầu tuần trước khi bắt đầu vòng lặp các ca làm việc
-            $dayIterator = clone $firstDayOfWeek; // Reset lại $dayIterator trước mỗi ca làm việc
+            $dayIterator = clone $firstDayOfWeek; 
 
             foreach ($daysOfWeek as $day) {
-                $date = $dayIterator->format('Y-m-d'); // Định dạng ngày là 'Y-m-d' (ví dụ: 2024-11-19)
+                $date = $dayIterator->format('Y-m-d'); 
                 $hasShift = false;
 
                 // Kiểm tra xem có ca làm việc vào ngày này không
                 foreach ($lichLamViec as $shift) {
-                    // echo "{$shift['ngaylamviec']} == $date && {$shift['tenca']} == $shiftType<br>"; // Debug so sánh
                     if ($shift['ngaylamviec'] == $date && $shift['tenca'] == $shiftType) {
                         $hasShift = true;
-                        break; // Đã tìm thấy ca làm việc, không cần kiểm tra tiếp
+                        break; 
                     }
                 }
 
@@ -168,7 +165,7 @@ if ($mavaitro == 3) {
                     echo "<td class='empty-shift'>Trống</td>";
                 }
 
-                $dayIterator->modify('+1 day'); // Chuyển sang ngày tiếp theo
+                $dayIterator->modify('+1 day'); 
             }
             echo "</tr>";
         }
@@ -182,25 +179,20 @@ if ($mavaitro == 3) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function changeWeek(offset) {
-        var currentOffset = <?php echo $weekOffset; ?>; // Lấy giá trị tuần hiện tại từ PHP
-        var newOffset = currentOffset + offset; // Thay đổi giá trị tuần
+        var currentOffset = <?php echo $weekOffset; ?>; 
+        var newOffset = currentOffset + offset; 
+        
+        if (newOffset < 0) return; 
 
-        // Nếu tuần trước (offset = -1) và hiện tại đang là tuần đầu tiên, thì không cho phép đi trước nữa
-        if (newOffset < 0) return; // Không cho phép xem tuần trước nếu đang ở tuần 0
-
-        // Lấy URL hiện tại và thay đổi giá trị weekOffset trong URL
         var currentUrl = window.location.href;
         var newUrl = new URL(currentUrl);
 
-        // Thay đổi giá trị của weekOffset
         newUrl.searchParams.set('weekOffset', newOffset);
 
-        // Gửi yêu cầu AJAX với URL mới
         $.ajax({
-            url: newUrl.toString(), // Gửi yêu cầu đến URL mới
+            url: newUrl.toString(), 
             type: 'GET',
             success: function(response) {
-                // Cập nhật phần lịch làm việc trong response
                 $('div.shift').html($(response).find('div.shift').html());
             }
         });

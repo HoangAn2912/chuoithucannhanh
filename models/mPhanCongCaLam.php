@@ -46,7 +46,6 @@ class modelPhanCongCaLam {
     }
 
     public function selectNguoidung($ngaydangky, $macalam) {
-        // lấy được nhân viên có trong ca làm đó
         $sql = "SELECT nguoidung.mand, nguoidung.tennd, calam.tenca, vaitro.tenvaitro
                 FROM lichlamviec 
                 JOIN nguoidung ON lichlamviec.mand = nguoidung.mand
@@ -99,20 +98,17 @@ class modelPhanCongCaLam {
         return $employees;
     }
 
-    // Phương thức lưu phân công ca làm
     public function assignShift($ngaydangky, $tenca, $mand) {
-        // SQL để chèn dữ liệu vào bảng lichlamviec
         $sql = "INSERT INTO lichlamviec (ngaylamviec, macalam, mand)
                 SELECT '$ngaydangky', c.macalam, '$mand'
                 FROM calam c
                 WHERE c.tenca = '$tenca'
                 LIMIT 1";
-        
-        // Thực thi câu lệnh SQL
+       
         if ($this->conn->query($sql) === TRUE) {
-            return true; // Nếu thành công
+            return true;
         } else {
-            return false; // Nếu thất bại
+            return false; 
         }
     }
     

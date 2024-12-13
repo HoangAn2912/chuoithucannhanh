@@ -12,9 +12,11 @@
         // danh sách đơn hàng
         public function danhsachdonhang($mach) {
             $sql = "SELECT dh.*, tt.tenttdh 
-                    FROM donhang dh 
-                    INNER JOIN tinhtrangdonhang tt ON dh.mattdh = tt.mattdh
-                    WHERE dh.mach = ?";
+        FROM donhang dh 
+        INNER JOIN tinhtrangdonhang tt ON dh.mattdh = tt.mattdh
+        WHERE dh.mach = ?
+        ORDER BY dh.mattdh ASC"; // Sắp xếp theo trạng thái
+                    
 
             $stmt = $this->conn->prepare($sql);
 
@@ -69,7 +71,7 @@
             // Gán tham số cho truy vấn
             $stmt->bind_param("ii", $madh, $mach);
 
-            // Thực thi lấykq
+            // Thực thi l
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -89,7 +91,8 @@
                  FROM donhang
                  LEFT JOIN tinhtrangdonhang ON donhang.mattdh = tinhtrangdonhang.mattdh
                  WHERE (donhang.tennguoinhan LIKE ? OR donhang.sdtnguoinhan LIKE ?)
-                 AND donhang.mach = ?"
+                 AND donhang.mach = ?
+                 ORDER BY donhang.mattdh ASC" // Sắp xếp theo trạng thái
             );
         
             $searchTerm = "%" . $searchQuery . "%";
@@ -105,7 +108,7 @@
             $statusResult = $statusStmt->get_result();
             $statusList = $statusResult->fetch_all(MYSQLI_ASSOC);
         
-            // Gắn danh sách trạng thái vào từng đơn hàng dưới dạng mảng
+            // Gắn danh sách trạng thái và đơn
             foreach ($orders as &$order) {
                 // Lấy tất cả các trạng thái và gắn vào đơn hàng
                 $order['statusList'] = $statusList;
