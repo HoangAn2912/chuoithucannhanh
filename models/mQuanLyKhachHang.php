@@ -69,7 +69,7 @@
 		
 				if (mysqli_num_rows($resultCheckEmail) > 0) {
 					// Nếu email đã tồn tại, không cho phép sửa
-					return "Email đã tồn tại!";
+					return false;
 				} else {
 					// Thực hiện cập nhật nếu email không trùng lặp
 					$sql = "UPDATE khachhang 
