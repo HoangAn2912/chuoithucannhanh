@@ -57,22 +57,36 @@
 
         public function mUpdateKhachHang($makh, $tennd, $ngaysinh, $gioitinh, $sodienthoai, $email, $diachi, $matkhau){
 			$p = new ketnoi();
-			$con = $p -> ketnoi();
-            $matkhau = md5($matkhau);
-			if($con -> connect_errno){
+			$con = $p->ketnoi();
+			$matkhau = md5($matkhau);
+			
+			if ($con->connect_errno) {
 				return false;
-			}else{
-				$sql = "UPDATE khachhang 
-            	SET tennd = '$tennd', 
-                ngaysinh = '$ngaysinh', 
-                gioitinh = $gioitinh, 
-                sodienthoai = '$sodienthoai', 
-                email = '$email', 
-                diachi = '$diachi' where makh = $makh";	
-				$kq = mysqli_query($con, $sql);
-				return $kq;
+			} else {
+				// Kiểm tra xem email đã tồn tại trong bảng nhưng không thuộc khách hàng hiện tại
+				$sqlCheckEmail = "SELECT * FROM khachhang WHERE email = '$email' AND makh != $makh";
+				$resultCheckEmail = mysqli_query($con, $sqlCheckEmail);
+		
+				if (mysqli_num_rows($resultCheckEmail) > 0) {
+					// Nếu email đã tồn tại, không cho phép sửa
+					return "Email đã tồn tại!";
+				} else {
+					// Thực hiện cập nhật nếu email không trùng lặp
+					$sql = "UPDATE khachhang 
+							SET tennd = '$tennd', 
+								ngaysinh = '$ngaysinh', 
+								gioitinh = $gioitinh, 
+								sodienthoai = '$sodienthoai', 
+								email = '$email', 
+								diachi = '$diachi' 
+							WHERE makh = $makh";
+					
+					$kq = mysqli_query($con, $sql);
+					return $kq;
+				}
 			}
 		}
+		
 
 		public function checkEmailTrungLap($email) {
 			$p = new ketnoi();
