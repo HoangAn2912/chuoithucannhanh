@@ -13,10 +13,13 @@ if (isset($_GET['action'])) {
 
     if ($_GET['action'] == 'delete' && isset($_GET['mand'])) {
         $mand = $employeeModel->giaiMa($_GET['mand']);
+        
         if ($employeeModel->deleteEmployee($mand)) {
+            // Xóa thành công
             header("Location: ../index.php?page=qlnv&status=success");
         } else {
-            header("Location: ../index.php?page=qlnv&status=error");
+            // Không thể xóa (có thể do nhân viên có ca làm)
+            header("Location: ../index.php?page=qlnv&status=error&message=Nhân viên này không có ca làm không thể xóa");
         }
         exit();
     }

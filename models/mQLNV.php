@@ -148,6 +148,20 @@ class EmployeeModel {
     
 
     public function deleteEmployee($mand) {
+        // Kiểm tra xem nhân viên có ca làm trong bảng lichlamviec hay không
+        $sqlCheck = "SELECT COUNT(*) as count FROM lichlamviec WHERE mand = ?";
+        $stmtCheck = $this->conn->prepare($sqlCheck);
+        $stmtCheck->bind_param("i", $mand);
+        $stmtCheck->execute();
+        $result = $stmtCheck->get_result();
+        $row = $result->fetch_assoc();
+        
+        if ($row['count'] > 0) {
+            // Nếu nhân viên có ca làm, không cho phép xóa
+            return false;
+        }
+        
+        // Nếu không có ca làm, thực hiện xóa logic
         $sql = "UPDATE nguoidung SET email = '', matkhau = '', mattlv = 2, mavaitro = NULL WHERE mand = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $mand);

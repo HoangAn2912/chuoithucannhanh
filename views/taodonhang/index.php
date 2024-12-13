@@ -128,18 +128,18 @@ if (isset($_SESSION['checkout_success'])) {
 
     <script>
         function confirmCheckout() {
-        if (<?php echo isset($_SESSION['dangnhap']) ? 'false' : 'true'; ?>) {
-            alert("Vui lòng đăng nhập để thanh toán.");
-            return;
-        }
-        if (<?php echo empty($cart) ? 'true' : 'false'; ?>) {
-            alert("Bạn chưa có sản phẩm nào để thanh toán.");
-        } else {
-            if (confirm("Bạn có chắc chắn muốn thanh toán không?")) {
-                document.getElementById('checkout-form').submit();
+            if (<?php echo isset($_SESSION['dangnhap']) ? 'false' : 'true'; ?>) {
+                alert("Vui lòng đăng nhập để thanh toán.");
+                return;
+            }
+            if (<?php echo empty($cart) ? 'true' : 'false'; ?>) {
+                alert("Bạn chưa có sản phẩm nào để thanh toán.");
+            } else {
+                if (confirm("Bạn có chắc chắn muốn thanh toán không?")) {
+                    document.getElementById('checkout-form').submit();
+                }
             }
         }
-    }
         <?php if ($checkoutSuccess): ?>
             alert("Thanh toán thành công!");
         <?php endif; ?>
