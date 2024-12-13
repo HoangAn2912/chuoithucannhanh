@@ -51,12 +51,16 @@ if (isset($_POST["btn-detail"])) {
                    <div class="form-group">
                         <label for="loai">Loại món ăn</label>
                         <select id="loai" name="loai" required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="1">Gà</option>
+                            <option value="2">Mì ý</option>
+                            <option value="3">Khoai tây</option>
+                            <option value="4">Nước ngọt</option>
+                            <option value="5">Combo</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gia">Số lượng</label>
+                        <input type="text" id="soluong" name="soluong" required>
                     </div>
                     <div class="form-group">
                         <label for="gia">Đơn giá</label>
@@ -82,6 +86,7 @@ if (isset($_POST["btn-detail"])) {
         $name = $_POST['name'];
         $loai = $_POST['loai'];
         $gia=  $_POST['gia'];
+        $soluong=  $_POST['soluong'];
         $hinhanh= $_FILES['hinh']['name'];
         $congthuc = '';
         foreach ($_POST['dinhluong'] as $key => $dinhluong) {
@@ -90,7 +95,7 @@ if (isset($_POST["btn-detail"])) {
             }
         }if(move_uploaded_file($_FILES['hinh']['tmp_name'],'img/'.$hinhanh)){
 
-        $monan->addMonAn($name, $loai, $gia, $congthuc, $hinhanh);
+        $monan->addMonAn($name, $loai, $gia, $soluong, $congthuc, $hinhanh);
     }}
 ?>
 <div class="sidebar">
